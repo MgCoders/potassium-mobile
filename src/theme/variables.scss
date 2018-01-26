@@ -73,6 +73,14 @@ $colors: (
 @import "ionic.theme.default";
 
 
+.toolbar-background {
+  background-color: #c42e29 !important;
+}
+
+.toolbar-title{
+  color: #fff!important;
+}
+
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:

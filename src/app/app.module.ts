@@ -4,18 +4,31 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
+import { RecepcionPage } from '../pages/recepcion/recepcion';
+import { LoginPage } from '../pages/login/login';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {AltaTrabajoPage} from "../pages/alta-trabajo/alta-trabajo";
+import {SeleccionaClientePage} from "../pages/selecciona-cliente/selecciona-cliente";
+import {SeleccionaEquipoPage} from "../pages/selecciona-equipo/selecciona-equipo";
+import {IngresarDetallesPage} from "../pages/ingresar-detalles/ingresar-detalles";
+import {IngresarFirmaPage} from "../pages/ingresar-firma/ingresar-firma";
 
 @NgModule({
   declarations: [
     MyApp,
     HelloIonicPage,
-    ItemDetailsPage,
-    ListPage
+    ListPage,
+    RecepcionPage,
+    LoginPage,
+    AltaTrabajoPage,
+    SeleccionaClientePage,
+    SeleccionaEquipoPage,
+    IngresarDetallesPage,
+    IngresarFirmaPage
   ],
   imports: [
     BrowserModule,
@@ -25,8 +38,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HelloIonicPage,
-    ItemDetailsPage,
-    ListPage
+    ListPage,
+    RecepcionPage,
+    LoginPage,
+    AltaTrabajoPage,
+    SeleccionaClientePage,
+    SeleccionaEquipoPage,
+    IngresarDetallesPage,
+    IngresarFirmaPage
   ],
   providers: [
     StatusBar,
