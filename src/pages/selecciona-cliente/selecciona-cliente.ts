@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Cliente} from "../../app/_models/Cliente";
+import {RecepcionPage} from "../recepcion/recepcion";
+import {ClientePage} from "../cliente/cliente";
 
 /**
  * Generated class for the SeleccionaClientePage page.
@@ -14,15 +17,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'selecciona-cliente.html',
 })
 export class SeleccionaClientePage {
-  clientes: Array<{nombre: string}>;
+  clientes: Array<Cliente>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.clientes = [];
     for(let i = 1; i < 5; i++) {
-      this.clientes.push({
-        nombre: 'Cliente ' + i,
-      });
+      var c = {idCliente: i ,nombreEmpresa: 'Empresa'+i,personaContacto:'Cliente'+i, telefonoContacto: '00598'+i} as Cliente;
+      this.clientes.push(c);
     }
+  }
+
+  nuevoCliente() {
+    this.navCtrl.push(ClientePage, {});
   }
 
   ionViewDidLoad() {

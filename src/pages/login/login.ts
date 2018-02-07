@@ -63,6 +63,7 @@ export class LoginPage {
           console.info(result);
           if (result === true) {
             console.log('LOGINA!' + this.returnUrl);
+            this.navCtrl.setRoot(RecepcionPage, {});
           }
         } ,
         (err) => {

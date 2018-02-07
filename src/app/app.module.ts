@@ -18,6 +18,8 @@ import {IngresarDetallesPage} from "../pages/ingresar-detalles/ingresar-detalles
 import {IngresarFirmaPage} from "../pages/ingresar-firma/ingresar-firma";
 import {AuthService} from "./_services/auth.service";
 import { HttpModule } from '@angular/http';
+import {ClientePage} from "../pages/cliente/cliente";
+import {EquipoPage} from "../pages/equipo/equipo";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HttpModule } from '@angular/http';
     SeleccionaClientePage,
     SeleccionaEquipoPage,
     IngresarDetallesPage,
-    IngresarFirmaPage
+    IngresarFirmaPage,
+    ClientePage,
+    EquipoPage,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,9 @@ import { HttpModule } from '@angular/http';
     SeleccionaClientePage,
     SeleccionaEquipoPage,
     IngresarDetallesPage,
-    IngresarFirmaPage
+    IngresarFirmaPage,
+    ClientePage,
+    EquipoPage
   ],
   providers: [
     StatusBar,

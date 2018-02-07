@@ -16,14 +16,14 @@
 <ion-content padding>
   <ion-list>
     <button ion-item *ngFor="let cliente of clientes">
-      <ion-icon name="star" item-left></ion-icon>
-      {{cliente.nombre}}
+      <ion-icon name="new" item-left></ion-icon>
+      {{cliente.nombreEmpresa}}
     </button>
   </ion-list>
 
   <ion-item>
-    <button ion-button outline item-end icon-left>
-      <ion-icon name="star"></ion-icon>
+    <button ion-button outline item-end icon-left (click)="nuevoCliente()">
+      <ion-icon name="add"></ion-icon>
       Agregar nuevo cliente
     </button>
   </ion-item>
