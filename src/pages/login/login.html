@@ -13,23 +13,28 @@
 
 <ion-content padding>
 	<ion-list>
-    <img src="assets/imgs/logo_full.png" />
-    <br>
-    <br>
-		<ion-item>
-			<ion-label stacked>Usuario</ion-label>
-			<ion-input type="text"></ion-input>
-		</ion-item>
-
-		<ion-item>
-			<ion-label stacked>Contraseña</ion-label>
-			<ion-input type="password"></ion-input>
-		</ion-item>
-
-    <br>
+    <img src="assets/imgs/logo_vector.png" />
     <br>
     <br>
 
-		<p> <button ion-button full color="primary" (click)="validateLogin()" >Acceder</button> </p>
+    <form name="material_login_form" class="form-validation" [formGroup]="validationForm" (ngSubmit)="login()">
+      <fieldset>
+        <ion-item>
+          <ion-label stacked>Usuario</ion-label>
+          <ion-input formControlName="email" type="email" name="email" [(ngModel)]="model.email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Contraseña</ion-label>
+          <ion-input formControlName="password" type="password" name="password" [(ngModel)]="model.password"></ion-input>
+        </ion-item>
+
+        <br>
+        <br>
+        <br>
+
+        <p> <button ion-button full color="primary" type="submit" >Acceder</button> </p>
+      </fieldset>
+    </form>
 	</ion-list>
 </ion-content>

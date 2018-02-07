@@ -16,6 +16,8 @@ import {SeleccionaClientePage} from "../pages/selecciona-cliente/selecciona-clie
 import {SeleccionaEquipoPage} from "../pages/selecciona-equipo/selecciona-equipo";
 import {IngresarDetallesPage} from "../pages/ingresar-detalles/ingresar-detalles";
 import {IngresarFirmaPage} from "../pages/ingresar-firma/ingresar-firma";
+import {AuthService} from "./_services/auth.service";
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import {IngresarFirmaPage} from "../pages/ingresar-firma/ingresar-firma";
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -50,7 +53,8 @@ import {IngresarFirmaPage} from "../pages/ingresar-firma/ingresar-firma";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthService
   ]
 })
 export class AppModule {}
