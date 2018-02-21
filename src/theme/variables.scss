@@ -73,13 +73,30 @@ $colors: (
 @import "ionic.theme.default";
 
 
+$colors: (
+  primary:    #488aff,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  blanco:     #fff,
+  sandonato_rojoLogo: #ff3d06,
+  gris:     #eaeaea
+);
+
+
 .toolbar-background {
-  background-color: #c42e29 !important;
+  background-color: color($colors, sandonato_rojoLogo) !important;
 }
 
 .toolbar-title{
-  color: #fff!important;
+  color: color($colors, blanco)!important;
 }
+
+bar-buttons {
+  color: color($colors, blanco)!important;
+}
+
 
 // Ionicons
 // --------------------------------------------------

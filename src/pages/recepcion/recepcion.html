@@ -14,13 +14,19 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding id="ion_recepcionPage">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 col-lg-6>
+        <h3>Seleccione el tipo de trabajo</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button full color="primary" (click)="trabajoNuevo()">Nuevo</button>
 
-  <h3>Seleccione el tipo de trabajo</h3>
-  <p>
-    <button ion-button full color="primary" (click)="trabajoNuevo()">Nuevo</button>
-    <br>
-    <button ion-button full color="secondary" (click)="trabajoReparacion()" >Reparación</button>
-  </p>
-
+        <button ion-button full color="secondary" (click)="trabajoReparacion()" >Reparación</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

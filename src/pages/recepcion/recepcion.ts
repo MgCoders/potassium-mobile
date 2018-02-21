@@ -13,7 +13,10 @@ import {AltaTrabajoPage} from "../alta-trabajo/alta-trabajo";
 @Component({
   selector: 'page-recepcion',
   templateUrl: 'recepcion.html',
+  styleUrls: ['/pages/recepcion/recepcion.scss']
 })
+
+
 export class RecepcionPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {

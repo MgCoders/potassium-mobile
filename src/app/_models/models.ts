@@ -11,3 +11,11 @@ export * from './Usuario';
 
 export * from './UsuarioRubro';
 
+export * from './Trabajo';
+
+export * from './TipoTarea';
+
+export * from './Proyecto';
+
+
+
