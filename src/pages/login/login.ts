@@ -57,6 +57,8 @@ export class LoginPage {
   }
 
   login() {
+    //this.navCtrl.setRoot(RecepcionPage, {});
+
     this.formSubmitted = true;
     this.authService.login(this.model.email, this.model.password)
       .subscribe((result) => {
@@ -71,6 +73,7 @@ export class LoginPage {
           //console.log('mail: '+this.model.email+' - pass: '+this.model.password);
           this.onResetForm();
         });
+
   }
 
   onResetForm() {

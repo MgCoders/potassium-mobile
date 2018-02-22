@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {RecepcionPage} from "../recepcion/recepcion";
+import {ListaTrabajoPage} from "../lista-trabajo/lista-trabajo";
 
 /**
  * Generated class for the IngresarFirmaPage page.
@@ -15,11 +17,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class IngresarFirmaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad IngresarFirmaPage');
+  }
+
+
+  finalizarTrabajo(){
+    let toastCorrecto = this.toastCtrl.create({
+      message: 'Trabajo cargado correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toastCorrecto.present();
+
+    this.navCtrl.setRoot(ListaTrabajoPage, {});
   }
 
 }

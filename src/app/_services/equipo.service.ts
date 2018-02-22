@@ -23,19 +23,19 @@ export class EquipoServices {
         return this.http.get<Equipo>(`${environment.apiUrl}/equipos/matricula/` + matricula);
     }
 
-    getByCliente(cliente: number): Observable<Equipo> {
-        return this.http.get<Equipo>(`${environment.apiUrl}/equipos/cliente/` + cliente);
+    getByCliente(equipo: number): Observable<Equipo> {
+        return this.http.get<Equipo>(`${environment.apiUrl}/equipos/equipo/` + equipo);
     }
 
-    getByRut(rut: string): Observable<Cliente> {
-        return this.http.get<Cliente>(`${environment.apiUrl}/clientes/rut/` + rut);
+    getByRut(rut: string): Observable<Equipo> {
+        return this.http.get<Equipo>(`${environment.apiUrl}/equipos/rut/` + rut);
     }
 
-    create(x: Cliente): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/clientes/`, x);
+    create(x: Equipo): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/equipos/`, x);
     }
 
-    edit(x: Cliente): Observable<any> {
-        return this.http.put(`${environment.apiUrl}/clientes/` + x.id, x);
+    edit(x: Equipo): Observable<any> {
+        return this.http.put(`${environment.apiUrl}/equipos/` + x.id, x);
     }
 }

@@ -58,7 +58,7 @@ import {EquipoServices} from "./_services/equipo.service";
     IngresarDetallesPage,
     IngresarFirmaPage,
     AltaClientePage,
-    AltaEquipoPage
+    AltaEquipoPage,
   ],
   providers: [
     StatusBar,

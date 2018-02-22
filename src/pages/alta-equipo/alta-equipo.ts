@@ -32,12 +32,12 @@ export class AltaEquipoPage {
     });
     let toastCorrecto = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
     let toastError = this.toastCtrl.create({
       message: 'Error al cargar datos..',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
 
@@ -76,12 +76,12 @@ export class AltaEquipoPage {
     });
     let toastCorrecto = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
     let toastError = this.toastCtrl.create({
       message: 'Error al cargar datos..',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
 
@@ -97,6 +97,8 @@ export class AltaEquipoPage {
           this.equipoActual = new EquipoImp(data);
         },
         (error) => {
+          console.log(error);
+          console.log(error.toString());
           toastError.setMessage(error);
           toastError.present();
         });

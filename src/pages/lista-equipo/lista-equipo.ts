@@ -32,7 +32,7 @@ export class ListaEquipoPage {
               private toastCtrl: ToastController,
               private events: Events) {
     this.lista = [];
-
+    this.lista.push(new EquipoImp({marca:'SCANIA',modelo:'48 Ruedas',matricula:'556321',color:'Azul'}));
   }
 
 
@@ -62,12 +62,12 @@ export class ListaEquipoPage {
     });
     let toastCorrecto = this.toastCtrl.create({
       message: 'Lista cargada correctamente!',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
     let toastError = this.toastCtrl.create({
       message: 'Error al obtener la lista de equipos..',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
 

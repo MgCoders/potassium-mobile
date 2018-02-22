@@ -32,12 +32,12 @@ export class AltaClientePage {
     });
     let toastCorrecto = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
     let toastError = this.toastCtrl.create({
       message: 'Error al cargar datos..',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
 
@@ -75,12 +75,12 @@ export class AltaClientePage {
     });
     let toastCorrecto = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
     let toastError = this.toastCtrl.create({
       message: 'Error al cargar datos..',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
 
@@ -114,6 +114,6 @@ export class AltaClientePage {
     loading.dismissAll();
     console.log('Cliente después');
     console.log(this.clienteActual);
-
+    this.navCtrl.pop();
   }
 }

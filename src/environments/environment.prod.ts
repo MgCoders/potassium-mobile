@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://sulfur.mgcoders.com/api',
+  apiUrl: 'https://potassium.mgcoders.com/api',
   hmr: false
 };

@@ -71,12 +71,12 @@ export class ListaClientePage {
     });
     let toastCorrecto = this.toastCtrl.create({
       message: 'Lista cargada correctamente!',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
     let toastError = this.toastCtrl.create({
       message: 'Error al obtener la lista de clientes..',
-      duration: 6000,
+      duration: 3000,
       position: 'bottom'
     });
 
