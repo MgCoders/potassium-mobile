@@ -44,7 +44,7 @@ export class AltaTrabajoPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private clienteServices: ClienteServices,
-              private events: Events) {
+              public events: Events) {
 
     this.limpiarCampos();
 
@@ -60,6 +60,7 @@ export class AltaTrabajoPage {
         this.enabled_tabCliente = false;
         this.enabled_tabEquipo = true;
         console.log('TAB:: selecciona cliente');
+        this.navParams.data=data;
         this.trabajoActual.cliente = data;
         console.log(this.trabajoActual.cliente);
 
@@ -135,6 +136,10 @@ export class AltaTrabajoPage {
 
     console.log(this.tipoTrabajo);
 
+  }
+
+  ionViewWillLeave(){
+    this.events.unsubscribe('change-tab');
   }
 
 

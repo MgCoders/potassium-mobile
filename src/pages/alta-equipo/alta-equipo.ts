@@ -27,6 +27,8 @@ export class AltaEquipoPage {
               public navParams: NavParams,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController) {
+
+
     let loading = this.loadingCtrl.create({
       content: 'Procesando...'
     });
@@ -42,7 +44,7 @@ export class AltaEquipoPage {
     });
 
     //Inicializo en vacío
-    this.equipoActual =  new EquipoImp({marca:'',modelo:'',matricula:'',color:''});
+    this.equipoActual =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'',cliente:this.navParams.data['cliente']});
 
     let id = this.navParams.data['id'];
 
@@ -90,6 +92,9 @@ export class AltaEquipoPage {
 
     loading.present();
     if (!this.editar) {
+      console.log('Creo un nuevo equipo');
+      console.log(this.equipoActual);
+
       this.equipoService.create(this.equipoActual).subscribe(
         (data) => {
           toastCorrecto.present();
@@ -117,6 +122,6 @@ export class AltaEquipoPage {
     loading.dismissAll();
     console.log('Equipo después');
     console.log(this.equipoActual);
-
+    this.navCtrl.pop();
   }
 }

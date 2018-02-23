@@ -7,6 +7,7 @@ import {Equipo} from "../../app/_models/Equipo";
 import {EquipoServices} from "../../app/_services/equipo.service";
 import {AltaEquipoPage} from "../alta-equipo/alta-equipo";
 import {EquipoImp} from "../../app/_models/EquipoImp";
+import {Cliente} from "../../app/_models/Cliente";
 
 /**
  * Generated class for the ListaEquipoPage page.
@@ -23,6 +24,7 @@ import {EquipoImp} from "../../app/_models/EquipoImp";
 export class ListaEquipoPage {
 
   lista: Equipo[];
+  clienteSeleccionado: Cliente[];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -30,19 +32,21 @@ export class ListaEquipoPage {
               private service: EquipoServices,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
-              private events: Events) {
+              public events: Events) {
+
     this.lista = [];
+    this.clienteSeleccionado = this.navParams['cliente'];
     //this.lista.push(new EquipoImp({marca:'SCANIA',modelo:'48 Ruedas',matricula:'556321',color:'Azul'}));
   }
 
 
 
   nuevoEquipo() {
-    this.navCtrl.push(AltaEquipoPage, {});
+    this.navCtrl.push(AltaEquipoPage, {cliente:this.navParams.data});
   }
 
   editarEquipo(id: number) {
-    this.navCtrl.push(AltaEquipoPage, {id:id});
+    this.navCtrl.push(AltaEquipoPage, {id:id,cliente:this.navParams.data});
   }
 
   seleccionarEquipo(id: number ) {

@@ -15,9 +15,9 @@
 
 <ion-content padding>
   <ion-tabs>
-    <ion-tab tabIcon="person" enabled="{{enabled_tabCliente}}" [root]="tabCliente"></ion-tab>
-    <ion-tab tabIcon="md-car" enabled="{{enabled_tabEquipo}}" [root]="tabEquipo"></ion-tab>
-    <ion-tab tabIcon="md-text" enabled="{{enabled_tabDetalles}}" [root]="tabDetalles"></ion-tab>
-    <ion-tab tabIcon="md-create" enabled="{{enabled_tabFrima}}" [root]="tabFirma"></ion-tab>
+    <ion-tab tabIcon="person" enabled="{{enabled_tabCliente}}" [root]="tabCliente" ></ion-tab>
+    <ion-tab tabIcon="md-car" enabled="{{enabled_tabEquipo}}" [root]="tabEquipo" [rootParams]="navParams"></ion-tab>
+    <ion-tab tabIcon="md-text" enabled="{{enabled_tabDetalles}}" [root]="tabDetalles" ></ion-tab>
+    <ion-tab tabIcon="md-create" enabled="{{enabled_tabFrima}}" [root]="tabFirma" ></ion-tab>
   </ion-tabs>`
 </ion-content>

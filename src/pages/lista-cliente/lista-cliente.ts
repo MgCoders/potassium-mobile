@@ -31,7 +31,7 @@ export class ListaClientePage {
               private service: ClienteServices,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
-              private events: Events) {
+              public events: Events) {
 
     this.lista = [];
   }
