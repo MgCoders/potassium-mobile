@@ -52,7 +52,11 @@ export class ListaClientePage {
     //this.navCtrl.push(AltaClientePage, );
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+
+    //Limpio la lista
+    this.lista = [];
+    console.log("Entro a la lista de clientes");
 
     //Harcodeo la lista
     /*for(let i = 65; i < 70; i++) {
@@ -87,6 +91,8 @@ export class ListaClientePage {
 
       (data) => {
         loading.dismissAll();
+
+        //Obtengo la lista desde el server con lo último
         data.forEach(Cliente => {this.lista.push( new ClienteImp(Cliente));} )
 
         this.lista.sort(function(a, b) {
@@ -100,6 +106,8 @@ export class ListaClientePage {
         toastError.setMessage(error);
         toastError.present();
     });
+
+
   }
 
 }
