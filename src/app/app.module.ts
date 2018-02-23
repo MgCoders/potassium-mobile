@@ -24,6 +24,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {Dialogs} from "@ionic-native/dialogs";
 import {InterceptorModule} from "./_interceptor/token.interceptor";
 import {EquipoServices} from "./_services/equipo.service";
+import {VerTrabajoPage} from "../pages/ver-trabajo/ver-trabajo";
+import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import {EquipoServices} from "./_services/equipo.service";
     IngresarFirmaPage,
     AltaClientePage,
     AltaEquipoPage,
+    ListaTrabajoPage,
+    VerTrabajoPage
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,8 @@ import {EquipoServices} from "./_services/equipo.service";
     IngresarFirmaPage,
     AltaClientePage,
     AltaEquipoPage,
+    ListaTrabajoPage,
+    VerTrabajoPage
   ],
   providers: [
     StatusBar,

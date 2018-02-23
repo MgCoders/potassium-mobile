@@ -7,35 +7,43 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Ingresar firmas del trabajo</ion-title>
+    <ion-title>Paso 4: Ingresar firmas del trabajo</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-col col-12>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <button ion-button full color="primary" >
+          Firma cliente
+        </button>
+        <ion-card>
+          <img src="assets/imgs/firma1.jpg" />
+          <ion-card-content>
+            <ion-card-title>
+              Cliente 1
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
+        <br>
+        <br>
+        <button ion-button full color="primary" >Firma empleado</button>
+        <ion-card>
+          <img src="assets/imgs/firma2.jpg"/>
+          <ion-card-content>
+            <ion-card-title>
+              Empleado 1
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
 
-    <button ion-button full color="primary" >Firma cliente</button>
-    <ion-card>
-      <img src="assets/imgs/firma1.jpg" />
-      <ion-card-content>
-        <ion-card-title>
-          Cliente 1
-        </ion-card-title>
-      </ion-card-content>
-    </ion-card>
-    <br><br>
-    <button ion-button full color="primary" >Firma empleado</button>
-    <ion-card>
-      <img src="assets/imgs/firma2.jpg"/>
-      <ion-card-content>
-        <ion-card-title>
-          Empleado 1
-        </ion-card-title>
-      </ion-card-content>
-    </ion-card>
-
-    <button ion-button full color="secondary" >Reparación</button>
-  </ion-col>
+        <button ion-button full color="secondary" (click)="finalizarTrabajo()" >
+          Finalizar trabajo
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

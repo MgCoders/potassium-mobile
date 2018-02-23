@@ -8,6 +8,8 @@ import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {ListaTrabajoPageModule} from "../pages/lista-trabajo/lista-trabajo.module";
+import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
 
 
 @Component({
@@ -33,6 +35,7 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HelloIonicPage },
       { title: 'Recepción de cliente', component: RecepcionPage },
+      { title: 'Ver trabajos', component: ListaTrabajoPage },
       { title: 'Cerrar sesión', component: LoginPage }
     ];
   }

@@ -7,30 +7,35 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Seleccionar un cliente</ion-title>
+    <ion-title>Paso 1: Seleccionar un cliente</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let cliente of lista">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-list>
+          <ion-item *ngFor="let cliente of lista">
 
-      <ion-thumbnail (click)="seleccionarCliente(cliente.id)" item-start>
-        <img src="assets/imgs/client.png">
-      </ion-thumbnail>
-      <h2 (click)="seleccionarCliente(cliente.id)">{{cliente.nombreEmpresa}}</h2>
-      <p (click)="seleccionarCliente(cliente.id)">{{cliente.rut}}</p>
+            <ion-thumbnail (click)="seleccionarCliente(cliente.id)" item-start>
+              <img src="assets/imgs/client.png">
+            </ion-thumbnail>
+            <h2 (click)="seleccionarCliente(cliente.id)">{{cliente.nombreEmpresa}}</h2>
+            <p (click)="seleccionarCliente(cliente.id)">{{cliente.rut}}</p>
 
-      <button ion-button clear item-end (click)="editarCliente(cliente.id)">Editar</button>
-    </ion-item>
-  </ion-list>
-
-  <ion-item>
-    <button ion-button outline item-end icon-left (click)="nuevoCliente()">
-      <ion-icon name="add"></ion-icon>
-      Agregar nuevo cliente
-    </button>
-  </ion-item>
+            <button ion-button clear item-end (click)="editarCliente(cliente.id)">Editar</button>
+          </ion-item>
+          <ion-item>
+            <button ion-button outline item-end icon-left (click)="nuevoCliente()">
+              <ion-icon name="add"></ion-icon>
+              Agregar nuevo cliente
+            </button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

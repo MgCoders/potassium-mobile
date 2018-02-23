@@ -7,30 +7,35 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Seleccionar un equipo</ion-title>
+    <ion-title>Paso 2: Seleccionar un equipo</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let equipo of lista">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-list>
+          <ion-item *ngFor="let equipo of lista">
 
-      <ion-thumbnail (click)="seleccionarEquipo(equipo.id)" item-start>
-        <img src="assets/imgs/truck.png">
-      </ion-thumbnail>
-      <h2 (click)="seleccionarEquipo(equipo.id)">{{equipo.marca}} / {{equipo.modelo}}</h2>
-      <p (click)="seleccionarEquipo(equipo.id)">{{equipo.matricula}}</p>
+            <ion-thumbnail (click)="seleccionarEquipo(equipo.id)" item-start>
+              <img src="assets/imgs/truck.png">
+            </ion-thumbnail>
+            <h2 (click)="seleccionarEquipo(equipo.id)">{{equipo.marca}} / {{equipo.modelo}}</h2>
+            <p (click)="seleccionarEquipo(equipo.id)">{{equipo.matricula}}</p>
 
-      <button ion-button clear item-end (click)="editarEquipo(equipo.id)">Editar</button>
-    </ion-item>
-  </ion-list>
-
-  <ion-item>
-    <button ion-button outline item-end icon-left (click)="nuevoEquipo()">
-      <ion-icon name="add"></ion-icon>
-      Agregar nuevo equipo
-    </button>
-  </ion-item>
+            <button ion-button clear item-end (click)="editarEquipo(equipo.id)">Editar</button>
+          </ion-item>
+          <ion-item>
+            <button ion-button outline item-end icon-left (click)="nuevoEquipo()">
+              <ion-icon name="add"></ion-icon>
+              Agregar nuevo equipo
+            </button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

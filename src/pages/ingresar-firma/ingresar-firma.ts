@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
-import {RecepcionPage} from "../recepcion/recepcion";
-import {ListaTrabajoPage} from "../lista-trabajo/lista-trabajo";
+import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {VerTrabajoPage} from "../ver-trabajo/ver-trabajo";
 
 /**
  * Generated class for the IngresarFirmaPage page.
@@ -19,7 +18,8 @@ export class IngresarFirmaPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController,
+              private events: Events) {
   }
 
   ionViewDidLoad() {
@@ -36,7 +36,9 @@ export class IngresarFirmaPage {
 
     toastCorrecto.present();
 
-    this.navCtrl.setRoot(ListaTrabajoPage, {});
+    this.events.publish('change-tab', 4, {});
+    console.log("Sigo ejecución?");
+    this.navCtrl.setRoot(VerTrabajoPage, {});
   }
 
 }

@@ -32,7 +32,7 @@ export class ListaEquipoPage {
               private toastCtrl: ToastController,
               private events: Events) {
     this.lista = [];
-    this.lista.push(new EquipoImp({marca:'SCANIA',modelo:'48 Ruedas',matricula:'556321',color:'Azul'}));
+    //this.lista.push(new EquipoImp({marca:'SCANIA',modelo:'48 Ruedas',matricula:'556321',color:'Azul'}));
   }
 
 
@@ -54,7 +54,12 @@ export class ListaEquipoPage {
   }
 
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+
+    this.lista = [];
+    console.log("Entro a la lista de clientes");
+
+
     //console.log('ionViewDidLoad SeleccionaEquipoPage');
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
     let loading = this.loadingCtrl.create({
@@ -78,6 +83,8 @@ export class ListaEquipoPage {
 
       (data) => {
         loading.dismissAll();
+
+        //Obtengo la lista desde el server con lo último
         data.forEach(Equipo => {this.lista.push( new EquipoImp(Equipo));} )
 
         this.lista.sort(function(a, b) {

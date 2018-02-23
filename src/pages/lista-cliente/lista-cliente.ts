@@ -48,26 +48,16 @@ export class ListaClientePage {
     console.log('LISTA:: cliente seleccionado');
     //console.log(id);
 
-    this.events.publish('change-tab', 1, this.lista.find((x) => x.id === id));1
+    this.events.publish('change-tab', 1, this.lista.find((x) => x.id === id));
     //this.navCtrl.push(AltaClientePage, );
   }
 
   ionViewWillEnter() {
 
     //Limpio la lista
-    this.lista = [];
+    //this.lista = [];
     console.log("Entro a la lista de clientes");
 
-    //Harcodeo la lista
-    /*for(let i = 65; i < 70; i++) {
-      let char = String.fromCharCode(i);
-      let c = {id: i,
-                nombreEmpresa: 'Empresa '+char,
-                personaContacto:'Cliente '+char,
-                telefonoContacto: '00598 '+char} as Cliente;
-
-      this.lista.push( new ClienteImp(c) );
-    }*/
 
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
     let loading = this.loadingCtrl.create({

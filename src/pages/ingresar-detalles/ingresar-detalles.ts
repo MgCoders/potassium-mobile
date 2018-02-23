@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {
+  AlertController, Events, IonicPage, LoadingController, NavController, NavParams,
+  ToastController
+} from 'ionic-angular';
+import {ClienteServices} from "../../app/_services/cliente.services";
 
 /**
  * Generated class for the IngresarDetallesPage page.
@@ -15,11 +19,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class IngresarDetallesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private as: AlertController,
+              private service: ClienteServices,
+              public loadingCtrl: LoadingController,
+              private toastCtrl: ToastController,
+              private events: Events) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad IngresarDetallesPage');
   }
-
+  confirmarDetalles(){
+    this.events.publish('change-tab', 3, {});
+  }
 }
