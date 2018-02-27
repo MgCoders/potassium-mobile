@@ -26,6 +26,8 @@ import {InterceptorModule} from "./_interceptor/token.interceptor";
 import {EquipoServices} from "./_services/equipo.service";
 import {VerTrabajoPage} from "../pages/ver-trabajo/ver-trabajo";
 import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
+import { CanvasDraw } from '../components/canvas-draw/canvas-draw';
+import {AltaFirmaPage} from "../pages/alta-firma/alta-firma";
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
     AltaClientePage,
     AltaEquipoPage,
     ListaTrabajoPage,
-    VerTrabajoPage
+    VerTrabajoPage,
+    CanvasDraw,
+    AltaFirmaPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,8 @@ import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
     AltaClientePage,
     AltaEquipoPage,
     ListaTrabajoPage,
-    VerTrabajoPage
+    VerTrabajoPage,
+    AltaFirmaPage
   ],
   providers: [
     StatusBar,
