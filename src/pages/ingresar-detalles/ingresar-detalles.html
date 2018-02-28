@@ -17,42 +17,32 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
-        <button ion-button full color="primary" >Tomar foto</button>
+        <button ion-button full color="primary" (click)="nuevoDetalle()">Tomar foto</button>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3 *ngFor="let detalle of lista">
         <ion-card>
-          <img src="assets/imgs/paragolpe.jpg" />
+          <img src="{{detalle.img}}" />
           <ion-card-content>
             <ion-card-title>
-              Paragolpe roto
+              {{detalle.titulo}}
             </ion-card-title>
             <p>
-              Doblado en la parte derecha
+              {{detalle.descr}}
             </p>
           </ion-card-content>
         </ion-card>
-        <ion-card>
-          <img src="assets/imgs/espejo.jpg"/>
-          <ion-card-content>
-            <ion-card-title>
-              Espejo roto
-            </ion-card-title>
-            <p>
-              El espejo izquierdo está roto
-            </p>
-          </ion-card-content>
-        </ion-card>
-        <br><br>
-        <ion-card>
-          <ion-card-header>
-            Comentarios
-          </ion-card-header>
-          <ion-card-content>
-            (Comentarios básicos sobre el estado del camión.)
-            El camión estaba todo roto...
-            La pintura está mala
-            Tiene el parabrisas quebrado
-            Los frenos funcionan bien.
-          </ion-card-content>
-        </ion-card>
+      </ion-col>
+      <ion-card>
+        <ion-card-header>
+          Comentarios generales del equipo
+        </ion-card-header>
+        <ion-card-content>
+            <textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="myStuff">
+              {{comentarios}}
+            </textarea>
+        </ion-card-content>
+      </ion-card>
+      <ion-col col-12 col-md-6 offset-md-3>
         <button ion-button full color="secondary" (click)="confirmarDetalles()">
           Confirmar detalles
         </button>

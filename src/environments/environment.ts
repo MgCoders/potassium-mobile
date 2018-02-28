@@ -5,7 +5,7 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080/api',
-  //apiUrl: 'https://potassium.magnesium.coop/api',
+  //apiUrl: 'http://localhost:8080/api',
+  apiUrl: 'https://potassium.magnesium.coop/api',
   hmr: false
 };

@@ -1,0 +1,53 @@
+<!--
+  Generated template for the ListaPuntocontrolPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Listado de Puntos de control</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-thumbnail (click)="seleccionarPuntoControl()" item-start>
+        <img src="assets/imgs/control.jpg">
+      </ion-thumbnail>
+      <h2 (click)="seleccionarPuntoControl()">Revisar limpio</h2>
+      <p (click)="seleccionarPuntoControl()">Sin mugre</p>
+      <button ion-button clear item-end (click)="editarPuntoControl()">Editar</button>
+    </ion-item>
+
+    <ion-item>
+      <ion-thumbnail (click)="seleccionarPuntoControl()" item-start>
+        <img src="assets/imgs/control.jpg">
+      </ion-thumbnail>
+      <h2 (click)="seleccionarPuntoControl()">Cortar aluminio</h2>
+      <p (click)="seleccionarPuntoControl()">En cubitos de 40x40</p>
+      <button ion-button clear item-end (click)="editarPuntoControl()">Editar</button>
+    </ion-item>
+
+    <ion-item>
+      <ion-thumbnail (click)="seleccionarPuntoControl()" item-start>
+        <img src="assets/imgs/control.jpg">
+      </ion-thumbnail>
+      <h2 (click)="seleccionarPuntoControl()">Doblar los cortes</h2>
+      <p (click)="seleccionarPuntoControl()">45 grados norte->sur</p>
+      <button ion-button clear item-end (click)="editarPuntoControl()">Editar</button>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button outline item-end icon-left (click)="nuevoPuntoControl()">
+        <ion-icon name="add"></ion-icon>
+        Agregar nuevo cliente
+      </button>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

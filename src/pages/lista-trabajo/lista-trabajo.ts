@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AltaClientePage} from "../alta-cliente/alta-cliente";
+import {SeleccionaTrabajoPage} from "../selecciona-trabajo/selecciona-trabajo";
 
 /**
  * Generated class for the ListaTrabajoPage page.
@@ -15,11 +17,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ListaTrabajoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaTrabajoPage');
   }
+
+  verTrabajo(){
+    this.navCtrl.push(SeleccionaTrabajoPage, {});
+  }
+
 
 }

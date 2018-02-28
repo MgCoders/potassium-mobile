@@ -1,0 +1,53 @@
+<!--
+  Generated template for the ListaTareaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Listado de tareas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-thumbnail (click)="seleccionarTarea()" item-start>
+        <img src="assets/imgs/llave.png">
+      </ion-thumbnail>
+      <h2 (click)="seleccionarTarea()">Limpiar</h2>
+      <p (click)="seleccionarTarea()">Preparar la superficie</p>
+      <button ion-button clear item-end (click)="editarTarea()">Editar</button>
+    </ion-item>
+
+    <ion-item>
+      <ion-thumbnail (click)="seleccionarTarea()" item-start>
+        <img src="assets/imgs/llave.png">
+      </ion-thumbnail>
+      <h2 (click)="seleccionarTarea()">Cortar aluminio</h2>
+      <p (click)="seleccionarTarea()">En cubitos de 40x40</p>
+      <button ion-button clear item-end (click)="editarTarea()">Editar</button>
+    </ion-item>
+
+    <ion-item>
+      <ion-thumbnail (click)="seleccionarTarea()" item-start>
+        <img src="assets/imgs/llave.png">
+      </ion-thumbnail>
+      <h2 (click)="seleccionarTarea()">Doblar los cortes</h2>
+      <p (click)="seleccionarTarea()">45 grados norte->sur</p>
+      <button ion-button clear item-end (click)="editarTarea()">Editar</button>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button outline item-end icon-left (click)="nuevaTarea()">
+        <ion-icon name="add"></ion-icon>
+        Agregar nuevo cliente
+      </button>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

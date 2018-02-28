@@ -65,9 +65,6 @@ export class AltaFirmaPage {
 
   }
 
-  changeColour(colour){
-    this.currentColour = colour;
-  }
 
   changeSize(size){
     this.brushSize = size;

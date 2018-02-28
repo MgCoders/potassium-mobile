@@ -21,13 +21,19 @@ import {AltaClientePage} from "../pages/alta-cliente/alta-cliente";
 import {AltaEquipoPage} from "../pages/alta-equipo/alta-equipo";
 import {ClienteServices} from "./_services/cliente.services";
 import {HttpClientModule} from "@angular/common/http";
-import {Dialogs} from "@ionic-native/dialogs";
 import {InterceptorModule} from "./_interceptor/token.interceptor";
 import {EquipoServices} from "./_services/equipo.service";
 import {VerTrabajoPage} from "../pages/ver-trabajo/ver-trabajo";
 import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
-import { CanvasDraw } from '../components/canvas-draw/canvas-draw';
 import {AltaFirmaPage} from "../pages/alta-firma/alta-firma";
+import { Camera } from '@ionic-native/camera';
+import {AltaDescripcionPage} from "../pages/alta-descripcion/alta-descripcion";
+import {SeleccionaTrabajoPage} from "../pages/selecciona-trabajo/selecciona-trabajo";
+import {ListaPuntocontrolPage} from "../pages/lista-puntocontrol/lista-puntocontrol";
+import {ListaTareaPage} from "../pages/lista-tarea/lista-tarea";
+import {AltaTareaPage} from "../pages/alta-tarea/alta-tarea";
+import {CalendarioPage} from "../pages/calendario/calendario";
+import {SeleccionaTareaPage} from "../pages/selecciona-tarea/selecciona-tarea";
 
 @NgModule({
   declarations: [
@@ -44,15 +50,25 @@ import {AltaFirmaPage} from "../pages/alta-firma/alta-firma";
     AltaEquipoPage,
     ListaTrabajoPage,
     VerTrabajoPage,
-    CanvasDraw,
-    AltaFirmaPage
+    AltaDescripcionPage,
+    AltaFirmaPage,
+    SeleccionaTrabajoPage,
+    ListaPuntocontrolPage,
+    ListaTareaPage,
+    AltaTareaPage,
+    CalendarioPage,
+    SeleccionaTrabajoPage,
+    SeleccionaTareaPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
     InterceptorModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      scrollAssist: true,
+      autoFocusAssist: true
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,7 +85,14 @@ import {AltaFirmaPage} from "../pages/alta-firma/alta-firma";
     AltaEquipoPage,
     ListaTrabajoPage,
     VerTrabajoPage,
-    AltaFirmaPage
+    AltaFirmaPage,
+    AltaDescripcionPage,
+    ListaPuntocontrolPage,
+    ListaTareaPage,
+    AltaTareaPage,
+    CalendarioPage,
+    SeleccionaTrabajoPage,
+    SeleccionaTareaPage
   ],
   providers: [
     StatusBar,
@@ -78,7 +101,8 @@ import {AltaFirmaPage} from "../pages/alta-firma/alta-firma";
     AuthService,
     ClienteServices,
     EquipoServices,
-    HttpClientModule
+    HttpClientModule,
+    Camera,
 
   ]
 })
