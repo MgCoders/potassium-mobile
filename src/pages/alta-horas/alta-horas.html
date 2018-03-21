@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Cargar horas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+        Vas a cargar horas para la tarea:
+        <br>
+        <b>Tarea 1</b>
+        </ion-item>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-list>
+          <ion-item>
+            <ion-label>Empleado</ion-label>
+            <ion-icon name='md-clipboard' item-start></ion-icon>
+            <ion-select [(ngModel)]="empleado">
+              <ion-option value="1">Juan</ion-option>
+              <ion-option value="2">José</ion-option>
+              <ion-option value="3">Gervasio</ion-option>
+              <ion-option value="4">Arturo</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-list>
+          <ion-item>
+            <ion-label>Rubro</ion-label>
+            <ion-icon name='md-clipboard' item-start></ion-icon>
+            <ion-select [(ngModel)]="rubro">
+              <ion-option value="1">Soldadura</ion-option>
+              <ion-option value="2">Pintura</ion-option>
+              <ion-option value="3">Limpieza</ion-option>
+              <ion-option value="4">Cortar material</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-list>
+          <ion-item>
+            <ion-label>Fecha</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="hoy"></ion-datetime>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <br><br>
+      <ion-col col-12 col-md-6 offset-md-3>
+
+        <ion-item>
+          <ion-label color="primary" stacked>Cantidad de horas</ion-label>
+          <ion-input type="text" placeholder="...">
+
+          </ion-input>
+        </ion-item>
+
+        <!--ion-list>
+          <ion-list-header>
+
+            Detalle de horarios
+
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Comienzo</ion-label>
+            <ion-datetime displayFormat="HH:mm" [(ngModel)]="comienzo"></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Fin</ion-label>
+            <ion-datetime displayFormat="HH:mm" [(ngModel)]="fin"></ion-datetime>
+          </ion-item>
+
+        </ion-list-->
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <button ion-button full color="primary" (click)="registrarHoras()">Cargar registro</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

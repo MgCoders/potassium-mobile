@@ -19,7 +19,8 @@ import {AltaTrabajoPage} from "../alta-trabajo/alta-trabajo";
 
 export class RecepcionPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams) {
   }
 
   ionViewDidLoad() {

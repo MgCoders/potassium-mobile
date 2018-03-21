@@ -4,21 +4,24 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header #head>
 
   <ion-navbar>
-    <ion-title>Lista de trabajos</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Lista de trabajos ({{tipo}})</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <ion-list no-border>
+<ion-content padding hide-header [header]="head">
+  <ion-list [hidden]="proceso" no-border>
     <ion-list-header>
-      Cliente 1
+     Cliente 1
     </ion-list-header>
-    <ion-item (click)="verTrabajo()">
+    <ion-item  (click)="verTrabajo()">
       Barco
       <ion-note item-end>el grande</ion-note>
       <ion-icon name='ios-construct' item-start></ion-icon>
@@ -31,11 +34,11 @@
     </ion-item>
   </ion-list>
   <br><br>
-  <ion-list no-border>
+  <ion-list [hidden]="historial" no-border>
     <ion-list-header>
       Cliente 2
     </ion-list-header>
-    <ion-item>
+    <ion-item (click)="verTrabajo()">
       Tanque
       <ion-note item-end> 25.000 l</ion-note>
       <ion-icon name='ios-build-outline' item-start></ion-icon>

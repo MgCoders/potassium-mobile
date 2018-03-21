@@ -4,16 +4,16 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header #head>
 
   <ion-navbar>
-    <ion-title>Nombre tarea</ion-title>
+    <ion-title>Tarea #1_a</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding padding hide-header [header]="head">
 
   <ion-list>
     <ion-list-header>
@@ -22,21 +22,27 @@
     <ion-item>
       Creado el: 04 / 03 / 2018
     </ion-item>
-    <ion-item>
+    <!--ion-item>
       Asignado a: (Empleado 23,Empleado 24, Empleado 25)
-    </ion-item>
+    </ion-item-->
   </ion-list>
   <br>
   <ion-list no-border>
     <ion-list-header>
       Acciones
     </ion-list-header>
-    <ion-item (click)="cambiarEstado()">
-      Cambiar estado
-      <ion-note item-end></ion-note>
+
+    <ion-item>
+      <ion-label>Estado Actual</ion-label>
       <ion-icon name='md-clipboard' item-start></ion-icon>
-      <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
+      <ion-select [(ngModel)]="estado" (click)="cambiarEstado()">
+        <ion-option value="1">Iniciado</ion-option>
+        <ion-option value="2">En proceso</ion-option>
+        <ion-option value="3">Verificación</ion-option>
+        <ion-option value="4">Finalizado</ion-option>
+      </ion-select>
     </ion-item>
+
 
     <ion-item  (click)="cargarHoras()">
       Cargar horas
@@ -48,7 +54,7 @@
       (Borrar?)
       <ion-note item-end></ion-note>
       <ion-icon color="sandonato_rojoLogo" name='md-trash' item-start></ion-icon>
-      <ion-icon color="dark" name='ios-arrow-forward-outline' item-end></ion-icon>
+      <!--ion-icon color="dark" name='ios-arrow-forward-outline' item-end></ion-icon-->
     </ion-item>
 
   </ion-list>

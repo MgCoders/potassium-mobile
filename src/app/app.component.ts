@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ListaTrabajoPageModule} from "../pages/lista-trabajo/lista-trabajo.module";
 import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
+import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
 
 
 @Component({
@@ -35,7 +36,8 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HelloIonicPage },
       { title: 'Recepción de cliente', component: RecepcionPage },
-      { title: 'Ver trabajos', component: ListaTrabajoPage },
+      { title: 'Ver trabajos en proceso', component: ListaTrabajoPage },
+      { title: 'Historial de trabajos', component: ListaTrabajoPage },
       { title: 'Cerrar sesión', component: LoginPage }
     ];
   }
@@ -53,6 +55,20 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+    if(page.title == "Historial de trabajos"){
+
+      this.nav.setRoot(page.component, {tipo: 'historial'});
+
+    } else if(page.title == "Ver trabajos en proceso"){
+
+      this.nav.setRoot(page.component, {tipo: 'proceso'});
+
+    } else {
+
+      this.nav.setRoot(page.component);
+
+    }
+
+
   }
 }

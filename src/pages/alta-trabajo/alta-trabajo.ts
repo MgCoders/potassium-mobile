@@ -1,11 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
-import {Events, IonicPage, NavController, NavParams, Tabs} from 'ionic-angular';
+import {Events, IonicPage, Keyboard, NavController, NavParams, Platform, Tabs} from 'ionic-angular';
 import {IngresarDetallesPage} from "../ingresar-detalles/ingresar-detalles";
 import {IngresarFirmaPage} from "../ingresar-firma/ingresar-firma";
 import {ListaEquipoPage} from "../lista-equipo/lista-equipo";
 import {ListaClientePage} from "../lista-cliente/lista-cliente";
 import {Trabajo} from "../../app/_models/Trabajo";
-import {ClienteServices} from "../../app/_services/cliente.services";
 import {ClienteImp} from "../../app/_models/ClienteImp";
 import {TrabajoImp} from "../../app/_models/TrabajoImp";
 import {EquipoImp} from "../../app/_models/EquipoImp";
@@ -43,8 +42,10 @@ export class AltaTrabajoPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private clienteServices: ClienteServices,
+              public platform: Platform,
+              public keyboard: Keyboard,
               public events: Events) {
+
 
     this.limpiarCampos();
 
@@ -75,6 +76,7 @@ export class AltaTrabajoPage {
 
 
       }
+
       else if(tab==3){
         //Voy a la vista de detalles, y acaban de seleccionar el equipo
         console.log('TAB:: Ingresa Detalles');
@@ -86,6 +88,7 @@ export class AltaTrabajoPage {
       else if(tab==4){
         events.unsubscribe('change-tab');
         this.limpiarCampos();
+        this.navCtrl.pop();
       }
 
       console.log('entro>');
@@ -95,6 +98,12 @@ export class AltaTrabajoPage {
       console.log(this.trabajoActual);
     });
   }
+
+  keyboardCheck() {
+    console.log('The keyboard is open:', this.keyboard.isOpen());
+    return this.keyboard.isOpen();
+  }
+
 
   limpiarCampos(){
     this.tabCliente = ListaClientePage;
@@ -139,9 +148,8 @@ export class AltaTrabajoPage {
   }
 
   ionViewWillLeave(){
+    // Si apreta la flechita de arriba, se unsuscribe
     this.events.unsubscribe('change-tab');
   }
-
-
 
 }

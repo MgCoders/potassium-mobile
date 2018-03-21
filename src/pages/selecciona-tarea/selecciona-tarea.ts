@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AltaTrabajoPage} from "../alta-trabajo/alta-trabajo";
+import {AltaHorasPage} from "../alta-horas/alta-horas";
 
 /**
  * Generated class for the SeleccionaTareaPage page.
@@ -15,7 +17,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SeleccionaTareaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  estado: number;
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams) {
+    this.estado = 1;
   }
 
   ionViewDidLoad() {
@@ -27,7 +34,7 @@ export class SeleccionaTareaPage {
   }
 
   cargarHoras(){
-
+    this.navCtrl.push(AltaHorasPage);
   }
 
   borraTarea(){

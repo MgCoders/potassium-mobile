@@ -67,19 +67,22 @@ export class LoginPage {
 
     this.formSubmitted = true;
     this.authService.login(this.model.email, this.model.password)
-      .subscribe((result) => {
-          console.info(result);
-          if (result === true) {
-            console.log('LOGINA!' + this.returnUrl);
-            this.menu.enable(true);
-            this.navCtrl.setRoot(RecepcionPage, {});
-          }
-        } ,
+      .subscribe(
+        (result) => {
+            console.info(result);
+            if (result === true) {
+              console.log('LOGINA!' + this.returnUrl);
+              this.menu.enable(true);
+              this.navCtrl.setRoot(RecepcionPage, {});
+            }
+          } ,
         (err) => {
-          console.log('NO LOG');
-          //console.log('mail: '+this.model.email+' - pass: '+this.model.password);
-          this.onResetForm();
-        });
+            console.log('NO LOG');
+            console.log(JSON.stringify(err));
+            console.log('mail: '+this.model.email+' - pass: '+this.model.password);
+            this.onResetForm();
+          }
+        );
 
   }
 

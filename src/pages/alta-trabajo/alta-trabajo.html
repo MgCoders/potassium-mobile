@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <ion-tabs>
+  <ion-tabs [ngClass]="{'remove-tabs': keyboardCheck()}">
     <ion-tab tabIcon="person" enabled="{{enabled_tabCliente}}" [root]="tabCliente" ></ion-tab>
     <ion-tab tabIcon="md-car" enabled="{{enabled_tabEquipo}}" [root]="tabEquipo" [rootParams]="navParams"></ion-tab>
     <ion-tab tabIcon="md-text" enabled="{{enabled_tabDetalles}}" [root]="tabDetalles" ></ion-tab>

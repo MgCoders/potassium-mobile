@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import {IonicApp, IonicModule, IonicErrorHandler, Keyboard} from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
@@ -34,6 +34,8 @@ import {ListaTareaPage} from "../pages/lista-tarea/lista-tarea";
 import {AltaTareaPage} from "../pages/alta-tarea/alta-tarea";
 import {CalendarioPage} from "../pages/calendario/calendario";
 import {SeleccionaTareaPage} from "../pages/selecciona-tarea/selecciona-tarea";
+import {HideHeaderDirective} from "../directives/hide-header/hide-header";
+import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import {SeleccionaTareaPage} from "../pages/selecciona-tarea/selecciona-tarea";
     AltaTareaPage,
     CalendarioPage,
     SeleccionaTrabajoPage,
-    SeleccionaTareaPage
+    SeleccionaTareaPage,
+    HideHeaderDirective,
+    AltaHorasPage
   ],
   imports: [
     BrowserModule,
@@ -66,8 +70,9 @@ import {SeleccionaTareaPage} from "../pages/selecciona-tarea/selecciona-tarea";
     HttpClientModule,
     InterceptorModule,
     IonicModule.forRoot(MyApp, {
-      scrollAssist: true,
-      autoFocusAssist: true
+      scrollPadding: false,
+      scrollAssist: false,
+      autoFocusAssist: false
     })
   ],
   bootstrap: [IonicApp],
@@ -92,7 +97,8 @@ import {SeleccionaTareaPage} from "../pages/selecciona-tarea/selecciona-tarea";
     AltaTareaPage,
     CalendarioPage,
     SeleccionaTrabajoPage,
-    SeleccionaTareaPage
+    SeleccionaTareaPage,
+    AltaHorasPage
   ],
   providers: [
     StatusBar,
@@ -103,7 +109,7 @@ import {SeleccionaTareaPage} from "../pages/selecciona-tarea/selecciona-tarea";
     EquipoServices,
     HttpClientModule,
     Camera,
-
+    Keyboard
   ]
 })
 export class AppModule {}
