@@ -16,6 +16,7 @@ import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 export class AltaFirmaPage {
 
   rol: string;
+  nombreFirma: string;
   @ViewChild('myCanvas') canvas: any;
   canvasElement: any;
   callback:any;
@@ -40,7 +41,7 @@ export class AltaFirmaPage {
 
 
     this.callback = this.navParams.get("callback");
-    let data = this.canvasElement.toDataURL();
+    let data = {firma: this.canvasElement.toDataURL(), nombre: this.nombreFirma};
     this.callback(data).then(()=>{
       this.navCtrl.pop();
     });
@@ -60,7 +61,7 @@ export class AltaFirmaPage {
 
     this.canvasElement = this.canvas.nativeElement;
 
-    this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() -8 + '');
+    this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() - (16+5)*2  -2 -1 + '');
     this.renderer.setElementAttribute(this.canvasElement, 'height', 300 + '');
 
   }
@@ -72,15 +73,15 @@ export class AltaFirmaPage {
 
   handleStart(ev){
 
-    this.lastX = ev.touches[0].pageX;
-    this.lastY = ev.touches[0].pageY-156;
+    this.lastX = ev.touches[0].pageX-21;
+    this.lastY = ev.touches[0].pageY-226;
   }
 
   handleMove(ev){
 
     let ctx = this.canvasElement.getContext('2d');
-    let currentX = ev.touches[0].pageX;
-    let currentY = ev.touches[0].pageY-156;
+    let currentX = ev.touches[0].pageX-21;
+    let currentY = ev.touches[0].pageY-226;
 
     ctx.beginPath();
     ctx.lineJoin = "round";

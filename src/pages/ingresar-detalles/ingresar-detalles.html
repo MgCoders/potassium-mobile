@@ -16,9 +16,12 @@
 <ion-content padding hide-header [header]="head">
   <ion-grid>
     <ion-row>
+
       <ion-col col-12 col-md-6 offset-md-3>
-        <button ion-button full color="primary" (click)="nuevoDetalle()">Tomar foto</button>
+        Sección Fotos:
+        <button ion-button full color="primary" (click)="nuevoDetalle()">Agregar nueva foto del equipo</button>
       </ion-col>
+
       <ion-col col-12 col-md-6 offset-md-3 *ngFor="let detalle of lista">
         <ion-card>
           <img src="{{detalle.img}}" />
@@ -32,16 +35,29 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-card>
-        <ion-card-header>
-          Comentarios generales del equipo
-        </ion-card-header>
-        <ion-card-content>
-            <textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="myStuff">
-              {{comentarios}}
-            </textarea>
-        </ion-card-content>
-      </ion-card>
+
+      <ion-col col-12 col-md-6 offset-md-3 class="separador">
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3 >
+        Comentarios generales del equipo
+        <ion-card>
+          <ion-card-content>
+              <textarea #myInput
+                        id="myInput"
+                        rows="1"
+                        maxLength="500"
+                        (keyup)="resize()"
+                        [(ngModel)]="myStuff">
+                {{comentarios}}
+              </textarea>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3 class="separador">
+      </ion-col>
+
       <ion-col col-12 col-md-6 offset-md-3>
         <button ion-button full color="secondary" (click)="confirmarDetalles()">
           Confirmar detalles

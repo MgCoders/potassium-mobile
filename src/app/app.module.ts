@@ -3,7 +3,6 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler, Keyboard} from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { RecepcionPage } from '../pages/recepcion/recepcion';
 import { LoginPage } from '../pages/login/login';
 
@@ -40,7 +39,6 @@ import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
 @NgModule({
   declarations: [
     MyApp,
-    HelloIonicPage,
     RecepcionPage,
     LoginPage,
     AltaTrabajoPage,
@@ -78,7 +76,6 @@ import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HelloIonicPage,
     RecepcionPage,
     LoginPage,
     AltaTrabajoPage,

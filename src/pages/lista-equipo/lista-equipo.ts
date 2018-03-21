@@ -34,7 +34,6 @@ export class ListaEquipoPage {
               private toastCtrl: ToastController,
               public events: Events) {
 
-    this.lista = [];
     this.clienteSeleccionado = this.navParams['cliente'];
     //this.lista.push(new EquipoImp({marca:'SCANIA',modelo:'48 Ruedas',matricula:'556321',color:'Azul'}));
   }

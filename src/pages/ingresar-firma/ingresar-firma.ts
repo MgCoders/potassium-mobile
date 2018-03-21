@@ -20,6 +20,8 @@ export class IngresarFirmaPage {
   firmaCliente64: string;
   firmaEmpleado64: string;
 
+  nombreCliente: string;
+  nombreEmpleado: string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -28,7 +30,8 @@ export class IngresarFirmaPage {
 
     this.firmaCliente64 = 'assets/imgs/blanco.jpg';
     this.firmaEmpleado64 = 'assets/imgs/blanco.jpg';
-
+    this.nombreCliente = "Sin ingresar...";
+    this.nombreEmpleado = "Sin ingresar...";
   }
 
   ionViewWillEnter() {
@@ -60,7 +63,8 @@ export class IngresarFirmaPage {
     return new Promise((resolve, reject) => {
       console.log("INGRESO::Seteo cliente");
       //console.log(this.firmaCliente64);
-      this.firmaCliente64 = _params;
+      this.firmaCliente64 = _params['firma'];
+      this.nombreCliente = _params['nombre'];
       //console.log(this.firmaCliente64);
       resolve();
     });
@@ -68,10 +72,11 @@ export class IngresarFirmaPage {
 
   callbackEmpleado = (_params) => {
     return new Promise((resolve, reject) => {
-      console.log("INGRESO::Seteo cliente");
+
       //console.log(this.firmaCliente64);
-      this.firmaEmpleado64 = _params;
-      //console.log(this.firmaCliente64);
+      this.firmaEmpleado64 = _params['firma'];
+      this.nombreEmpleado = _params['nombre'];
+
       resolve();
     });
   };

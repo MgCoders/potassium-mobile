@@ -11,9 +11,8 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="outer-content" padding>
     <ion-row>
-
       <ion-col col-sm-12 offset-md-3 col-md-6 col-lg-4 offset-lg-4>
         <br>
         <br>
@@ -27,13 +26,13 @@
     <ion-row>
       <ion-col col-sm-12 offset-md-3 col-md-6>
         <form name="material_login_form" class="form-validation" [formGroup]="validationForm" (ngSubmit)="login()">
-          <fieldset>
-            <ion-item>
+
+            <ion-item class="no-padding">
               <ion-label stacked>Usuario</ion-label>
               <ion-input formControlName="email" type="email" name="email" [(ngModel)]="model.email"></ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item class="no-padding">
               <ion-label stacked>Contraseña</ion-label>
               <ion-input formControlName="password" type="password" name="password" [(ngModel)]="model.password"></ion-input>
             </ion-item>
@@ -43,7 +42,7 @@
             <br>
 
             <button ion-button full color="primary" type="submit" >Acceder</button>
-          </fieldset>
+
         </form>
       </ion-col>
     </ion-row>

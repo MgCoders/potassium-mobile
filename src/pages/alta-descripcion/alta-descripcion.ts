@@ -16,7 +16,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class AltaDescripcionPage {
 
-  image: string = null;
+  image: string = 'assets/imgs/photo.jpg';
   titulo: string = null;
   descr: string = null;
 
@@ -26,6 +26,7 @@ export class AltaDescripcionPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private camera: Camera) {
+    this.image = 'assets/imgs/photo.jpg';
   }
 
   ionViewDidLoad() {

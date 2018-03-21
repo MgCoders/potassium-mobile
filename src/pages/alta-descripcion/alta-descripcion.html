@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>alta-descripcion</ion-title>
+    <ion-title>Nueva descripcion con foto</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,25 +17,25 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
-        <button ion-button block (click)="getPicture()">Toma una foto</button>
+        <button ion-button block (click)="getPicture()">Abrir la cámara</button>
         <img [src]="image" *ngIf="image" />
       </ion-col>
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
-        <ion-item>
+        <ion-item class="no-padding">
           <ion-label color="primary" stacked>Título</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="titulo">
           </ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
-        <ion-item>
+        <ion-item class="no-padding">
           <ion-label color="primary" stacked>Descripción</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="descr">
           </ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
-        <button ion-button color="secondary" (click)="guardarDetalle()" >Confirmar</button>
+        <button ion-button block color="secondary" (click)="guardarDetalle()" >Confirmar</button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -32,8 +32,6 @@ export class ListaClientePage {
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events) {
-
-    this.lista = [];
   }
 
   nuevoCliente() {
@@ -55,7 +53,7 @@ export class ListaClientePage {
   ionViewWillEnter() {
 
     //Limpio la lista
-    //this.lista = [];
+    this.lista = [];
     console.log("Entro a la lista de clientes");
 
 

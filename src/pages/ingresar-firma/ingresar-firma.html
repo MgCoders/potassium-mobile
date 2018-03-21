@@ -17,29 +17,38 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
-        <button ion-button full color="primary" (click)="nuevaFirmaCliente()">
+        <div text-center>
           Firma cliente
-        </button>
-        <ion-card>
+        </div>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+
+        <ion-card (click)="nuevaFirmaCliente()">
           <img src="{{firmaCliente64}}" />
           <ion-card-content>
-            <ion-card-title>
-              Cliente
-            </ion-card-title>
+            {{nombreCliente}}
           </ion-card-content>
         </ion-card>
-        <br>
-        <br>
-        <button ion-button full color="primary" (click)="nuevaFirmaEmpleado()" >Firma empleado</button>
-        <ion-card>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3 class="separador">
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <div text-center>
+          Firma empleado
+        </div>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-card (click)="nuevaFirmaEmpleado()">
           <img src="{{firmaEmpleado64}}"/>
           <ion-card-content>
-            <ion-card-title>
-              Empleado
-            </ion-card-title>
+            {{nombreEmpleado}}
           </ion-card-content>
         </ion-card>
-
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
         <button ion-button full color="secondary" (click)="finalizarTrabajo()" >
           Finalizar trabajo
         </button>

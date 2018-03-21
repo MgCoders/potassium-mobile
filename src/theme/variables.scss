@@ -81,12 +81,17 @@ $colors: (
   dark:       #222,
   blanco:     #fff,
   sandonato_rojoLogo: #ff3d06,
+  sandonato_negroLogo: #555,
   gris:     #eaeaea
 );
 
 
 .toolbar-background {
-  background-color: color($colors, sandonato_rojoLogo) !important;
+  background-color: color($colors, sandonato_negroLogo) !important;
+}
+
+.bar-button-default-md {
+  color: color($colors, blanco) !important;
 }
 
 .toolbar-title{
@@ -97,6 +102,13 @@ bar-buttons {
   color: color($colors, blanco)!important;
 }
 
+ion-content, ion-item {
+  background-color: #fafafa !important;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
 
 // Ionicons
 // --------------------------------------------------

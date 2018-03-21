@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 
 import { Platform, MenuController, Nav } from 'ionic-angular';
 
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { RecepcionPage } from '../pages/recepcion/recepcion';
 import { LoginPage } from '../pages/login/login';
 
@@ -34,7 +33,6 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Inicio', component: HelloIonicPage },
       { title: 'Recepción de cliente', component: RecepcionPage },
       { title: 'Ver trabajos en proceso', component: ListaTrabajoPage },
       { title: 'Historial de trabajos', component: ListaTrabajoPage },

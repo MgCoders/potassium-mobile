@@ -5,27 +5,46 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title> Firma {{rol}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-toolbar id="bottom-toolbar">
+  <ion-buttons left>
+    <button color="light" ion-button icon-only (click)="clearCanvas()"><ion-icon name="trash"></ion-icon></button>
+    <button color="dark" ion-button icon-only (click)="changeSize(4)"><ion-icon style="font-size: 1em;" name="radio-button-on"></ion-icon></button>
+    <button color="dark" ion-button icon-only (click)="changeSize(8)"><ion-icon style="font-size: 2em;" name="radio-button-on"></ion-icon></button>
+  </ion-buttons>
+  <ion-buttons right>
+    <button color="light" ion-button outline (click)="confirmarFirma()">Confirmar!</button>
+  </ion-buttons>
+</ion-toolbar>
 
-        Ingrese la firma debajo...
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <canvas #myCanvas
+                (touchstart)="handleStart($event)"
+                (touchmove)="handleMove($event)">
+        </canvas>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item class="no-padding">
+          <ion-label color="primary" stacked>Nombre del {{rol}}</ion-label>
+          <ion-input type="text" placeholder="..." [(ngModel)]="nombreFirma">
+          </ion-input>
+        </ion-item>
+      </ion-col>
 
 
-<canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
 
 
-        <ion-toolbar id="bottom-toolbar">
-          <ion-buttons left>
-            <button color="light" ion-button icon-only (click)="clearCanvas()"><ion-icon name="trash"></ion-icon></button>
-            <button color="dark" ion-button icon-only (click)="changeSize(4)"><ion-icon style="font-size: 1em;" name="radio-button-on"></ion-icon></button>
-            <button color="dark" ion-button icon-only (click)="changeSize(8)"><ion-icon style="font-size: 2em;" name="radio-button-on"></ion-icon></button>
-          </ion-buttons>
-          <ion-buttons right>
-            <button color="light" ion-button outline (click)="confirmarFirma()">Confirmar!</button>
-          </ion-buttons>
-        </ion-toolbar>
+
+
+
+    </ion-row>
+  </ion-grid>
+</ion-content>
