@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {IonicPage, NavController, Loading, NavParams, LoadingController, AlertController, Events} from 'ionic-angular';
 import {AltaClientePage} from "../alta-cliente/alta-cliente";
 import {ClienteImp} from "../../app/_models/ClienteImp";
@@ -6,6 +6,8 @@ import {Cliente} from "../../app/_models/Cliente";
 import {ClienteServices} from "../../app/_services/cliente.services";
 import { ToastController } from 'ionic-angular';
 import {errorHandler} from "@angular/platform-browser/src/browser";
+import {FormControl} from "@angular/forms";
+import {FilterPipe} from "../../pipes/filter.pipe";
 
 
 /**
@@ -19,11 +21,21 @@ import {errorHandler} from "@angular/platform-browser/src/browser";
 @Component({
   selector: 'page-lista-cliente',
   templateUrl: 'lista-cliente.html',
+
 })
+
+
+
+
+
 export class ListaClientePage {
 
   lista: Cliente[];
 
+  public filterText: string;
+  public filterPlaceholder: string;
+  public filterInput = new FormControl();
+  public enableFilter: boolean;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -50,7 +62,23 @@ export class ListaClientePage {
     //this.navCtrl.push(AltaClientePage, );
   }
 
+  ionViewDidLoad(){
+    //this.filterText = "";
+  }
+
   ionViewWillEnter() {
+
+    this.enableFilter = true;
+    this.filterText = "";
+    this.filterPlaceholder = "Busca por: empresa, mail, teléfono, rut, persona de contacto..";
+
+    this.filterInput
+      .valueChanges
+      //.debounceTime(200)
+      .subscribe(term => {
+        this.filterText = term;
+        console.log(term);
+      });
 
     //Limpio la lista
     this.lista = [];
@@ -87,6 +115,8 @@ export class ListaClientePage {
           return a.id - b.id;
         });
         console.log(this.lista);
+
+
         toastCorrecto.present();
       },
       (error) => {
@@ -95,7 +125,8 @@ export class ListaClientePage {
         toastError.present();
     });
 
-
   }
+
+
 
 }

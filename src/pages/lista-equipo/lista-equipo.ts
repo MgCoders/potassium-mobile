@@ -8,6 +8,7 @@ import {EquipoServices} from "../../app/_services/equipo.service";
 import {AltaEquipoPage} from "../alta-equipo/alta-equipo";
 import {EquipoImp} from "../../app/_models/EquipoImp";
 import {Cliente} from "../../app/_models/Cliente";
+import {FormControl} from "@angular/forms";
 
 /**
  * Generated class for the ListaEquipoPage page.
@@ -25,6 +26,11 @@ export class ListaEquipoPage {
 
   lista: Equipo[];
   clienteSeleccionado: Cliente[];
+
+  public filterText: string;
+  public filterPlaceholder: string;
+  public filterInput = new FormControl();
+  public enableFilter: boolean;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -59,6 +65,20 @@ export class ListaEquipoPage {
 
   ionViewWillEnter() {
 
+
+    this.enableFilter = true;
+    this.filterText = "";
+    this.filterPlaceholder = "Busca por: marca, matrícula, modelo, color..";
+
+    this.filterInput
+      .valueChanges
+      //.debounceTime(200)
+      .subscribe(term => {
+        this.filterText = term;
+        console.log(term);
+      });
+
+    //Limpio la lista
     this.lista = [];
     console.log("Entro a la lista de clientes");
 

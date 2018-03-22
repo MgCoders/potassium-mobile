@@ -1,3 +1,8 @@
 page-lista-trabajo {
 
 }
+
+ion-list-header {
+  color: color($colors, primary) !important;
+  background-color: color($colors, fondoApp) !important;
+}

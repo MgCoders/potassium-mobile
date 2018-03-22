@@ -35,6 +35,7 @@ import {CalendarioPage} from "../pages/calendario/calendario";
 import {SeleccionaTareaPage} from "../pages/selecciona-tarea/selecciona-tarea";
 import {HideHeaderDirective} from "../directives/hide-header/hide-header";
 import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
+import {FilterPipe} from "../pipes/filter.pipe";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
     SeleccionaTrabajoPage,
     SeleccionaTareaPage,
     HideHeaderDirective,
-    AltaHorasPage
+    AltaHorasPage,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

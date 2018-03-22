@@ -20,7 +20,7 @@ export class HideHeaderDirective {
 
   constructor(public element: ElementRef, public renderer: Renderer) {
 
-    console.log('Hello HideHeaderDirective Directive');
+    //console.log('Hello HideHeaderDirective Directive');
   }
 
   ngOnInit(){

@@ -100,7 +100,7 @@ export class AltaTrabajoPage {
   }
 
   keyboardCheck() {
-    console.log('The keyboard is open:', this.keyboard.isOpen());
+    //console.log('The keyboard is open:', this.keyboard.isOpen());
     return this.keyboard.isOpen();
   }
 

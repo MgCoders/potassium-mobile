@@ -28,17 +28,11 @@ export class JwtInterceptor implements HttpInterceptor {
         console.log(event);
       }
     }, (err: any) => {
-      console.log(err);
-      if (err instanceof HttpErrorResponse) {
+        console.log(err);
         if (err.status === 401) {
-          if (this.auth.getCurrentUser() != null) {
-            this.navCtrl.setRoot(LoginPage, {});
-          } else {
-            this.navCtrl.setRoot(LoginPage, {});
-          }
+          this.navCtrl.setRoot(LoginPage, {});
           console.log('unauthorized');
         }
-      }
     });
   }
 }

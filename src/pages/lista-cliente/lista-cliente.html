@@ -14,11 +14,19 @@
 
 
 <ion-content padding hide-header [header]="head">
+  <ion-searchbar [(ngModel)]="filterText"
+                 [placeholder]="filterPlaceholder"
+                 [formControl]="filterInput"></ion-searchbar>
   <ion-grid>
     <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-list>
-          <ion-item *ngFor="let cliente of lista">
+          <ion-item *ngFor="let cliente of lista | filter:{ nombreEmpresa:  (filterText ||''),
+                                                            rut:            (filterText ||''),
+                                                            nombreEmpresa:  (filterText ||''),
+                                                            telefono:       (filterText ||''),
+                                                            personaContacto:(filterText ||''),
+                                                            emailEmpresa:   (filterText ||'') } : false">
 
             <ion-thumbnail (click)="seleccionarCliente(cliente.id)" item-start>
               <img src="assets/imgs/client.png">
