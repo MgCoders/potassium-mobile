@@ -63,6 +63,244 @@
           Confirmar detalles
         </button>
       </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3 class="separador">
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <button ion-button full color="secondary" (click)="confirmarDetalles()">
+          Confirmar detalles
+        </button>
+      </ion-col>
+
+      <!-- Comienza campos switch/toggle -->
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Documentos</ion-label>
+          <ion-select [(ngModel)]="documentos">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Radio</ion-label>
+          <ion-select [(ngModel)]="radio">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Extintor</ion-label>
+          <ion-select [(ngModel)]="extintor">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Balizas</ion-label>
+          <ion-select [(ngModel)]="balizas">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Llave de ruedas</ion-label>
+          <ion-select [(ngModel)]="llave">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Herramientas</ion-label>
+          <ion-select [(ngModel)]="herramientas">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Manuales</ion-label>
+          <ion-select [(ngModel)]="manuales">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Frente de radio</ion-label>
+          <ion-select [(ngModel)]="frenteRadio">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Manguera cabina</ion-label>
+          <ion-select [(ngModel)]="mangueraCabina">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Cenicero</ion-label>
+          <ion-select [(ngModel)]="cenicero">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Gato y palanca</ion-label>
+          <ion-select [(ngModel)]="gato">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Parabrisas</ion-label>
+          <ion-select [(ngModel)]="parabrisas">
+            <ion-option value="f">Roto</ion-option>
+            <ion-option value="m">Sano</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Gato y palanca</ion-label>
+          <ion-select [(ngModel)]="gato">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Vidrios laterales</ion-label>
+          <ion-select [(ngModel)]="vidrios">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Estado de los vidrios</ion-label>
+          <ion-select [(ngModel)]="estadoVidrios">
+            <ion-option value="f">Roto</ion-option>
+            <ion-option value="m">Sano</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Espejos</ion-label>
+          <ion-select [(ngModel)]="espejos">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Estado de los espejos</ion-label>
+          <ion-select [(ngModel)]="estadoEspejos">
+            <ion-option value="f">Roto</ion-option>
+            <ion-option value="m">Sano</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Señaleros</ion-label>
+          <ion-select [(ngModel)]="senaleros">
+            <ion-option value="f">Roto</ion-option>
+            <ion-option value="m">Sano</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Luces traseras</ion-label>
+          <ion-select [(ngModel)]="luces">
+            <ion-option value="f">Roto</ion-option>
+            <ion-option value="m">Sano</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Rayones</ion-label>
+          <ion-select [(ngModel)]="rayones">
+            <ion-option value="f">Si</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label>Auxiliar</ion-label>
+          <ion-select [(ngModel)]="rayones">
+            <ion-option value="f">Si (armada)</ion-option>
+            <ion-option value="m">Si (solo disco)</ion-option>
+            <ion-option value="m">No</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-list>
+          <ion-list-header>
+            Gasoil
+            <ion-badge item-end>{{gasoil}} %</ion-badge>
+          </ion-list-header>
+          <ion-item>
+            <ion-range min="0" max="100" [(ngModel)]="gasoil" color="primary">
+              <ion-label range-left>0</ion-label>
+              <ion-label range-right>100</ion-label>
+            </ion-range>
+          </ion-item>
+        </ion-list>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
