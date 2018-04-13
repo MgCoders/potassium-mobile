@@ -45,6 +45,7 @@ export class AltaClientePage {
     this.clienteActual =  new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
 
     let id = this.navParams.data['id'];
+    loading.present();
 
     if(id != undefined){
       console.log('Edicion de cliente!');
@@ -60,6 +61,7 @@ export class AltaClientePage {
           toastError.present();
         });
     }
+    loading.dismissAll();
     console.log(this.clienteActual);
   }
 

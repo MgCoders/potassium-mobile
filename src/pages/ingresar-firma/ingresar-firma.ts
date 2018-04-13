@@ -54,7 +54,12 @@ export class IngresarFirmaPage {
 
     toastCorrecto.present();
 
-    this.events.publish('change-tab', 4, {});
+    this.events.publish('change-tab', 4, {
+      'firmaClienteRecepcion': this.firmaCliente64,
+      'firmaEmpleadoRecepcion': this.firmaEmpleado64,
+      'nombreClienteRecepcion': this.nombreCliente,
+      'nombreEmpleadoRecepcion': this.nombreEmpleado
+    });
 
   }
 

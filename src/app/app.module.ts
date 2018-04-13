@@ -36,6 +36,7 @@ import {SeleccionaTareaPage} from "../pages/selecciona-tarea/selecciona-tarea";
 import {HideHeaderDirective} from "../directives/hide-header/hide-header";
 import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
 import {FilterPipe} from "../pipes/filter.pipe";
+import {TrabajoService} from "./_services/trabajo.service";
 
 @NgModule({
   declarations: [
@@ -72,7 +73,11 @@ import {FilterPipe} from "../pipes/filter.pipe";
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
       scrollAssist: false,
-      autoFocusAssist: false
+      autoFocusAssist: false,
+      monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre' ],
+      monthShortNames: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'set', 'oct', 'nov', 'dic' ],
+      dayNames: ['domingo', 'lunes', 'martes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+      dayShortNames: ['dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab'],
     })
   ],
   bootstrap: [IonicApp],
@@ -105,6 +110,7 @@ import {FilterPipe} from "../pipes/filter.pipe";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     ClienteServices,
+    TrabajoService,
     EquipoServices,
     HttpClientModule,
     Camera,

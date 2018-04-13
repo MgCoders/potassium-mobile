@@ -1,5 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {Events, IonicPage, Keyboard, NavController, NavParams, Platform, Tabs} from 'ionic-angular';
+import {
+  Events, IonicPage, Keyboard, LoadingController, NavController, NavParams, Platform, Tabs,
+  ToastController
+} from 'ionic-angular';
 import {IngresarDetallesPage} from "../ingresar-detalles/ingresar-detalles";
 import {IngresarFirmaPage} from "../ingresar-firma/ingresar-firma";
 import {ListaEquipoPage} from "../lista-equipo/lista-equipo";
@@ -8,6 +11,7 @@ import {Trabajo} from "../../app/_models/Trabajo";
 import {ClienteImp} from "../../app/_models/ClienteImp";
 import {TrabajoImp} from "../../app/_models/TrabajoImp";
 import {EquipoImp} from "../../app/_models/EquipoImp";
+import {TrabajoService} from "../../app/_services/trabajo.service";
 
 /**
  * Generated class for the AltaTrabajoPage page.
@@ -44,8 +48,26 @@ export class AltaTrabajoPage {
               public navParams: NavParams,
               public platform: Platform,
               public keyboard: Keyboard,
-              public events: Events) {
+              public events: Events,
+              public loadingCtrl: LoadingController,
+              private toastCtrl: ToastController,
+              private trabajoService: TrabajoService) {
 
+
+
+    let loading = this.loadingCtrl.create({
+      content: 'Procesando...'
+    });
+    let toastCorrecto = this.toastCtrl.create({
+      message: 'Datos cargados correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastError = this.toastCtrl.create({
+      message: 'Error al cargar datos..',
+      duration: 3000,
+      position: 'bottom'
+    });
 
     this.limpiarCampos();
 
@@ -82,20 +104,94 @@ export class AltaTrabajoPage {
         console.log('TAB:: Ingresa Detalles');
         this.enabled_tabDetalles = false;
         this.enabled_tabFrima = true;
-        //this.trabajoActual.comentarios = "";
-        console.log(this.trabajoActual.comentarios);
+
+        console.log("Data: ");
+        console.log(data);
+
+        //Obtengo la lista de detalles para agregarle al trabajo actual
+        this.trabajoActual.comentarios = data['comentarios'];
+        this.trabajoActual.fechaRecepcion= data['fechaRecepcion'];
+        this.trabajoActual.fechaProvistaEntrega = data['fechaProvistaEntrega'];
+        this.trabajoActual.kmEquipoRecepcion = data['kmEquipoRecepcion'];
+        this.trabajoActual.equipoDocumentos = data['equipoDocumentos'];
+        this.trabajoActual.equipoAbollones = data['equipoAbollones'];
+        this.trabajoActual.equipoAuxiliar = data['equipoAuxiliar'];
+        this.trabajoActual.equipoAuxiliarArmada = data['equipoAuxiliarArmada'];
+        this.trabajoActual.equipoBalizas = data['equipoBalizas'];
+        this.trabajoActual.equipoCantidadCombustible = data['equipoCantidadCombustible'];
+        this.trabajoActual.equipoCenicero = data['equipoCenicero'];
+        this.trabajoActual.equipoEspejos = data['equipoEspejos'];
+        this.trabajoActual.equipoEspejosSanos = data['equipoEspejosSanos'];
+        this.trabajoActual.equipoExtintor = data['equipoExtintor'];
+        this.trabajoActual.equipoFrenteRadio = data['equipoFrenteRadio'];
+        this.trabajoActual.equipoGatoPalanca = data['equipoGatoPalanca'];
+        this.trabajoActual.equipoHerramientas = data['equipoHerramientas'];
+        this.trabajoActual.equipoLlaveRuedas = data['equipoLlaveRuedas'];
+        this.trabajoActual.equipoLucesTraserasSanas = data['equipoLucesTraserasSanas'];
+        this.trabajoActual.equipoMangueraCabina = data['equipoMangueraCabina'];
+        this.trabajoActual.equipoManuales = data['equipoManuales'];
+        this.trabajoActual.equipoParabrisasSano = data['equipoParabrisasSano'];
+        this.trabajoActual.equipoRadio = data['equipoRadio'];
+        this.trabajoActual.equipoRayones = data['equipoRayones'];
+        this.trabajoActual.equipoSenalerosSanos = data['equipoSenalerosSanos'];
+        this.trabajoActual.equipoVidriosLaterales = data['equipoVidriosLaterales'];
+        this.trabajoActual.equipoVidriosLateralesSanos = data['equipoVidriosLateralesSanos'];
+        this.trabajoActual.dibujoEquipoRecepcion = data['dibujoEquipoRecepcion'];
+
+
+        if (this.trabajoActual.equipoDocumentos) {
+          console.log("tiene documentos");
+        } else {
+          console.log("no tiene");
+        }
+
       }
       else if(tab==4){
+        //Me llegó la firma en la data!
+        console.log('TAB:: Ingresa Firma');
+        console.log("Data: ");
+        console.log(data);
+
+        this.trabajoActual.firmaClienteRecepcion = data['firmaClienteRecepcion'];
+        //this.trabajoActual.firmaEmpleadoRecepcion = data['firmaEmpleadoRecepcion'];
+        this.trabajoActual.nombreClienteRecepcion = data['nombreClienteRecepcion'];
+        //this.trabajoActual.nombreEmpleadoRecepcion = data['nombreEmpleadoRecepcion'];
+
+        //Pushear el trabajo a la API
+        console.log('Imprimo el trabajo');
+        console.log(this.trabajoActual);
+
+        loading.present();
+
+        /*
+        Cambio como dijo el tincho para poder pushear las fotos*/
+        this.trabajoService.create(this.trabajoActual).subscribe(
+          (data) => {
+            toastCorrecto.present();
+            loading.dismissAll();
+            this.trabajoActual = new TrabajoImp(data);
+          },
+          (error) => {
+            console.log(error);
+            toastError.setMessage(error);
+            toastError.present();
+          });
+
+        loading.dismissAll();
+
+
         events.unsubscribe('change-tab');
         this.limpiarCampos();
+
         this.navCtrl.pop();
       }
 
-      console.log('entro>');
-      this.tabs.select(tab);
-      console.log('<salgo');
-
       console.log(this.trabajoActual);
+
+      //console.log('entro>');
+      this.tabs.select(tab);
+      //console.log('<salgo');
+
     });
   }
 
@@ -124,17 +220,45 @@ export class AltaTrabajoPage {
       new TrabajoImp({
         cliente:c,
         equipo:e,
-        motivoVisita:'',
-        fechaRecepcion:'',
+        motivoVisita: this.tipoTrabajo,
+        fechaRecepcion: '',
         fechaProvistaEntrega:'',
         requierePresupuesto:false,
         comentarios:'',
         estado:'',
         kmEquipoRecepcion:0,
+        firmaClienteRecepcion: '',
+        //firmaEmpleadoRecepcion: '',
         nombreClienteRecepcion:'',
+        //nombreEmpleadoRecepcion:'',
         nroFactura:0,
         nroRemito:0,
-        nroOrdenCompra:0});
+        nroOrdenCompra:0,
+        equipoDocumentos:false,
+        equipoAbollones:false,
+        equipoAuxiliar:false,
+        equipoAuxiliarArmada:false,
+        equipoBalizas:false,
+        equipoCantidadCombustible:0,
+        equipoCenicero:false,
+        equipoEspejos:false,
+        equipoEspejosSanos:false,
+        equipoExtintor:false,
+        equipoFrenteRadio:false,
+        equipoGatoPalanca:false,
+        equipoHerramientas:false,
+        equipoLlaveRuedas:false,
+        equipoLucesTraserasSanas:false,
+        equipoMangueraCabina:false,
+        equipoManuales:false,
+        equipoParabrisasSano:false,
+        equipoRadio:false,
+        equipoRayones:false,
+        equipoSenalerosSanos:false,
+        equipoVidriosLaterales:false,
+        equipoVidriosLateralesSanos:false,
+        dibujoEquipoRecepcion: ''}
+      );
     console.log('Todo Limpito');
     console.log(this.trabajoActual);
   }

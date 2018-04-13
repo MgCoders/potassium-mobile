@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Trabajo #1</ion-title>
+    <ion-title>Trabajo #{{trabajoActual.id}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,10 +20,10 @@
       Detalles
     </ion-list-header>
     <ion-item>
-      Creado el: 03 / 03 / 2018
+      Fecha de recepcion: {{trabajoActual.fechaRecepcion}}
     </ion-item>
     <ion-item>
-      Creado por: Empleado 1
+      Creado por: {{trabajoActual.nombreClienteRecepcion}}
     </ion-item>
   </ion-list>
     <br>
@@ -31,20 +31,20 @@
     <ion-list-header>
       Acciones
     </ion-list-header>
-    <ion-item (click)="verFicha()">
+    <ion-item (click)="verFicha(trabajoActual.id)">
       Ficha
       <ion-note item-end></ion-note>
       <ion-icon name='ios-create-outline' item-start></ion-icon>
       <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
     </ion-item>
 
-    <ion-item  (click)="verTareas()">
+    <ion-item  (click)="verTareas(trabajoActual.id)">
       Tareas
       <ion-note item-end></ion-note>
       <ion-icon name='md-swap' item-start></ion-icon>
       <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
     </ion-item>
-    <ion-item (click)="verPuntosDeControl()">
+    <ion-item (click)="verPuntosDeControl(trabajoActual.id)">
       Puntos de contol
       <ion-note item-end></ion-note>
       <ion-icon name='ios-checkbox-outline' item-start></ion-icon>

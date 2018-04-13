@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Trabajo: idTrabajo!! </ion-title>
+    <ion-title>Trabajo: {{trabajoActual.id}}!! </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -24,8 +24,8 @@
             <ion-thumbnail  item-start>
               <img src="assets/imgs/client.png">
             </ion-thumbnail>
-            <h2 >Cliente 1</h2>
-            <p >123123</p>
+            <h2>{{trabajoActual.cliente.nombreEmpresa}}</h2>
+            <p>{{trabajoActual.cliente.rut}}</p>
 
             <button ion-button clear item-end >Ver</button>
           </ion-item>
@@ -39,7 +39,7 @@
             <ion-thumbnail  item-start>
               <img src="assets/imgs/truck.png">
             </ion-thumbnail>
-            <h2 >Vlokswagen / muchas ruedas</h2>
+            <h2 >{{trabajoActual.equipo.marca}} / {{trabajoActual.equipo.modelo}}</h2>
             <p >Up</p>
 
             <button ion-button clear item-end >Ver</button>
@@ -79,26 +79,22 @@
             Comentarios
           </ion-card-header>
           <ion-card-content>
-            (Comentarios básicos sobre el estado del camión.)
-            El camión estaba todo roto...
-            La pintura está mala
-            Tiene el parabrisas quebrado
-            Los frenos funcionan bien.
+            {{trabajoActual.comentarios}}
           </ion-card-content>
         </ion-card>
         <ion-card>
-          <img src="assets/imgs/firma1.jpg" />
+          <img src="{{trabajoActual.firmaClienteRecepcion}}" />
           <ion-card-content>
             <ion-card-title>
-              Cliente
+              {{trabajoActual.nombreClienteRecepcion}}
             </ion-card-title>
           </ion-card-content>
         </ion-card>
         <ion-card>
-          <img src="assets/imgs/firma2.jpg"  />
+          <img src="{{trabajoActual.firmaClienteRecepcion}}"  />
           <ion-card-content>
             <ion-card-title>
-              Empleado
+              {{trabajoActual.nombreClienteRecepcion}}
             </ion-card-title>
           </ion-card-content>
         </ion-card>

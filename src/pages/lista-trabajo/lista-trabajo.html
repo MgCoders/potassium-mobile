@@ -21,7 +21,7 @@
     <ion-list-header>
      Cliente 1
     </ion-list-header>
-    <ion-item  (click)="verTrabajo()">
+    <ion-item >
       Barco
       <ion-note item-end>el grande</ion-note>
       <ion-icon name='ios-construct' item-start></ion-icon>
@@ -38,7 +38,7 @@
     <ion-list-header>
       Cliente 2
     </ion-list-header>
-    <ion-item (click)="verTrabajo()">
+    <ion-item>
       Tanque
       <ion-note item-end> 25.000 l</ion-note>
       <ion-icon name='ios-build-outline' item-start></ion-icon>
@@ -55,5 +55,20 @@
       <ion-icon name='ios-build-outline' item-start></ion-icon>
       <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
     </ion-item>
+  </ion-list>
+
+  <ion-list no-border *ngFor="let cliente of filterClientes()">
+    <ion-list-header>
+      {{cliente.nombreEmpresa}} ({{cliente.rut}})
+    </ion-list-header>
+
+      <ion-item (click)="verTrabajo(trabajo.id)" *ngFor="let trabajo of filterTrabajos(cliente)">
+        {{trabajo.equipo.marca}} - {{trabajo.equipo.color}}
+        <ion-note item-end> {{trabajo.equipo.modelo}} - {{trabajo.equipo.matricula}}</ion-note>
+        <ion-icon *ngIf="(trabajo.motivoVisita == 'nuevo')" name='ios-construct' item-start></ion-icon>
+        <ion-icon *ngIf="(trabajo.motivoVisita != 'nuevo')" name='ios-build-outline' item-start></ion-icon>
+        <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
+      </ion-item>
+
   </ion-list>
 </ion-content>

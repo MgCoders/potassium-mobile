@@ -14,10 +14,70 @@ export interface Trabajo {
     requierePresupuesto: boolean;
     comentarios: string;
     estado: string;
-    // dibujoEquipoRecepcion: string;
+
+    //agregados
+
+
+
+    equipoDocumentos: boolean;
+
+    equipoRadio: boolean;
+
+    equipoExtintor: boolean;
+
+    equipoBalizas: boolean;
+
+    equipoLlaveRuedas: boolean;
+
+    equipoHerramientas: boolean;
+
+    equipoManuales: boolean;
+
+    equipoFrenteRadio: boolean;
+
+    equipoMangueraCabina: boolean;
+
+    equipoCenicero: boolean;
+
+    equipoGatoPalanca: boolean;
+
+    equipoParabrisasSano: boolean;
+
+    equipoVidriosLaterales: boolean;
+
+    equipoVidriosLateralesSanos: boolean;
+
+    equipoEspejos: boolean;
+
+    equipoEspejosSanos: boolean;
+
+    equipoSenalerosSanos: boolean;
+
+    equipoLucesTraserasSanas: boolean;
+
+    equipoRayones: boolean;
+
+    equipoAbollones: boolean;
+
+    equipoAuxiliar: boolean;
+
+    equipoAuxiliarArmada: boolean;
+
+    equipoCantidadCombustible: number;
+    //@ManyToOne
+    //private Usuario usuarioRecepcion;
+
+    dibujoEquipoRecepcion: string; //Para el dibujito de cuando lo recibe, guardar el array de bytes
+
+
     kmEquipoRecepcion: number;
-    // firmaClienteRecepcion: string;
+
+    firmaClienteRecepcion: string;
+    //firmaEmpleadoRecepcion: string;
+
     nombreClienteRecepcion: string;
+    //nombreEmpleadoRecepcion: string;
+
     nroFactura: number;
     nroRemito: number;
     nroOrdenCompra: number;
