@@ -17,16 +17,38 @@
 <ion-content padding id="ion_recepcionPage">
   <ion-grid>
     <ion-row>
-      <ion-col col-12 col-md-6 offset-md-3>
-        <h3>Seleccione el tipo de trabajo</h3>
+      <ion-col col-12 col-md-6 offset-md-3 text-center>
+        <b>Crear ficha de trabajo</b>
       </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-12 col-md-6 offset-md-3>
-        <button ion-button full color="primary" (click)="trabajoNuevo()">Nuevo</button>
 
-        <button ion-button full color="secondary" (click)="trabajoReparacion()" >Reparación</button>
+      <br><br>
+      <br><br>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <h3>Selecione el tipo de trabajo:</h3>
       </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <button ion-button full color="primary" (click)="trabajoNuevo()">
+          Nuevo
+        </button>
+
+        <button ion-button full color="light" (click)="trabajoReparacion()" >
+          Reparación
+        </button>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3 class="separador">
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <h3>Más opciones:</h3>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <button ion-button full color="secondary" (click)="recuperarTrabajo()">
+          Continuar ficha en proceso
+        </button>
+      </ion-col>
+
     </ion-row>
   </ion-grid>
 </ion-content>

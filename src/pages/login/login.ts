@@ -5,7 +5,6 @@ import {IonicPage, MenuController, NavController, NavParams} from 'ionic-angular
 import {RecepcionPage} from "../recepcion/recepcion";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../app/_services/auth.service";
-import {MyApp} from "../../app/app.component";
 
 /**
  * Generated class for the LoginPage page.
@@ -19,6 +18,7 @@ import {MyApp} from "../../app/app.component";
   selector: 'page-login',
   templateUrl: 'login.html',
 })
+
 export class LoginPage {
 
   model: any = {};

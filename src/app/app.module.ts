@@ -37,6 +37,7 @@ import {HideHeaderDirective} from "../directives/hide-header/hide-header";
 import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
 import {FilterPipe} from "../pipes/filter.pipe";
 import {TrabajoService} from "./_services/trabajo.service";
+import {TrabajoFotoService} from "./_services/trabajoFoto.service";
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import {TrabajoService} from "./_services/trabajo.service";
     AuthService,
     ClienteServices,
     TrabajoService,
+    TrabajoFotoService,
     EquipoServices,
     HttpClientModule,
     Camera,

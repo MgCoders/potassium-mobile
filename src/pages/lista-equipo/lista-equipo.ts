@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  AlertController, Events, IonicPage, LoadingController, NavController, NavParams,
+  Events, IonicPage, LoadingController, NavController, NavParams,
   ToastController
 } from 'ionic-angular';
 import {Equipo} from "../../app/_models/Equipo";
@@ -34,7 +34,7 @@ export class ListaEquipoPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private as: AlertController,
+              //private as: AlertController,
               private service: EquipoServices,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,

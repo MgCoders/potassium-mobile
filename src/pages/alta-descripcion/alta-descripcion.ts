@@ -17,7 +17,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 export class AltaDescripcionPage {
 
   image: string = 'assets/imgs/photo.jpg';
-  titulo: string = null;
   descr: string = null;
 
   callback:any;
@@ -39,7 +38,8 @@ export class AltaDescripcionPage {
       destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: 1000,
       targetHeight: 1000,
-      quality: 100
+      //quality: 100,
+      correctOrientation: true
     };
 
     this.camera.getPicture( options )
@@ -55,7 +55,7 @@ export class AltaDescripcionPage {
   guardarDetalle(){
     this.callback = this.navParams.get("callback");
 
-    let data = {img: this.image, titulo: this.titulo, descr: this.descr};
+    let data = {img: this.image, descr: this.descr};
     this.callback(data).then(()=>{
       this.navCtrl.pop();
     });

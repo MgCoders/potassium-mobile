@@ -73,10 +73,10 @@ export interface Trabajo {
     kmEquipoRecepcion: number;
 
     firmaClienteRecepcion: string;
-    //firmaEmpleadoRecepcion: string;
+    firmaEmpleadoRecepcion: string;
 
     nombreClienteRecepcion: string;
-    //nombreEmpleadoRecepcion: string;
+    nombreEmpleadoRecepcion: string;
 
     nroFactura: number;
     nroRemito: number;

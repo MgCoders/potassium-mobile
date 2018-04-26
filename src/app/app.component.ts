@@ -1,15 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import {Platform, MenuController, Nav, Events} from 'ionic-angular';
 
 import { RecepcionPage } from '../pages/recepcion/recepcion';
 import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {ListaTrabajoPageModule} from "../pages/lista-trabajo/lista-trabajo.module";
 import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
-import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
+import {IngresarDetallesPage} from "../pages/ingresar-detalles/ingresar-detalles";
 
 
 @Component({
@@ -27,7 +26,8 @@ export class MyApp {
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public events: Events,
   ) {
     this.initializeApp();
 
@@ -38,6 +38,19 @@ export class MyApp {
       { title: 'Historial de trabajos', component: ListaTrabajoPage },
       { title: 'Cerrar sesión', component: LoginPage }
     ];
+
+    events.subscribe('user:logout', () => {
+      this.nav.setRoot(LoginPage, {tipo: 'proceso'});
+      //this.rootPage = LoginPage;
+    });
+
+
+    events.subscribe('user:login', (token) => {
+
+      localStorage.setItem('token', token);
+
+
+    });
   }
 
   initializeApp() {
@@ -69,4 +82,7 @@ export class MyApp {
 
 
   }
+
+
+
 }

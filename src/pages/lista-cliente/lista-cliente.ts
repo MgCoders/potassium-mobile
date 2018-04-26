@@ -1,13 +1,11 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, Loading, NavParams, LoadingController, AlertController, Events} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController, Events} from 'ionic-angular';
 import {AltaClientePage} from "../alta-cliente/alta-cliente";
 import {ClienteImp} from "../../app/_models/ClienteImp";
 import {Cliente} from "../../app/_models/Cliente";
 import {ClienteServices} from "../../app/_services/cliente.services";
 import { ToastController } from 'ionic-angular';
-import {errorHandler} from "@angular/platform-browser/src/browser";
 import {FormControl} from "@angular/forms";
-import {FilterPipe} from "../../pipes/filter.pipe";
 
 
 /**
@@ -39,7 +37,6 @@ export class ListaClientePage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private as: AlertController,
               private service: ClienteServices,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,

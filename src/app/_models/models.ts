@@ -16,6 +16,8 @@ export * from './UsuarioRubro';
 
 export * from './Trabajo';
 
+export * from './TrabajoFoto';
+
 export * from './Tarea';
 
 export * from './PuntoControl';

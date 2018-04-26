@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Nueva descripcion con foto</ion-title>
+    <ion-title>Agregar foto</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,13 +19,6 @@
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
         <button ion-button block (click)="getPicture()">Abrir la cámara</button>
         <img [src]="image" *ngIf="image" />
-      </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
-        <ion-item class="no-padding">
-          <ion-label color="primary" stacked>Título</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="titulo">
-          </ion-input>
-        </ion-item>
       </ion-col>
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
         <ion-item class="no-padding">

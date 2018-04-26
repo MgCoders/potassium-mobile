@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {
-  Events, IonicPage, Keyboard, LoadingController, NavController, NavParams, Platform, Tabs,
+  Events, IonicPage, Keyboard, NavController, NavParams, Platform, Tabs,
   ToastController
 } from 'ionic-angular';
 import {IngresarDetallesPage} from "../ingresar-detalles/ingresar-detalles";
@@ -12,6 +12,11 @@ import {ClienteImp} from "../../app/_models/ClienteImp";
 import {TrabajoImp} from "../../app/_models/TrabajoImp";
 import {EquipoImp} from "../../app/_models/EquipoImp";
 import {TrabajoService} from "../../app/_services/trabajo.service";
+import {DatePipe, registerLocaleData} from "@angular/common";
+import localeUy from "@angular/common/locales/es-UY";
+import {TrabajoFotoService} from "../../app/_services/trabajoFoto.service";
+import {TrabajoFotoImp} from "../../app/_models/TrabajoFotoImp";
+import {TrabajoFoto} from "../../app/_models/TrabajoFoto";
 
 /**
  * Generated class for the AltaTrabajoPage page.
@@ -36,12 +41,15 @@ export class AltaTrabajoPage {
   tabDetalles:any;
   tabFirma:any;
 
+  listaFotos: TrabajoFoto[] = [];
+
   enabled_tabCliente: boolean;
   enabled_tabEquipo: boolean;
   enabled_tabDetalles: boolean;
   enabled_tabFrima: boolean;
 
   trabajoActual: Trabajo;
+  dp: DatePipe;
 
 
   constructor(public navCtrl: NavController,
@@ -49,15 +57,13 @@ export class AltaTrabajoPage {
               public platform: Platform,
               public keyboard: Keyboard,
               public events: Events,
-              public loadingCtrl: LoadingController,
+              private trabajoFotoService: TrabajoFotoService,
               private toastCtrl: ToastController,
               private trabajoService: TrabajoService) {
 
+    registerLocaleData(localeUy);
+    this.dp = new DatePipe('es-UY');
 
-
-    let loading = this.loadingCtrl.create({
-      content: 'Procesando...'
-    });
     let toastCorrecto = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
       duration: 3000,
@@ -65,6 +71,17 @@ export class AltaTrabajoPage {
     });
     let toastError = this.toastCtrl.create({
       message: 'Error al cargar datos..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    let toastCorrectoFoto = this.toastCtrl.create({
+      message: 'Foto cargada correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastErrorFoto = this.toastCtrl.create({
+      message: 'Error al cargar la foto..',
       duration: 3000,
       position: 'bottom'
     });
@@ -83,7 +100,7 @@ export class AltaTrabajoPage {
         this.enabled_tabCliente = false;
         this.enabled_tabEquipo = true;
         console.log('TAB:: selecciona cliente');
-        this.navParams.data=data;
+        //this.navParams.data=data;
         this.trabajoActual.cliente = data;
         console.log(this.trabajoActual.cliente);
 
@@ -96,11 +113,21 @@ export class AltaTrabajoPage {
         this.trabajoActual.equipo = data;
         console.log(this.trabajoActual.equipo);
 
-
+        //Cambio como dijo el tincho para poder pushear las fotos
+        this.trabajoService.create(this.trabajoActual).subscribe(
+          (data) => {
+            toastCorrecto.present();
+            this.trabajoActual = new TrabajoImp(data);
+          },
+          (error) => {
+            console.log(error);
+            toastError.setMessage(error);
+            toastError.present();
+          });
       }
 
       else if(tab==3){
-        //Voy a la vista de detalles, y acaban de seleccionar el equipo
+        //Voy a la vista de firmas, y acaban de ingresar los detalles
         console.log('TAB:: Ingresa Detalles');
         this.enabled_tabDetalles = false;
         this.enabled_tabFrima = true;
@@ -153,22 +180,21 @@ export class AltaTrabajoPage {
         console.log(data);
 
         this.trabajoActual.firmaClienteRecepcion = data['firmaClienteRecepcion'];
-        //this.trabajoActual.firmaEmpleadoRecepcion = data['firmaEmpleadoRecepcion'];
+        this.trabajoActual.firmaEmpleadoRecepcion = data['firmaEmpleadoRecepcion'];
         this.trabajoActual.nombreClienteRecepcion = data['nombreClienteRecepcion'];
-        //this.trabajoActual.nombreEmpleadoRecepcion = data['nombreEmpleadoRecepcion'];
+        this.trabajoActual.nombreEmpleadoRecepcion = data['nombreEmpleadoRecepcion'];
 
         //Pushear el trabajo a la API
         console.log('Imprimo el trabajo');
         console.log(this.trabajoActual);
 
-        loading.present();
-
         /*
-        Cambio como dijo el tincho para poder pushear las fotos*/
-        this.trabajoService.create(this.trabajoActual).subscribe(
+        Cambio como dijo el tincho para poder pushear las fotos
+        Ahora hago un update
+        */
+        this.trabajoService.edit(this.trabajoActual).subscribe(
           (data) => {
             toastCorrecto.present();
-            loading.dismissAll();
             this.trabajoActual = new TrabajoImp(data);
           },
           (error) => {
@@ -177,21 +203,41 @@ export class AltaTrabajoPage {
             toastError.present();
           });
 
-        loading.dismissAll();
-
 
         events.unsubscribe('change-tab');
         this.limpiarCampos();
 
         this.navCtrl.pop();
+        return;
       }
 
       console.log(this.trabajoActual);
 
       //console.log('entro>');
-      this.tabs.select(tab);
+      this.tabs.select(tab, {});
       //console.log('<salgo');
 
+    });
+
+    events.subscribe('push-foto', (data) => {
+      console.log("Entró a la función padre!")
+      //console.log("trabajo", this.trabajoActual);
+      //console.log("params:", data);
+      let trabFot = new TrabajoFotoImp({foto: data['img'], trabajo: this.trabajoActual, descripcion: data['descr']});
+
+      console.log("trabFot:", trabFot);
+      this.trabajoFotoService.create(trabFot).subscribe(
+        (data) => {
+          toastCorrectoFoto.present();
+          this.listaFotos.push(new TrabajoFotoImp(data));
+        },
+        (error) => {
+          console.log(error);
+          toastErrorFoto.setMessage(error);
+          toastErrorFoto.present();
+        });
+
+      return;
     });
   }
 
@@ -221,16 +267,16 @@ export class AltaTrabajoPage {
         cliente:c,
         equipo:e,
         motivoVisita: this.tipoTrabajo,
-        fechaRecepcion: '',
-        fechaProvistaEntrega:'',
+        fechaRecepcion: this.dp.transform( new Date(), 'dd-MM-yyyy HH:MM'),
+        fechaProvistaEntrega: this.dp.transform( new Date(), 'dd-MM-yyyy'),
         requierePresupuesto:false,
         comentarios:'',
         estado:'',
         kmEquipoRecepcion:0,
         firmaClienteRecepcion: '',
-        //firmaEmpleadoRecepcion: '',
+        firmaEmpleadoRecepcion: '',
         nombreClienteRecepcion:'',
-        //nombreEmpleadoRecepcion:'',
+        nombreEmpleadoRecepcion:'',
         nroFactura:0,
         nroRemito:0,
         nroOrdenCompra:0,

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import {
-  AlertController, Events, IonicPage, LoadingController, NavController, NavParams,
+  Events, IonicPage, LoadingController, NavController, NavParams,
   ToastController
 } from 'ionic-angular';
 import {VerTrabajoPage} from "../ver-trabajo/ver-trabajo";
 import {ListaTareaPage} from "../lista-tarea/lista-tarea";
 import {ListaPuntocontrolPage} from "../lista-puntocontrol/lista-puntocontrol";
-import {ClienteServices} from "../../app/_services/cliente.services";
 import {TrabajoService} from "../../app/_services/trabajo.service";
 import {Trabajo} from "../../app/_models/Trabajo";
 import {TrabajoImp} from "../../app/_models/TrabajoImp";
@@ -31,7 +30,6 @@ export class SeleccionaTrabajoPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private as: AlertController,
               private service: TrabajoService,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
@@ -69,9 +67,9 @@ export class SeleccionaTrabajoPage {
         estado:'',
         kmEquipoRecepcion:0,
         firmaClienteRecepcion: '',
-        //firmaEmpleadoRecepcion: '',
+        firmaEmpleadoRecepcion: '',
         nombreClienteRecepcion:'',
-        //nombreEmpleadoRecepcion:'',
+        nombreEmpleadoRecepcion:'',
         nroFactura:0,
         nroRemito:0,
         nroOrdenCompra:0,
@@ -142,6 +140,49 @@ export class SeleccionaTrabajoPage {
 
   verFicha(id: number){
     this.navCtrl.push(VerTrabajoPage, {id:id});
+  }
+
+  borraTrabajo(id: number){
+
+
+    let loading = this.loadingCtrl.create({
+      content: 'Procesando...'
+    });
+    let toastCorrecto = this.toastCtrl.create({
+      message: 'Trabajo borrado!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastError = this.toastCtrl.create({
+      message: 'Error al borrar el trabajo..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    loading.present();
+    if(id != undefined){
+      console.log('Borrar trabajo!');
+      /*this.service.borrar.subscribe(
+        (data) => {
+          toastCorrecto.present();
+          loading.dismissAll();
+          this.trabajoActual = data;
+          console.log("adentro",this.trabajoActual);
+        },
+        (error) => {
+          toastError.setMessage(error);
+          toastError.present();
+        });*/
+    }
+
+    loading.dismissAll();
+    loading.dismiss();
+
+    console.log("despues", this.trabajoActual);
+
+    this.navCtrl.pop();
+
   }
 
 }

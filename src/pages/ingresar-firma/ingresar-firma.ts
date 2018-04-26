@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
-import {VerTrabajoPage} from "../ver-trabajo/ver-trabajo";
 import {AltaFirmaPage} from "../alta-firma/alta-firma";
 
 /**

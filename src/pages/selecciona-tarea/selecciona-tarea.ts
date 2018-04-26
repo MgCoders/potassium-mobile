@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {AltaTrabajoPage} from "../alta-trabajo/alta-trabajo";
+//import {AltaTrabajoPage} from "../alta-trabajo/alta-trabajo";
 import {AltaHorasPage} from "../alta-horas/alta-horas";
 
 /**

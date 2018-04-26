@@ -1,4 +1,4 @@
-import {Component, Inject, Optional} from '@angular/core';
+import {Component} from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Cliente} from "../../app/_models/Cliente";
 import {ClienteImp} from "../../app/_models/ClienteImp";
@@ -27,7 +27,7 @@ export class AltaClientePage {
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController) {
 
-    let loading = this.loadingCtrl.create({
+    /*let loading = this.loadingCtrl.create({
       content: 'Procesando...'
     });
     let toastCorrecto = this.toastCtrl.create({
@@ -39,29 +39,12 @@ export class AltaClientePage {
       message: 'Error al cargar datos..',
       duration: 3000,
       position: 'bottom'
-    });
+    });*/
 
     //Inicializo en vacío
     this.clienteActual =  new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
 
-    let id = this.navParams.data['id'];
-    loading.present();
 
-    if(id != undefined){
-      console.log('Edicion de cliente!');
-      this.editar = true;
-      this.clienteServices.get(id).subscribe(
-        (data) => {
-          toastCorrecto.present();
-          loading.dismissAll();
-          this.clienteActual = data;
-        },
-        (error) => {
-          toastError.setMessage(error);
-          toastError.present();
-        });
-    }
-    loading.dismissAll();
     console.log(this.clienteActual);
   }
 

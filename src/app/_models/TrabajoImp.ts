@@ -67,10 +67,10 @@ export class TrabajoImp implements models.Trabajo {
     kmEquipoRecepcion: number;
 
     firmaClienteRecepcion: string;
-    //firmaEmpleadoRecepcion: string;
+    firmaEmpleadoRecepcion: string;
 
     nombreClienteRecepcion: string;
-    //nombreEmpleadoRecepcion: string;
+    nombreEmpleadoRecepcion: string;
 
     nroFactura: number;
     nroRemito: number;
@@ -138,8 +138,8 @@ export class TrabajoImp implements models.Trabajo {
 
       this.kmEquipoRecepcion = x.kmEquipoRecepcion;
       this.firmaClienteRecepcion = x.firmaClienteRecepcion;
-      //this.firmaEmpleadoRecepcion = x.firmaEmpleadoRecepcion;
-      //this.nombreEmpleadoRecepcion = x.nombreEmpleadoRecepcion;
+      this.firmaEmpleadoRecepcion = x.firmaEmpleadoRecepcion;
+      this.nombreEmpleadoRecepcion = x.nombreEmpleadoRecepcion;
       this.nombreClienteRecepcion = x.nombreClienteRecepcion;
 
       this.nroFactura = x.nroFactura;

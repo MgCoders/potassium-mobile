@@ -1,15 +1,13 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {
-  AlertController, Events, IonicPage, LoadingController, NavController, NavParams,
-  ToastController
+  Events, IonicPage, NavController, NavParams, ToastController
 } from 'ionic-angular';
-import {ClienteServices} from "../../app/_services/cliente.services";
-import {AltaFirmaPage} from "../alta-firma/alta-firma";
+//import {ClienteServices} from "../../app/_services/cliente.services";
 import {AltaDescripcionPage} from "../alta-descripcion/alta-descripcion";
-import {Cliente} from "../../app/_models/Cliente";
 import {DatePipe} from "@angular/common";
 import { registerLocaleData } from '@angular/common';
 import localeUy from '@angular/common/locales/es-UY';
+
 
 /**
  * Generated class for the IngresarDetallesPage page.
@@ -55,6 +53,7 @@ export class IngresarDetallesPage {
   equipoVidriosLateralesSanos: boolean = false;
   dibujoEquipoRecepcion: string = '';
   fechaRecepcion: Date;
+  fechaRecepcion_txt: string = '';
   fechaProvistaEntrega: Date;
   dp: DatePipe;
 
@@ -67,10 +66,8 @@ export class IngresarDetallesPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private as: AlertController,
-              private service: ClienteServices,
-              public loadingCtrl: LoadingController,
-              private toastCtrl: ToastController,
+              /*private as: AlertController,*/
+              /*private toastCtrl: ToastController,*/
               private events: Events) {
     this.lista = [];
     registerLocaleData(localeUy);
@@ -78,7 +75,7 @@ export class IngresarDetallesPage {
     this.fechaRecepcion = new Date();
     this.fechaProvistaEntrega = new Date( );
     this.dp = new DatePipe('es-UY');
-    console.log("FR: " + this.dp.transform( this.fechaRecepcion, 'dd-MM-yyyy HH:mm'));
+    this.fechaRecepcion_txt = this.dp.transform( this.fechaRecepcion, 'dd/MM/yyyy HH:MM');
     console.log("FPE: " + this.dp.transform( this.fechaProvistaEntrega, 'dd-MM-yyyy HH:mm'));
   }
 
@@ -155,10 +152,18 @@ export class IngresarDetallesPage {
 
 
   callbackDetalle = (_params) => {
+
+
     return new Promise((resolve, reject) => {
-      console.log("INGRESO::Seteo detalle");
+      console.log("VUELVO:: de Seteat foto");
       //console.log(this.firmaCliente64);
+      //Cambio como dijo el tincho para poder pushear las fotos
+
+      /**/
+
+
       this.lista.push(_params);
+      this.events.publish('push-foto', _params);
       //console.log(this.firmaCliente64);
       resolve();
     });

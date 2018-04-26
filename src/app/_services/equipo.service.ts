@@ -2,7 +2,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Cliente } from '../_models/Cliente';
 import { environment } from '../../environments/environment';
 import {Equipo} from "../_models/Equipo";
 

@@ -4,7 +4,6 @@ import {SeleccionaTrabajoPage} from "../selecciona-trabajo/selecciona-trabajo";
 import {Trabajo} from "../../app/_models/Trabajo";
 import {TrabajoImp} from "../../app/_models/TrabajoImp";
 import {ClienteImp} from "../../app/_models/ClienteImp";
-import {EquipoImp} from "../../app/_models/EquipoImp";
 import {Equipo} from "../../app/_models/Equipo";
 import {Cliente} from "../../app/_models/Cliente";
 import {TrabajoService} from "../../app/_services/trabajo.service";

@@ -10,7 +10,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-toolbar id="bottom-toolbar">
+<ion-toolbar id="bottom-toolbar" [ngClass]="{'remove-tab-draw': keyboardCheck()}">
   <ion-buttons left>
     <button color="light" ion-button icon-only (click)="clearCanvas()"><ion-icon name="trash"></ion-icon></button>
     <button color="dark" ion-button icon-only (click)="changeSize(4)"><ion-icon style="font-size: 1em;" name="radio-button-on"></ion-icon></button>

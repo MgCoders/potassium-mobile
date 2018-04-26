@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { TipoTarea } from '../_models/models';
 import { Observable } from 'rxjs/Observable';
 import { Tarea } from '../_models/Tarea';
 import { TareaMaterial } from '../_models/TareaMaterial';

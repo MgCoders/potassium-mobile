@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  AlertController, Events, IonicPage, LoadingController, NavController, NavParams,
+  Events, IonicPage, LoadingController, NavController, NavParams,
   ToastController
 } from 'ionic-angular';
 import {ClienteImp} from "../../app/_models/ClienteImp";
@@ -27,7 +27,7 @@ export class VerTrabajoPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private as: AlertController,
+              //private as: AlertController,
               private service: TrabajoService,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
@@ -64,9 +64,9 @@ export class VerTrabajoPage {
         estado:'',
         kmEquipoRecepcion:0,
         firmaClienteRecepcion: '',
-        //firmaEmpleadoRecepcion: '',
+        firmaEmpleadoRecepcion: '',
         nombreClienteRecepcion:'',
-        //nombreEmpleadoRecepcion:'',
+        nombreEmpleadoRecepcion:'',
         nroFactura:0,
         nroRemito:0,
         nroOrdenCompra:0,

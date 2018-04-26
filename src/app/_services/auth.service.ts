@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
-    Headers,
-    Http,
-    RequestOptions,
+    //Headers,
+    //RequestOptions,
     Response
 } from '@angular/http';
 import {
   HttpParams,
-  HttpClient, HttpErrorResponse,
+  HttpClient,
 
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -16,7 +15,6 @@ import 'rxjs/add/operator/catch';
 import { JwtHelper } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 import { Usuario } from '../_models/Usuario';
-import {UsuarioImp} from "../_models/UsuarioImp";
 
 export const TOKEN_NAME: string = 'jwt_token';
 
@@ -144,8 +142,8 @@ export class AuthService {
     }
 
     changePassword(token: string, password: string) {
-        const headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-        const options = new RequestOptions({headers});
+        //const headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+        //const options = new RequestOptions({headers});
         let p = new HttpParams({
           fromObject: {
             'Content-Type': 'application/x-www-form-urlencoded',

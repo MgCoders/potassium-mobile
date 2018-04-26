@@ -1,5 +1,5 @@
 import {Component, Renderer, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {IonicPage, Keyboard, NavController, NavParams, Platform} from 'ionic-angular';
 
 /**
  * Generated class for the AltaFirmaPage page.
@@ -24,6 +24,7 @@ export class AltaFirmaPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public platform: Platform,
+              public keyboard: Keyboard,
               public renderer: Renderer) {
     this.rol = this.navParams.get("rol");
 
@@ -101,5 +102,11 @@ export class AltaFirmaPage {
     let ctx = this.canvasElement.getContext('2d');
     ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
   }
+
+  keyboardCheck() {
+    //console.log('The keyboard is open:', this.keyboard.isOpen());
+    return this.keyboard.isOpen();
+  }
+
 
 }
