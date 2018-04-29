@@ -62,7 +62,7 @@
       {{cliente.nombreEmpresa}} ({{cliente.rut}})
     </ion-list-header>
 
-      <ion-item (click)="verTrabajo(trabajo.id)" *ngFor="let trabajo of filterTrabajos(cliente)">
+      <ion-item (click)="switchTrabajo(trabajo.id)" *ngFor="let trabajo of filterTrabajos(cliente)">
         {{trabajo.equipo.marca}} - {{trabajo.equipo.color}}
         <ion-note item-end> {{trabajo.equipo.modelo}} - {{trabajo.equipo.matricula}}</ion-note>
         <ion-icon *ngIf="(trabajo.motivoVisita == 'nuevo')" name='ios-construct' item-start></ion-icon>

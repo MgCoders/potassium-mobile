@@ -6,6 +6,7 @@ import {Cliente} from "../../app/_models/Cliente";
 import {ClienteServices} from "../../app/_services/cliente.services";
 import { ToastController } from 'ionic-angular';
 import {FormControl} from "@angular/forms";
+import {Trabajo} from "../../app/_models/Trabajo";
 
 
 /**
@@ -35,12 +36,20 @@ export class ListaClientePage {
   public filterInput = new FormControl();
   public enableFilter: boolean;
 
+  public seleccionado: number = 1;
+
+  public trabajoActual: Trabajo;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private service: ClienteServices,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events) {
+
+    this.trabajoActual = this.navParams.data['trabajoActual'];
+    this.seleccionado =  this.trabajoActual.cliente.id;
+    console.log('id del cliente seleccionado:',this.seleccionado);
   }
 
   nuevoCliente() {
@@ -112,8 +121,6 @@ export class ListaClientePage {
           return a.id - b.id;
         });
         console.log(this.lista);
-
-
         toastCorrecto.present();
       },
       (error) => {

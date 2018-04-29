@@ -25,7 +25,7 @@ import {FormControl} from "@angular/forms";
 export class ListaEquipoPage {
 
   lista: Equipo[];
-  clienteSeleccionado: Cliente[];
+  clienteSeleccionado: Cliente;
 
   public filterText: string;
   public filterPlaceholder: string;
@@ -40,8 +40,8 @@ export class ListaEquipoPage {
               private toastCtrl: ToastController,
               public events: Events) {
 
-    this.clienteSeleccionado = this.navParams['cliente'];
-    //this.lista.push(new EquipoImp({marca:'SCANIA',modelo:'48 Ruedas',matricula:'556321',color:'Azul'}));
+    this.clienteSeleccionado = this.navParams.data['cliente'];
+    console.log('SeleccionadoData: ', this.clienteSeleccionado);
   }
 
 

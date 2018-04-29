@@ -75,6 +75,7 @@ export class AltaTrabajoPage {
       position: 'bottom'
     });
 
+
     let toastCorrectoFoto = this.toastCtrl.create({
       message: 'Foto cargada correctamente!',
       duration: 3000,
@@ -86,7 +87,47 @@ export class AltaTrabajoPage {
       position: 'bottom'
     });
 
-    this.limpiarCampos();
+
+    let toastCorrectoTrabajo = this.toastCtrl.create({
+      message: 'Trabajo cargado correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastErrorTrabajo = this.toastCtrl.create({
+      message: 'Error al cargar el Trabajo..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    let id = this.navParams.data['id'];
+    let tipo = this.navParams.data['tipo'];
+
+    if (tipo == "recuperar" && id != undefined) {
+
+      console.log('id pasado por la vista:',id);
+      console.log('Tengo que traer un trabajo del la API!');
+      this.trabajoService.get(id).subscribe(
+        (data) => {
+          toastCorrectoTrabajo.present();
+          this.trabajoActual = data;
+          console.log('adentro',this.trabajoActual);
+
+          //Inicializo
+          this.initTabs();
+
+        },
+        (error) => {
+          toastErrorTrabajo.setMessage(error);
+          toastErrorTrabajo.present();
+        }
+      );
+
+    } else {
+
+
+      this.limpiarCampos();
+    }
 
 
     //declaro el listener en las tabs
@@ -103,6 +144,9 @@ export class AltaTrabajoPage {
         //this.navParams.data=data;
         this.trabajoActual.cliente = data;
         console.log(this.trabajoActual.cliente);
+
+        //Seteo el cliente para poder seleccionar los equipos suyos en la próxima TAB
+
 
 
       } else if(tab==2){
@@ -172,6 +216,17 @@ export class AltaTrabajoPage {
           console.log("no tiene");
         }
 
+        this.trabajoService.edit(this.trabajoActual).subscribe(
+          (data) => {
+            toastCorrecto.present();
+            this.trabajoActual = new TrabajoImp(data);
+          },
+          (error) => {
+            console.log(error);
+            toastError.setMessage(error);
+            toastError.present();
+          });
+
       }
       else if(tab==4){
         //Me llegó la firma en la data!
@@ -212,9 +267,10 @@ export class AltaTrabajoPage {
       }
 
       console.log(this.trabajoActual);
+      this.navParams.data['trabajoActual'] = this.trabajoActual;
 
       //console.log('entro>');
-      this.tabs.select(tab, {});
+      this.tabs.select(tab);
       //console.log('<salgo');
 
     });
@@ -223,7 +279,11 @@ export class AltaTrabajoPage {
       console.log("Entró a la función padre!")
       //console.log("trabajo", this.trabajoActual);
       //console.log("params:", data);
-      let trabFot = new TrabajoFotoImp({foto: data['img'], trabajo: this.trabajoActual, descripcion: data['descr']});
+      let trabFot = new TrabajoFotoImp({
+                                            foto: data['img'],
+                                            trabajo: this.trabajoActual,
+                                            descripcion: data['descr']
+                                          });
 
       console.log("trabFot:", trabFot);
       this.trabajoFotoService.create(trabFot).subscribe(
@@ -247,7 +307,14 @@ export class AltaTrabajoPage {
   }
 
 
-  limpiarCampos(){
+  initTabs(){
+
+    //Lo dejo para cuando entre a la tab de cliente
+    console.log("navInita:",this.navParams);
+    this.navParams.data['trabajoActual'] = this.trabajoActual;
+    console.log("navInitd:",this.navParams);
+
+    //Esta funcion inicializa cada una de las pages
     this.tabCliente = ListaClientePage;
     this.tabEquipo = ListaEquipoPage;
     this.tabDetalles = IngresarDetallesPage;
@@ -258,6 +325,18 @@ export class AltaTrabajoPage {
     this.enabled_tabDetalles = false;
     this.enabled_tabEquipo = false;
     this.enabled_tabFrima = false;
+
+  }
+
+
+  limpiarCampos(){
+
+    //Inicializo las tablas para la limpieza
+
+
+
+
+
 
     //Inicializo un trabajo en vacio
     let c = new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
@@ -271,7 +350,7 @@ export class AltaTrabajoPage {
         fechaProvistaEntrega: this.dp.transform( new Date(), 'dd-MM-yyyy'),
         requierePresupuesto:false,
         comentarios:'',
-        estado:'',
+        estado:'CREADO',
         kmEquipoRecepcion:0,
         firmaClienteRecepcion: '',
         firmaEmpleadoRecepcion: '',
@@ -307,6 +386,12 @@ export class AltaTrabajoPage {
       );
     console.log('Todo Limpito');
     console.log(this.trabajoActual);
+
+
+
+
+    this.initTabs();
+
   }
 
 

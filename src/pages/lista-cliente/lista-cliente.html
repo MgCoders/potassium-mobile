@@ -38,6 +38,7 @@
             <p (click)="seleccionarCliente(cliente.id)">{{cliente.rut}}</p>
 
             <button ion-button clear item-end (click)="editarCliente(cliente.id)">Editar</button>
+            <ion-badge *ngIf="cliente.id == seleccionado">Seleccionado</ion-badge>
           </ion-item>
           <ion-item>
             <button ion-button outline item-end icon-left (click)="nuevoCliente()">

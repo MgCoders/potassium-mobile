@@ -28,7 +28,7 @@ export class VerTrabajoPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               //private as: AlertController,
-              private service: TrabajoService,
+              private trabajoService: TrabajoService,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events) {
@@ -105,7 +105,7 @@ export class VerTrabajoPage {
     loading.present();
     if(id != undefined){
       console.log('SeleccionaTrabajo!');
-      this.service.get(id).subscribe(
+      this.trabajoService.get(id).subscribe(
         (data) => {
           toastCorrecto.present();
           loading.dismissAll();
@@ -115,7 +115,8 @@ export class VerTrabajoPage {
         (error) => {
           toastError.setMessage(error);
           toastError.present();
-        });
+        }
+      );
     }
     loading.dismissAll();
     console.log("despues", this.trabajoActual);

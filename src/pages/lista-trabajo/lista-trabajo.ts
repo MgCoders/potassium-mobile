@@ -7,6 +7,7 @@ import {ClienteImp} from "../../app/_models/ClienteImp";
 import {Equipo} from "../../app/_models/Equipo";
 import {Cliente} from "../../app/_models/Cliente";
 import {TrabajoService} from "../../app/_services/trabajo.service";
+import {AltaTrabajoPage} from "../alta-trabajo/alta-trabajo";
 
 /**
  * Generated class for the ListaTrabajoPage page.
@@ -26,12 +27,14 @@ export class ListaTrabajoPage {
   lista: Trabajo[];
   listaClientes: Cliente[];
   listaEquipos:Equipo[];
+  listaEstados: string[];
   proceso: boolean;
   historial: boolean;
+  recuperar: boolean;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private service: TrabajoService,
+              private trabajoService: TrabajoService,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events) {
@@ -39,9 +42,43 @@ export class ListaTrabajoPage {
     this.lista =[];
     this.listaClientes=[];
     this.listaEquipos=[];
+    this.listaEstados = [];
+
 
     this.proceso = this.navParams.data['tipo'] == 'proceso';
     this.historial = this.navParams.data['tipo'] == 'historial';
+    this.recuperar = this.navParams.data['tipo'] == 'recuperar';
+
+
+    if (this.proceso) {
+      this.listaEstados.push('EN_ESPERA');
+      this.listaEstados.push('EN_PUNTO_CONTROL');
+      this.listaEstados.push('EN_PROCESO');
+      this.listaEstados.push('RECIBIDO');
+    } else if (this.historial) {
+      this.listaEstados.push('FINALIZADO');
+    } else if (this.recuperar) {
+      this.listaEstados.push('CREADO');
+    }
+
+    /*
+
+    PENDIENTE_REMITO              -> NO
+    PENDIENTE_FACTURA             -> NO
+    PENDIENTE_ASIGNACION_VALORES  -> NO
+    EN_ESPERA                     -> En Proceso
+    EN_PUNTO_CONTROL              -> En Proceso
+    PENDIENTE_PRESUPUESTO         -> NO
+    FINALIZADO                    -> Historial
+    EN_PROCESO                    -> En Proceso
+    RECIBIDO                      -> En Proceso
+    CREADO                        -> Recuperar
+
+    */
+
+
+
+
 
 
   }
@@ -68,78 +105,102 @@ export class ListaTrabajoPage {
     });
 
 
-    this.service.getAll().subscribe(
 
-      (data) => {
-        loading.dismissAll();
 
-        //Obtengo la lista desde el server con lo último
-        data.forEach(
-          Trabajo => {
-            this.lista.push(new TrabajoImp(Trabajo));
-            let c = new ClienteImp(Trabajo.cliente);
 
-            var cli = this.listaClientes.filter(
-              function (item) {
-                return item.id === c.id;
-              })[0];
-            console.log("cli",cli);
-            if (cli === undefined) {
-              this.listaClientes.push(c);
+
+    this.listaEstados.forEach(estado => {
+      console.log("estado a solicitar:",estado);
+      this.trabajoService.getByEstado(estado).subscribe(
+
+        (data) => {
+          loading.dismissAll();
+
+          //Obtengo la lista desde el server con lo último
+          data.forEach(
+            Trabajo => {
+              this.lista.push(new TrabajoImp(Trabajo));
+              let c = new ClienteImp(Trabajo.cliente);
+              console.log("estado",Trabajo.estado);
+              /*var cli = this.listaClientes.filter(
+                function (item) {
+                  return item.id === c.id;
+                })[0];
+              console.log("cli",cli);
+              if (cli === undefined) {*/
+                this.listaClientes.push(c);
+              /*}*/
+
             }
+          );
 
-          })
+          this.lista.sort(function(a, b) {
+            return a.id - b.id;
+          });
 
-        this.lista.sort(function(a, b) {
-          return a.id - b.id;
+          console.log(this.listaClientes);
+
+          console.log(this.lista);
+
+
+          toastCorrecto.present();
+        },
+        (error) => {
+          loading.dismissAll();
+          toastError.setMessage(error);
+          toastError.present();
         });
-        console.log(this.listaClientes);
-
-        console.log(this.lista);
 
 
-        toastCorrecto.present();
-      },
-      (error) => {
-        loading.dismissAll();
-        toastError.setMessage(error);
-        toastError.present();
-      });
+    } );
+
+
   }
+
+
+
+  switchTrabajo(id: number) {
+    if(this.recuperar){
+      this.recuperarTrabajo(id);
+    } else {
+      this.verTrabajo(id);
+    }
+  }
+
+  recuperarTrabajo(id: number){
+    this.navCtrl.push(AltaTrabajoPage, {tipo:"recuperar", id:id});
+  }
+
 
   verTrabajo(id: number){
     this.navCtrl.push(SeleccionaTrabajoPage, {id:id});
   }
 
+
   filterClientes() {
     //Me quedo con los clientes que tengan trabajos de el tipo de la pantalla
     let yo = this;
-    return this.listaClientes.filter(
+    return this.listaClientes;/*.filter(
       function (item) {
         //matcheo los trabajos que tengo, con los clientes
         return yo.lista.filter(
           function (itemLista) {
 
             //filtro los trabajos de la pantalla
-            let retorno = false;
-            retorno = retorno || yo.proceso && itemLista.motivoVisita != "FINALIZADO";
-            retorno = retorno || yo.historial && itemLista.motivoVisita == "FINALIZADO";
-            return retorno
+
+            return yo.listaEstados.indexOf(itemLista.motivoVisita) != -1;
           })[0];
-      });
+      });*/
   }
 
   filterTrabajos(cli: Cliente) {
 
     //La misma lógica que la de arriba
     let yo = this;
-    return this.lista.filter(
+    return this.lista;/*.filter(
       function (item) {
-        let retorno = false;
-        retorno = retorno || yo.proceso && item.motivoVisita != "FINALIZADO";
-        retorno = retorno || yo.historial && item.motivoVisita == "FINALIZADO";
-        return retorno && (item.cliente.id === cli.id);
-      });
+        return yo.listaEstados.indexOf(item.motivoVisita) != -1 && (item.cliente.id === cli.id);
+      });*/
   }
 
 }
