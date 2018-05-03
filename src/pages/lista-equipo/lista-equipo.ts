@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {
   Events, IonicPage, LoadingController, NavController, NavParams,
   ToastController
@@ -9,6 +9,7 @@ import {AltaEquipoPage} from "../alta-equipo/alta-equipo";
 import {EquipoImp} from "../../app/_models/EquipoImp";
 import {Cliente} from "../../app/_models/Cliente";
 import {FormControl} from "@angular/forms";
+import {Trabajo} from "../../app/_models/Trabajo";
 
 /**
  * Generated class for the ListaEquipoPage page.
@@ -31,6 +32,8 @@ export class ListaEquipoPage {
   public filterPlaceholder: string;
   public filterInput = new FormControl();
   public enableFilter: boolean;
+  public trabajoActual: Trabajo;
+  public seleccionado: number = -1;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -41,24 +44,41 @@ export class ListaEquipoPage {
               public events: Events) {
 
     this.clienteSeleccionado = this.navParams.data['cliente'];
-    console.log('SeleccionadoData: ', this.clienteSeleccionado);
+    this.trabajoActual = this.navParams.data['trabajoActual'];
+    this.seleccionado = this.trabajoActual.equipo.id;
+    console.log('Cliente - Seleccionado(Data): ', this.clienteSeleccionado);
+
+    this.filterText = 'all';
+
+    events.subscribe('equip-selected', (data) => {
+      this.seleccionado = data;
+      console.log('entré al evento, seleccionado:', this.seleccionado);
+    });
+
   }
 
+  getListaEquipos() {
+    return this.lista;
+  }
 
+  isSelectedEquipo(id: number) {
+    return id == this.seleccionado;
+  }
 
   nuevoEquipo() {
-    this.navCtrl.push(AltaEquipoPage, {cliente:this.navParams.data});
+    this.navCtrl.push(AltaEquipoPage, {cliente: this.navParams.data});
   }
 
   editarEquipo(id: number) {
-    this.navCtrl.push(AltaEquipoPage, {id:id,cliente:this.navParams.data});
+    this.navCtrl.push(AltaEquipoPage, {id: id, cliente: this.navParams.data});
   }
 
-  seleccionarEquipo(id: number ) {
+  seleccionarEquipo(id: number) {
     console.log('LISTA:: equipo seleccionado');
     console.log(id);
 
-    this.events.publish('change-tab', 2, this.lista.find((x) => x.id === id));1
+    this.events.publish('change-tab', 2, this.lista.find((x) => x.id === id));
+    1
     //this.navCtrl.push(AltaEquipoPage, );
   }
 
@@ -67,7 +87,7 @@ export class ListaEquipoPage {
 
 
     this.enableFilter = true;
-    this.filterText = "";
+    this.filterText = 'all';
     this.filterPlaceholder = "Busca por: marca, matrícula, modelo, color..";
 
     this.filterInput
@@ -100,17 +120,17 @@ export class ListaEquipoPage {
     });
 
 
-
     loading.present();
-    this.service.getAll().subscribe(
-
+    this.service.getByCliente(1).subscribe(
       (data) => {
         loading.dismissAll();
 
         //Obtengo la lista desde el server con lo último
-        data.forEach(Equipo => {this.lista.push( new EquipoImp(Equipo));} )
+        data.forEach (Equipo => {
+          this.lista.push(new EquipoImp(Equipo));
+        })
 
-        this.lista.sort(function(a, b) {
+        this.lista.sort(function (a, b) {
           return a.id - b.id;
         });
         console.log(this.lista);
@@ -118,7 +138,7 @@ export class ListaEquipoPage {
       },
       (error) => {
         loading.dismissAll();
-        toastError.setMessage(error);
+        toastError.setMessage(error.toString());
         toastError.present();
       });
   }

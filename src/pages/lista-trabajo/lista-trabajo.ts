@@ -1,5 +1,14 @@
 import { Component } from '@angular/core';
-import {Events, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {
+  Events,
+  IonicPage,
+  Loading,
+  LoadingController,
+  NavController,
+  NavParams,
+  Toast,
+  ToastController
+} from 'ionic-angular';
 import {SeleccionaTrabajoPage} from "../selecciona-trabajo/selecciona-trabajo";
 import {Trabajo} from "../../app/_models/Trabajo";
 import {TrabajoImp} from "../../app/_models/TrabajoImp";
@@ -31,6 +40,9 @@ export class ListaTrabajoPage {
   proceso: boolean;
   historial: boolean;
   recuperar: boolean;
+
+  toast: Toast;
+  loading: Loading;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -77,11 +89,22 @@ export class ListaTrabajoPage {
     */
 
 
-
-
-
-
   }
+
+
+
+  showLoading() {
+    try {
+      this.loading.dismissAll();
+    } catch(e) {}
+
+    this.loading = this.loadingCtrl.create({
+      content: 'Cargando la lista de clientes...',
+      duration: 1000,
+    });
+    this.loading.present();
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaTrabajoPage');
@@ -89,48 +112,26 @@ export class ListaTrabajoPage {
     this.tipo = this.navParams.data['tipo'];
 
 
-    //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
-    let loading = this.loadingCtrl.create({
-      content: 'Cargando la lista de clientes...'
-    });
-    let toastCorrecto = this.toastCtrl.create({
-      message: 'Lista cargada correctamente!',
-      duration: 3000,
-      position: 'bottom'
-    });
-    let toastError = this.toastCtrl.create({
-      message: 'Error al obtener la lista de clientes..',
-      duration: 3000,
-      position: 'bottom'
-    });
-
-
-
-
-
+    this.showLoading();
 
     this.listaEstados.forEach(estado => {
       console.log("estado a solicitar:",estado);
       this.trabajoService.getByEstado(estado).subscribe(
 
         (data) => {
-          loading.dismissAll();
 
           //Obtengo la lista desde el server con lo último
           data.forEach(
+
             Trabajo => {
+
               this.lista.push(new TrabajoImp(Trabajo));
               let c = new ClienteImp(Trabajo.cliente);
               console.log("estado",Trabajo.estado);
-              /*var cli = this.listaClientes.filter(
-                function (item) {
-                  return item.id === c.id;
-                })[0];
-              console.log("cli",cli);
-              if (cli === undefined) {*/
-                this.listaClientes.push(c);
-              /*}*/
+              this.listaClientes.push(c);
 
+              console.log(this.listaClientes);
+              console.log(this.lista);
             }
           );
 
@@ -138,22 +139,13 @@ export class ListaTrabajoPage {
             return a.id - b.id;
           });
 
-          console.log(this.listaClientes);
-
-          console.log(this.lista);
 
 
-          toastCorrecto.present();
         },
         (error) => {
-          loading.dismissAll();
-          toastError.setMessage(error);
-          toastError.present();
         });
 
-
     } );
-
 
   }
 
@@ -179,8 +171,15 @@ export class ListaTrabajoPage {
 
   filterClientes() {
     //Me quedo con los clientes que tengan trabajos de el tipo de la pantalla
-    let yo = this;
-    return this.listaClientes;/*.filter(
+    var seen = {};
+    return this.listaClientes.filter(function(item){
+      if(seen.hasOwnProperty(item.id)){
+        return false;
+      }else{
+        seen[item.id] = true;
+        return true;
+      } } );
+    /*.filter(
       function (item) {
         //matcheo los trabajos que tengo, con los clientes
         return yo.lista.filter(
@@ -197,7 +196,9 @@ export class ListaTrabajoPage {
 
     //La misma lógica que la de arriba
     let yo = this;
-    return this.lista;/*.filter(
+    return this.lista.filter( function (item) {
+      return (item.cliente.id == cli.id);
+    });/*.filter(
       function (item) {
         return yo.listaEstados.indexOf(item.motivoVisita) != -1 && (item.cliente.id === cli.id);
       });*/

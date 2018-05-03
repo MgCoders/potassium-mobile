@@ -3,6 +3,7 @@ import {IonicPage, LoadingController, NavController, NavParams, ToastController}
 import {Cliente} from "../../app/_models/Cliente";
 import {ClienteImp} from "../../app/_models/ClienteImp";
 import {ClienteServices} from "../../app/_services/cliente.services";
+import {EquipoImp} from "../../app/_models/EquipoImp";
 
 /**
  * Generated class for the AltaClientePage page.
@@ -44,8 +45,38 @@ export class AltaClientePage {
     //Inicializo en vacío
     this.clienteActual =  new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
 
+    let loading = this.loadingCtrl.create({
+      content: 'Procesando...'
+    });
+    let toastCorrecto = this.toastCtrl.create({
+      message: 'Datos cargados correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastError = this.toastCtrl.create({
+      message: 'Error al cargar datos..',
+      duration: 3000,
+      position: 'bottom'
+    });
 
+    let id = this.navParams.data['id'];
+
+    if(id != undefined){
+      console.log('Edicion de equipo!');
+      this.editar = true;
+      this.clienteServices.get(id).subscribe(
+        (data) => {
+          toastCorrecto.present();
+          loading.dismissAll();
+          this.clienteActual = data;
+        },
+        (error) => {
+          toastError.setMessage(error);
+          toastError.present();
+        });
+    }
     console.log(this.clienteActual);
+
   }
 
   ionViewDidLoad() {

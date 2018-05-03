@@ -18,12 +18,12 @@ export class EquipoServices {
         return this.http.get<Equipo>(`${environment.apiUrl}/equipos/` + id);
     }
 
-    getByMarticula(matricula: string): Observable<Equipo> {
-        return this.http.get<Equipo>(`${environment.apiUrl}/equipos/matricula/` + matricula);
+    getByMarticula(matricula: string): Observable<Equipo[]> {
+        return this.http.get<Equipo[]>(`${environment.apiUrl}/equipos/matricula/` + matricula);
     }
 
-    getByCliente(equipo: number): Observable<Equipo> {
-        return this.http.get<Equipo>(`${environment.apiUrl}/equipos/equipo/` + equipo);
+    getByCliente(cliente: number): Observable<Equipo[]> {
+        return this.http.get<Equipo[]>(`${environment.apiUrl}/equipos/cliente/` + cliente);
     }
 
     getByRut(rut: string): Observable<Equipo> {

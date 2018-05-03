@@ -31,12 +31,13 @@ export class ListaClientePage {
 
   lista: Cliente[];
 
+
   public filterText: string;
   public filterPlaceholder: string;
   public filterInput = new FormControl();
   public enableFilter: boolean;
 
-  public seleccionado: number = 1;
+  public seleccionado: number = -1;
 
   public trabajoActual: Trabajo;
 
@@ -47,9 +48,24 @@ export class ListaClientePage {
               private toastCtrl: ToastController,
               public events: Events) {
 
+
+    this.filterText = 'all';
+
+
     this.trabajoActual = this.navParams.data['trabajoActual'];
+    console.log('Trabajo seleccionado:',this.trabajoActual);
     this.seleccionado =  this.trabajoActual.cliente.id;
     console.log('id del cliente seleccionado:',this.seleccionado);
+
+    events.subscribe('client-selected', (data) => {
+      this.seleccionado =  data;
+      console.log('entré al evento, seleccionado:', this.seleccionado);
+    });
+
+  }
+
+  isSelectedCliente(id: number){
+    return id == this.seleccionado;
   }
 
   nuevoCliente() {
@@ -72,10 +88,14 @@ export class ListaClientePage {
     //this.filterText = "";
   }
 
+  getListaClientes(){
+    return this.lista;
+  }
+
   ionViewWillEnter() {
 
     this.enableFilter = true;
-    this.filterText = "";
+    this.filterText = 'all';
     this.filterPlaceholder = "Busca por: empresa, mail, teléfono, rut, persona de contacto..";
 
     this.filterInput

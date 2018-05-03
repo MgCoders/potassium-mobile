@@ -24,12 +24,8 @@
       </ion-col>
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-list>
-          <ion-item *ngFor="let cliente of lista | filter:{ nombreEmpresa:  (filterText ||''),
-                                                            rut:            (filterText ||''),
-                                                            nombreEmpresa:  (filterText ||''),
-                                                            telefono:       (filterText ||''),
-                                                            personaContacto:(filterText ||''),
-                                                            emailEmpresa:   (filterText ||'') } : false">
+          <ion-item [ngClass]="{'seleccionado': isSelectedCliente(cliente.id)}"
+                    *ngFor="let cliente of getListaClientes() ">
 
             <ion-thumbnail (click)="seleccionarCliente(cliente.id)" item-start>
               <img src="assets/imgs/client.png">
@@ -37,17 +33,15 @@
             <h2 (click)="seleccionarCliente(cliente.id)">{{cliente.nombreEmpresa}}</h2>
             <p (click)="seleccionarCliente(cliente.id)">{{cliente.rut}}</p>
 
-            <button ion-button clear item-end (click)="editarCliente(cliente.id)">Editar</button>
-            <ion-badge *ngIf="cliente.id == seleccionado">Seleccionado</ion-badge>
-          </ion-item>
-          <ion-item>
-            <button ion-button outline item-end icon-left (click)="nuevoCliente()">
-              <ion-icon name="add"></ion-icon>
-              Agregar nuevo cliente
-            </button>
+            <button *ngIf="cliente.id != seleccionado" ion-button clear item-end (click)="editarCliente(cliente.id)">Editar</button>
+            <button *ngIf="cliente.id == seleccionado" ion-button clear item-end >Asignado</button>
+            <ion-badge ></ion-badge>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-fab right bottom>
+    <button ion-fab color="" (click)="nuevoCliente()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

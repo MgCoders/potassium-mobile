@@ -100,8 +100,34 @@ export class AltaTrabajoPage {
     });
 
 
+    let toastCorrectoEquipo = this.toastCtrl.create({
+      message: 'Equipo seleccionado correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastErrorEquipo = this.toastCtrl.create({
+      message: 'Error al seleccionar equipo..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    let toastCorrectoFinal = this.toastCtrl.create({
+      message: 'Trabajo cargado correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastErrorFinal = this.toastCtrl.create({
+      message: 'Error al cargar el Trabajo..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
     let id = this.navParams.data['id'];
     let tipo = this.navParams.data['tipo'];
+
+    this.tipoTrabajo = tipo;
+
+    this.limpiarCampos();
 
     if (tipo == "recuperar" && id != undefined) {
 
@@ -112,9 +138,11 @@ export class AltaTrabajoPage {
           toastCorrectoTrabajo.present();
           this.trabajoActual = data;
           console.log('adentro',this.trabajoActual);
+          this.events.publish('client-selected', this.trabajoActual.cliente.id);
+          this.events.publish('equip-selected', this.trabajoActual.equipo.id);
 
           //Inicializo
-          this.initTabs();
+
 
         },
         (error) => {
@@ -122,12 +150,13 @@ export class AltaTrabajoPage {
           toastErrorTrabajo.present();
         }
       );
-
-    } else {
-
-
-      this.limpiarCampos();
     }
+    else {
+      toastErrorTrabajo.setMessage("error al intentar recuperar el trabajo");
+      toastErrorTrabajo.present();
+    }
+
+    this.initTabs();
 
 
     //declaro el listener en las tabs
@@ -135,6 +164,7 @@ export class AltaTrabajoPage {
     events.subscribe('change-tab', (tab, data) => {
       console.log('EVENT::ChangeTAB');
 
+      console.log("antes de entrar:", this.trabajoActual);
       //Las tabs van de [0,1,....]
       if(tab==1 /*&& this.trabajoActual.cliente.id == undefined*/){
         //Voy a la vista de equipo, y acaban de seleccionar al cliente;
@@ -158,16 +188,31 @@ export class AltaTrabajoPage {
         console.log(this.trabajoActual.equipo);
 
         //Cambio como dijo el tincho para poder pushear las fotos
-        this.trabajoService.create(this.trabajoActual).subscribe(
-          (data) => {
-            toastCorrecto.present();
-            this.trabajoActual = new TrabajoImp(data);
-          },
-          (error) => {
-            console.log(error);
-            toastError.setMessage(error);
-            toastError.present();
-          });
+        if (tipo == "recuperar" && this.trabajoActual.id != undefined) {
+          this.trabajoService.edit(this.trabajoActual).subscribe(
+            (data) => {
+              toastCorrecto.present();
+              this.trabajoActual = new TrabajoImp(data);
+            },
+            (error) => {
+              console.log(error);
+              toastError.setMessage(error.toString());
+              toastError.present();
+            });
+        }else{
+          this.trabajoService.create(this.trabajoActual).subscribe(
+            (data) => {
+              toastCorrectoEquipo.present();
+              this.trabajoActual = new TrabajoImp(data);
+            },
+            (error) => {
+              console.log(error);
+              toastErrorEquipo.setMessage(error.toString());
+              toastErrorEquipo.present();
+            });
+
+        }
+
       }
 
       else if(tab==3){
@@ -249,13 +294,13 @@ export class AltaTrabajoPage {
         */
         this.trabajoService.edit(this.trabajoActual).subscribe(
           (data) => {
-            toastCorrecto.present();
+            toastCorrectoFinal.present();
             this.trabajoActual = new TrabajoImp(data);
           },
           (error) => {
             console.log(error);
-            toastError.setMessage(error);
-            toastError.present();
+            toastErrorFinal.setMessage(error);
+            toastErrorFinal.present();
           });
 
 
@@ -266,7 +311,7 @@ export class AltaTrabajoPage {
         return;
       }
 
-      console.log(this.trabajoActual);
+      console.log("Al salir:", this.trabajoActual);
       this.navParams.data['trabajoActual'] = this.trabajoActual;
 
       //console.log('entro>');
@@ -386,11 +431,6 @@ export class AltaTrabajoPage {
       );
     console.log('Todo Limpito');
     console.log(this.trabajoActual);
-
-
-
-
-    this.initTabs();
 
   }
 
