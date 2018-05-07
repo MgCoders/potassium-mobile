@@ -30,7 +30,7 @@
 
         <ion-item>
           <ion-label>Fecha prevista entrega</ion-label>
-          <ion-datetime displayFormat="DD MMM, YYYY" [(ngModel)]="fechaProvistaEntrega">
+          <ion-datetime displayFormat="DD MMM, YYYY" [min]="today" [max]="max" [(ngModel)]="fechaProvistaEntrega">
           </ion-datetime>
         </ion-item>
       </ion-col>

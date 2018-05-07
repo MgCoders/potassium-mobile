@@ -17,6 +17,7 @@ import localeUy from "@angular/common/locales/es-UY";
 import {TrabajoFotoService} from "../../app/_services/trabajoFoto.service";
 import {TrabajoFotoImp} from "../../app/_models/TrabajoFotoImp";
 import {TrabajoFoto} from "../../app/_models/TrabajoFoto";
+import {TipoEquipoImp} from "../../app/_models/TipoEquipoImp";
 
 /**
  * Generated class for the AltaTrabajoPage page.
@@ -188,22 +189,29 @@ export class AltaTrabajoPage {
         console.log(this.trabajoActual.equipo);
 
         //Cambio como dijo el tincho para poder pushear las fotos
+
+        console.log("id del trabajo:",this.trabajoActual);
+        console.log("tipo de acciómn:",tipo);
+
         if (tipo == "recuperar" && this.trabajoActual.id != undefined) {
           this.trabajoService.edit(this.trabajoActual).subscribe(
             (data) => {
-              toastCorrecto.present();
+              toastCorrectoEquipo.present();
               this.trabajoActual = new TrabajoImp(data);
+              console.log("trabajoActual CON ID editado: ",this.trabajoActual);
             },
             (error) => {
               console.log(error);
-              toastError.setMessage(error.toString());
-              toastError.present();
+              toastErrorEquipo.setMessage(error.toString());
+              toastErrorEquipo.present();
             });
         }else{
           this.trabajoService.create(this.trabajoActual).subscribe(
             (data) => {
               toastCorrectoEquipo.present();
               this.trabajoActual = new TrabajoImp(data);
+              console.log("trabajoActual CON ID NUEVO: ",this.trabajoActual);
+              this.events.publish('actualizar-trabajo', this.trabajoActual);
             },
             (error) => {
               console.log(error);
@@ -224,8 +232,12 @@ export class AltaTrabajoPage {
         console.log("Data: ");
         console.log(data);
 
+
+        //cambios y paso el trabajo
+        this.trabajoActual = data;
+
         //Obtengo la lista de detalles para agregarle al trabajo actual
-        this.trabajoActual.comentarios = data['comentarios'];
+        /*this.trabajoActual.comentarios = data['comentarios'];
         this.trabajoActual.fechaRecepcion= data['fechaRecepcion'];
         this.trabajoActual.fechaProvistaEntrega = data['fechaProvistaEntrega'];
         this.trabajoActual.kmEquipoRecepcion = data['kmEquipoRecepcion'];
@@ -252,7 +264,7 @@ export class AltaTrabajoPage {
         this.trabajoActual.equipoSenalerosSanos = data['equipoSenalerosSanos'];
         this.trabajoActual.equipoVidriosLaterales = data['equipoVidriosLaterales'];
         this.trabajoActual.equipoVidriosLateralesSanos = data['equipoVidriosLateralesSanos'];
-        this.trabajoActual.dibujoEquipoRecepcion = data['dibujoEquipoRecepcion'];
+        this.trabajoActual.dibujoEquipoRecepcion = data['dibujoEquipoRecepcion'];*/
 
 
         if (this.trabajoActual.equipoDocumentos) {
@@ -275,17 +287,18 @@ export class AltaTrabajoPage {
       }
       else if(tab==4){
         //Me llegó la firma en la data!
-        console.log('TAB:: Ingresa Firma');
-        console.log("Data: ");
-        console.log(data);
+        console.log('TAB:: Ingresa Firma (pusheo el trabajo y salgo del alta)');
+        console.log("Data: ", data);
 
         this.trabajoActual.firmaClienteRecepcion = data['firmaClienteRecepcion'];
         this.trabajoActual.firmaEmpleadoRecepcion = data['firmaEmpleadoRecepcion'];
         this.trabajoActual.nombreClienteRecepcion = data['nombreClienteRecepcion'];
         this.trabajoActual.nombreEmpleadoRecepcion = data['nombreEmpleadoRecepcion'];
 
+        this.trabajoActual.estado = "EN_PROCESO";
+
         //Pushear el trabajo a la API
-        console.log('Imprimo el trabajo');
+        console.log('Imprimo el trabajo, con estado cambiado');
         console.log(this.trabajoActual);
 
         /*
@@ -385,7 +398,10 @@ export class AltaTrabajoPage {
 
     //Inicializo un trabajo en vacio
     let c = new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
-    let e = new EquipoImp({marca:'',modelo:'',matricula:'',color:''});
+    let te = new TipoEquipoImp({descripcion:'', dibujo: ''});
+    //Inicializo en vacío
+    let e =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
+
     this.trabajoActual =
       new TrabajoImp({
         cliente:c,

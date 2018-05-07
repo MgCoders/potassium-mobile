@@ -38,6 +38,7 @@ import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
 import {FilterPipe} from "../pipes/filter.pipe";
 import {TrabajoService} from "./_services/trabajo.service";
 import {TrabajoFotoService} from "./_services/trabajoFoto.service";
+import {TipoEquipoService} from "./_services/tipoEquipo.service";
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import {TrabajoFotoService} from "./_services/trabajoFoto.service";
     TrabajoService,
     TrabajoFotoService,
     EquipoServices,
+    TipoEquipoService,
     HttpClientModule,
     Camera,
     Keyboard

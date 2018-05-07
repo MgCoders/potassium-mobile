@@ -49,8 +49,7 @@ export class ListaClientePage {
               public events: Events) {
 
 
-    this.filterText = 'all';
-
+    this.filterText = '';
 
     this.trabajoActual = this.navParams.data['trabajoActual'];
     console.log('Trabajo seleccionado:',this.trabajoActual);
@@ -61,7 +60,6 @@ export class ListaClientePage {
       this.seleccionado =  data;
       console.log('entré al evento, seleccionado:', this.seleccionado);
     });
-
   }
 
   isSelectedCliente(id: number){
@@ -110,7 +108,6 @@ export class ListaClientePage {
     this.lista = [];
     console.log("Entro a la lista de clientes");
 
-
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
     let loading = this.loadingCtrl.create({
       content: 'Cargando la lista de clientes...'
@@ -127,7 +124,6 @@ export class ListaClientePage {
     });
 
 
-
     loading.present();
     this.service.getAll().subscribe(
 
@@ -135,12 +131,11 @@ export class ListaClientePage {
         loading.dismissAll();
 
         //Obtengo la lista desde el server con lo último
-        data.forEach(Cliente => {this.lista.push( new ClienteImp(Cliente));} )
-
-        this.lista.sort(function(a, b) {
-          return a.id - b.id;
+        data.forEach(Cliente => {
+          this.lista.push( new ClienteImp(Cliente));
         });
-        console.log(this.lista);
+
+        console.log("lista de clientes:",this.lista);
         toastCorrecto.present();
       },
       (error) => {
@@ -148,9 +143,5 @@ export class ListaClientePage {
         toastError.setMessage(error);
         toastError.present();
     });
-
   }
-
-
-
 }

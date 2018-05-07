@@ -43,12 +43,12 @@ export class ListaEquipoPage {
               private toastCtrl: ToastController,
               public events: Events) {
 
-    this.clienteSeleccionado = this.navParams.data['cliente'];
     this.trabajoActual = this.navParams.data['trabajoActual'];
+    this.clienteSeleccionado = this.trabajoActual.cliente;
     this.seleccionado = this.trabajoActual.equipo.id;
     console.log('Cliente - Seleccionado(Data): ', this.clienteSeleccionado);
 
-    this.filterText = 'all';
+    this.filterText = '';
 
     events.subscribe('equip-selected', (data) => {
       this.seleccionado = data;
@@ -66,11 +66,11 @@ export class ListaEquipoPage {
   }
 
   nuevoEquipo() {
-    this.navCtrl.push(AltaEquipoPage, {cliente: this.navParams.data});
+    this.navCtrl.push(AltaEquipoPage, {cliente: this.trabajoActual.cliente});
   }
 
   editarEquipo(id: number) {
-    this.navCtrl.push(AltaEquipoPage, {id: id, cliente: this.navParams.data});
+    this.navCtrl.push(AltaEquipoPage, {id: id, cliente: this.trabajoActual.cliente});
   }
 
   seleccionarEquipo(id: number) {
@@ -84,7 +84,6 @@ export class ListaEquipoPage {
 
 
   ionViewWillEnter() {
-
 
     this.enableFilter = true;
     this.filterText = 'all';
@@ -100,8 +99,7 @@ export class ListaEquipoPage {
 
     //Limpio la lista
     this.lista = [];
-    console.log("Entro a la lista de clientes");
-
+    console.log("Entro a la lista de equipos");
 
     //console.log('ionViewDidLoad SeleccionaEquipoPage');
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
@@ -121,19 +119,17 @@ export class ListaEquipoPage {
 
 
     loading.present();
-    this.service.getByCliente(1).subscribe(
+    this.service.getByCliente(this.clienteSeleccionado.id).subscribe(
+
       (data) => {
         loading.dismissAll();
 
         //Obtengo la lista desde el server con lo último
         data.forEach (Equipo => {
           this.lista.push(new EquipoImp(Equipo));
-        })
-
-        this.lista.sort(function (a, b) {
-          return a.id - b.id;
         });
-        console.log(this.lista);
+
+        console.log("equipos del cliente:",this.lista);
         toastCorrecto.present();
       },
       (error) => {

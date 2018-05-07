@@ -2,11 +2,12 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import {
   Events, IonicPage, NavController, NavParams, ToastController
 } from 'ionic-angular';
-//import {ClienteServices} from "../../app/_services/cliente.services";
 import {AltaDescripcionPage} from "../alta-descripcion/alta-descripcion";
 import {DatePipe} from "@angular/common";
 import { registerLocaleData } from '@angular/common';
 import localeUy from '@angular/common/locales/es-UY';
+import moment from 'moment';
+import {Trabajo} from "../../app/_models/Trabajo";
 
 
 /**
@@ -55,6 +56,12 @@ export class IngresarDetallesPage {
   fechaRecepcion: Date;
   fechaRecepcion_txt: string = '';
   fechaProvistaEntrega: Date;
+
+  trabajoActual: Trabajo;
+
+
+  today: string;
+  max: string;
   dp: DatePipe;
 
   @ViewChild('myInput') myInput: ElementRef;
@@ -69,14 +76,69 @@ export class IngresarDetallesPage {
               /*private as: AlertController,*/
               /*private toastCtrl: ToastController,*/
               private events: Events) {
+
+    events.subscribe('actualizar-trabajo', (data) => {
+      if (data['id'] != undefined){
+        this.trabajoActual = data;
+        console.log('actualizo trabajo con la vista:',this.trabajoActual);
+      }
+    });
+
+    this.trabajoActual = this.navParams.data['trabajoActual'];
+    console.log('Trabajo seleccionado (carga vista):',this.trabajoActual);
+
+
     this.lista = [];
     registerLocaleData(localeUy);
+    this.dp = new DatePipe('es-UY');
+
+    let tipo = this.navParams.data['tipo'];
+
 
     this.fechaRecepcion = new Date();
-    this.fechaProvistaEntrega = new Date( );
-    this.dp = new DatePipe('es-UY');
+    this.fechaProvistaEntrega = new Date();
+
+    if(tipo == "recuperar"){
+      this.fechaRecepcion = new Date(this.dp.transform( this.trabajoActual.fechaRecepcion, 'dd/MM/yyyy HH:MM'));
+      this.fechaProvistaEntrega = new Date(this.dp.transform( this.trabajoActual.fechaProvistaEntrega, 'dd/MM/yyyy HH:MM'));
+
+      //Datos
+      this.comentarios =          this.trabajoActual.comentarios;
+      this.kmEquipoRecepcion =    this.trabajoActual.kmEquipoRecepcion;
+      this.equipoDocumentos =     this.trabajoActual.equipoDocumentos;
+      this.equipoAbollones =      this.trabajoActual.equipoAbollones;
+      this.equipoAuxiliar =       this.trabajoActual.equipoAuxiliar;
+      this.equipoAuxiliarArmada = this.trabajoActual.equipoAuxiliarArmada;
+      this.equipoBalizas =        this.trabajoActual.equipoBalizas;
+      this.equipoCantidadCombustible = this.trabajoActual.equipoCantidadCombustible;
+      this.equipoCenicero =       this.trabajoActual.equipoCenicero;
+      this.equipoEspejos =        this.trabajoActual.equipoEspejos;
+      this.equipoEspejosSanos =   this.trabajoActual.equipoEspejosSanos;
+      this.equipoExtintor =       this.trabajoActual.equipoExtintor;
+      this.equipoFrenteRadio =    this.trabajoActual.equipoFrenteRadio;
+      this.equipoGatoPalanca =    this.trabajoActual.equipoGatoPalanca;
+      this.equipoHerramientas =   this.trabajoActual.equipoHerramientas;
+      this.equipoLlaveRuedas =    this.trabajoActual.equipoLlaveRuedas;
+      this.equipoLucesTraserasSanas = this.trabajoActual.equipoLucesTraserasSanas;
+      this.equipoMangueraCabina = this.trabajoActual.equipoMangueraCabina;
+      this.equipoManuales =       this.trabajoActual.equipoManuales;
+      this.equipoParabrisasSano = this.trabajoActual.equipoParabrisasSano;
+      this.equipoRadio =          this.trabajoActual.equipoRadio;
+      this.equipoRayones =        this.trabajoActual.equipoRayones;
+      this.equipoSenalerosSanos = this.trabajoActual.equipoSenalerosSanos;
+      this.equipoVidriosLaterales = this.trabajoActual.equipoVidriosLaterales;
+      this.equipoVidriosLateralesSanos = this.trabajoActual.equipoVidriosLateralesSanos;
+      this.dibujoEquipoRecepcion = this.trabajoActual.dibujoEquipoRecepcion;
+    }
+
     this.fechaRecepcion_txt = this.dp.transform( this.fechaRecepcion, 'dd/MM/yyyy HH:MM');
+
+    this.today = new Date().toJSON().split('T')[0];
+    this.max = moment().add(2, 'years').toJSON().split('T')[0];
+
     console.log("FPE: " + this.dp.transform( this.fechaProvistaEntrega, 'dd-MM-yyyy HH:mm'));
+    console.log("today: ",this.today);
+    console.log("max: ",this.max);
   }
 
 
@@ -115,8 +177,40 @@ export class IngresarDetallesPage {
 
     //Tengo que generar la data para mandarla al padre
 
+    this.trabajoActual.fechaRecepcion =       this.dp.transform( this.fechaRecepcion, 'dd-MM-yyyy HH:MM');
+    this.trabajoActual.fechaProvistaEntrega = this.dp.transform( this.fechaProvistaEntrega, 'dd-MM-yyyy');
+    this.trabajoActual.comentarios =          this.comentarios;
+    this.trabajoActual.kmEquipoRecepcion =    this.kmEquipoRecepcion;
+    this.trabajoActual.equipoDocumentos =     this.equipoDocumentos;
+    this.trabajoActual.equipoAbollones =      this.equipoAbollones;
+    this.trabajoActual.equipoAuxiliar =       this.equipoAuxiliar;
+    this.trabajoActual.equipoAuxiliarArmada = this.equipoAuxiliarArmada;
+    this.trabajoActual.equipoBalizas =        this.equipoBalizas;
+    this.trabajoActual.equipoCantidadCombustible = this.equipoCantidadCombustible;
+    this.trabajoActual.equipoCenicero =       this.equipoCenicero;
+    this.trabajoActual.equipoEspejos =        this.equipoEspejos;
+    this.trabajoActual.equipoEspejosSanos =   this.equipoEspejosSanos;
+    this.trabajoActual.equipoExtintor =       this.equipoExtintor;
+    this.trabajoActual.equipoFrenteRadio =    this.equipoFrenteRadio;
+    this.trabajoActual.equipoGatoPalanca =    this.equipoGatoPalanca;
+    this.trabajoActual.equipoHerramientas =   this.equipoHerramientas;
+    this.trabajoActual.equipoLlaveRuedas =    this.equipoLlaveRuedas;
+    this.trabajoActual.equipoLucesTraserasSanas = this.equipoLucesTraserasSanas;
+    this.trabajoActual.equipoMangueraCabina = this.equipoMangueraCabina;
+    this.trabajoActual.equipoManuales =       this.equipoManuales;
+    this.trabajoActual.equipoParabrisasSano = this.equipoParabrisasSano;
+    this.trabajoActual.equipoRadio =          this.equipoRadio;
+    this.trabajoActual.equipoRayones =        this.equipoRayones;
+    this.trabajoActual.equipoSenalerosSanos = this.equipoSenalerosSanos;
+    this.trabajoActual.equipoVidriosLaterales = this.equipoVidriosLaterales;
+    this.trabajoActual.equipoVidriosLateralesSanos = this.equipoVidriosLateralesSanos;
+    this.trabajoActual.dibujoEquipoRecepcion = this.dibujoEquipoRecepcion;
 
-    this.events.publish('change-tab', 3, {
+    this.events.publish('change-tab', 3, this.trabajoActual);
+
+
+
+    /*this.events.publish('change-tab', 3, {
       'fechaRecepcion': this.dp.transform( this.fechaRecepcion, 'dd-MM-yyyy HH:MM'),
       'fechaProvistaEntrega': this.dp.transform( this.fechaProvistaEntrega, 'dd-MM-yyyy'),
       'comentarios': this.comentarios,
@@ -147,7 +241,7 @@ export class IngresarDetallesPage {
       'equipoVidriosLaterales': this.equipoVidriosLaterales,
       'equipoVidriosLateralesSanos': this.equipoVidriosLateralesSanos,
       'dibujoEquipoRecepcion': this.dibujoEquipoRecepcion
-    });
+    });*/
   }
 
 
@@ -155,7 +249,7 @@ export class IngresarDetallesPage {
 
 
     return new Promise((resolve, reject) => {
-      console.log("VUELVO:: de Seteat foto");
+      console.log("VUELVO:: de Setear foto");
       //console.log(this.firmaCliente64);
       //Cambio como dijo el tincho para poder pushear las fotos
 

@@ -48,15 +48,28 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <!--ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 col-lg-6>
         <ion-item>
-          <ion-label color="primary" stacked>Tipo de equipo</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.tipoEquipo">
+          <ion-label color="primary" stacked>Número chasis</ion-label>
+          <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.numeroChasis">
 
           </ion-input>
         </ion-item>
-      </ion-col-->
+      </ion-col>
+      <ion-col col-12 col-md-6 col-lg-6>
+        <ion-item>
+          <ion-label color="primary" stacked>Tipo de equipo</ion-label>
+          <ion-input type="text" placeholder="..." >
+
+          </ion-input>
+        </ion-item>
+        <ion-select [(ngModel)]="equipoActual.tipoEquipo">
+          <ion-option *ngFor="let est of listaTipoEquipo " [value]="est.idTipoEquipo">{{est.descripcion}}</ion-option>
+
+        </ion-select>
+      </ion-col>
     </ion-row>
+
     <ion-row>
       <ion-col col-12>
         <button ion-button full color="primary" (click)="guardarEquipo()" >Confirmar</button>

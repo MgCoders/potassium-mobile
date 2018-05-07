@@ -11,6 +11,7 @@ import {Trabajo} from "../../app/_models/Trabajo";
 import {TrabajoImp} from "../../app/_models/TrabajoImp";
 import {ClienteImp} from "../../app/_models/ClienteImp";
 import {EquipoImp} from "../../app/_models/EquipoImp";
+import {TipoEquipoImp} from "../../app/_models/TipoEquipoImp";
 
 /**
  * Generated class for the SeleccionaTrabajoPage page.
@@ -53,7 +54,9 @@ export class SeleccionaTrabajoPage {
 
     //Inicializo el trabajo en vacío
     let c = new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
-    let e = new EquipoImp({marca:'',modelo:'',matricula:'',color:''});
+    let te = new TipoEquipoImp({descripcion:'', dibujo: ''});
+    //Inicializo en vacío
+    let e =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
 
     this.trabajoActual =
       new TrabajoImp({

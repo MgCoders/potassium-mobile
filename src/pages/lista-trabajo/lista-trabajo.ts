@@ -106,13 +106,16 @@ export class ListaTrabajoPage {
   }
 
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad ListaTrabajoPage');
     console.log('Tipo: '+this.navParams.data['tipo']);
     this.tipo = this.navParams.data['tipo'];
 
 
     this.showLoading();
+
+    this.listaClientes = [];
+    this.lista = [];
 
     this.listaEstados.forEach(estado => {
       console.log("estado a solicitar:",estado);

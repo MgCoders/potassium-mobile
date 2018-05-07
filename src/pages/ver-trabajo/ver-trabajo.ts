@@ -8,6 +8,9 @@ import {TrabajoImp} from "../../app/_models/TrabajoImp";
 import {EquipoImp} from "../../app/_models/EquipoImp";
 import {TrabajoService} from "../../app/_services/trabajo.service";
 import {Trabajo} from "../../app/_models/Trabajo";
+import {TrabajoFoto} from "../../app/_models/TrabajoFoto";
+import {TrabajoFotoService} from "../../app/_services/trabajoFoto.service";
+import {TipoEquipoImp} from "../../app/_models/TipoEquipoImp";
 
 /**
  * Generated class for the VerTrabajoPage page.
@@ -24,11 +27,13 @@ import {Trabajo} from "../../app/_models/Trabajo";
 export class VerTrabajoPage {
 
   trabajoActual: Trabajo;
+  listaFoto: TrabajoFoto[];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               //private as: AlertController,
               private trabajoService: TrabajoService,
+              private trabajoFotoService: TrabajoFotoService,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events) {
@@ -50,7 +55,11 @@ export class VerTrabajoPage {
 
     //Inicializo el trabajo en vacío
     let c = new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
-    let e = new EquipoImp({marca:'',modelo:'',matricula:'',color:''});
+    let te = new TipoEquipoImp({descripcion:'', dibujo: ''});
+
+    //Inicializo en vacío
+    let e =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
+
 
     this.trabajoActual =
       new TrabajoImp({
@@ -120,6 +129,33 @@ export class VerTrabajoPage {
     }
     loading.dismissAll();
     console.log("despues", this.trabajoActual);
+
+
+    this.listaFoto = [];
+
+    loading.present();
+    if(id != undefined){
+      console.log('Descargo las fotos del trabajo (si tiene)!');
+      this.trabajoFotoService.get(id).subscribe(
+        (data) => {
+          toastCorrecto.present();
+          loading.dismissAll();
+          data.forEach( item => {
+            this.listaFoto.push(item);
+          });
+
+          console.log("adentro",this.trabajoActual);
+        },
+        (error) => {
+          toastError.setMessage(error);
+          toastError.present();
+        }
+      );
+    }
+    loading.dismissAll();
+    console.log("despues", this.trabajoActual)
+
+
   }
 
   ionViewDidLoad() {
