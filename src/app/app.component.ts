@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
 import {IngresarDetallesPage} from "../pages/ingresar-detalles/ingresar-detalles";
+import {AltaDibujoPage} from "../pages/alta-dibujo/alta-dibujo";
 
 
 @Component({
@@ -18,7 +19,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage = LoginPage;
+  rootPage = AltaDibujoPage;
   //rootPage = IngresarDetallesPage;
   pages: Array<{title: string, component: any}>;
 

@@ -39,6 +39,7 @@ import {FilterPipe} from "../pipes/filter.pipe";
 import {TrabajoService} from "./_services/trabajo.service";
 import {TrabajoFotoService} from "./_services/trabajoFoto.service";
 import {TipoEquipoService} from "./_services/tipoEquipo.service";
+import {AltaDibujoPage} from "../pages/alta-dibujo/alta-dibujo";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {TipoEquipoService} from "./_services/tipoEquipo.service";
     SeleccionaTareaPage,
     HideHeaderDirective,
     AltaHorasPage,
-    FilterPipe
+    FilterPipe,
+    AltaDibujoPage
   ],
   imports: [
     BrowserModule,
@@ -104,7 +106,8 @@ import {TipoEquipoService} from "./_services/tipoEquipo.service";
     CalendarioPage,
     SeleccionaTrabajoPage,
     SeleccionaTareaPage,
-    AltaHorasPage
+    AltaHorasPage,
+    AltaDibujoPage
   ],
   providers: [
     StatusBar,

@@ -8,6 +8,7 @@ import { registerLocaleData } from '@angular/common';
 import localeUy from '@angular/common/locales/es-UY';
 import moment from 'moment';
 import {Trabajo} from "../../app/_models/Trabajo";
+import {AltaDibujoPage} from "../alta-dibujo/alta-dibujo";
 
 
 /**
@@ -267,6 +268,31 @@ export class IngresarDetallesPage {
   nuevoDetalle() {
 
     this.navCtrl.push(AltaDescripcionPage, {callback: this.callbackDetalle})
+
+  }
+
+  callbackDibujo = (_params) => {
+
+
+    return new Promise((resolve, reject) => {
+      console.log("VUELVO:: de Setear el dibujo");
+      //console.log(this.firmaCliente64);
+      //Cambio como dijo el tincho para poder pushear las fotos
+
+      /**/
+
+
+      this.dibujoEquipoRecepcion = _params;
+      //this.events.publish('push-foto', _params);
+      //console.log(this.firmaCliente64);
+      resolve();
+    });
+  };
+
+
+  nuevoDibujo() {
+
+    this.navCtrl.push(AltaDibujoPage, {callback: this.callbackDibujo, dibujo: this.dibujoEquipoRecepcion})
 
   }
 
