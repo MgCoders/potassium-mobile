@@ -9,6 +9,8 @@ import localeUy from '@angular/common/locales/es-UY';
 import moment from 'moment';
 import {Trabajo} from "../../app/_models/Trabajo";
 import {AltaDibujoPage} from "../alta-dibujo/alta-dibujo";
+import {TrabajoFotoService} from "../../app/_services/trabajoFoto.service";
+import {TrabajoFotoImp} from "../../app/_models/TrabajoFotoImp";
 
 
 /**
@@ -54,12 +56,14 @@ export class IngresarDetallesPage {
   equipoVidriosLaterales: boolean = false;
   equipoVidriosLateralesSanos: boolean = false;
   dibujoEquipoRecepcion: string = '';
+  dibujoAncho: number = 0;
+  dibujoAlto: number = 0;
   fechaRecepcion: Date;
   fechaRecepcion_txt: string = '';
   fechaProvistaEntrega: Date;
 
   trabajoActual: Trabajo;
-
+  background:string;
 
   today: string;
   max: string;
@@ -74,14 +78,47 @@ export class IngresarDetallesPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private trabajoFotoService: TrabajoFotoService,
               /*private as: AlertController,*/
-              /*private toastCtrl: ToastController,*/
+              private toastCtrl: ToastController,
               private events: Events) {
 
+    //seteo el fondo segun el tipo equipo!
+    this.background = '../../assets/imgs/auto.png';
+
+
+    let toastError = this.toastCtrl.create({
+      message: 'Error al cargar datos..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    this.lista = [];
+
+
     events.subscribe('actualizar-trabajo', (data) => {
-      if (data['id'] != undefined){
+      console.log('evento:: Actualizar trabajo')
+      let id = data['id'];
+      if (id != undefined){
         this.trabajoActual = data;
         console.log('actualizo trabajo con la vista:',this.trabajoActual);
+        if(id != undefined){
+          console.log('Descargo las fotos del trabajo (si tiene)!');
+          this.trabajoFotoService.get(id).subscribe(
+            (data) => {
+              data.forEach( item => {
+                this.lista.push( new TrabajoFotoImp(item));
+                console.log('Foto en el server!:', item);
+              });
+
+              console.log("adentro",this.trabajoActual);
+            },
+            (error) => {
+              toastError.setMessage(error.toString());
+            }
+          );
+        }
       }
     });
 
@@ -89,7 +126,7 @@ export class IngresarDetallesPage {
     console.log('Trabajo seleccionado (carga vista):',this.trabajoActual);
 
 
-    this.lista = [];
+
     registerLocaleData(localeUy);
     this.dp = new DatePipe('es-UY');
 
@@ -130,6 +167,8 @@ export class IngresarDetallesPage {
       this.equipoVidriosLaterales = this.trabajoActual.equipoVidriosLaterales;
       this.equipoVidriosLateralesSanos = this.trabajoActual.equipoVidriosLateralesSanos;
       this.dibujoEquipoRecepcion = this.trabajoActual.dibujoEquipoRecepcion;
+
+
     }
 
     this.fechaRecepcion_txt = this.dp.transform( this.fechaRecepcion, 'dd/MM/yyyy HH:MM');
@@ -276,13 +315,12 @@ export class IngresarDetallesPage {
 
     return new Promise((resolve, reject) => {
       console.log("VUELVO:: de Setear el dibujo");
-      //console.log(this.firmaCliente64);
-      //Cambio como dijo el tincho para poder pushear las fotos
+      console.log('params', _params);
 
-      /**/
+      this.dibujoEquipoRecepcion = _params['dibujo'];
+      this.dibujoAncho = _params['dibujoAncho'];
+      this.dibujoAlto = _params['dibujoAlto'];
 
-
-      this.dibujoEquipoRecepcion = _params;
       //this.events.publish('push-foto', _params);
       //console.log(this.firmaCliente64);
       resolve();
@@ -292,7 +330,10 @@ export class IngresarDetallesPage {
 
   nuevoDibujo() {
 
-    this.navCtrl.push(AltaDibujoPage, {callback: this.callbackDibujo, dibujo: this.dibujoEquipoRecepcion})
+    this.navCtrl.push(AltaDibujoPage, {callback: this.callbackDibujo,
+                                                dibujo: this.dibujoEquipoRecepcion,
+                                                dibujoAncho: this.trabajoActual.dibujoAncho,
+                                                dibujoAlto: this.trabajoActual.dibujoAlto})
 
   }
 

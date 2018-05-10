@@ -73,8 +73,6 @@ export class SeleccionaTrabajoPage {
         firmaEmpleadoRecepcion: '',
         nombreClienteRecepcion:'',
         nombreEmpleadoRecepcion:'',
-        nroFactura:0,
-        nroRemito:0,
         nroOrdenCompra:0,
         equipoDocumentos:false,
         equipoAbollones:false,
@@ -99,7 +97,9 @@ export class SeleccionaTrabajoPage {
         equipoSenalerosSanos:false,
         equipoVidriosLaterales:false,
         equipoVidriosLateralesSanos:false,
-        dibujoEquipoRecepcion: ''}
+        dibujoEquipoRecepcion: '',
+        dibujoAlto: 0,
+        dibujoAncho:0}
       );
 
 

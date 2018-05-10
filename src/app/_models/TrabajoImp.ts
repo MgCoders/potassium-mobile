@@ -62,7 +62,8 @@ export class TrabajoImp implements models.Trabajo {
     //private Usuario usuarioRecepcion;
 
     dibujoEquipoRecepcion: string; //Para el dibujito de cuando lo recibe, guardar el array de bytes
-
+    dibujoAncho: number;
+    dibujoAlto: number;
 
     kmEquipoRecepcion: number;
 
@@ -72,8 +73,6 @@ export class TrabajoImp implements models.Trabajo {
     nombreClienteRecepcion: string;
     nombreEmpleadoRecepcion: string;
 
-    nroFactura: number;
-    nroRemito: number;
     nroOrdenCompra: number;
 
 
@@ -135,15 +134,14 @@ export class TrabajoImp implements models.Trabajo {
       //private Usuario usuarioRecepcion;
 
       this.dibujoEquipoRecepcion = x.dibujoEquipoRecepcion;
-
+      this.dibujoAncho = x.dibujoAncho;
+      this.dibujoAlto = x.dibujoAlto;
       this.kmEquipoRecepcion = x.kmEquipoRecepcion;
       this.firmaClienteRecepcion = x.firmaClienteRecepcion;
       this.firmaEmpleadoRecepcion = x.firmaEmpleadoRecepcion;
       this.nombreEmpleadoRecepcion = x.nombreEmpleadoRecepcion;
       this.nombreClienteRecepcion = x.nombreClienteRecepcion;
 
-      this.nroFactura = x.nroFactura;
-      this.nroRemito = x.nroRemito;
       this.nroOrdenCompra = x.nroOrdenCompra;
       this.cliente = x.cliente;
       this.equipo = x.equipo

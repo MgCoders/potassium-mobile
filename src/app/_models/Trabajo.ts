@@ -68,7 +68,8 @@ export interface Trabajo {
     //private Usuario usuarioRecepcion;
 
     dibujoEquipoRecepcion: string; //Para el dibujito de cuando lo recibe, guardar el array de bytes
-
+    dibujoAncho: number;
+    dibujoAlto: number;
 
     kmEquipoRecepcion: number;
 
@@ -78,8 +79,6 @@ export interface Trabajo {
     nombreClienteRecepcion: string;
     nombreEmpleadoRecepcion: string;
 
-    nroFactura: number;
-    nroRemito: number;
     nroOrdenCompra: number;
 
 }

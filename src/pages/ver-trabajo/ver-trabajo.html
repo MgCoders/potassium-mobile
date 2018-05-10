@@ -52,33 +52,31 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-list>
           <ion-list-header>
-            Detalles:
+            Foto del equipo:
           </ion-list-header>
+
           <ion-item>
-            <ion-card>
-              <img src="assets/imgs/paragolpe.jpg" />
+            <ion-card *ngFor="let foto of listaFoto">
+              <img src="{{foto.foto}}" />
               <ion-card-content>
-                <ion-card-title>
-                  Paragolpe roto
-                </ion-card-title>
                 <p>
-                  Doblado en la parte derecha
+                  {{foto.descripcion}}
                 </p>
               </ion-card-content>
             </ion-card>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="listaFoto?.length == 0">
+        <ion-card>
+          <b>No se tomaron fotos del equipo....</b>
+        </ion-card>
+      </ion-col>
 
-            <ion-card>
-              <img src="assets/imgs/espejo.jpg"/>
-              <ion-card-content>
-                <ion-card-title>
-                  Espejo roto
-                </ion-card-title>
-                <p>
-                  El espejo izquierdo está roto
-                </p>
-              </ion-card-content>
-            </ion-card>
 
+      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="listaFoto?.length == 0">
+        <ion-list>
+          <ion-item>
             <ion-card>
               <ion-card-header>
                 Comentarios

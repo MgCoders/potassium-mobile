@@ -19,7 +19,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage = AltaDibujoPage;
+  rootPage = LoginPage;
   //rootPage = IngresarDetallesPage;
   pages: Array<{title: string, component: any}>;
 

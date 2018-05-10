@@ -76,8 +76,6 @@ export class VerTrabajoPage {
         firmaEmpleadoRecepcion: '',
         nombreClienteRecepcion:'',
         nombreEmpleadoRecepcion:'',
-        nroFactura:0,
-        nroRemito:0,
         nroOrdenCompra:0,
         equipoDocumentos:false,
         equipoAbollones:false,
@@ -102,7 +100,9 @@ export class VerTrabajoPage {
         equipoSenalerosSanos:false,
         equipoVidriosLaterales:false,
         equipoVidriosLateralesSanos:false,
-        dibujoEquipoRecepcion: ''}
+        dibujoEquipoRecepcion: '',
+        dibujoAlto: 0,
+        dibujoAncho:0}
       );
 
 
@@ -133,22 +133,19 @@ export class VerTrabajoPage {
 
     this.listaFoto = [];
 
-    loading.present();
     if(id != undefined){
       console.log('Descargo las fotos del trabajo (si tiene)!');
       this.trabajoFotoService.get(id).subscribe(
         (data) => {
-          toastCorrecto.present();
-          loading.dismissAll();
           data.forEach( item => {
             this.listaFoto.push(item);
+            console.log('Foto en el server!:', item);
           });
 
           console.log("adentro",this.trabajoActual);
         },
         (error) => {
-          toastError.setMessage(error);
-          toastError.present();
+          toastError.setMessage(error.toString());
         }
       );
     }

@@ -23,8 +23,16 @@ export class AltaDibujoPage {
   callback:any;
   background: string = "";
   dibujo: string = "";
-  anchoDinujo: number = 0;
-  altodibujo: number = 0;
+  dibujoAncho: number = 0;
+  dibujoAlto: number = 0;
+
+  lastX: number;
+  lastY: number;
+
+  currentColour: string = '#000';
+
+  brushSize: number = 4;
+
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -35,7 +43,8 @@ export class AltaDibujoPage {
     this.background = '../../assets/imgs/auto.png';
 
     this.dibujo = navParams.data['dibujo'];
-
+    this.dibujoAncho = navParams.data['dibujoAncho'];
+    this.dibujoAlto = navParams.data['dibujoAlto'];
 
   }
 
@@ -44,27 +53,6 @@ export class AltaDibujoPage {
     //this.canvasElement = this.canvas.nativeElement;
   }
 
-  confirmarDibujo(){
-    console.log("lo exporto");
-
-    console.log(this.canvasElement.toDataURL());
-
-
-    this.callback = this.navParams.get("callback");
-    let data = {dibujo: this.canvasElement.toDataURL(), ancho: this.anchoDinujo, alto: this.altodibujo};
-    this.callback(data).then(()=>{
-      this.navCtrl.pop();
-    });
-
-    this.navCtrl.pop();
-  }
-
-  lastX: number;
-  lastY: number;
-
-  currentColour: string = '#000';
-
-  brushSize: number = 4;
 
 
   ngAfterViewInit(){
@@ -73,14 +61,17 @@ export class AltaDibujoPage {
     let ctx = this.canvasElement.getContext('2d');
 
 
-    this.anchoDinujo = this.platform.width() - (16+5)*2  -2 -1;
-    this.altodibujo = 300;
+    //si no hay nada seteado, lo seteo en la máquina
+    if (!(this.dibujoAlto !=undefined && this.dibujoAncho !=undefined
+        && this.dibujoAlto > 0 && this.dibujoAncho > 0 )) {
+      this.dibujoAncho = this.platform.width() - (16+5)*2  -2 -1;
+      this.dibujoAlto = 300;
+    }
 
-    this.renderer.setElementAttribute(this.canvasElement, 'width', this.anchoDinujo.toString());
-    this.renderer.setElementAttribute(this.canvasElement, 'height',  this.altodibujo.toString());
+    this.renderer.setElementAttribute(this.canvasElement, 'width', this.dibujoAncho.toString());
+    this.renderer.setElementAttribute(this.canvasElement, 'height',  this.dibujoAlto.toString());
 
-
-
+    //Muestro la imagen
     var image = new Image();
     image.onload = function() {
       ctx.drawImage(image, 0, 0);
@@ -88,10 +79,6 @@ export class AltaDibujoPage {
     image.src = this.dibujo;
 
   }
-
-
-
-
 
   changeSize(size){
     this.brushSize = size;
@@ -131,6 +118,24 @@ export class AltaDibujoPage {
   keyboardCheck() {
     //console.log('The keyboard is open:', this.keyboard.isOpen());
     return this.keyboard.isOpen();
+  }
+
+
+
+  confirmarDibujo(){
+    console.log("lo exporto");
+
+    console.log(this.canvasElement.toDataURL());
+
+
+    this.callback = this.navParams.get("callback");
+    let data = {dibujo: this.canvasElement.toDataURL(),
+                dibujoAncho: this.dibujoAncho,
+                dibujoAlto: this.dibujoAlto};
+    this.callback(data).then(()=>{
+      this.navCtrl.pop();
+    });
+
   }
 
 }

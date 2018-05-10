@@ -47,7 +47,6 @@ export class AltaFirmaPage {
       this.navCtrl.pop();
     });
 
-    //this.navCtrl.pop();
   }
 
   lastX: number;

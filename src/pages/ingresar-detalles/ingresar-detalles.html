@@ -314,26 +314,21 @@
       </ion-col>
 
       <ion-col col-12 col-md-6 offset-md-3>
-        Sección Fotos:
-        <button ion-button full color="primary" (click)="nuevoDetalle()">Agregar foto del equipo</button>
+        Sección Croquis:
+        <button ion-button full color="primary" (click)="nuevoDibujo()">Ubicar detalles visuales al equipo</button>
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="lista?.length == 0">
+      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="dibujoEquipoRecepcion == ''">
         <ion-card>
-          <b>Aún no se han ingresado fotos....</b>
+          <b>Aún no se ha ingresado....</b>
         </ion-card>
       </ion-col>
 
-
-
-      <ion-col col-12 col-md-6 offset-md-3 *ngFor="let detalle of lista">
+      <ion-col col-12 col-md-6 offset-md-3 *ngIf="dibujoEquipoRecepcion != ''">
         <ion-card>
-          <img src="{{detalle.img}}" />
-          <ion-card-content>
-            <p>
-              {{detalle.descr}}
-            </p>
-          </ion-card-content>
+          <img src="{{dibujoEquipoRecepcion}}" class="dibujo"
+               [ngStyle]="{'background-image': 'url(' + background + ')'}"
+               />
         </ion-card>
       </ion-col>
 

@@ -199,6 +199,7 @@ export class AltaTrabajoPage {
               toastCorrectoEquipo.present();
               this.trabajoActual = new TrabajoImp(data);
               console.log("trabajoActual CON ID editado: ",this.trabajoActual);
+              this.events.publish('actualizar-trabajo', this.trabajoActual);
             },
             (error) => {
               console.log(error);
@@ -346,13 +347,11 @@ export class AltaTrabajoPage {
       console.log("trabFot:", trabFot);
       this.trabajoFotoService.create(trabFot).subscribe(
         (data) => {
-          toastCorrectoFoto.present();
           this.listaFotos.push(new TrabajoFotoImp(data));
         },
         (error) => {
           console.log(error);
-          toastErrorFoto.setMessage(error);
-          toastErrorFoto.present();
+          toastErrorFoto.setMessage(error.toString());
         });
 
       return;
@@ -417,8 +416,6 @@ export class AltaTrabajoPage {
         firmaEmpleadoRecepcion: '',
         nombreClienteRecepcion:'',
         nombreEmpleadoRecepcion:'',
-        nroFactura:0,
-        nroRemito:0,
         nroOrdenCompra:0,
         equipoDocumentos:false,
         equipoAbollones:false,
@@ -443,7 +440,9 @@ export class AltaTrabajoPage {
         equipoSenalerosSanos:false,
         equipoVidriosLaterales:false,
         equipoVidriosLateralesSanos:false,
-        dibujoEquipoRecepcion: ''}
+        dibujoEquipoRecepcion: '',
+        dibujoAlto: 0,
+        dibujoAncho:0}
       );
     console.log('Todo Limpito');
     console.log(this.trabajoActual);

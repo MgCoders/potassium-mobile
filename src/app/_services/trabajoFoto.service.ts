@@ -14,7 +14,7 @@ export class TrabajoFotoService {
 
 
     get(id: number): Observable<TrabajoFoto[]> {
-        return this.http.get<TrabajoFoto[]>(`${environment.apiUrl}/trabajofotos/` + id);
+        return this.http.get<TrabajoFoto[]>(`${environment.apiUrl}/trabajofotos/trabajo/` + id);
     }
 
 
@@ -22,7 +22,4 @@ export class TrabajoFotoService {
         return this.http.post(`${environment.apiUrl}/trabajofotos/`, x);
     }
 
-    edit(x: TrabajoFoto): Observable<any> {
-        return this.http.put(`${environment.apiUrl}/trabajofotos/` + x.id, x);
-    }
 }
