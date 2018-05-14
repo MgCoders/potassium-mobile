@@ -48,11 +48,10 @@
         </ion-list>
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3 class="separador"></ion-col>
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-list>
           <ion-list-header>
-            Foto del equipo:
+            Fotos del equipo:
           </ion-list-header>
 
           <ion-item>
@@ -74,7 +73,7 @@
       </ion-col>
 
 
-      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="listaFoto?.length == 0">
+      <ion-col col-12 col-md-6 offset-md-3 text-center>
         <ion-list>
           <ion-item>
             <ion-card>
@@ -86,20 +85,34 @@
                 {{trabajoActual.comentarios}}
               </ion-card-content>
             </ion-card>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3 text-center>
+        <ion-list>
+          <ion-list-header>
+            Firmas:
+          </ion-list-header>
+          <ion-item>
             <ion-card>
+              <ion-card-header>
+                Cliente:
+              </ion-card-header>
               <img src="{{trabajoActual.firmaClienteRecepcion}}" />
               <ion-card-content>
-                <ion-card-title>
-                  {{trabajoActual.nombreClienteRecepcion}}
-                </ion-card-title>
+                {{trabajoActual.nombreClienteRecepcion}}
               </ion-card-content>
             </ion-card>
+          </ion-item>
+          <ion-item>
             <ion-card>
+              <ion-card-header>
+                Empleado:
+              </ion-card-header>
               <img src="{{trabajoActual.firmaEmpleadoRecepcion}}"  />
               <ion-card-content>
-                <ion-card-title>
-                  {{trabajoActual.nombreEmpleadoRecepcion}}
-                </ion-card-title>
+                {{trabajoActual.nombreEmpleadoRecepcion}}
               </ion-card-content>
             </ion-card>
           </ion-item>

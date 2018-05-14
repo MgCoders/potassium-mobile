@@ -34,15 +34,15 @@ export class AltaEquipoPage {
               private toastCtrl: ToastController) {
 
 
-    let loading = this.loadingCtrl.create({
+    let loading_ae = this.loadingCtrl.create({
       content: 'Procesando...'
     });
-    let toastCorrecto = this.toastCtrl.create({
+    let toastCorrecto_ae = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
       duration: 3000,
       position: 'bottom'
     });
-    let toastError = this.toastCtrl.create({
+    let toastError_ae = this.toastCtrl.create({
       message: 'Error al cargar datos..',
       duration: 3000,
       position: 'bottom'
@@ -60,13 +60,13 @@ export class AltaEquipoPage {
       this.editar = true;
       this.equipoService.get(id).subscribe(
         (data) => {
-          toastCorrecto.present();
-          loading.dismissAll();
+          toastCorrecto_ae.present();
+          loading_ae.dismissAll();
           this.equipoActual = data;
         },
         (error) => {
-          toastError.setMessage(error);
-          toastError.present();
+          toastError_ae.setMessage(error);
+          toastError_ae.present();
         });
     }
     console.log(this.equipoActual);
@@ -97,15 +97,15 @@ export class AltaEquipoPage {
   guardarEquipo() {
 
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
-    let loading = this.loadingCtrl.create({
+    let loading_ae_2 = this.loadingCtrl.create({
       content: 'Procesando...'
     });
-    let toastCorrecto = this.toastCtrl.create({
+    let toastCorrecto_ae_2 = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
       duration: 3000,
       position: 'bottom'
     });
-    let toastError = this.toastCtrl.create({
+    let toastError_ae_2 = this.toastCtrl.create({
       message: 'Error al cargar datos..',
       duration: 3000,
       position: 'bottom'
@@ -114,33 +114,32 @@ export class AltaEquipoPage {
     console.log('Equipo antes');
     console.log(this.equipoActual);
 
-    loading.present();
+    loading_ae_2.present();
     if (!this.editar) {
       console.log('Creo un nuevo equipo');
       console.log(this.equipoActual);
 
       this.equipoService.create(this.equipoActual).subscribe(
         (data) => {
-          toastCorrecto.present();
-          loading.dismissAll();
+          toastCorrecto_ae_2.present();
+          loading_ae_2.dismissAll();
           this.equipoActual = new EquipoImp(data);
         },
         (error) => {
-          console.log(error);
           console.log(error.toString());
-          toastError.setMessage(error);
-          toastError.present();
+          toastError_ae_2.setMessage(error);
+          toastError_ae_2.present();
         });
     } else {
       this.equipoService.edit(this.equipoActual).subscribe(
         (data) => {
-          toastCorrecto.present();
-          loading.dismissAll();
+          toastCorrecto_ae_2.present();
+          loading_ae_2.dismissAll();
           this.equipoActual = new EquipoImp(data);
         },
         (error) => {
-          toastError.setMessage(error);
-          toastError.present();
+          toastError_ae_2.setMessage(error);
+          toastError_ae_2.present();
         });
     }
 

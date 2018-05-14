@@ -103,26 +103,26 @@ export class ListaEquipoPage {
 
     //console.log('ionViewDidLoad SeleccionaEquipoPage');
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
-    let loading = this.loadingCtrl.create({
+    let loading_le = this.loadingCtrl.create({
       content: 'Cargando la lista de equipos...'
     });
-    let toastCorrecto = this.toastCtrl.create({
+    let toastCorrecto_le = this.toastCtrl.create({
       message: 'Lista cargada correctamente!',
       duration: 3000,
       position: 'bottom'
     });
-    let toastError = this.toastCtrl.create({
+    let toastError_le = this.toastCtrl.create({
       message: 'Error al obtener la lista de equipos..',
       duration: 3000,
       position: 'bottom'
     });
 
 
-    loading.present();
+    loading_le.present();
     this.service.getByCliente(this.clienteSeleccionado.id).subscribe(
 
       (data) => {
-        loading.dismissAll();
+        loading_le.dismissAll();
 
         //Obtengo la lista desde el server con lo último
         data.forEach (Equipo => {
@@ -130,12 +130,12 @@ export class ListaEquipoPage {
         });
 
         console.log("equipos del cliente:",this.lista);
-        toastCorrecto.present();
+        toastCorrecto_le.present();
       },
       (error) => {
-        loading.dismissAll();
-        toastError.setMessage(error.toString());
-        toastError.present();
+        loading_le.dismissAll();
+        toastError_le.setMessage(error.toString());
+        toastError_le.present();
       });
   }
 

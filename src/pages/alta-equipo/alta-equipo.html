@@ -58,15 +58,15 @@
       </ion-col>
       <ion-col col-12 col-md-6 col-lg-6>
         <ion-item>
-          <ion-label color="primary" stacked>Tipo de equipo</ion-label>
-          <ion-input type="text" placeholder="..." >
-
-          </ion-input>
+          <ion-label color="primary" stacked>
+            Tipo de equipo
+          </ion-label>
+          <ion-select [(ngModel)]="equipoActual.tipoEquipo">
+            <ion-option *ngFor="let est of listaTipoEquipo " [value]="est">
+              {{est.descripcion}}
+            </ion-option>
+          </ion-select>
         </ion-item>
-        <ion-select [(ngModel)]="equipoActual.tipoEquipo">
-          <ion-option *ngFor="let est of listaTipoEquipo " [value]="est.idTipoEquipo">{{est.descripcion}}</ion-option>
-
-        </ion-select>
       </ion-col>
     </ion-row>
 

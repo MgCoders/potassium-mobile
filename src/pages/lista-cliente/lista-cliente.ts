@@ -109,26 +109,26 @@ export class ListaClientePage {
     console.log("Entro a la lista de clientes");
 
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
-    let loading = this.loadingCtrl.create({
+    let loading_lc = this.loadingCtrl.create({
       content: 'Cargando la lista de clientes...'
     });
-    let toastCorrecto = this.toastCtrl.create({
+    let toastCorrecto_lc = this.toastCtrl.create({
       message: 'Lista cargada correctamente!',
       duration: 3000,
       position: 'bottom'
     });
-    let toastError = this.toastCtrl.create({
+    let toastError_lc = this.toastCtrl.create({
       message: 'Error al obtener la lista de clientes..',
       duration: 3000,
       position: 'bottom'
     });
 
 
-    loading.present();
+    loading_lc.present();
     this.service.getAll().subscribe(
 
       (data) => {
-        loading.dismissAll();
+        loading_lc.dismissAll();
 
         //Obtengo la lista desde el server con lo último
         data.forEach(Cliente => {
@@ -136,12 +136,13 @@ export class ListaClientePage {
         });
 
         console.log("lista de clientes:",this.lista);
-        toastCorrecto.present();
+        toastCorrecto_lc.present();
       },
       (error) => {
-        loading.dismissAll();
-        toastError.setMessage(error);
-        toastError.present();
+        loading_lc.dismissAll();
+        toastError_lc.setMessage(error);
+        toastError_lc.present();
     });
+    this.lista = [];
   }
 }

@@ -22,7 +22,12 @@
                        [placeholder]="filterPlaceholder"
                        [formControl]="filterInput"></ion-searchbar>
       </ion-col>
-      <ion-col col-12 col-md-6 offset-md-3>
+      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="lista?.length == 0">
+        <ion-card>
+          <b>La lista de clientes está vacía....</b>
+        </ion-card>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3 *ngIf="lista?.length != 0">
         <ion-list>
           <ion-item [ngClass]="{'seleccionado': isSelectedCliente(cliente.id)}"
                     *ngFor="let cliente of getListaClientes() ">

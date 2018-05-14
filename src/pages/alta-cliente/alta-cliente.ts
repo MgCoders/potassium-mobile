@@ -45,15 +45,15 @@ export class AltaClientePage {
     //Inicializo en vacío
     this.clienteActual =  new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
 
-    let loading = this.loadingCtrl.create({
+    let loading_ac = this.loadingCtrl.create({
       content: 'Procesando...'
     });
-    let toastCorrecto = this.toastCtrl.create({
+    let toastCorrecto_ac = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
       duration: 3000,
       position: 'bottom'
     });
-    let toastError = this.toastCtrl.create({
+    let toastError_ac = this.toastCtrl.create({
       message: 'Error al cargar datos..',
       duration: 3000,
       position: 'bottom'
@@ -66,13 +66,13 @@ export class AltaClientePage {
       this.editar = true;
       this.clienteServices.get(id).subscribe(
         (data) => {
-          toastCorrecto.present();
-          loading.dismissAll();
+          toastCorrecto_ac.present();
+          loading_ac.dismissAll();
           this.clienteActual = data;
         },
         (error) => {
-          toastError.setMessage(error);
-          toastError.present();
+          toastError_ac.setMessage(error);
+          toastError_ac.present();
         });
     }
     console.log(this.clienteActual);
@@ -86,15 +86,15 @@ export class AltaClientePage {
   guardarCliente() {
 
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
-    let loading = this.loadingCtrl.create({
+    let loading_ac_2 = this.loadingCtrl.create({
       content: 'Procesando...'
     });
-    let toastCorrecto = this.toastCtrl.create({
+    let toastCorrecto_ac_2 = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
       duration: 3000,
       position: 'bottom'
     });
-    let toastError = this.toastCtrl.create({
+    let toastError_ac_2 = this.toastCtrl.create({
       message: 'Error al cargar datos..',
       duration: 3000,
       position: 'bottom'
@@ -103,31 +103,30 @@ export class AltaClientePage {
     console.log('Cliente antes');
     console.log(this.clienteActual);
 
-    loading.present();
+    loading_ac_2.present();
     if (!this.editar) {
       this.clienteServices.create(this.clienteActual).subscribe(
         (data) => {
-          toastCorrecto.present();
-          loading.dismissAll();
+          toastCorrecto_ac_2.present();
+          loading_ac_2.dismissAll();
           this.clienteActual = new ClienteImp(data);
         },
         (error) => {
-          toastError.setMessage(error);
-          toastError.present();
+          toastError_ac_2.setMessage(error);
+          toastError_ac_2.present();
         });
     } else {
       this.clienteServices.edit(this.clienteActual).subscribe(
         (data) => {
-          toastCorrecto.present();
-          loading.dismissAll();
+          toastCorrecto_ac_2.present();
+          loading_ac_2.dismissAll();
           this.clienteActual = new ClienteImp(data);
         },
         (error) => {
-          toastError.setMessage(error);
-          toastError.present();
+          toastError_ac_2.setMessage(error);
+          toastError_ac_2.present();
         });
     }
-    loading.dismissAll();
     console.log('Cliente después');
     console.log(this.clienteActual);
     this.navCtrl.pop();
