@@ -40,6 +40,8 @@ import {TrabajoService} from "./_services/trabajo.service";
 import {TrabajoFotoService} from "./_services/trabajoFoto.service";
 import {TipoEquipoService} from "./_services/tipoEquipo.service";
 import {AltaDibujoPage} from "../pages/alta-dibujo/alta-dibujo";
+import {ModalClientePage} from "../components/modal-cliente/modal-cliente";
+import {ModalEquipoPage} from "../components/modal-equipo/modal-equipo";
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import {AltaDibujoPage} from "../pages/alta-dibujo/alta-dibujo";
     HideHeaderDirective,
     AltaHorasPage,
     FilterPipe,
-    AltaDibujoPage
+    AltaDibujoPage,
+    ModalClientePage,
+    ModalEquipoPage
   ],
   imports: [
     BrowserModule,
@@ -107,7 +111,9 @@ import {AltaDibujoPage} from "../pages/alta-dibujo/alta-dibujo";
     SeleccionaTrabajoPage,
     SeleccionaTareaPage,
     AltaHorasPage,
-    AltaDibujoPage
+    AltaDibujoPage,
+    ModalClientePage,
+    ModalEquipoPage
   ],
   providers: [
     StatusBar,

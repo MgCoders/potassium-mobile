@@ -137,39 +137,52 @@ export class IngresarDetallesPage {
     this.fechaProvistaEntrega = new Date();
 
     if(tipo == "recuperar"){
-      this.fechaRecepcion = new Date(this.dp.transform( this.trabajoActual.fechaRecepcion, 'dd/MM/yyyy HH:MM'));
-      this.fechaProvistaEntrega = new Date(this.dp.transform( this.trabajoActual.fechaProvistaEntrega, 'dd/MM/yyyy HH:MM'));
+      //this.fechaRecepcion = new Date(this.dp.transform( this.trabajoActual.fechaRecepcion, 'dd/MM/yyyy HH:MM'));
+      //this.fechaProvistaEntrega = new Date(this.dp.transform( this.trabajoActual.fechaProvistaEntrega, 'dd/MM/yyyy HH:MM'));
+      //Viene así -> 28-05-2018 necesitamos agregarle la hora
+      //console.log( "1" );
+      var fechaR = this.trabajoActual.fechaRecepcion.substr(0, 10);
+      var fechaRStr = fechaR.split("-");
+      //console.log("fechaparseada: "+Number(fechaStr[0]), Number(fechaStr[1]) , Number(fechaStr[2]));
+      this.fechaRecepcion = new Date( Number(fechaRStr[2]) , Number(fechaRStr[1])-1 , Number(fechaRStr[0]) );
 
+      //console.log( "2" );
+      var fechaP = this.trabajoActual.fechaProvistaEntrega.substr(0, 10);
+      var fechaPStr = fechaP.split("-");
+      this.fechaProvistaEntrega = new Date( Number(fechaPStr[2]) , Number(fechaPStr[1])-1 , Number(fechaPStr[0]) );
+
+      //console.log( "3" );
       //Datos
-      this.comentarios =          this.trabajoActual.comentarios;
-      this.kmEquipoRecepcion =    this.trabajoActual.kmEquipoRecepcion;
-      this.equipoDocumentos =     this.trabajoActual.equipoDocumentos;
-      this.equipoAbollones =      this.trabajoActual.equipoAbollones;
-      this.equipoAuxiliar =       this.trabajoActual.equipoAuxiliar;
-      this.equipoAuxiliarArmada = this.trabajoActual.equipoAuxiliarArmada;
-      this.equipoBalizas =        this.trabajoActual.equipoBalizas;
-      this.equipoCantidadCombustible = this.trabajoActual.equipoCantidadCombustible;
-      this.equipoCenicero =       this.trabajoActual.equipoCenicero;
-      this.equipoEspejos =        this.trabajoActual.equipoEspejos;
-      this.equipoEspejosSanos =   this.trabajoActual.equipoEspejosSanos;
-      this.equipoExtintor =       this.trabajoActual.equipoExtintor;
-      this.equipoFrenteRadio =    this.trabajoActual.equipoFrenteRadio;
-      this.equipoGatoPalanca =    this.trabajoActual.equipoGatoPalanca;
-      this.equipoHerramientas =   this.trabajoActual.equipoHerramientas;
-      this.equipoLlaveRuedas =    this.trabajoActual.equipoLlaveRuedas;
-      this.equipoLucesTraserasSanas = this.trabajoActual.equipoLucesTraserasSanas;
-      this.equipoMangueraCabina = this.trabajoActual.equipoMangueraCabina;
-      this.equipoManuales =       this.trabajoActual.equipoManuales;
-      this.equipoParabrisasSano = this.trabajoActual.equipoParabrisasSano;
-      this.equipoRadio =          this.trabajoActual.equipoRadio;
-      this.equipoRayones =        this.trabajoActual.equipoRayones;
-      this.equipoSenalerosSanos = this.trabajoActual.equipoSenalerosSanos;
-      this.equipoVidriosLaterales = this.trabajoActual.equipoVidriosLaterales;
-      this.equipoVidriosLateralesSanos = this.trabajoActual.equipoVidriosLateralesSanos;
-      this.dibujoEquipoRecepcion = this.trabajoActual.dibujoEquipoRecepcion;
+      this.comentarios =          (this.trabajoActual.comentarios == undefined ? '' : this.trabajoActual.comentarios);
+      this.kmEquipoRecepcion =    (this.trabajoActual.kmEquipoRecepcion);
+      this.equipoDocumentos =     (this.trabajoActual.equipoDocumentos == undefined ? false : this.trabajoActual.equipoDocumentos);
+      this.equipoAbollones =      (this.trabajoActual.equipoAbollones == undefined ? false : this.trabajoActual.equipoAbollones);
+      this.equipoAuxiliar =       (this.trabajoActual.equipoAuxiliar == undefined ? false : this.trabajoActual.equipoAuxiliar);
+      this.equipoAuxiliarArmada = (this.trabajoActual.equipoAuxiliarArmada == undefined ? false : this.trabajoActual.equipoAuxiliarArmada);
+      this.equipoBalizas =        (this.trabajoActual.equipoBalizas == undefined ? false : this.trabajoActual.equipoBalizas);
+      this.equipoCantidadCombustible = (this.trabajoActual.equipoCantidadCombustible);
+      this.equipoCenicero =       (this.trabajoActual.equipoCenicero == undefined ? false : this.trabajoActual.equipoCenicero);
+      this.equipoEspejos =        (this.trabajoActual.equipoEspejos == undefined ? false : this.trabajoActual.equipoEspejos);
+      this.equipoEspejosSanos =   (this.trabajoActual.equipoEspejosSanos == undefined ? false : this.trabajoActual.equipoEspejosSanos);
+      this.equipoExtintor =       (this.trabajoActual.equipoExtintor == undefined ? false : this.trabajoActual.equipoExtintor);
+      this.equipoFrenteRadio =    (this.trabajoActual.equipoFrenteRadio == undefined ? false : this.trabajoActual.equipoFrenteRadio);
+      this.equipoGatoPalanca =    (this.trabajoActual.equipoGatoPalanca == undefined ? false : this.trabajoActual.equipoGatoPalanca);
+      this.equipoHerramientas =   (this.trabajoActual.equipoHerramientas == undefined ? false : this.trabajoActual.equipoHerramientas);
+      this.equipoLlaveRuedas =    (this.trabajoActual.equipoLlaveRuedas == undefined ? false : this.trabajoActual.equipoLlaveRuedas);
+      this.equipoLucesTraserasSanas = (this.trabajoActual.equipoLucesTraserasSanas == undefined ? false : this.trabajoActual.equipoLucesTraserasSanas);
+      this.equipoMangueraCabina = (this.trabajoActual.equipoMangueraCabina == undefined ? false : this.trabajoActual.equipoMangueraCabina);
+      this.equipoManuales =       (this.trabajoActual.equipoManuales == undefined ? false : this.trabajoActual.equipoManuales);
+      this.equipoParabrisasSano = (this.trabajoActual.equipoParabrisasSano == undefined ? false : this.trabajoActual.equipoParabrisasSano);
+      this.equipoRadio =          (this.trabajoActual.equipoRadio == undefined ? false : this.trabajoActual.equipoRadio);
+      this.equipoRayones =        (this.trabajoActual.equipoRayones == undefined ? false : this.trabajoActual.equipoRayones);
+      this.equipoSenalerosSanos = (this.trabajoActual.equipoSenalerosSanos == undefined ? false : this.trabajoActual.equipoSenalerosSanos);
+      this.equipoVidriosLaterales = (this.trabajoActual.equipoVidriosLaterales == undefined ? false : this.trabajoActual.equipoVidriosLaterales);
+      this.equipoVidriosLateralesSanos = (this.trabajoActual.equipoVidriosLateralesSanos == undefined ? false : this.trabajoActual.equipoVidriosLateralesSanos);
+      this.dibujoEquipoRecepcion = (this.trabajoActual.dibujoEquipoRecepcion == undefined ? '' : this.trabajoActual.dibujoEquipoRecepcion);
 
 
     }
+
 
     this.fechaRecepcion_txt = this.dp.transform( this.fechaRecepcion, 'dd/MM/yyyy HH:MM');
 

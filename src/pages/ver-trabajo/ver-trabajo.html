@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Trabajo: {{trabajoActual.id}}!! </ion-title>
+    <ion-title>Ver detalles del trabajo: {{trabajoActual.id}} </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -15,6 +15,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
+
         <ion-list no-lines no-border >
           <ion-list-header>
             Cliente:
@@ -27,7 +28,7 @@
             <h2>{{trabajoActual.cliente.nombreEmpresa}}</h2>
             <p>{{trabajoActual.cliente.rut}}</p>
 
-            <button ion-button clear item-end >Ver</button>
+            <button ion-button clear item-end (click)="openModalCliente()"  >Ver</button>
           </ion-item>
         </ion-list>
         <ion-list no-lines no-border >
@@ -43,7 +44,7 @@
             <h2 >{{trabajoActual.equipo.marca}} / {{trabajoActual.equipo.modelo}}</h2>
             <p >Up</p>
 
-            <button ion-button clear item-end >Ver</button>
+            <button ion-button clear item-end (click)="openModalEquipo()" >Ver</button>
           </ion-item>
         </ion-list>
       </ion-col>

@@ -2,16 +2,17 @@ import { Component } from '@angular/core';
 
 import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
 import {Cliente} from "../../app/_models/Cliente";
+import {Equipo} from "../../app/_models/Equipo";
 
 
 @Component({
-  templateUrl: 'modal-cliente.html'
+  templateUrl: 'modal-equipo.html'
 })
 
 
-export class ModalClientePage {
+export class ModalEquipoPage {
   character;
-  clienteActual: Cliente;
+  equipoActual: Equipo;
 
   constructor(
     public platform: Platform,
@@ -19,7 +20,7 @@ export class ModalClientePage {
     public viewCtrl: ViewController
   ) {
 
-    this.clienteActual = this.params.get('cliente');
+    this.equipoActual = this.params.get('equipo');
 
 
 

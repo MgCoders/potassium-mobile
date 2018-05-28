@@ -289,29 +289,7 @@
       <ion-col col-12 col-md-6 offset-md-3 class="separador">
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3>
-        Sección Fotos:
-        <button ion-button full color="primary" (click)="nuevoDetalle()">Agregar foto del equipo</button>
-      </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="lista?.length == 0">
-        <ion-card>
-          <b>Aún no se han ingresado fotos....</b>
-        </ion-card>
-      </ion-col>
-
-
-
-      <ion-col col-12 col-md-6 offset-md-3 *ngFor="let detalle of lista">
-        <ion-card>
-          <img src="{{detalle.img}}" />
-          <ion-card-content>
-            <p>
-              {{detalle.descr}}
-            </p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
 
       <ion-col col-12 col-md-6 offset-md-3>
         Sección Croquis:
@@ -355,6 +333,34 @@
 
       <ion-col col-12 col-md-6 offset-md-3 class="separador">
       </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        Sección Fotos:
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="lista?.length == 0">
+        <ion-card>
+          <b>Aún no se han ingresado fotos....</b>
+        </ion-card>
+      </ion-col>
+
+
+
+      <ion-col col-12 col-md-6 offset-md-3 *ngFor="let detalle of lista">
+        <ion-card>
+          <img src="{{detalle.img}}" />
+          <ion-card-content>
+            <p>
+              {{detalle.descr}}
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <button ion-button full color="primary" (click)="nuevoDetalle()">Agregar foto del equipo</button>
+      </ion-col>
+
 
       <ion-col col-12 col-md-6 offset-md-3>
         <button ion-button full color="secondary" (click)="confirmarDetalles()">

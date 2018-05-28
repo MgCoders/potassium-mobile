@@ -16,7 +16,7 @@
 <ion-content padding  hide-header [header]="head">
   <ion-grid>
     <ion-row>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Nombre empresa</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.nombreEmpresa">
@@ -24,7 +24,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>RUT</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.rut">
@@ -32,7 +32,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Teléfono</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.telefono">
@@ -40,7 +40,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Persona de contacto</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.personaContacto">
@@ -48,7 +48,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Teléfono de contacto</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.telefonoContacto">
@@ -56,7 +56,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Email empresa</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.emailEmpresa">
@@ -64,7 +64,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Dirección</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.direccion">
@@ -73,7 +73,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-12>
+      <ion-col col-4 offset-4>
         <button ion-button full color="primary" (click)="guardarCliente()" >Confirmar</button>
       </ion-col>
     </ion-row>

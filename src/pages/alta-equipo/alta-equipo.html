@@ -16,7 +16,7 @@
 <ion-content padding hide-header [header]="head">
   <ion-grid>
     <ion-row>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Modelo</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.modelo">
@@ -24,7 +24,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Marca</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.marca">
@@ -32,7 +32,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Color</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.color">
@@ -40,7 +40,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Matricula</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.matricula">
@@ -48,7 +48,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Número chasis</ion-label>
           <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.numeroChasis">
@@ -56,7 +56,7 @@
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 col-lg-6>
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>
             Tipo de equipo
@@ -71,7 +71,7 @@
     </ion-row>
 
     <ion-row>
-      <ion-col col-12>
+      <ion-col col-4 offset-4>
         <button ion-button full color="primary" (click)="guardarEquipo()" >Confirmar</button>
       </ion-col>
     </ion-row>

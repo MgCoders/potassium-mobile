@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  Events, IonicPage, LoadingController, NavController, NavParams,
+  Events, IonicPage, LoadingController, ModalController, NavController, NavParams,
   ToastController
 } from 'ionic-angular';
 import {ClienteImp} from "../../app/_models/ClienteImp";
@@ -11,7 +11,8 @@ import {Trabajo} from "../../app/_models/Trabajo";
 import {TrabajoFoto} from "../../app/_models/TrabajoFoto";
 import {TrabajoFotoService} from "../../app/_services/trabajoFoto.service";
 import {TipoEquipoImp} from "../../app/_models/TipoEquipoImp";
-
+import {ModalClientePage} from "../../components/modal-cliente/modal-cliente";
+import {ModalEquipoPage} from "../../components/modal-equipo/modal-equipo";
 /**
  * Generated class for the VerTrabajoPage page.
  *
@@ -36,7 +37,14 @@ export class VerTrabajoPage {
               private trabajoFotoService: TrabajoFotoService,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
+              private modalCtrl: ModalController,
               public events: Events) {
+
+
+
+
+
+
     let loading = this.loadingCtrl.create({
       content: 'Procesando...'
     });
@@ -153,6 +161,19 @@ export class VerTrabajoPage {
     console.log("despues", this.trabajoActual)
 
 
+  }
+
+
+  openModalCliente() {
+
+    let modal = this.modalCtrl.create(ModalClientePage, {cliente: this.trabajoActual.cliente});
+    modal.present();
+  }
+
+  openModalEquipo() {
+
+    let modal = this.modalCtrl.create(ModalEquipoPage, {equipo: this.trabajoActual.equipo});
+    modal.present();
   }
 
   ionViewDidLoad() {
