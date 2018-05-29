@@ -42,6 +42,7 @@ import {TipoEquipoService} from "./_services/tipoEquipo.service";
 import {AltaDibujoPage} from "../pages/alta-dibujo/alta-dibujo";
 import {ModalClientePage} from "../components/modal-cliente/modal-cliente";
 import {ModalEquipoPage} from "../components/modal-equipo/modal-equipo";
+import {ModalCamposPage} from "../components/modal-campos/modal-campos";
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import {ModalEquipoPage} from "../components/modal-equipo/modal-equipo";
     FilterPipe,
     AltaDibujoPage,
     ModalClientePage,
-    ModalEquipoPage
+    ModalEquipoPage,
+    ModalCamposPage
   ],
   imports: [
     BrowserModule,
@@ -113,7 +115,8 @@ import {ModalEquipoPage} from "../components/modal-equipo/modal-equipo";
     AltaHorasPage,
     AltaDibujoPage,
     ModalClientePage,
-    ModalEquipoPage
+    ModalEquipoPage,
+    ModalCamposPage
   ],
   providers: [
     StatusBar,

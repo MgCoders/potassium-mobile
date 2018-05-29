@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {SeleccionaTareaPage} from "../selecciona-tarea/selecciona-tarea";
+import {Equipo} from "../../app/_models/Equipo";
+import {Tarea} from "../../app/_models/Tarea";
 
 /**
  * Generated class for the ListaTareaPage page.
@@ -15,6 +17,8 @@ import {SeleccionaTareaPage} from "../selecciona-tarea/selecciona-tarea";
   templateUrl: 'lista-tarea.html',
 })
 export class ListaTareaPage {
+
+  lista: Tarea[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

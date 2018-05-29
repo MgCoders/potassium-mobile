@@ -13,6 +13,7 @@ import {TrabajoFotoService} from "../../app/_services/trabajoFoto.service";
 import {TipoEquipoImp} from "../../app/_models/TipoEquipoImp";
 import {ModalClientePage} from "../../components/modal-cliente/modal-cliente";
 import {ModalEquipoPage} from "../../components/modal-equipo/modal-equipo";
+import {ModalCamposPage} from "../../components/modal-campos/modal-campos";
 /**
  * Generated class for the VerTrabajoPage page.
  *
@@ -175,6 +176,13 @@ export class VerTrabajoPage {
     let modal = this.modalCtrl.create(ModalEquipoPage, {equipo: this.trabajoActual.equipo});
     modal.present();
   }
+
+  openModalCampos() {
+
+    let modal = this.modalCtrl.create(ModalCamposPage, {trabajoActual: this.trabajoActual});
+    modal.present();
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VerTrabajoPage');

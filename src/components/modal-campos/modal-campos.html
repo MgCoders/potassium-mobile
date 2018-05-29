@@ -1,0 +1,242 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Description
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          Cantidad de combustible:
+          <ion-note item-end>
+            {{
+              (trabajoActual.equipoCantidadCombustible == 0) ?
+                "vacío"
+              : (trabajoActual.equipoCantidadCombustible == 8) ?
+                "Lleno"
+              : trabajoActual.equipoCantidadCombustible+"/8"
+            }}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Kilómetros actuales
+          <ion-note item-end>
+            {{trabajoActual.kmEquipoRecepcion}}
+          </ion-note>
+
+
+        </ion-item>
+
+
+
+        <ion-item>
+          Documentos
+          <ion-note item-end>
+            {{(trabajoActual.equipoDocumentos) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Radio
+          <ion-note item-end>
+            {{(trabajoActual.equipoRadio) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Extintor
+          <ion-note item-end>
+            {{(trabajoActual.equipoExtintor) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Balizas
+          <ion-note item-end>
+            {{(trabajoActual.equipoBalizas) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Llave de ruedas
+          <ion-note item-end>
+            {{(trabajoActual.equipoLlaveRuedas) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Herramientas
+          <ion-note item-end>
+            {{(trabajoActual.equipoHerramientas) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Manuales
+          <ion-note item-end>
+            {{(trabajoActual.equipoManuales) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Frente de radio
+          <ion-note item-end>
+            {{(trabajoActual.equipoFrenteRadio) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Manguera cabina
+          <ion-note item-end>
+            {{(trabajoActual.equipoMangueraCabina) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Cenicero
+          <ion-note item-end>
+            {{(trabajoActual.equipoCenicero) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Gato y palanca
+          <ion-note item-end>
+            {{(trabajoActual.equipoGatoPalanca) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Parabrisas
+          <ion-note item-end>
+            {{(trabajoActual.equipoParabrisasSano) ? "Sano": "Roto"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Auxiliar
+          <ion-note item-end>
+            {{(rueda_auxiliar)}}
+          </ion-note>
+
+        </ion-item>
+
+
+
+        <ion-item>
+          Vidrios laterales
+          <ion-note item-end>
+            {{(trabajoActual.equipoVidriosLaterales) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Estado de los vidrios
+          <ion-note item-end>
+            {{(trabajoActual.equipoVidriosLateralesSanos) ? "Sano": "Roto"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Espejos
+          <ion-note item-end>
+            {{(trabajoActual.equipoEspejos) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Estado de los espejos
+          <ion-note item-end>
+            {{(trabajoActual.equipoEspejosSanos) ? "Sano": "Roto"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Señaleros
+          <ion-note item-end>
+            {{(trabajoActual.equipoSenalerosSanos) ? "Sano": "Roto"}}
+          </ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          Luces traseras
+          <ion-note item-end>
+            {{(trabajoActual.equipoLucesTraserasSanas) ? "Sano": "Roto"}}
+          </ion-note>
+        </ion-item>
+
+
+
+
+        <ion-item>
+          Rayones
+          <ion-note item-end>
+            {{(trabajoActual.equipoRayones) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+
+
+
+
+        <ion-item>
+          Abollones
+          <ion-note item-end>
+            {{(trabajoActual.equipoAbollones) ? "Si": "No"}}
+          </ion-note>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4 offset-4>
+        <button ion-button full color="primary" (click)="dismiss()" >Volver</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
