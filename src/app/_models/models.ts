@@ -32,5 +32,7 @@ export * from './TareaMaterial';
 
 export * from './Proyecto';
 
+export * from './Registro';
+
 
 

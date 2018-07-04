@@ -7,56 +7,111 @@
 <ion-header #head>
 
   <ion-navbar>
-    <ion-title>Tarea #1_a</ion-title>
+    <ion-title>Tarea #{{(idTareaSeleccionada !=undefined) ? idTareaSeleccionada : ''}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding padding hide-header [header]="head">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="lista?.length == 0">
+        <ion-card>
+          <b>No existen tareas para este trabajo...</b>
+        </ion-card>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-card  *ngIf="lista?.length != 0">
+          <ion-card-header>
+            <b>Detalles</b>
+          </ion-card-header>
+          <ion-list class="white-background" *ngFor="let tarea of lista ">
 
-  <ion-list>
-    <ion-list-header>
-      Detalles
-    </ion-list-header>
-    <ion-item>
-      Creado el: 04 / 03 / 2018
-    </ion-item>
-    <!--ion-item>
-      Asignado a: (Empleado 23,Empleado 24, Empleado 25)
-    </ion-item-->
-  </ion-list>
-  <br>
-  <ion-list no-border>
-    <ion-list-header>
-      Acciones
-    </ion-list-header>
+            <ion-item>
+              <span class="simpleLabel">Nombre:</span>
+              <br> {{tarea.nombre}}
+            </ion-item>
+            <ion-item>
+              <span class="simpleLabel">Minutos estimados:</span>
+              <br> {{tarea.minutosEstimados}}
+            </ion-item>
+            <ion-item>
+              <span class="simpleLabel">Descripción:</span>
+              <br> {{tarea.descripcion}}
+            </ion-item>
+            <ion-item>
+              <span class="simpleLabel">Corresponde al Punto de control:</span>
+              <br> {{tarea.puntoControl.id}} - {{tarea.puntoControl.nombre }}
+            </ion-item>
+            <!--ion-item>
+              Asignado a: (Empleado 23,Empleado 24, Empleado 25)
+            </ion-item-->
+          </ion-list>
+        </ion-card>
+        <br>
+        <ion-list no-border>
+          <ion-list-header>
+            Acciones
+          </ion-list-header>
 
-    <ion-item>
-      <ion-label>Estado Actual</ion-label>
-      <ion-icon name='md-clipboard' item-start></ion-icon>
-      <ion-select [(ngModel)]="estado" (click)="cambiarEstado()">
-        <ion-option value="1">Iniciado</ion-option>
-        <ion-option value="2">En proceso</ion-option>
-        <ion-option value="3">Verificación</ion-option>
-        <ion-option value="4">Finalizado</ion-option>
-      </ion-select>
-    </ion-item>
+          <!--ion-item>
+            <ion-label>Estado Actual</ion-label>
+            <ion-icon name='md-clipboard' item-start></ion-icon>
+            <ion-select [(ngModel)]="estado" (click)="cambiarEstado()">
+              <ion-option value="1">Iniciado</ion-option>
+              <ion-option value="2">En proceso</ion-option>
+              <ion-option value="3">Verificación</ion-option>
+              <ion-option value="4">Finalizado</ion-option>
+            </ion-select>
+          </ion-item-->
 
 
-    <ion-item  (click)="cargarHoras()">
-      Cargar horas
-      <ion-note item-end></ion-note>
-      <ion-icon name='ios-clock-outline' item-start></ion-icon>
-      <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
-    </ion-item>
-    <ion-item (click)="borraTarea()" >
-      Borrar tarea
-      <ion-note item-end></ion-note>
-      <ion-icon color="sandonato_rojoLogo" name='md-trash' item-start></ion-icon>
-      <!--ion-icon color="dark" name='ios-arrow-forward-outline' item-end></ion-icon-->
-    </ion-item>
+          <ion-item  (click)="verReporteHoras()">
+            Ver registros de horas
+            <ion-note item-end></ion-note>
+            <ion-icon name='ios-clock-outline' item-start></ion-icon>
+            <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
+          </ion-item>
 
-  </ion-list>
+          <ion-item (click)="borraTarea()" >
+            Borrar tarea
+            <ion-note item-end></ion-note>
+            <ion-icon color="sandonato_rojoLogo" name='md-trash' item-start></ion-icon>
+            <ion-icon color="dark" name='ios-arrow-forward-outline' item-end></ion-icon>
+          </ion-item>
 
+          <!--ion-item>
+            <ion-grid class="tablaHoras">
+              <ion-row>
+                <ion-col>
+                  Empleado
+                </ion-col>
+                <ion-col>
+                  Días
+                </ion-col>
+                <ion-col>
+                  Total: Suma
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  Persona 1
+                </ion-col>
+                <ion-col>
+                  2
+                </ion-col>
+                <ion-col>
+                  5
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item-->
+
+
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

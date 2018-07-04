@@ -34,11 +34,12 @@ export class ListaEquipoPage {
   public enableFilter: boolean;
   public trabajoActual: Trabajo;
   public seleccionado: number = -1;
+  public recuperarTrabajo: number = -1;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               //private as: AlertController,
-              private service: EquipoServices,
+              private equipoService: EquipoServices,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events) {
@@ -52,6 +53,7 @@ export class ListaEquipoPage {
 
     events.subscribe('equip-selected', (data) => {
       this.seleccionado = data;
+      this.recuperarTrabajo = 1;
       console.log('entré al evento, seleccionado:', this.seleccionado);
     });
 
@@ -77,8 +79,12 @@ export class ListaEquipoPage {
     console.log('LISTA:: equipo seleccionado');
     console.log(id);
 
-    this.events.publish('change-tab', 2, this.lista.find((x) => x.id === id));
-    1
+    if (id == undefined) {
+      this.events.publish('change-tab', 2, undefined);
+    }
+    else {
+      this.events.publish('change-tab', 2, this.lista.find((x) => x.id === id));
+    }
     //this.navCtrl.push(AltaEquipoPage, );
   }
 
@@ -119,7 +125,7 @@ export class ListaEquipoPage {
 
 
     loading_le.present();
-    this.service.getByCliente(this.clienteSeleccionado.id).subscribe(
+    this.equipoService.getByCliente(this.clienteSeleccionado.id).subscribe(
 
       (data) => {
         loading_le.dismissAll();
@@ -139,4 +145,9 @@ export class ListaEquipoPage {
       });
   }
 
+  esRecuperacionSinTrabajo () {
+    return this.recuperarTrabajo == 1 &&
+            (this.trabajoActual.equipo == undefined ||
+              this.trabajoActual.equipo != undefined && this.trabajoActual.equipo.id == undefined);
+  }
 }

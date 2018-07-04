@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Ver detalles del trabajo: {{trabajoActual.id}} </ion-title>
+    <ion-title>Ver detalles del trabajo #{{trabajoActual.id}} </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -50,20 +50,53 @@
       </ion-col>
 
       <ion-col col-12 col-md-6 offset-md-3>
-        <button ion-button full color="primary" (click)="openModalCampos()">Ver más detalles del equipo</button>
+        <ion-item>
+          <button ion-button full color="primary" (click)="openModalCampos()">Ver más detalles del equipo</button>
+        </ion-item>
+
+        <ion-list-header>
+          Detalles del trabajo:
+        </ion-list-header>
+        <ion-list>
+          <ion-item *ngIf="trabajoActual.comentarios != undefined && trabajoActual.comentarios != ''">
+            <ion-card>
+              <ion-card-header>
+                Comentarios
+              </ion-card-header>
+              <ion-card-content>
+                <br>
+                {{trabajoActual.comentarios}}
+              </ion-card-content>
+            </ion-card>
+          </ion-item>
+
+          <ion-item *ngIf="trabajoActual.comentarios == undefined || trabajoActual.comentarios == ''">
+            <ion-card>
+              <b>El trabajo no tiene comentarios</b>
+            </ion-card>
+          </ion-item>
+
+
+        </ion-list>
       </ion-col>
+
+
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-list>
           <ion-list-header>
             Fotos del equipo:
           </ion-list-header>
-
           <ion-item>
             <ion-card *ngFor="let foto of listaFoto">
               <img src="{{foto.foto}}" />
-              <ion-card-content>
+              <ion-card-content *ngIf="foto.descripcion != undefined && foto.descripcion != ''">
                 <p>
                   {{foto.descripcion}}
+                </p>
+              </ion-card-content>
+              <ion-card-content *ngIf="foto.descripcion == undefined || foto.descripcion == ''">
+                <p>
+                  << Esta foto no tiene descripción >>
                 </p>
               </ion-card-content>
             </ion-card>
@@ -77,23 +110,10 @@
       </ion-col>
 
 
-      <ion-col col-12 col-md-6 offset-md-3 text-center>
-        <ion-list>
-          <ion-item>
-            <ion-card>
-              <ion-card-header>
-                Comentarios
-              </ion-card-header>
-              <ion-card-content>
-                <br>
-                {{trabajoActual.comentarios}}
-              </ion-card-content>
-            </ion-card>
-          </ion-item>
-        </ion-list>
-      </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3 text-center>
+
+
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-list>
           <ion-list-header>
             Firmas:

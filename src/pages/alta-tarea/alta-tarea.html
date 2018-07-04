@@ -14,5 +14,65 @@
 
 
 <ion-content padding padding hide-header [header]="head">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label color="primary" stacked>Modelo</ion-label>
+          <ion-input type="text" placeholder="..." [(ngModel)]="tareaActual.nombre">
 
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3 >
+        Comentarios generales del equipo
+        <ion-card>
+          <ion-card-content>
+              <textarea #myInput
+                        id="myInput"
+                        rows="1"
+                        maxLength="500"
+                        (keyup)="resize()"
+                        [(ngModel)]="tareaActual.descripcion">
+
+              </textarea>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label color="primary" stacked>Marca</ion-label>
+          <ion-input type="text" placeholder="..." [(ngModel)]="tareaActual.descripcion">
+
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label color="primary" stacked>Color</ion-label>
+          <ion-input type="text" placeholder="..." [(ngModel)]="tareaActual.minutosEstimados">
+
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label color="primary" stacked>
+            Tipo de equipo
+          </ion-label>
+          <ion-select [(ngModel)]="tareaActual.puntoControl">
+            <ion-option *ngFor="let est of listaPC " [value]="est">
+              {{est.nombre}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-4 offset-4>
+        <button [disabled]="(agregar === false)" ion-button full color="primary" (click)="guardarTarea()" >Confirmar</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

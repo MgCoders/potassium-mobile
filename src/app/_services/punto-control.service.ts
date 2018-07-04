@@ -6,37 +6,27 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Trabajo } from '../_models/Trabajo';
+import {PuntoControl} from "../_models/PuntoControl";
 
 @Injectable()
-export class TrabajoService {
+export class PuntoControlService {
 
-    constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
-    getAll(): Observable<Trabajo[]> {
-        return this.http.get<Trabajo[]>(`${environment.apiUrl}/trabajos/`);
-    }
+  getByTrabajo(idTrabajo: number): Observable<PuntoControl[]> {
+    return this.http.get<PuntoControl[]>(`${environment.apiUrl}/puntoscontrol/` + idTrabajo);
+  }
 
-    get(id: number): Observable<Trabajo> {
-        return this.http.get<Trabajo>(`${environment.apiUrl}/trabajos/` + id);
-    }
+  create(x: PuntoControl): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/puntoscontrol/1`, x);
+  }
 
-    getByEstado(estado: string): Observable<Trabajo[]> {
-        return this.http.get<Trabajo[]>(`${environment.apiUrl}/trabajos/estado/` + estado);
-    }
+  edit(x: PuntoControl): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/puntoscontrol/` + x.id, x);
+  }
 
-    getByCliente(idCliente: number): Observable<Trabajo[]> {
-        return this.http.get<Trabajo[]>(`${environment.apiUrl}/trabajos/cliente/` + idCliente);
-    }
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/puntoscontrol/` + id);
+  }
 
-    getByEquipo(idEquipo: number): Observable<Trabajo[]> {
-        return this.http.get<Trabajo[]>(`${environment.apiUrl}/trabajos/equipo/` + idEquipo);
-    }
-
-    create(x: Trabajo): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/trabajos/`, x);
-    }
-
-    edit(x: Trabajo): Observable<any> {
-        return this.http.put(`${environment.apiUrl}/trabajos/` + x.id, x);
-    }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  AlertController,
   Events, IonicPage, LoadingController, NavController, NavParams,
   ToastController
 } from 'ionic-angular';
@@ -34,7 +35,8 @@ export class SeleccionaTrabajoPage {
               private service: TrabajoService,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
-              public events: Events) {
+              public events: Events,
+              private alertCtrl: AlertController) {
 
     let loading = this.loadingCtrl.create({
       content: 'Procesando...'
@@ -138,7 +140,7 @@ export class SeleccionaTrabajoPage {
   }
 
   verTareas(id: number){
-    this.navCtrl.push(ListaTareaPage, {id:id});
+    this.navCtrl.push(ListaTareaPage, {idTrabajo:id});
   }
 
   verFicha(id: number){
@@ -148,43 +150,64 @@ export class SeleccionaTrabajoPage {
   borraTrabajo(id: number){
 
 
-    let loading = this.loadingCtrl.create({
-      content: 'Procesando...'
-    });
-    let toastCorrecto = this.toastCtrl.create({
-      message: 'Trabajo borrado!',
-      duration: 3000,
-      position: 'bottom'
-    });
-    let toastError = this.toastCtrl.create({
-      message: 'Error al borrar el trabajo..',
-      duration: 3000,
-      position: 'bottom'
-    });
-
-
-    loading.present();
-    if(id != undefined){
-      console.log('Borrar trabajo!');
-      /*this.service.borrar.subscribe(
-        (data) => {
-          toastCorrecto.present();
-          loading.dismissAll();
-          this.trabajoActual = data;
-          console.log("adentro",this.trabajoActual);
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar borrado',
+      message: 'Realmente quiere borrar este trabajo?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Canceló, no se borra nada');
+          }
         },
-        (error) => {
-          toastError.setMessage(error);
-          toastError.present();
-        });*/
-    }
+        {
+          text: 'Confirmar',
+          handler: () => {
+            console.log('Confirmó, Borro el trabajo');
 
-    loading.dismissAll();
-    loading.dismiss();
 
-    console.log("despues", this.trabajoActual);
+            /*
+                        let loading = this.loadingCtrl.create({
+                          content: 'Procesando...'
+                        });
+                        let toastCorrecto = this.toastCtrl.create({
+                          message: 'Trabajo borrado!',
+                          duration: 3000,
+                          position: 'bottom'
+                        });
+                        let toastError = this.toastCtrl.create({
+                          message: 'Error al borrar el trabajo..',
+                          duration: 3000,
+                          position: 'bottom'
+                        });
 
-    this.navCtrl.pop();
+
+                        loading.present();
+                        if(id != undefined){
+                          console.log('Borrar trabajo!');
+                          this.service.borrar.subscribe(
+                            (data) => {
+                              toastCorrecto.present();
+                              loading.dismissAll();
+                              this.trabajoActual = data;
+                              console.log("adentro",this.trabajoActual);
+                            },
+                            (error) => {
+                              toastError.setMessage(error);
+                              toastError.present();
+                            });
+                        }
+
+                        loading.dismissAll();
+                        loading.dismiss();*/
+
+            console.log("despues", this.trabajoActual);
+          }
+        }
+      ]
+    });
+    alert.present();
 
   }
 

@@ -110,6 +110,7 @@ export class AltaClientePage {
           toastCorrecto_ac_2.present();
           loading_ac_2.dismissAll();
           this.clienteActual = new ClienteImp(data);
+          this.navCtrl.pop();
         },
         (error) => {
           toastError_ac_2.setMessage(error);
@@ -121,6 +122,7 @@ export class AltaClientePage {
           toastCorrecto_ac_2.present();
           loading_ac_2.dismissAll();
           this.clienteActual = new ClienteImp(data);
+          this.navCtrl.pop();
         },
         (error) => {
           toastError_ac_2.setMessage(error);
@@ -129,6 +131,6 @@ export class AltaClientePage {
     }
     console.log('Cliente después');
     console.log(this.clienteActual);
-    this.navCtrl.pop();
+
   }
 }

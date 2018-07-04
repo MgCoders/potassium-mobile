@@ -46,6 +46,14 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-buttons class="myFab_upperSide" ion-fixed top right edge>
+    <button *ngIf="seleccionado != undefined && seleccionado != -1"
+            ion-button round color="green"
+            (click)="seleccionarCliente(seleccionado)"> Continuar <ion-icon name="arrow-round-forward"></ion-icon>
+    </button>
+  </ion-buttons>
+
   <ion-fab right bottom>
     <button ion-fab color="" (click)="nuevoCliente()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>

@@ -34,7 +34,6 @@ import {AltaTareaPage} from "../pages/alta-tarea/alta-tarea";
 import {CalendarioPage} from "../pages/calendario/calendario";
 import {SeleccionaTareaPage} from "../pages/selecciona-tarea/selecciona-tarea";
 import {HideHeaderDirective} from "../directives/hide-header/hide-header";
-import {AltaHorasPage} from "../pages/alta-horas/alta-horas";
 import {FilterPipe} from "../pipes/filter.pipe";
 import {TrabajoService} from "./_services/trabajo.service";
 import {TrabajoFotoService} from "./_services/trabajoFoto.service";
@@ -43,6 +42,13 @@ import {AltaDibujoPage} from "../pages/alta-dibujo/alta-dibujo";
 import {ModalClientePage} from "../components/modal-cliente/modal-cliente";
 import {ModalEquipoPage} from "../components/modal-equipo/modal-equipo";
 import {ModalCamposPage} from "../components/modal-campos/modal-campos";
+import {TareaService} from "./_services/tarea.service";
+import {PuntoControlService} from "./_services/punto-control.service";
+import {AltaRegistroPage} from "../pages/alta-registro/alta-registro";
+import {ListaRegistroPage} from "../pages/lista-registro/lista-registro";
+import {RubroService} from "./_services/rubro.service";
+import {UsuarioService} from "./_services/usuario.service";
+import {RegistroService} from "./_services/registro.service";
 
 @NgModule({
   declarations: [
@@ -68,12 +74,13 @@ import {ModalCamposPage} from "../components/modal-campos/modal-campos";
     SeleccionaTrabajoPage,
     SeleccionaTareaPage,
     HideHeaderDirective,
-    AltaHorasPage,
     FilterPipe,
     AltaDibujoPage,
     ModalClientePage,
     ModalEquipoPage,
-    ModalCamposPage
+    ModalCamposPage,
+    AltaRegistroPage,
+    ListaRegistroPage
   ],
   imports: [
     BrowserModule,
@@ -112,11 +119,12 @@ import {ModalCamposPage} from "../components/modal-campos/modal-campos";
     CalendarioPage,
     SeleccionaTrabajoPage,
     SeleccionaTareaPage,
-    AltaHorasPage,
     AltaDibujoPage,
     ModalClientePage,
     ModalEquipoPage,
-    ModalCamposPage
+    ModalCamposPage,
+    AltaRegistroPage,
+    ListaRegistroPage
   ],
   providers: [
     StatusBar,
@@ -129,8 +137,13 @@ import {ModalCamposPage} from "../components/modal-campos/modal-campos";
     EquipoServices,
     TipoEquipoService,
     HttpClientModule,
+    TareaService,
+    PuntoControlService,
     Camera,
-    Keyboard
+    Keyboard,
+    RubroService,
+    UsuarioService,
+    RegistroService
   ]
 })
 export class AppModule {}

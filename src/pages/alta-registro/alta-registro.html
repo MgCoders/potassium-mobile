@@ -1,17 +1,26 @@
-<ion-header>
+<!--
+  Generated template for the AltaClientePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header #head>
+
   <ion-navbar>
-    <ion-title>Cargar horas</ion-title>
+    <ion-title>{{editar == 1 ? "Editar" : "Crear"}} registro de horas</ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content class="outer-content">
+
+<ion-content padding  hide-header [header]="head">
   <ion-grid>
     <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
-        Vas a cargar horas para la tarea:
-        <br>
-        <b>Tarea 1</b>
+          Vas a cargar horas para la tarea:
+          <br>
+          <b>Tarea #{{registroActual.tarea.id}}: {{registroActual.tarea.nombre}}</b>
         </ion-item>
       </ion-col>
       <ion-col col-12 col-md-6 offset-md-3>
@@ -19,11 +28,8 @@
           <ion-item>
             <ion-label>Empleado</ion-label>
             <ion-icon name='md-clipboard' item-start></ion-icon>
-            <ion-select [(ngModel)]="empleado">
-              <ion-option value="1">Juan</ion-option>
-              <ion-option value="2">José</ion-option>
-              <ion-option value="3">Gervasio</ion-option>
-              <ion-option value="4">Arturo</ion-option>
+            <ion-select [(ngModel)]="usuarioseleccionado">
+              <ion-option *ngFor="let usr of listaUsuarios " [value]="usr.id" >{{usr.nombre}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>
@@ -33,11 +39,8 @@
           <ion-item>
             <ion-label>Rubro</ion-label>
             <ion-icon name='md-clipboard' item-start></ion-icon>
-            <ion-select [(ngModel)]="rubro">
-              <ion-option value="1">Soldadura</ion-option>
-              <ion-option value="2">Pintura</ion-option>
-              <ion-option value="3">Limpieza</ion-option>
-              <ion-option value="4">Cortar material</ion-option>
+            <ion-select [(ngModel)]="rubroseleccionado">
+              <ion-option *ngFor="let rub of listaRubros " [value]="rub.id" >{{rub.nombre}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>
@@ -54,8 +57,8 @@
       <ion-col col-12 col-md-6 offset-md-3>
 
         <ion-item>
-          <ion-label color="primary" stacked>Cantidad de horas</ion-label>
-          <ion-input type="text" placeholder="...">
+          <ion-label color="primary" stacked >Cantidad de minutos</ion-label>
+          <ion-input type="text" placeholder="..." [(ngModel)]="cantMinutos">
 
           </ion-input>
         </ion-item>
@@ -82,6 +85,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <button ion-button full color="primary" (click)="registrarHoras()">Cargar registro</button>
       </ion-col>
+
     </ion-row>
   </ion-grid>
 </ion-content>
