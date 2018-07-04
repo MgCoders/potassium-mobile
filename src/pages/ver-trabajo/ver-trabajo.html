@@ -31,33 +31,56 @@
             <button ion-button clear item-end (click)="openModalCliente()"  >Ver</button>
           </ion-item>
         </ion-list>
-        <ion-list no-lines no-border >
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="hayEquipoSeleccionado()">
+        <ion-list>
           <ion-list-header>
             Equipo:
           </ion-list-header>
 
           <ion-item>
-
-            <ion-thumbnail  item-start>
-              <img src="assets/imgs/truck.png">
-            </ion-thumbnail>
-            <h2 >{{trabajoActual.equipo.marca}} / {{trabajoActual.equipo.modelo}}</h2>
-            <p >Up</p>
-
-            <button ion-button clear item-end (click)="openModalEquipo()" >Ver</button>
+            <ion-card>
+              <b>Este trabajo no tiene un equipo asociado....</b>
+            </ion-card>
           </ion-item>
         </ion-list>
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3>
-        <ion-item>
-          <button ion-button full color="primary" (click)="openModalCampos()">Ver más detalles del equipo</button>
-        </ion-item>
 
-        <ion-list-header>
-          Detalles del trabajo:
-        </ion-list-header>
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()">
+          <ion-col col-12 col-md-6 offset-md-3>
+            <ion-list no-lines no-border >
+              <ion-list-header>
+                Equipo:
+              </ion-list-header>
+
+              <ion-item>
+
+                <ion-thumbnail  item-start>
+                  <img src="assets/imgs/truck.png">
+                </ion-thumbnail>
+                <h2 >{{trabajoActual.equipo != undefined ? trabajoActual.equipo.marca : ''}} / {{ trabajoActual.equipo != undefined ? trabajoActual.equipo.modelo : ''}}</h2>
+                <p >Up</p>
+
+                <button ion-button clear item-end (click)="openModalEquipo()" >Ver</button>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+
+
+          <ion-col col-12 col-md-6 offset-md-3>
+            <ion-item>
+              <button ion-button full color="primary" (click)="openModalCampos()">Ver más detalles del equipo</button>
+            </ion-item>
+          </ion-col>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
         <ion-list>
+          <ion-list-header>
+            Detalles del trabajo:
+          </ion-list-header>
           <ion-item *ngIf="trabajoActual.comentarios != undefined && trabajoActual.comentarios != ''">
             <ion-card>
               <ion-card-header>
@@ -80,35 +103,35 @@
         </ion-list>
       </ion-col>
 
-
-      <ion-col col-12 col-md-6 offset-md-3>
-        <ion-list>
-          <ion-list-header>
-            Fotos del equipo:
-          </ion-list-header>
-          <ion-item>
-            <ion-card *ngFor="let foto of listaFoto">
-              <img src="{{foto.foto}}" />
-              <ion-card-content *ngIf="foto.descripcion != undefined && foto.descripcion != ''">
-                <p>
-                  {{foto.descripcion}}
-                </p>
-              </ion-card-content>
-              <ion-card-content *ngIf="foto.descripcion == undefined || foto.descripcion == ''">
-                <p>
-                  << Esta foto no tiene descripción >>
-                </p>
-              </ion-card-content>
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()">
+          <ion-col col-12 col-md-6 offset-md-3>
+            <ion-list>
+              <ion-list-header>
+                Fotos del equipo:
+              </ion-list-header>
+              <ion-item>
+                <ion-card *ngFor="let foto of listaFoto">
+                  <img src="{{foto.foto}}" />
+                  <ion-card-content *ngIf="foto.descripcion != undefined && foto.descripcion != ''">
+                    <p>
+                      {{foto.descripcion}}
+                    </p>
+                  </ion-card-content>
+                  <ion-card-content *ngIf="foto.descripcion == undefined || foto.descripcion == ''">
+                    <p>
+                      << Esta foto no tiene descripción >>
+                    </p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="listaFoto?.length == 0">
+            <ion-card>
+              <b>No se tomaron fotos del equipo....</b>
             </ion-card>
-          </ion-item>
-        </ion-list>
+          </ion-col>
       </ion-col>
-      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="listaFoto?.length == 0">
-        <ion-card>
-          <b>No se tomaron fotos del equipo....</b>
-        </ion-card>
-      </ion-col>
-
 
 
 

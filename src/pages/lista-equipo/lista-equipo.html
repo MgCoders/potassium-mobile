@@ -28,15 +28,15 @@
       </ion-col>
       <ion-col col-12 col-md-6 offset-md-3 *ngIf="lista?.length != 0">
         <ion-list>
-          <ion-item [ngClass]="{'seleccionado': esRecuperacionSinTrabajo() }" >
+          <ion-item [ngClass]="{'seleccionado': esRecuperacionSinEquipo() }" >
 
             <ion-thumbnail (click)="seleccionarEquipo(undefined)" item-start>
-              <img src="">
+              <img src="assets/imgs/no_truck.png">
             </ion-thumbnail>
             <h2 (click)="seleccionarEquipo(undefined)">Sin equipo</h2>
-            <p (click)="seleccionarEquipo(undefined)">Este trabajo no tendrá equipo asociado</p>
+            <p (click)="seleccionarEquipo(undefined)">(Trabajo sin equipo asociado)</p>
 
-            <button *ngIf="esRecuperacionSinTrabajo()" ion-button clear item-end >Asignado</button>
+            <button *ngIf="esRecuperacionSinEquipo()" ion-button clear item-end >Asignado</button>
 
           </ion-item>
 
@@ -58,8 +58,8 @@
     </ion-row>
   </ion-grid>
 
-  <ion-buttons class="myFab_upperSide" ion-fixed top right edge>
-    <button *ngIf="recuperarTrabajo != undefined && recuperarTrabajo == -1"
+  <ion-buttons [hidden]="!esRecuperacion()" class="myFab_upperSide" ion-fixed top right edge>
+    <button
             ion-button round color="green"
             (click)="seleccionarEquipo(seleccionado)"> Continuar <ion-icon name="arrow-round-forward"></ion-icon>
     </button>

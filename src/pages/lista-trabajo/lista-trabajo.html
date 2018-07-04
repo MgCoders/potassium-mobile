@@ -24,7 +24,7 @@
     </ion-list-header>
 
       <ion-item (click)="switchTrabajo(trabajo.id)" *ngFor="let trabajo of filterTrabajos(cliente)">
-        {{trabajo.equipo.marca}} - {{trabajo.equipo.color}} :: ({{trabajo.estado}})
+        {{trabajo.equipo != undefined ? trabajo.equipo.marca : 'Sin equipo'}} - {{trabajo.equipo != undefined ? trabajo.equipo.color: ''}} :: ({{trabajo.estado}})
         <ion-note item-end> {{trabajo.fechaRecepcion}}</ion-note>
         <ion-icon *ngIf="(trabajo.motivoVisita == 'nuevo')" name='ios-construct' item-start></ion-icon>
         <ion-icon *ngIf="(trabajo.motivoVisita != 'nuevo')" name='ios-build-outline' item-start></ion-icon>

@@ -40,6 +40,7 @@ export class ListaClientePage {
   public seleccionado: number = -1;
 
   public trabajoActual: Trabajo;
+  public recuperarTrabajo: number = -1;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -47,6 +48,8 @@ export class ListaClientePage {
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events) {
+
+    this.recuperarTrabajo = this.navParams.data['recuperarTrabajo'];
 
 
     this.filterText = '';
@@ -145,4 +148,13 @@ export class ListaClientePage {
     });
     this.lista = [];
   }
+
+  esRecuperacion() {
+    console.log("BOOL:: es recuperación?", this.seleccionado != -1);
+    console.log("BOOL:: seleccionado", this.seleccionado);
+    return this.seleccionado != undefined && this.seleccionado != -1;
+
+
+  }
+
 }

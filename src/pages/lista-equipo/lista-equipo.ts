@@ -45,15 +45,15 @@ export class ListaEquipoPage {
               public events: Events) {
 
     this.trabajoActual = this.navParams.data['trabajoActual'];
+    this.recuperarTrabajo = this.navParams.data['recuperarTrabajo'];
     this.clienteSeleccionado = this.trabajoActual.cliente;
-    this.seleccionado = this.trabajoActual.equipo.id;
+    this.seleccionado = this.trabajoActual.equipo == undefined ? -1 : this.trabajoActual.equipo.id;
     console.log('Cliente - Seleccionado(Data): ', this.clienteSeleccionado);
 
     this.filterText = '';
 
     events.subscribe('equip-selected', (data) => {
-      this.seleccionado = data;
-      this.recuperarTrabajo = 1;
+      this.seleccionado = -1;
       console.log('entré al evento, seleccionado:', this.seleccionado);
     });
 
@@ -145,9 +145,16 @@ export class ListaEquipoPage {
       });
   }
 
-  esRecuperacionSinTrabajo () {
-    return this.recuperarTrabajo == 1 &&
-            (this.trabajoActual.equipo == undefined ||
-              this.trabajoActual.equipo != undefined && this.trabajoActual.equipo.id == undefined);
+  esRecuperacionSinEquipo() {
+    //console.log("entro a chequear si es recuperar seleccionado = -1");
+    //console.log("BOOL:: seleccionado = -1 >"+(this.seleccionado == -1));
+    //console.log("BOOL:: recuperar >"+this.recuperarTrabajo);
+    return this.recuperarTrabajo == 1 && this.seleccionado == -1;
+            //(this.trabajoActual.equipo == undefined ||
+            //  this.trabajoActual.equipo != undefined && this.trabajoActual.equipo.id == undefined);
+  }
+
+  esRecuperacion() {
+    return this.recuperarTrabajo == 1;
   }
 }

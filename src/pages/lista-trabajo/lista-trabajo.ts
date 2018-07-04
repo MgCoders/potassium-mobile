@@ -130,13 +130,16 @@ export class ListaTrabajoPage {
 
               this.lista.push(new TrabajoImp(Trabajo));
               let c = new ClienteImp(Trabajo.cliente);
-              console.log("estado",Trabajo.estado);
+
               this.listaClientes.push(c);
 
-              console.log(this.listaClientes);
-              console.log(this.lista);
+
             }
           );
+
+          console.log("listaClientes", this.listaClientes);
+          console.log("lista", this.lista);
+
 
           this.lista.sort(function(a, b) {
             return a.id - b.id;

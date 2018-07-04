@@ -61,6 +61,8 @@ export class IngresarDetallesPage {
   fechaRecepcion: Date;
   fechaRecepcion_txt: string = '';
   fechaProvistaEntrega: Date;
+  recuperarTrabajo: number = -1;
+
 
   trabajoActual: Trabajo;
   background:string;
@@ -84,7 +86,10 @@ export class IngresarDetallesPage {
               private events: Events) {
 
     //seteo el fondo segun el tipo equipo!
-    this.background = '../../assets/imgs/auto.png';
+    this.background = "../../assets/imgs/auto.png";
+
+    this.recuperarTrabajo = this.navParams.data['recuperarTrabajo'];
+
 
 
     let toastError = this.toastCtrl.create({
@@ -330,7 +335,7 @@ export class IngresarDetallesPage {
       console.log("VUELVO:: de Setear el dibujo");
       console.log('params', _params);
 
-      this.dibujoEquipoRecepcion = _params['dibujo'];
+      this.dibujoEquipoRecepcion = _params['dibujoEquipoRecepcion'];
       this.dibujoAncho = _params['dibujoAncho'];
       this.dibujoAlto = _params['dibujoAlto'];
 
@@ -344,10 +349,19 @@ export class IngresarDetallesPage {
   nuevoDibujo() {
 
     this.navCtrl.push(AltaDibujoPage, {callback: this.callbackDibujo,
-                                                dibujo: this.dibujoEquipoRecepcion,
+                                                dibujoEquipoRecepcion: this.dibujoEquipoRecepcion,
+                                                backgroundDibujo: this.trabajoActual.equipo.tipoEquipo.dibujo,
                                                 dibujoAncho: this.trabajoActual.dibujoAncho,
                                                 dibujoAlto: this.trabajoActual.dibujoAlto})
 
+  }
+
+  hayEquipoSeleccionado(){
+    //console.log("Entro a controlar si oculto o no");
+    //console.log("OBJ:: trabajoActual.equipo > ", this.trabajoActual.equipo);
+    //console.log("OBJ:: RETURN ", this.trabajoActual.equipo != undefined);
+
+    return this.trabajoActual.equipo != undefined;
   }
 
 }

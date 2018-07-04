@@ -20,7 +20,7 @@
 
 
       <ion-col col-12 col-md-6 offset-md-3>
-        Inofrmación básica:
+        Información básica:
       </ion-col>
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
@@ -45,264 +45,267 @@
         </ion-range>
       </ion-col-->
 
-      <ion-col col-12 col-md-6 offset-md-3>
-        <ion-item>
-          <ion-label>Cantidad de combustible:</ion-label>
-          <ion-select [(ngModel)]="equipoCantidadCombustible">
-            <ion-option [value]="0">Vacío</ion-option>
-            <ion-option [value]="1">1/8</ion-option>
-            <ion-option [value]="2">1/4</ion-option>
-            <ion-option [value]="3">3/8</ion-option>
-            <ion-option [value]="4">1/2</ion-option>
-            <ion-option [value]="5">5/8</ion-option>
-            <ion-option [value]="6">3/4</ion-option>
-            <ion-option [value]="7">7/8</ion-option>
-            <ion-option [value]="8">Lleno</ion-option>
-          </ion-select>
-        </ion-item>
+
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()">
+          <ion-col col-12 col-md-6 offset-md-3>
+            <ion-item>
+              <ion-label>Cantidad de combustible:</ion-label>
+              <ion-select [(ngModel)]="equipoCantidadCombustible">
+                <ion-option [value]="0">Vacío</ion-option>
+                <ion-option [value]="1">1/8</ion-option>
+                <ion-option [value]="2">1/4</ion-option>
+                <ion-option [value]="3">3/8</ion-option>
+                <ion-option [value]="4">1/2</ion-option>
+                <ion-option [value]="5">5/8</ion-option>
+                <ion-option [value]="6">3/4</ion-option>
+                <ion-option [value]="7">7/8</ion-option>
+                <ion-option [value]="8">Lleno</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-6 offset-md-3>
+            <ion-item>
+              <ion-label color="primary" stacked>Kilómetros actuales</ion-label>
+              <ion-input type="tel" placeholder="..." [(ngModel)]="kmEquipoRecepcion">
+
+              </ion-input>
+            </ion-item>
+          </ion-col>
+
+          <!-- Comienza campos switch/toggle -->
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Documentos</ion-label>
+              <ion-select [(ngModel)]="equipoDocumentos">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 >
+            <ion-item>
+              <ion-label>Radio</ion-label>
+              <ion-select [(ngModel)]="equipoRadio">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Extintor</ion-label>
+              <ion-select [(ngModel)]="equipoExtintor">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3>
+            <ion-item>
+              <ion-label>Balizas</ion-label>
+              <ion-select [(ngModel)]="equipoBalizas">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Llave de ruedas</ion-label>
+              <ion-select [(ngModel)]="equipoLlaveRuedas">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3>
+            <ion-item>
+              <ion-label>Herramientas</ion-label>
+              <ion-select [(ngModel)]="equipoHerramientas">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Manuales</ion-label>
+              <ion-select [(ngModel)]="equipoManuales">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3>
+            <ion-item>
+              <ion-label>Frente de radio</ion-label>
+              <ion-select [(ngModel)]="equipoFrenteRadio">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Manguera cabina</ion-label>
+              <ion-select [(ngModel)]="equipoMangueraCabina">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3>
+            <ion-item>
+              <ion-label>Cenicero</ion-label>
+              <ion-select [(ngModel)]="equipoCenicero">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Gato y palanca</ion-label>
+              <ion-select [(ngModel)]="equipoGatoPalanca">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3>
+            <ion-item>
+              <ion-label>Parabrisas</ion-label>
+              <ion-select [(ngModel)]="equipoParabrisasSano">
+                <ion-option [value]="true">Sano</ion-option>
+                <ion-option [value]="false">Roto</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Auxiliar</ion-label>
+              <ion-select [(ngModel)]="rueda_auxiliar" (ionChange)="logicaRuedaAuxiliar()">
+                <ion-option value="armada">Si (armada)</ion-option>
+                <ion-option value="solo_disco">Si (solo disco)</ion-option>
+                <ion-option value="no">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3>
+            <ion-item>
+              <ion-label>Vidrios laterales</ion-label>
+              <ion-select [(ngModel)]="equipoVidriosLaterales">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Estado de los vidrios</ion-label>
+              <ion-select [(ngModel)]="equipoVidriosLateralesSanos">
+                <ion-option [value]="false">Roto</ion-option>
+                <ion-option [value]="true">Sano</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3>
+            <ion-item>
+              <ion-label>Espejos</ion-label>
+              <ion-select [(ngModel)]="equipoEspejos">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Estado de los espejos</ion-label>
+              <ion-select [(ngModel)]="equipoEspejosSanos">
+                <ion-option [value]="true">Sano</ion-option>
+                <ion-option [value]="false">Roto</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3>
+            <ion-item>
+              <ion-label>Señaleros</ion-label>
+              <ion-select [(ngModel)]="equipoSenalerosSanos">
+                <ion-option [value]="true">Sano</ion-option>
+                <ion-option [value]="false">Roto</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Luces traseras</ion-label>
+              <ion-select [(ngModel)]="equipoLucesTraserasSanas">
+                <ion-option [value]="true">Sano</ion-option>
+                <ion-option [value]="false">Roto</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+
+          <ion-col col-12 col-md-3>
+            <ion-item>
+              <ion-label>Rayones</ion-label>
+              <ion-select [(ngModel)]="equipoRayones">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+
+          <ion-col col-12 col-md-3 offset-md-3>
+            <ion-item>
+              <ion-label>Abollones</ion-label>
+              <ion-select [(ngModel)]="equipoAbollones">
+                <ion-option [value]="true">Si</ion-option>
+                <ion-option [value]="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <br><br><br>
+          <ion-col col-12 col-md-6 offset-md-3 class="separador">
+          </ion-col>
+
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3>
-        <ion-item>
-          <ion-label color="primary" stacked>Kilómetros actuales</ion-label>
-          <ion-input type="tel" placeholder="..." [(ngModel)]="kmEquipoRecepcion">
-
-          </ion-input>
-        </ion-item>
-      </ion-col>
-
-      <!-- Comienza campos switch/toggle -->
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Documentos</ion-label>
-          <ion-select [(ngModel)]="equipoDocumentos">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 >
-        <ion-item>
-          <ion-label>Radio</ion-label>
-          <ion-select [(ngModel)]="equipoRadio">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Extintor</ion-label>
-          <ion-select [(ngModel)]="equipoExtintor">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3>
-        <ion-item>
-          <ion-label>Balizas</ion-label>
-          <ion-select [(ngModel)]="equipoBalizas">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Llave de ruedas</ion-label>
-          <ion-select [(ngModel)]="equipoLlaveRuedas">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3>
-        <ion-item>
-          <ion-label>Herramientas</ion-label>
-          <ion-select [(ngModel)]="equipoHerramientas">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Manuales</ion-label>
-          <ion-select [(ngModel)]="equipoManuales">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3>
-        <ion-item>
-          <ion-label>Frente de radio</ion-label>
-          <ion-select [(ngModel)]="equipoFrenteRadio">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Manguera cabina</ion-label>
-          <ion-select [(ngModel)]="equipoMangueraCabina">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3>
-        <ion-item>
-          <ion-label>Cenicero</ion-label>
-          <ion-select [(ngModel)]="equipoCenicero">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Gato y palanca</ion-label>
-          <ion-select [(ngModel)]="equipoGatoPalanca">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3>
-        <ion-item>
-          <ion-label>Parabrisas</ion-label>
-          <ion-select [(ngModel)]="equipoParabrisasSano">
-            <ion-option [value]="true">Sano</ion-option>
-            <ion-option [value]="false">Roto</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Auxiliar</ion-label>
-          <ion-select [(ngModel)]="rueda_auxiliar" (ionChange)="logicaRuedaAuxiliar()">
-            <ion-option value="armada">Si (armada)</ion-option>
-            <ion-option value="solo_disco">Si (solo disco)</ion-option>
-            <ion-option value="no">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3>
-        <ion-item>
-          <ion-label>Vidrios laterales</ion-label>
-          <ion-select [(ngModel)]="equipoVidriosLaterales">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Estado de los vidrios</ion-label>
-          <ion-select [(ngModel)]="equipoVidriosLateralesSanos">
-            <ion-option [value]="false">Roto</ion-option>
-            <ion-option [value]="true">Sano</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3>
-        <ion-item>
-          <ion-label>Espejos</ion-label>
-          <ion-select [(ngModel)]="equipoEspejos">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Estado de los espejos</ion-label>
-          <ion-select [(ngModel)]="equipoEspejosSanos">
-            <ion-option [value]="true">Sano</ion-option>
-            <ion-option [value]="false">Roto</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3>
-        <ion-item>
-          <ion-label>Señaleros</ion-label>
-          <ion-select [(ngModel)]="equipoSenalerosSanos">
-            <ion-option [value]="true">Sano</ion-option>
-            <ion-option [value]="false">Roto</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Luces traseras</ion-label>
-          <ion-select [(ngModel)]="equipoLucesTraserasSanas">
-            <ion-option [value]="true">Sano</ion-option>
-            <ion-option [value]="false">Roto</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-
-      <ion-col col-12 col-md-3>
-        <ion-item>
-          <ion-label>Rayones</ion-label>
-          <ion-select [(ngModel)]="equipoRayones">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-
-      <ion-col col-12 col-md-3 offset-md-3>
-        <ion-item>
-          <ion-label>Abollones</ion-label>
-          <ion-select [(ngModel)]="equipoAbollones">
-            <ion-option [value]="true">Si</ion-option>
-            <ion-option [value]="false">No</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-      <br><br><br>
-      <ion-col col-12 col-md-6 offset-md-3 class="separador">
-      </ion-col>
-
-
-
-      <ion-col col-12 col-md-6 offset-md-3>
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()">
         Sección Croquis:
         <button ion-button full color="primary" (click)="nuevoDibujo()">Ubicar detalles visuales al equipo</button>
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="dibujoEquipoRecepcion == ''">
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()" text-center *ngIf="dibujoEquipoRecepcion == ''">
         <ion-card>
           <b>Aún no se ha ingresado....</b>
         </ion-card>
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3 *ngIf="dibujoEquipoRecepcion != ''">
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()" *ngIf="dibujoEquipoRecepcion != ''">
         <ion-card>
           <img src="{{dibujoEquipoRecepcion}}" class="dibujo"
                [ngStyle]="{'background-image': 'url(' + background + ')'}"
@@ -316,7 +319,7 @@
       </ion-col>
 
       <ion-col col-12 col-md-6 offset-md-3 >
-        Comentarios generales del equipo
+        Comentarios generales del trabajo
         <ion-card>
           <ion-card-content>
               <textarea #myInput
@@ -334,11 +337,13 @@
       <ion-col col-12 col-md-6 offset-md-3 class="separador">
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3>
+
+
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()">
         Sección Fotos:
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="lista?.length == 0">
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()" text-center *ngIf="lista?.length == 0">
         <ion-card>
           <b>Aún no se han ingresado fotos....</b>
         </ion-card>
@@ -346,7 +351,7 @@
 
 
 
-      <ion-col col-12 col-md-6 offset-md-3 *ngFor="let detalle of lista">
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()" *ngFor="let detalle of lista">
         <ion-card>
           <img src="{{detalle.img}}" />
           <ion-card-content>
@@ -357,10 +362,9 @@
         </ion-card>
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3>
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()">
         <button ion-button full color="primary" (click)="nuevoDetalle()">Agregar foto del equipo</button>
       </ion-col>
-
 
       <ion-col col-12 col-md-6 offset-md-3>
         <button ion-button full color="secondary" (click)="confirmarDetalles()">

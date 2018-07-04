@@ -188,4 +188,7 @@ export class VerTrabajoPage {
     console.log('ionViewDidLoad VerTrabajoPage');
   }
 
+  hayEquipoSeleccionado(){
+    return this.trabajoActual.equipo != undefined;
+  }
 }

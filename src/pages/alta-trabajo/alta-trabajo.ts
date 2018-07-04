@@ -140,7 +140,12 @@ export class AltaTrabajoPage {
           this.trabajoActual = data;
           console.log('adentro',this.trabajoActual);
           this.events.publish('client-selected', this.trabajoActual.cliente.id);
-          this.events.publish('equip-selected', this.trabajoActual.equipo.id);
+          if(this.trabajoActual.equipo == undefined) {
+            this.events.publish('equip-selected', undefined);
+          }
+          else {
+            this.events.publish('equip-selected', this.trabajoActual.equipo.id);
+          }
 
           //Inicializo
 
@@ -327,6 +332,7 @@ export class AltaTrabajoPage {
 
       console.log("Al salir:", this.trabajoActual);
       this.navParams.data['trabajoActual'] = this.trabajoActual;
+      this.navParams.data['recuperarTrabajo'] = (tipo == "recuperar" && id != undefined);
 
       //console.log('entro>');
       this.tabs.select(tab);
