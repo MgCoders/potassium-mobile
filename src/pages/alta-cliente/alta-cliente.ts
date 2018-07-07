@@ -85,6 +85,11 @@ export class AltaClientePage {
 
   guardarCliente() {
 
+    if(!this.validarCamposAltaCliente()) {
+      return;
+
+    }
+
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
     let loading_ac_2 = this.loadingCtrl.create({
       content: 'Procesando...'
@@ -133,4 +138,112 @@ export class AltaClientePage {
     console.log(this.clienteActual);
 
   }
+
+
+  validarCamposAltaCliente(){
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+    console.log("Validando Cliente: ", this.clienteActual);
+
+    if(this.clienteActual == undefined){
+      mensaje = 'Cliente no definido';
+      valido = false;
+    }
+
+
+    if(valido && (this.clienteActual.nombreEmpresa == undefined || this.clienteActual.nombreEmpresa == '')){
+      mensaje = 'Nombre de la empresa inválido';
+      valido = false;
+    }
+    if(valido && (this.clienteActual.personaContacto == undefined || this.clienteActual.personaContacto == '')){
+      mensaje = 'Persona de Contacto inválida';
+      valido = false;
+    }
+    if(valido && (this.clienteActual.telefonoContacto == undefined || this.clienteActual.telefonoContacto == '')){
+      mensaje = 'Teléfono de Contacto inválido';
+      valido = false;
+    }
+
+    if(valido && (this.clienteActual.emailEmpresa != undefined && this.clienteActual.emailEmpresa.match(/@/g).length != 1)){
+      mensaje = 'Revisar email';
+      valido = false;
+    }
+
+    if(valido && (this.clienteActual.rut != undefined && (this.clienteActual.rut.length != 12) )){
+      mensaje = 'Revisar RUT, largo 12 números y no puede tener espacio';
+      valido = false;
+
+    }
+
+
+    if(valido && !this.validate_isRUT(this.clienteActual.rut) ){
+      mensaje = 'RUT Inválido';
+      valido = false;
+
+    }
+
+
+    //Estos campos no requieren validación
+    //this.clienteActual.telefono
+    //this.clienteActual.direccion
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    return valido;
+
+
+
+  }
+
+
+
+    validate_isRUT(rut: string) {
+      if (rut != undefined && rut.length != 12){
+        return false;
+      }
+      else
+      {
+        if (!/^([0-9])*$/.test(rut)){
+          return false;
+        }
+        var dc = rut.substr(11, 1);
+        var rut = rut.substr(0, 11);
+        var total = 0;
+        var factor = 2;
+
+        var i = 10;
+        for (i; i >= 0; i--) {
+          total += (factor * parseInt(rut.substr(i, 1), 10));
+          factor = (factor == 9)?2:++factor;
+        }
+
+        var dv = 11 - (total % 11);
+
+        if (dv == 11){
+          dv = 0;
+        }else if(dv == 10){
+          dv = 1;
+        }
+        console.log("dv:", dv);
+        console.log("dc:", dc);
+
+        if(dv.toString() == dc){
+          return true;
+        }
+        return false;
+      }
+    }
+
+
+
 }

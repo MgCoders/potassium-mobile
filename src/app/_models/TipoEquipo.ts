@@ -11,7 +11,7 @@
  */
 
 export interface TipoEquipo {
-    idTipoEquipo?: number;
+    id?: number;
 
     descripcion: string;
 

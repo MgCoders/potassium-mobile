@@ -96,6 +96,12 @@ export class AltaEquipoPage {
 
   guardarEquipo() {
 
+
+    if(!this.validarCamposAltaEquipo()) {
+      return;
+
+    }
+
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
     let loading_ae_2 = this.loadingCtrl.create({
       content: 'Procesando...'
@@ -124,6 +130,9 @@ export class AltaEquipoPage {
           toastCorrecto_ae_2.present();
           loading_ae_2.dismissAll();
           this.equipoActual = new EquipoImp(data);
+          this.navCtrl.pop();
+          console.log('Equipo después');
+          console.log(this.equipoActual);
         },
         (error) => {
           console.log(error.toString());
@@ -136,6 +145,9 @@ export class AltaEquipoPage {
           toastCorrecto_ae_2.present();
           loading_ae_2.dismissAll();
           this.equipoActual = new EquipoImp(data);
+          this.navCtrl.pop();
+          console.log('Equipo después');
+          console.log(this.equipoActual);
         },
         (error) => {
           toastError_ae_2.setMessage(error);
@@ -143,12 +155,57 @@ export class AltaEquipoPage {
         });
     }
 
-    console.log('Equipo después');
-    console.log(this.equipoActual);
-    this.navCtrl.pop();
   }
 
-  tipoSeleccionado(id:number){
-    return id === this.equipoActual.tipoEquipo.idTipoEquipo;
+
+
+  validarCamposAltaEquipo(){
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+    console.log("Validando Cliente: ", this.equipoActual);
+
+    if(this.equipoActual == undefined){
+      mensaje = 'Equipo no definido';
+      valido = false;
+    }
+
+
+    if(valido && (this.equipoActual.cliente == undefined || this.equipoActual.cliente.id == undefined)) {
+      mensaje = 'Equipo sin cliente';
+      valido = false;
+    }
+
+    if(valido && (this.equipoActual.tipoEquipo == undefined || this.equipoActual.tipoEquipo.id == undefined)) {
+      mensaje = 'Equipo sin tipo seleccionado';
+      valido = false;
+    }
+
+    if(valido && (this.equipoActual.descripcion == undefined || this.equipoActual.descripcion == '')) {
+      mensaje = 'Equipo sin descripcón';
+      valido = false;
+    }
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    return valido;
+
   }
+
+
+
+
+
+
+
+
 }
