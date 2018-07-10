@@ -15,7 +15,7 @@ import { Material } from './Material';
 import {TipoEquipo} from "./TipoEquipo";
 
 export class TipoEquipoImp implements TipoEquipo {
-    idTipoEquipo?: number;
+  id?: number;
 
     dibujo: string;
 
@@ -23,7 +23,7 @@ export class TipoEquipoImp implements TipoEquipo {
 
 
     public constructor(t: TipoEquipo) {
-        this.idTipoEquipo = t.idTipoEquipo;
+        this.id = t.id;
         this.dibujo = t.dibujo;
         this.descripcion = t.descripcion;
     }

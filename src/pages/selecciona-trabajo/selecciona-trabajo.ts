@@ -140,7 +140,7 @@ export class SeleccionaTrabajoPage {
   }
 
   verTareas(id: number){
-    this.navCtrl.push(ListaTareaPage, {idTrabajo:id});
+    this.navCtrl.push(ListaTareaPage, {idTrabajo:id, trabajoActual:this.trabajoActual});
   }
 
   verFicha(id: number){

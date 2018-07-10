@@ -23,10 +23,17 @@ export class PuntoControlImp implements PuntoControl {
         this.orden = x.orden;
         this.trabajo = x.trabajo;
         this.tareas = new Array();
-        x.tareas.forEach(
-            (y) => {
-                this.tareas.push(new TareaImp(y));
-            });
+        console.log("x",x);
+        console.log("x.tareas",x.tareas);
+
+        if(x.tareas != undefined){
+          x.tareas.forEach(
+              (y) => {
+                  this.tareas.push(new TareaImp(y));
+              });
+        }
+      console.log("Terminé de setear el punto de control", this);
+
     }
 
 }

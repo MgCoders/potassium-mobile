@@ -6,6 +6,8 @@ import {PuntoControl} from "../../app/_models/PuntoControl";
 import {PuntoControlService} from "../../app/_services/punto-control.service";
 import {TareaImp} from "../../app/_models/TareaImp";
 import {PuntoControlImp} from "../../app/_models/PuntoControlImp";
+import {Trabajo} from "../../app/_models/Trabajo";
+import {UsuarioImp} from "../../app/_models/UsuarioImp";
 
 /**
  * Generated class for the AltaTareaPage page.
@@ -23,6 +25,7 @@ export class AltaTareaPage {
 
   tareaActual: Tarea;
   trabajoSeleccionado : number;
+  trabajoActual: Trabajo;
   listaPC: PuntoControl[];
 
   constructor(public navCtrl: NavController,
@@ -32,6 +35,19 @@ export class AltaTareaPage {
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events) {
+
+    this.trabajoSeleccionado = this.navParams.data['idTrabajo'];
+    this.trabajoActual = this.navParams.data['trabajoActual'];
+
+
+    if(this.tareaActual == undefined) {
+      let tareas = new Array();
+      let usuario = new UsuarioImp({    email: "", nombre: "", role: "", password: "" });
+      let pc = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas});
+      this.tareaActual = new TareaImp({nombre: "", descripcion:"",minutosEstimados: 0, puntoControl: pc});
+
+    }
+
   }
 
   ionViewDidLoad() {
@@ -40,8 +56,6 @@ export class AltaTareaPage {
 
 
   ionViewWillEnter() {
-
-    this.trabajoSeleccionado = this.navParams.data['idTrabajo'];
 
     //Limpio la lista
     this.listaPC = [];
@@ -70,6 +84,8 @@ export class AltaTareaPage {
       (data) => {
         loading_lt.dismissAll();
 
+        console.log("P.C. por trabajo:", data);
+
         //Obtengo la lista desde el server con lo último
         data.forEach (pc => {
           this.listaPC.push(new PuntoControlImp(pc));
@@ -86,7 +102,7 @@ export class AltaTareaPage {
 
   }
 
-    guardarTarea() {
+  guardarTarea() {
 
     this.navCtrl.pop();
   }

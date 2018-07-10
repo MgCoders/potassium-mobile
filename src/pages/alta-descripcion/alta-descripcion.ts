@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 /**
@@ -24,7 +24,8 @@ export class AltaDescripcionPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private camera: Camera) {
+              private camera: Camera,
+              private toastCtrl: ToastController) {
     this.image = 'assets/imgs/photo.jpg';
   }
 
@@ -53,6 +54,11 @@ export class AltaDescripcionPage {
 
 
   guardarDetalle(){
+
+    if(!this.validarCamposAltaDescripcion()) {
+      return;
+    }
+
     this.callback = this.navParams.get("callback");
 
     let data = {img: this.image, descr: this.descr};
@@ -60,5 +66,50 @@ export class AltaDescripcionPage {
       this.navCtrl.pop();
     });
   }
+
+
+
+
+  validarCamposAltaDescripcion(){
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+    console.log("Validando image: ", this.image);
+    console.log("Validando descr: ", this.descr);
+
+
+    if(valido && (this.image == undefined || this.image == 'assets/imgs/photo.jpg')){
+      mensaje = 'Debe tomar una foto';
+      valido = false;
+    }
+    if(valido && (this.descr == undefined || this.descr == '')){
+      mensaje = 'Ingrese una descripción de la foto';
+      valido = false;
+    }
+
+
+    //Estos campos no requieren validación
+    //this.clienteActual.telefono
+    //this.clienteActual.direccion
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    return valido;
+
+
+
+  }
+
+
+
 
 }

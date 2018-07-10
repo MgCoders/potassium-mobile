@@ -1,5 +1,5 @@
 import {Component, Renderer, ViewChild} from '@angular/core';
-import {IonicPage, Keyboard, NavController, NavParams, Platform} from 'ionic-angular';
+import {IonicPage, Keyboard, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 
 /**
  * Generated class for the AltaFirmaPage page.
@@ -25,7 +25,8 @@ export class AltaFirmaPage {
               public navParams: NavParams,
               public platform: Platform,
               public keyboard: Keyboard,
-              public renderer: Renderer) {
+              public renderer: Renderer,
+              private toastCtrl: ToastController) {
     this.rol = this.navParams.get("rol");
 
   }
@@ -35,19 +36,7 @@ export class AltaFirmaPage {
     //this.canvasElement = this.canvas.nativeElement;
   }
 
-  confirmarFirma(){
-    console.log("lo exporto");
 
-    console.log(this.canvasElement.toDataURL());
-
-
-    this.callback = this.navParams.get("callback");
-    let data = {firma: this.canvasElement.toDataURL(), nombre: this.nombreFirma};
-    this.callback(data).then(()=>{
-      this.navCtrl.pop();
-    });
-
-  }
 
   lastX: number;
   lastY: number;
@@ -105,6 +94,67 @@ export class AltaFirmaPage {
   keyboardCheck() {
     //console.log('The keyboard is open:', this.keyboard.isOpen());
     return this.keyboard.isOpen();
+  }
+
+
+  confirmarFirma(){
+    console.log("lo exporto");
+
+
+    if(!this.validarCamposAltaFirma()) {
+      return;
+    }
+
+    console.log(this.canvasElement.toDataURL());
+
+
+    this.callback = this.navParams.get("callback");
+    let data = {firma: this.canvasElement.toDataURL(), nombre: this.nombreFirma};
+    this.callback(data).then(()=>{
+      this.navCtrl.pop();
+    });
+
+  }
+
+
+
+  validarCamposAltaFirma(){
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+    console.log("Validando firma: ", this.canvasElement.toDataURL());
+    console.log("Validando nombreFirma: ", this.nombreFirma);
+
+
+    if(valido && (this.canvasElement.toDataURL() == undefined ||this.canvasElement.toDataURL() == '')){
+      mensaje = 'No se ingresó firma';
+      valido = false;
+    }
+    if(valido && (this.nombreFirma == undefined || this.nombreFirma == '')){
+      mensaje = 'No se ingresó nombre';
+      valido = false;
+    }
+
+
+    //Estos campos no requieren validación
+    //this.clienteActual.telefono
+    //this.clienteActual.direccion
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    return valido;
+
+
+
   }
 
 

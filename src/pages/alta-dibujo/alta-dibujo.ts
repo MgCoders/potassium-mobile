@@ -1,5 +1,5 @@
 import {Component, Renderer, ViewChild} from '@angular/core';
-import {IonicPage, Keyboard, NavController, NavParams, Platform} from 'ionic-angular';
+import {IonicPage, Keyboard, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 
 /**
  * Generated class for the AltaDibujoPage page.
@@ -15,7 +15,7 @@ import {IonicPage, Keyboard, NavController, NavParams, Platform} from 'ionic-ang
 })
 export class AltaDibujoPage {
 
-  rol: string;
+
   nombreDibujo: string;
   @ViewChild('myCanvas') canvas: any;
   @ViewChild('imgBk') image: any;
@@ -41,13 +41,23 @@ export class AltaDibujoPage {
               public navParams: NavParams,
               public platform: Platform,
               public keyboard: Keyboard,
-              public renderer: Renderer) {
-    this.rol = this.navParams.get("rol");
-    //this.background = '../../assets/imgs/auto.png';
+              public renderer: Renderer,
+              private toastCtrl: ToastController) {
+
+    //this.background = '../../assets/imgs/Camión_eje_simple_con_tanque.png';
 
     this.dibujoEquipoRecepcion = navParams.data['dibujoEquipoRecepcion'];
     let bck = navParams.data['backgroundDibujo'];
-    this.background = (bck == '') ? '../../assets/imgs/auto.png' : bck;
+    if (bck == "Camion"){
+      bck = 'assets/imgs/Camión_eje_simple_con_tanque.png';
+    }
+    if (bck == "Camion"){
+      bck = 'assets/imgs/Camión_eje_simple_con_tanque.png';
+    }
+    if (bck == "Camion"){
+      bck = 'assets/imgs/Camión_eje_simple_con_tanque.png';
+    }
+    this.background = (bck == '') ? 'assets/imgs/Camión_eje_simple_con_tanque.png' : bck;
     this.dibujoAncho = navParams.data['dibujoAncho'];
     this.dibujoAlto = navParams.data['dibujoAlto'];
 
@@ -203,16 +213,67 @@ export class AltaDibujoPage {
   confirmarDibujo(){
     console.log("lo exporto");
 
+    this.dibujoEquipoRecepcion =  this.canvasElement.toDataURL();
+
+    if(!this.validarCamposAltaDibujo()) {
+      return;
+    }
+
     console.log(this.canvasElement.toDataURL());
 
 
     this.callback = this.navParams.get("callback");
-    let data = {dibujoEquipoRecepcion: this.canvasElement.toDataURL(),
+    let data = {dibujoEquipoRecepcion: this.dibujoEquipoRecepcion,
                 dibujoAncho: this.dibujoAncho,
                 dibujoAlto: this.dibujoAlto};
     this.callback(data).then(()=>{
       this.navCtrl.pop();
     });
+
+  }
+
+
+  validarCamposAltaDibujo(){
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+    console.log("Validando dibujoEquipoRecepcion: ", this.dibujoEquipoRecepcion);
+    console.log("Validando dibujoAncho: ", this.dibujoAncho);
+    console.log("Validando dibujoAlto: ", this.dibujoAlto);
+
+
+
+    if(valido && (this.dibujoEquipoRecepcion == undefined || this.dibujoEquipoRecepcion == '')){
+      mensaje = 'No se ingresó nada';
+      valido = true;
+    }
+    if(valido && (this.dibujoAncho == undefined || this.dibujoAncho == 0)){
+      mensaje = 'Ocurrió un error con el tamaño de la imagen';
+      valido = false;
+    }
+    if(valido && (this.dibujoAlto == undefined || this.dibujoAlto == 0)){
+      mensaje = 'Ocurrió un error con el tamaño de la imagen';
+      valido = false;
+    }
+
+    //Estos campos no requieren validación
+    //this.clienteActual.telefono
+    //this.clienteActual.direccion
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    return valido;
+
+
 
   }
 

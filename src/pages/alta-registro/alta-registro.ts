@@ -306,9 +306,20 @@ export class AltaRegistroPage {
     console.log('Registro antes');
     console.log(this.registroActual);
 
+
+
+    if(!this.validarCamposAltaRegistro()) {
+      return;
+    }
+
+
+
+
+
+
+
+
     loading_ar_5.present();
-
-
 
     if (!this.editar) {
       this.registroService.create(this.registroActual).subscribe(
@@ -343,4 +354,66 @@ export class AltaRegistroPage {
 
 
   }
+
+
+
+
+  validarCamposAltaRegistro(){
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+
+    console.log("Validando hoy: ", this.registroActual.fecha);
+    console.log("Validando hoy: ", this.registroActual.minutos);
+    console.log("Validando hoy: ", this.registroActual.usuario);
+    console.log("Validando hoy: ", this.registroActual.rubro);
+    console.log("Validando hoy: ", this.registroActual.tarea);
+
+
+
+
+    if(valido && (this.registroActual.fecha == undefined || !this.registroActual.fecha.match(/\d\d-\d\d-\d\d\d\d \d\d:\d\d/g))){
+      mensaje = 'Formato de fecha inválido';
+      valido = false;
+    }
+    if(valido && (this.registroActual.minutos == undefined || this.registroActual.minutos == 0)){
+      mensaje = 'No se ingresó minutos';
+      valido = false;
+    }
+    if(valido && (this.registroActual.usuario == undefined || this.registroActual.usuario.id == undefined)){
+      mensaje = 'No se ingresó usuario';
+      valido = false;
+    }
+    if(valido && (this.registroActual.rubro == undefined || this.registroActual.rubro.id == undefined)){
+      mensaje = 'No se ingresó rubro';
+      valido = false;
+    }
+    if(valido && (this.registroActual.tarea == undefined || this.registroActual.tarea.id == undefined)){
+      mensaje = 'No se ingresó tarea';
+      valido = false;
+    }
+
+    //Estos campos no requieren validación
+    //this.clienteActual.telefono
+    //this.clienteActual.direccion
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    return valido;
+
+
+
+  }
+
+
+
 }
