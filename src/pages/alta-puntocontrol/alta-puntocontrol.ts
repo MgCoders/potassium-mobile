@@ -10,7 +10,7 @@ import {Trabajo} from "../../app/_models/Trabajo";
 import {UsuarioImp} from "../../app/_models/UsuarioImp";
 
 /**
- * Generated class for the AltaTareaPage page.
+ * Generated class for the AltaPuntoControl page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -18,15 +18,17 @@ import {UsuarioImp} from "../../app/_models/UsuarioImp";
 
 @IonicPage()
 @Component({
-  selector: 'page-alta-tarea',
-  templateUrl: 'alta-tarea.html',
+  selector: 'page-alta-puntocontrol',
+  templateUrl: 'alta-puntocontrol.html',
 })
-export class AltaTareaPage {
+export class AltaPuntoControlPage {
 
-  tareaActual: Tarea;
-  trabajoSeleccionado : number;
-  editar : boolean = false;
   trabajoActual: Trabajo;
+  editar : boolean = false;
+
+
+  pcSeleccionado : number;
+  pcActual: PuntoControl;
   listaPC: PuntoControl[];
 
   constructor(public navCtrl: NavController,
@@ -34,31 +36,30 @@ export class AltaTareaPage {
               //private as: AlertController,
               private pcService: PuntoControlService,
               public loadingCtrl: LoadingController,
-              private tareaService: TareaService,
               private toastCtrl: ToastController,
               public events: Events) {
 
-    this.trabajoSeleccionado = this.navParams.data['idTrabajo'];
+    //this.trabajoSeleccionado = this.navParams.data['idTrabajo'];
+    this.pcSeleccionado = this.navParams.data['idPc'];
+    this.trabajoActual = this.navParams.data['trabajoActual'];
 
-    this.editar = (this.trabajoSeleccionado != undefined);
+    this.editar = (this.pcSeleccionado != undefined);
 
     console.log("es edición:", this.editar);
 
-    this.trabajoActual = this.navParams.data['trabajoActual'];
+    //this.trabajoActual = this.navParams.data['trabajoActual'];
 
 
-    if(this.tareaActual == undefined) {
+    if(this.pcActual == undefined) {
       let tareas = new Array();
       let usuario = new UsuarioImp({    email: "", nombre: "", role: "", password: "" });
-      let pc = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas});
-      this.tareaActual = new TareaImp({nombre: "", descripcion:"",minutosEstimados: 0, puntoControl: pc});
-
+      this.pcActual = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas});
     }
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AltaTareaPage');
+    console.log('ionViewDidLoad AltaPuntoControlPage');
   }
 
 
@@ -70,58 +71,60 @@ export class AltaTareaPage {
 
     //console.log('ionViewDidLoad SeleccionaEquipoPage');
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
-    let loading_lt = this.loadingCtrl.create({
+    let loading_apc = this.loadingCtrl.create({
       content: 'Cargando la lista de equipos...'
     });
-    let toastCorrecto_lt = this.toastCtrl.create({
+    let toastCorrecto_apc = this.toastCtrl.create({
       message: 'Lista cargada correctamente!',
       duration: 3000,
       position: 'bottom'
     });
-    let toastError_lt = this.toastCtrl.create({
+    let toastError_apc = this.toastCtrl.create({
       message: 'Error al obtener la lista de equipos..',
       duration: 3000,
       position: 'bottom'
     });
 
 
-    loading_lt.present();
-    this.pcService.getByTrabajo(this.trabajoSeleccionado).subscribe(
+    if (this.editar){
 
-      (data) => {
-        loading_lt.dismissAll();
 
-        console.log("P.C. por trabajo:", data);
+      loading_apc.present();
+      this.pcService.find(this.pcSeleccionado).subscribe(
 
-        //Obtengo la lista desde el server con lo último
-        data.forEach (pc => {
-          this.listaPC.push(new PuntoControlImp(pc));
+        (data) => {
+          loading_apc.dismissAll();
+
+          console.log("P.C. traido desde la API:", data);
+
+          //Obtengo la lista desde el server con lo último
+
+          this.pcActual = new PuntoControlImp(data);
+
+          console.log("pc después del llamado:",this.pcActual);
+          toastCorrecto_apc.present();
+        },
+        (error) => {
+          loading_apc.dismissAll();
+          toastError_apc.setMessage(error.toString());
+          toastError_apc.present();
         });
-
-        console.log("lista pc:",this.listaPC);
-        toastCorrecto_lt.present();
-      },
-      (error) => {
-        loading_lt.dismissAll();
-        toastError_lt.setMessage(error.toString());
-        toastError_lt.present();
-      });
-
+    }
   }
 
-  guardarTarea() {
+  guardarPC() {
 
 
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
-    let loading_at_2 = this.loadingCtrl.create({
+    let loading_apc_2 = this.loadingCtrl.create({
       content: 'Procesando...'
     });
-    let toastCorrecto_at_2 = this.toastCtrl.create({
+    let toastCorrecto_apc_2 = this.toastCtrl.create({
       message: 'Datos cargados correctamente!',
       duration: 3000,
       position: 'bottom'
     });
-    let toastError_at_2 = this.toastCtrl.create({
+    let toastError_apc_2 = this.toastCtrl.create({
       message: 'Error al cargar datos..',
       duration: 3000,
       position: 'bottom'
@@ -129,39 +132,39 @@ export class AltaTareaPage {
 
     console.log("lo exporto");
 
-    if(!this.validarCamposAltaTarea()) {
+    if(!this.validarCamposAltaPuntoControl()) {
       return;
     }
 
 
-    loading_at_2.present();
+    loading_apc_2.present();
     if (!this.editar) {
-      this.tareaService.create(this.tareaActual).subscribe(
+      this.pcService.create(this.pcActual).subscribe(
         (data) => {
-          toastCorrecto_at_2.present();
-          loading_at_2.dismissAll();
-          this.tareaActual = new TareaImp(data);
+          toastCorrecto_apc_2.present();
+          loading_apc_2.dismissAll();
+          this.pcActual = new PuntoControlImp(data);
           this.navCtrl.pop();
         },
         (error) => {
-          toastError_at_2.setMessage(error);
-          toastError_at_2.present();
+          toastError_apc_2.setMessage(error);
+          toastError_apc_2.present();
         });
     } else {
-      this.tareaService.edit(this.tareaActual).subscribe(
+      this.pcService.edit(this.pcActual).subscribe(
         (data) => {
-          toastCorrecto_at_2.present();
-          loading_at_2.dismissAll();
-          this.tareaActual = new TareaImp(data);
+          toastCorrecto_apc_2.present();
+          loading_apc_2.dismissAll();
+          this.pcActual = new PuntoControlImp(data);
           this.navCtrl.pop();
         },
         (error) => {
-          toastError_at_2.setMessage(error);
-          toastError_at_2.present();
+          toastError_apc_2.setMessage(error);
+          toastError_apc_2.present();
         });
     }
     console.log('Cliente después');
-    console.log(this.tareaActual);
+    console.log(this.pcActual);
 
   }
 
@@ -169,7 +172,7 @@ export class AltaTareaPage {
 
 
 
-  validarCamposAltaTarea(){
+  validarCamposAltaPuntoControl(){
 
     let toastError_ck = this.toastCtrl.create({
       message: 'Error en los campos!',
@@ -184,10 +187,11 @@ export class AltaTareaPage {
 
 
 
-    console.log("Validando puntoControl: ", this.tareaActual.puntoControl);
-    console.log("Validando minutosEstimados: ", this.tareaActual.minutosEstimados);
-    console.log("Validando descripcion: ", this.tareaActual.descripcion);
-    console.log("Validando nombre: ", this.tareaActual.nombre);
+    console.log("Validando puntoControl: ", this.pcActual.orden);
+    console.log("Validando minutosEstimados: ", this.pcActual.tareas);
+    console.log("Validando descripcion: ", this.pcActual.responsable);
+    console.log("Validando nombre: ", this.pcActual.nombre);
+    console.log("Validando nombre: ", this.pcActual.trabajo);
 
 
 

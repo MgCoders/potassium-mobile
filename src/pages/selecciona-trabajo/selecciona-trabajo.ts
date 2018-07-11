@@ -136,7 +136,7 @@ export class SeleccionaTrabajoPage {
 
 
   verPuntosDeControl(id: number){
-    this.navCtrl.push(ListaPuntocontrolPage, {id:id});
+    this.navCtrl.push(ListaPuntocontrolPage, {id:id, trabajoActual:this.trabajoActual});
   }
 
   verTareas(id: number){

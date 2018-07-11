@@ -14,40 +14,27 @@
 
 
 <ion-content padding hide-header [header]="head">
-  <ion-list>
-    <ion-item>
-      <ion-thumbnail (click)="seleccionarPuntoControl()" item-start>
-        <img src="assets/imgs/control.jpg">
-      </ion-thumbnail>
-      <h2 (click)="seleccionarPuntoControl()">Revisar limpio</h2>
-      <p (click)="seleccionarPuntoControl()">Sin mugre</p>
-      <button ion-button clear item-end (click)="editarPuntoControl()">Editar</button>
-    </ion-item>
+  <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="lista?.length == 0">
+    <ion-card>
+      <b>Este trabajo aún no cuenta con puntos de control ingresados...</b>
+    </ion-card>
+  </ion-col>
+  <ion-col col-12 col-md-6 offset-md-3 *ngIf="lista?.length != 0">
+    <ion-list>
+      <ion-item *ngFor="let pc of lista ">
+        <ion-thumbnail (click)="seleccionarPuntoControl(pc.id)" item-start>
+          <img src="assets/imgs/control.jpg">
+        </ion-thumbnail>
+        <h2 (click)="seleccionarPuntoControl(pc.id)">{{pc.orden}} - {{pc.nombre}}</h2>
+        <p (click)="seleccionarPuntoControl(pc.id)">{{pc.responsable}}</p>
+        <button ion-button clear item-end (click)="editarPuntoControl(pc.id)">Editar</button>
+      </ion-item>
 
-    <ion-item>
-      <ion-thumbnail (click)="seleccionarPuntoControl()" item-start>
-        <img src="assets/imgs/control.jpg">
-      </ion-thumbnail>
-      <h2 (click)="seleccionarPuntoControl()">Cortar aluminio</h2>
-      <p (click)="seleccionarPuntoControl()">En cubitos de 40x40</p>
-      <button ion-button clear item-end (click)="editarPuntoControl()">Editar</button>
-    </ion-item>
+    </ion-list>
+  </ion-col>
 
-    <ion-item>
-      <ion-thumbnail (click)="seleccionarPuntoControl()" item-start>
-        <img src="assets/imgs/control.jpg">
-      </ion-thumbnail>
-      <h2 (click)="seleccionarPuntoControl()">Doblar los cortes</h2>
-      <p (click)="seleccionarPuntoControl()">45 grados norte->sur</p>
-      <button ion-button clear item-end (click)="editarPuntoControl()">Editar</button>
-    </ion-item>
+  <ion-fab right bottom >
+    <button ion-fab color="" (click)="nuevoPuntoControl()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 
-    <ion-item>
-      <button ion-button outline item-end icon-left (click)="nuevoPuntoControl()">
-        <ion-icon name="add"></ion-icon>
-        Agregar nuevo cliente
-      </button>
-    </ion-item>
-
-  </ion-list>
 </ion-content>

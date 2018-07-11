@@ -105,7 +105,6 @@ export class AltaFirmaPage {
       return;
     }
 
-    console.log(this.canvasElement.toDataURL());
 
 
     this.callback = this.navParams.get("callback");
