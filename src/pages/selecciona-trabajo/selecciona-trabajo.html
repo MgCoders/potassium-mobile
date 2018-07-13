@@ -23,7 +23,7 @@
       Fecha de recepcion: {{trabajoActual.fechaRecepcion}}
     </ion-item>
     <ion-item>
-      Creado por: {{trabajoActual.nombreEmpleadoRecepcion}}
+      Creado por: {{(trabajoActual.nombreEmpleadoRecepcion != undefined) ? trabajoActual.nombreEmpleadoRecepcion : "SIN INGRESAR"}}
     </ion-item>
     <ion-item>
       Estado actual: {{trabajoActual.estado}}

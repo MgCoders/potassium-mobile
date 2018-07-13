@@ -26,7 +26,7 @@
           <img src="assets/imgs/control.jpg">
         </ion-thumbnail>
         <h2 (click)="seleccionarPuntoControl(pc.id)">{{pc.orden}} - {{pc.nombre}}</h2>
-        <p (click)="seleccionarPuntoControl(pc.id)">{{pc.responsable}}</p>
+        <p (click)="seleccionarPuntoControl(pc.id)"> Responsable: {{(pc.responsable == undefined || pc.responsable.nombre == undefined) ? "Sin nombre" : pc.responsable.nombre}}</p>
         <button ion-button clear item-end (click)="editarPuntoControl(pc.id)">Editar</button>
       </ion-item>
 

@@ -18,6 +18,7 @@ export class PuntoControlImp implements PuntoControl {
     tareas?: Tarea[];
 
     constructor(x: PuntoControl) {
+        this.id = x.id;
         this.nombre = x.nombre;
         this.responsable = x.responsable;
         this.orden = x.orden;

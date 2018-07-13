@@ -101,7 +101,7 @@ export class ListaTareaPage {
     this.navCtrl.push(AltaTareaPage, {idTrabajo: this.trabajoSeleccionado, trabajoActual: this.navParams.data['trabajoActual']})
   }
 
-  editarTarea() {
-
+  editarTarea(id:number) {
+    this.navCtrl.push(AltaTareaPage, {idTrabajo: this.trabajoSeleccionado, trabajoActual: this.navParams.data['trabajoActual'], tareaActual: id})
   }
 }

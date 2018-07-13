@@ -31,7 +31,7 @@
             <p (click)="seleccionarTarea(tarea.id)">
                 {{tarea.nombre}} <br>
                 Minutos estimados: {{tarea.minutosEstimados}}
-                PC: {{tarea.puntoControl}}
+                PC: {{tarea.puntoControl.id}} - {{tarea.puntoControl.nombre}}
             </p>
             <button ion-button clear item-end (click)="editarTarea(tarea.id)"></button>
           </ion-item>

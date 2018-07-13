@@ -25,6 +25,7 @@ export class AltaTareaPage {
 
   tareaActual: Tarea;
   trabajoSeleccionado : number;
+  tareaSeleccionada : number;
   editar : boolean = false;
   trabajoActual: Trabajo;
   listaPC: PuntoControl[];
@@ -39,8 +40,13 @@ export class AltaTareaPage {
               public events: Events) {
 
     this.trabajoSeleccionado = this.navParams.data['idTrabajo'];
+    console.log("this.trabajoSeleccionado:", this.trabajoSeleccionado);
 
-    this.editar = (this.trabajoSeleccionado != undefined);
+    this.tareaSeleccionada = this.navParams.data['id'];
+    console.log("this.tareaSeleccionada:", this.tareaSeleccionada);
+
+
+    this.editar = (this.tareaSeleccionada != undefined);
 
     console.log("es edición:", this.editar);
 
@@ -66,12 +72,12 @@ export class AltaTareaPage {
 
     //Limpio la lista
     this.listaPC = [];
-    console.log("Entro a la lista de equipos");
+    console.log("Entro a alta tarea");
 
     //console.log('ionViewDidLoad SeleccionaEquipoPage');
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
     let loading_lt = this.loadingCtrl.create({
-      content: 'Cargando la lista de equipos...'
+      content: 'Cargando la lista de pc...'
     });
     let toastCorrecto_lt = this.toastCtrl.create({
       message: 'Lista cargada correctamente!',
@@ -79,7 +85,7 @@ export class AltaTareaPage {
       position: 'bottom'
     });
     let toastError_lt = this.toastCtrl.create({
-      message: 'Error al obtener la lista de equipos..',
+      message: 'Error al obtener la lista..',
       duration: 3000,
       position: 'bottom'
     });
@@ -107,25 +113,46 @@ export class AltaTareaPage {
         toastError_lt.present();
       });
 
+
+    let loading_lt_2 = this.loadingCtrl.create({
+      content: 'Cargando la tarea...'
+    });
+    let toastCorrecto_lt_2 = this.toastCtrl.create({
+      message: 'Lista cargada correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastError_lt_2 = this.toastCtrl.create({
+      message: 'Error al obtener la lista de equipos..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    if (this.editar) {
+      loading_lt_2.present();
+      this.tareaService.get(this.tareaSeleccionada).subscribe(
+        (data) => {
+          loading_lt_2.dismissAll();
+
+          console.log("Tarea traidea desde el server:", data);
+
+          //Obtengo la lista desde el server con lo último
+          this.tareaActual = new TareaImp(data);
+
+          console.log("tareaActual:", this.tareaActual);
+          toastCorrecto_lt_2.present();
+        },
+        (error) => {
+          loading_lt.dismissAll();
+          toastError_lt_2.setMessage(error.toString());
+          toastError_lt_2.present();
+        });
+    }
   }
 
   guardarTarea() {
 
-
-    //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
-    let loading_at_2 = this.loadingCtrl.create({
-      content: 'Procesando...'
-    });
-    let toastCorrecto_at_2 = this.toastCtrl.create({
-      message: 'Datos cargados correctamente!',
-      duration: 3000,
-      position: 'bottom'
-    });
-    let toastError_at_2 = this.toastCtrl.create({
-      message: 'Error al cargar datos..',
-      duration: 3000,
-      position: 'bottom'
-    });
 
     console.log("lo exporto");
 
@@ -134,30 +161,23 @@ export class AltaTareaPage {
     }
 
 
-    loading_at_2.present();
+    console.log("this.editar: ", this.editar);
+
     if (!this.editar) {
       this.tareaService.create(this.tareaActual).subscribe(
         (data) => {
-          toastCorrecto_at_2.present();
-          loading_at_2.dismissAll();
           this.tareaActual = new TareaImp(data);
           this.navCtrl.pop();
         },
         (error) => {
-          toastError_at_2.setMessage(error);
-          toastError_at_2.present();
         });
     } else {
       this.tareaService.edit(this.tareaActual).subscribe(
         (data) => {
-          toastCorrecto_at_2.present();
-          loading_at_2.dismissAll();
           this.tareaActual = new TareaImp(data);
           this.navCtrl.pop();
         },
         (error) => {
-          toastError_at_2.setMessage(error);
-          toastError_at_2.present();
         });
     }
     console.log('Cliente después');
@@ -193,22 +213,22 @@ export class AltaTareaPage {
 
     if(valido && (this.tareaActual.puntoControl == undefined || this.tareaActual.puntoControl.id == undefined)){
       mensaje = 'Error en el punto de control';
-      valido = true;
+      valido = false;
     }
 
     if(valido && (this.tareaActual.minutosEstimados == undefined || this.tareaActual.minutosEstimados == 0)){
       mensaje = 'No se ingresó minutosEstimados';
-      valido = true;
+      valido = false;
     }
 
     if(valido && (this.tareaActual.descripcion == undefined || this.tareaActual.descripcion == "")){
       mensaje = 'No se ingresó descripcion';
-      valido = true;
+      valido = false;
     }
 
     if(valido && (this.tareaActual.nombre == undefined || this.tareaActual.nombre == "")){
       mensaje = 'No se ingresó nombre';
-      valido = true;
+      valido = false;
     }
 
     //Estos campos no requieren validación

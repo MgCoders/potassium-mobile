@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import {IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 
 import {RecepcionPage} from "../recepcion/recepcion";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -31,7 +31,8 @@ export class LoginPage {
               public navParams: NavParams,
               private authService: AuthService,
               private formBuilder: FormBuilder,
-              public menu: MenuController) {
+              public menu: MenuController,
+              private toastCtrl: ToastController) {
 
     this.menu.enable(false);
   }
@@ -65,6 +66,12 @@ export class LoginPage {
   login() {
     //this.navCtrl.setRoot(RecepcionPage, {});
 
+    if(!this.validateLogin()) {
+      return;
+    }
+
+
+
     this.formSubmitted = true;
     this.authService.login(this.model.email, this.model.password)
       .subscribe(
@@ -78,8 +85,8 @@ export class LoginPage {
           } ,
         (err) => {
             console.log('NO LOG');
-            console.log(JSON.stringify(err));
-            console.log('mail: '+this.model.email+' - pass: '+this.model.password);
+            //console.log(JSON.stringify(err));
+            //console.log('mail: '+this.model.email+' - pass: '+this.model.password);
             this.onResetForm();
           }
         );
@@ -91,8 +98,45 @@ export class LoginPage {
     this.validationForm.reset();
   }
 
-  //validateLogin(){
-    //this.navCtrl.setRoot(RecepcionPage, {});
-  //}
+
+
+  validateLogin(){
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+
+
+
+    console.log("Validando Campos: ");
+
+
+    if(valido && (this.model.email == undefined || this.model.email == "")){
+      mensaje = 'No se ingresó email';
+      valido = false;
+    }
+
+
+    if(valido && (this.model.password == undefined || this.model.password == "")){
+      mensaje = 'No se ingresó contraseña';
+      valido = false;
+    }
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    return valido;
+
+
+  }
+
+
 
 }

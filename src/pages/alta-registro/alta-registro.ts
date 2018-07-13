@@ -380,7 +380,8 @@ export class AltaRegistroPage {
 
 
 
-    if(valido && (this.registroActual.fecha == undefined || !this.registroActual.fecha.match(/\d\d-\d\d-\d\d\d\d \d\d:\d\d/g))){
+    //if(valido && (this.registroActual.fecha == undefined || !this.registroActual.fecha.match(/\d\d-\d\d-\d\d\d\d \d\d:\d\d/g))){
+    if(valido && (this.registroActual.fecha == undefined || !this.registroActual.fecha.match(/\d\d-\d\d-\d\d\d\d/g))){
       mensaje = 'Formato de fecha inválido';
       valido = false;
     }

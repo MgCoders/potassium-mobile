@@ -7,6 +7,7 @@ import {PuntoControlImp} from "../../app/_models/PuntoControlImp";
 import {PuntoControl} from "../../app/_models/PuntoControl";
 import {AltaPuntoControlPage} from "../alta-puntocontrol/alta-puntocontrol";
 import {Trabajo} from "../../app/_models/Trabajo";
+import {TrabajoImp} from "../../app/_models/TrabajoImp";
 
 /**
  * Generated class for the ListaPuntocontrolPage page.
@@ -42,19 +43,25 @@ export class ListaPuntocontrolPage {
   ionViewWillEnter() {
 
     this.trabajoSeleccionado = this.navParams.data['idTrabajo'];
+    var jstrab = JSON.parse(this.navParams.data.trabajoActual);
+    console.log("jstrab: "+jstrab);
 
     //Cargo el trabajo, en teoría debería ser siempre el mismo
-    this.trabajoActual = this.navParams.data['trabajoActual'];
+    this.trabajoActual = new TrabajoImp(jstrab);
 
+
+    console.log("this.navParams: "+this.navParams);
+    console.log("trabajoSeleccionado: "+this.trabajoSeleccionado);
+    console.log("trabajoActual: "+this.trabajoActual);
 
     //Limpio la lista
     this.lista = [];
-    console.log("Entro a la lista de equipos");
+    console.log("Entro a la lista pc");
 
     //console.log('ionViewDidLoad SeleccionaEquipoPage');
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
     let loading_lt = this.loadingCtrl.create({
-      content: 'Cargando la lista de tareas...'
+      content: 'Cargando la lista de puntos de control...'
     });
     let toastCorrecto_lt = this.toastCtrl.create({
       message: 'Lista cargada correctamente!',
@@ -62,7 +69,7 @@ export class ListaPuntocontrolPage {
       position: 'bottom'
     });
     let toastError_lt = this.toastCtrl.create({
-      message: 'Error al obtener la lista de tareas..',
+      message: 'Error al obtener la lista..',
       duration: 3000,
       position: 'bottom'
     });

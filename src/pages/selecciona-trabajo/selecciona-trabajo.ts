@@ -118,7 +118,7 @@ export class SeleccionaTrabajoPage {
           toastCorrecto.present();
           loading.dismissAll();
           this.trabajoActual = data;
-          console.log("adentro",this.trabajoActual);
+          console.log("Cargo el trabajo: ",this.trabajoActual);
         },
         (error) => {
           toastError.setMessage(error);
@@ -136,7 +136,7 @@ export class SeleccionaTrabajoPage {
 
 
   verPuntosDeControl(id: number){
-    this.navCtrl.push(ListaPuntocontrolPage, {id:id, trabajoActual:this.trabajoActual});
+    this.navCtrl.push(ListaPuntocontrolPage, {idTrabajo:this.trabajoActual.id, trabajoActual:JSON.stringify(this.trabajoActual)});
   }
 
   verTareas(id: number){

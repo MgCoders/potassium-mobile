@@ -1,13 +1,12 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Events, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
-import {TareaService} from "../../app/_services/tarea.service";
-import {Tarea} from "../../app/_models/Tarea";
 import {PuntoControl} from "../../app/_models/PuntoControl";
 import {PuntoControlService} from "../../app/_services/punto-control.service";
-import {TareaImp} from "../../app/_models/TareaImp";
 import {PuntoControlImp} from "../../app/_models/PuntoControlImp";
 import {Trabajo} from "../../app/_models/Trabajo";
 import {UsuarioImp} from "../../app/_models/UsuarioImp";
+import {UsuarioService} from "../../app/_services/usuario.service";
+import {Usuario} from "../../app/_models/Usuario";
 
 /**
  * Generated class for the AltaPuntoControl page.
@@ -30,11 +29,14 @@ export class AltaPuntoControlPage {
   pcSeleccionado : number;
   pcActual: PuntoControl;
   listaPC: PuntoControl[];
+  listaUsuarios: Usuario[];
+
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               //private as: AlertController,
               private pcService: PuntoControlService,
+              private usuarioService: UsuarioService,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events) {
@@ -55,6 +57,31 @@ export class AltaPuntoControlPage {
       let usuario = new UsuarioImp({    email: "", nombre: "", role: "", password: "" });
       this.pcActual = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas});
     }
+
+
+
+    let toastError_ar_4 = this.toastCtrl.create({
+      message: 'Error al cargar datos..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    this.listaUsuarios = [];
+    console.log("Traigo la lista de usuarios.");
+    this.usuarioService.getAll().subscribe(
+      (data) => {
+        data.forEach( (usr) => {
+
+          this.listaUsuarios.push( new UsuarioImp(usr));
+        })
+        console.log("Lista de usuarios después:", this.listaUsuarios);
+      },
+      (error) => {
+        toastError_ar_4.setMessage(error);
+        toastError_ar_4.present();
+      });
+
 
   }
 
@@ -194,25 +221,20 @@ export class AltaPuntoControlPage {
     console.log("Validando nombre: ", this.pcActual.trabajo);
 
 
-
-    if(valido && (this.tareaActual.puntoControl == undefined || this.tareaActual.puntoControl.id == undefined)){
-      mensaje = 'Error en el punto de control';
-      valido = true;
-    }
-
-    if(valido && (this.tareaActual.minutosEstimados == undefined || this.tareaActual.minutosEstimados == 0)){
-      mensaje = 'No se ingresó minutosEstimados';
-      valido = true;
-    }
-
-    if(valido && (this.tareaActual.descripcion == undefined || this.tareaActual.descripcion == "")){
-      mensaje = 'No se ingresó descripcion';
-      valido = true;
-    }
-
-    if(valido && (this.tareaActual.nombre == undefined || this.tareaActual.nombre == "")){
+    if(valido && (this.pcActual.nombre == undefined || this.pcActual.nombre == "")){
       mensaje = 'No se ingresó nombre';
-      valido = true;
+      valido = false;
+    }
+
+    if(valido && (this.pcActual.orden == undefined || this.pcActual.orden.toString() == "")){
+      mensaje = 'No tiene orden';
+      valido = false;
+    }
+
+
+    if(valido && (this.pcActual.responsable == undefined || this.pcActual.responsable.id == undefined)){
+      mensaje = 'No se ingresó responsable';
+      valido = false;
     }
 
     //Estos campos no requieren validación
@@ -226,23 +248,6 @@ export class AltaPuntoControlPage {
 
 
   }
-
-
-  @ViewChild('myInput') myInput: ElementRef;
-
-  resize() {
-    this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
-    console.log("comentarios: "+this.tareaActual.descripcion);
-  }
-
-
-
-
-
-
-
-
-
 
 
 

@@ -49,6 +49,7 @@ import {ListaRegistroPage} from "../pages/lista-registro/lista-registro";
 import {RubroService} from "./_services/rubro.service";
 import {UsuarioService} from "./_services/usuario.service";
 import {RegistroService} from "./_services/registro.service";
+import {AltaPuntoControlPage} from "../pages/alta-puntocontrol/alta-puntocontrol";
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import {RegistroService} from "./_services/registro.service";
     ModalEquipoPage,
     ModalCamposPage,
     AltaRegistroPage,
-    ListaRegistroPage
+    ListaRegistroPage,
+    AltaPuntoControlPage,
   ],
   imports: [
     BrowserModule,
@@ -124,7 +126,8 @@ import {RegistroService} from "./_services/registro.service";
     ModalEquipoPage,
     ModalCamposPage,
     AltaRegistroPage,
-    ListaRegistroPage
+    ListaRegistroPage,
+    AltaPuntoControlPage
   ],
   providers: [
     StatusBar,

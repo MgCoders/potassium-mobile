@@ -18,53 +18,41 @@
     <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
-          <ion-label color="primary" stacked>Nombre de la tarea</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="tareaActual.nombre">
-
+          <ion-label color="primary" stacked>Nombre del punto de control</ion-label>
+          <ion-input type="text" placeholder="..." [(ngModel)]="pcActual.nombre">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" stacked>Orden</ion-label>
+          <ion-input type="number" placeholder="..." [(ngModel)]="pcActual.orden">
           </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-12 col-md-6 offset-md-3 >
-        Comentarios generales de la tarea
-        <ion-card>
-          <ion-card-content>
-              <textarea #myInput
-                        id="myInput"
-                        rows="1"
-                        maxLength="500"
-                        (keyup)="resize()"
-                        [(ngModel)]="tareaActual.descripcion">
 
-              </textarea>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
 
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
-          <ion-label color="primary" stacked>Color</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="tareaActual.minutosEstimados">
-
-          </ion-input>
+          <ion-label>Asociado al trabajo</ion-label>
+          <ion-input text-right disabled [(ngModel)]="pcActual.trabajo.id"></ion-input>
         </ion-item>
       </ion-col>
+
       <ion-col col-12 col-md-6 offset-md-3>
-        <ion-item>
-          <ion-label color="primary" stacked>
-            Tipo de equipo
-          </ion-label>
-          <ion-select [(ngModel)]="tareaActual.puntoControl">
-            <ion-option *ngFor="let est of listaPC " [value]="est">
-              {{est.nombre}}
-            </ion-option>
-          </ion-select>
-        </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label>Responsable</ion-label>
+            <ion-icon name='md-clipboard' item-start></ion-icon>
+            <ion-select [(ngModel)]="pcActual.responsable">
+              <ion-option *ngFor="let usr of listaUsuarios " [value]="usr" >{{usr.nombre}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col col-4 offset-4>
-        <button [disabled]="(agregar === false)" ion-button full color="primary" (click)="guardarTarea()" >Confirmar</button>
+        <button ion-button full color="primary" (click)="guardarPC()" >Confirmar</button>
       </ion-col>
     </ion-row>
   </ion-grid>
