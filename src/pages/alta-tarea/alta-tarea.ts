@@ -55,9 +55,9 @@ export class AltaTareaPage {
 
     if(this.tareaActual == undefined) {
       let tareas = new Array();
-      let usuario = new UsuarioImp({    email: "", nombre: "", role: "", password: "" });
-      let pc = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas});
-      this.tareaActual = new TareaImp({nombre: "", descripcion:"",minutosEstimados: 0, puntoControl: pc});
+      let usuario = new UsuarioImp({    email: "", nombre: "", apellido: "", role: "", login: false, password: "" });
+      let pc = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas, verificado: false});
+      this.tareaActual = new TareaImp({nombre: "", descripcion:"",minutosEstimados: 0, puntoControl: pc, completa:  false});
 
     }
 

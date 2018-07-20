@@ -25,13 +25,14 @@
         <ion-list>
           <ion-item *ngFor="let tarea of lista ">
             <ion-thumbnail (click)="seleccionarTarea(tarea.id)" item-start>
-              <img src="assets/imgs/llave.png">
+              <img *ngIf="tarea?.completa" src="assets/imgs/tick.png">
+              <img *ngIf="!tarea?.completa" src="assets/imgs/llave.png">
             </ion-thumbnail>
             <h2 (click)="seleccionarTarea(tarea.id)">{{tarea.descripcion}}</h2>
             <p (click)="seleccionarTarea(tarea.id)">
                 {{tarea.nombre}} <br>
                 Minutos estimados: {{tarea.minutosEstimados}}
-                PC: {{tarea.puntoControl.id}} - {{tarea.puntoControl.nombre}}
+              PC: {{tarea.puntoControl.id}} - {{tarea.puntoControl.nombre}}
             </p>
             <button ion-button clear item-end (click)="editarTarea(tarea.id)"></button>
           </ion-item>

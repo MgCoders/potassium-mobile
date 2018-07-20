@@ -15,7 +15,7 @@ import { Material } from './Material';
 import {TipoEquipo} from "./TipoEquipo";
 
 export class TipoEquipoImp implements TipoEquipo {
-  id?: number;
+    id?: number;
 
     dibujo: string;
 

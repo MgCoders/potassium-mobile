@@ -93,65 +93,70 @@ export class ListaTrabajoPage {
 
 
 
-  showLoading() {
-    try {
-      this.loading.dismissAll();
-    } catch(e) {}
-
-    this.loading = this.loadingCtrl.create({
-      content: 'Cargando la lista de clientes...',
-      duration: 1000,
-    });
-    this.loading.present();
-  }
-
-
   ionViewWillEnter() {
     console.log('ionViewDidLoad ListaTrabajoPage');
     console.log('Tipo: '+this.navParams.data['tipo']);
     this.tipo = this.navParams.data['tipo'];
 
 
-    this.showLoading();
+    let loading_lt = this.loadingCtrl.create({
+      content: 'Cargando la lista de trabajos...'
+    });
+    let toastCorrecto_lt = this.toastCtrl.create({
+      message: 'Lista cargada correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastError_lt = this.toastCtrl.create({
+      message: 'Error al obtener la lista de tareas..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
 
     this.listaClientes = [];
     this.lista = [];
 
+    let estados_str = "";
     this.listaEstados.forEach(estado => {
-      console.log("estado a solicitar:",estado);
-      this.trabajoService.getByEstado(estado).subscribe(
+      estados_str += estado+",";
+    });
 
-        (data) => {
+    console.log("estados a solicitar:",estados_str);
 
-          //Obtengo la lista desde el server con lo último
-          data.forEach(
+    loading_lt.present();
+    this.trabajoService.getByEstados(estados_str).subscribe(
 
-            Trabajo => {
+      (data) => {
+        loading_lt.dismissAll();
 
-              this.lista.push(new TrabajoImp(Trabajo));
-              let c = new ClienteImp(Trabajo.cliente);
+        //Obtengo la lista desde el server con lo último
+        data.forEach(
 
-              this.listaClientes.push(c);
+          Trabajo => {
 
+            this.lista.push(new TrabajoImp(Trabajo));
+            let c = new ClienteImp(Trabajo.cliente);
 
-            }
-          );
-
-          console.log("listaClientes", this.listaClientes);
-          console.log("lista", this.lista);
-
-
-          this.lista.sort(function(a, b) {
-            return a.id - b.id;
-          });
+            this.listaClientes.push(c);
 
 
+          }
+        );
 
-        },
-        (error) => {
+        console.log("listaClientes", this.listaClientes);
+        console.log("lista", this.lista);
+
+
+        this.lista.sort(function(a, b) {
+          return a.id - b.id;
         });
 
-    } );
+        toastCorrecto_lt.present();
+
+      },
+      (error) => {
+      });
 
   }
 

@@ -10,9 +10,13 @@ export class UsuarioImp implements models.Usuario {
 
   nombre: string;
 
+  apellido: string;
+
   role: string;
 
   token?: string;
+
+  login: boolean;
 
   password: string;
 
@@ -26,9 +30,13 @@ export class UsuarioImp implements models.Usuario {
 
       this.nombre= x.nombre;
 
+      this.apellido= x.apellido;
+
       this.role= x.role;
 
       this.token = x.token;
+
+      this.login = x.login;
 
       this.password= x.password;
 

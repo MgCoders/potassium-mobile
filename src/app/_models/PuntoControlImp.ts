@@ -17,12 +17,15 @@ export class PuntoControlImp implements PuntoControl {
 
     tareas?: Tarea[];
 
+    verificado: boolean;
+
     constructor(x: PuntoControl) {
         this.id = x.id;
         this.nombre = x.nombre;
         this.responsable = x.responsable;
         this.orden = x.orden;
         this.trabajo = x.trabajo;
+        this.verificado = x.verificado;
         this.tareas = new Array();
         console.log("x",x);
         console.log("x.tareas",x.tareas);

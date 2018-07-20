@@ -2,16 +2,18 @@
 import * as models from './models';
 
 export interface PuntoControl {
-    id?: number;
+  id?: number;
 
-    nombre: string;
+  nombre: string;
 
-    trabajo: models.Trabajo;
+  trabajo: models.Trabajo;
 
-    responsable?: models.Usuario;
+  responsable?: models.Usuario;
 
-    orden: number;
+  orden: number;
 
-    tareas?: models.Tarea[];
+  tareas?: models.Tarea[];
+
+  verificado: boolean;
 
 }

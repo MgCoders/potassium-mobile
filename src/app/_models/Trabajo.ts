@@ -81,4 +81,8 @@ export interface Trabajo {
 
     nroOrdenCompra: number;
 
+
+    paraFinalizar: boolean;
+
+
 }
