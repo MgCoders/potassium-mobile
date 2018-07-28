@@ -93,7 +93,7 @@ export class AltaRegistroPage {
 
     let id = (this.registroActual_param != undefined) ? this.registroActual_param.id : undefined;
 
-    let user = new UsuarioImp({email: '',nombre:'', role: '', password:''});
+    let user = new UsuarioImp({email: '',nombre:'', apellido:"", role: '', password:'', login:false});
     let rub = new RubroImp( {nombre:'', descripcion: ''} )
     this.registroActual = (this.registroActual != undefined) ?
                             this.registroActual
@@ -399,6 +399,11 @@ export class AltaRegistroPage {
     }
     if(valido && (this.registroActual.tarea == undefined || this.registroActual.tarea.id == undefined)){
       mensaje = 'No se ingresó tarea';
+      valido = false;
+    }
+
+    if(valido && (this.registroActual.tarea == undefined || this.registroActual.tarea.completa == false)){
+      mensaje = 'La tarea ya está completa';
       valido = false;
     }
 

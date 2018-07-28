@@ -86,7 +86,7 @@ export class IngresarDetallesPage {
               private events: Events) {
 
     //seteo el fondo segun el tipo equipo!
-    this.background = "../../assets/imgs/auto.png";
+    this.background = "assets/imgs/Camión_eje_simple_con_tanque.png";
 
     this.recuperarTrabajo = this.navParams.data['recuperarTrabajo'];
 

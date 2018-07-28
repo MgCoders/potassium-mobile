@@ -27,8 +27,8 @@ export class PuntoControlImp implements PuntoControl {
         this.trabajo = x.trabajo;
         this.verificado = x.verificado;
         this.tareas = new Array();
-        console.log("x",x);
-        console.log("x.tareas",x.tareas);
+        //console.log("x",x);
+        // console.log("x.tareas",x.tareas);
 
         if(x.tareas != undefined){
           x.tareas.forEach(
@@ -36,8 +36,8 @@ export class PuntoControlImp implements PuntoControl {
                   this.tareas.push(new TareaImp(y));
               });
         }
-      console.log("Terminé de setear el punto de control", this);
-
+      console.log("Terminé de clonar el punto de control, original:", x);
+      console.log("Terminé de clonar el punto de control, nuevo:", this);
     }
 
 }

@@ -49,13 +49,16 @@ export class AltaPuntoControlPage {
 
     console.log("es edición:", this.editar);
 
+    console.log("Vino por param. pcSeleccionado:", this.pcSeleccionado);
+    console.log("Vino por param. trabajoActual:", this.trabajoActual);
+
     //this.trabajoActual = this.navParams.data['trabajoActual'];
 
 
     if(this.pcActual == undefined) {
       let tareas = new Array();
-      let usuario = new UsuarioImp({    email: "", nombre: "", role: "", password: "" });
-      this.pcActual = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas});
+      let usuario = new UsuarioImp({    email: "", nombre: "", apellido:"", role: "", password: "", login:false });
+      this.pcActual = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas, verificado: false});
     }
 
 
@@ -94,12 +97,12 @@ export class AltaPuntoControlPage {
 
     //Limpio la lista
     this.listaPC = [];
-    console.log("Entro a la lista de equipos");
+    console.log("Entro a la lista de PC");
 
     //console.log('ionViewDidLoad SeleccionaEquipoPage');
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
     let loading_apc = this.loadingCtrl.create({
-      content: 'Cargando la lista de equipos...'
+      content: 'Cargando la lista de PC...'
     });
     let toastCorrecto_apc = this.toastCtrl.create({
       message: 'Lista cargada correctamente!',
@@ -107,7 +110,7 @@ export class AltaPuntoControlPage {
       position: 'bottom'
     });
     let toastError_apc = this.toastCtrl.create({
-      message: 'Error al obtener la lista de equipos..',
+      message: 'Error al obtener la lista..',
       duration: 3000,
       position: 'bottom'
     });
@@ -123,10 +126,11 @@ export class AltaPuntoControlPage {
           loading_apc.dismissAll();
 
           console.log("P.C. traido desde la API:", data);
+          console.log("P.C. traido desde la API, data[0]:", data[0]);
 
           //Obtengo la lista desde el server con lo último
 
-          this.pcActual = new PuntoControlImp(data);
+          this.pcActual = new PuntoControlImp(data[0]);
 
           console.log("pc después del llamado:",this.pcActual);
           toastCorrecto_apc.present();

@@ -46,6 +46,10 @@ export class ListaPuntocontrolPage {
     var jstrab = JSON.parse(this.navParams.data.trabajoActual);
     console.log("jstrab: "+jstrab);
 
+
+
+
+
     //Cargo el trabajo, en teoría debería ser siempre el mismo
     this.trabajoActual = new TrabajoImp(jstrab);
 

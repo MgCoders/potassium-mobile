@@ -48,7 +48,7 @@ export class AltaEquipoPage {
       position: 'bottom'
     });
 
-    let te = new TipoEquipoImp({descripcion:'', dibujo: ''});
+    let te = new TipoEquipoImp({descripcion:'', dibujo: '', id:-1});
 
     //Inicializo en vacío
       this.equipoActual =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
@@ -95,6 +95,9 @@ export class AltaEquipoPage {
 
 
   guardarEquipo() {
+
+
+    this.equipoActual.tipoEquipo = this.listaTipoEquipo.find(  te => te.id === this.equipoActual.tipoEquipo.id );
 
 
     if(!this.validarCamposAltaEquipo()) {

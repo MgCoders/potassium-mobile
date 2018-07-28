@@ -23,7 +23,8 @@
     <ion-list>
       <ion-item *ngFor="let pc of lista ">
         <ion-thumbnail (click)="seleccionarPuntoControl(pc.id)" item-start>
-          <img src="assets/imgs/control.jpg">
+          <img *ngIf="pc?.verificado" src="assets/imgs/tick.png">
+          <img *ngIf="!pc?.verificado" src="assets/imgs/control.jpg">
         </ion-thumbnail>
         <h2 (click)="seleccionarPuntoControl(pc.id)">{{pc.orden}} - {{pc.nombre}}</h2>
         <p (click)="seleccionarPuntoControl(pc.id)"> Responsable: {{(pc.responsable == undefined || pc.responsable.nombre == undefined) ? "Sin nombre" : pc.responsable.nombre}}</p>

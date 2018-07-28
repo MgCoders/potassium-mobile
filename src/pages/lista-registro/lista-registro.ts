@@ -132,7 +132,7 @@ export class ListaRegistroPage {
 
         console.log("tarea:", this.tarea);
 
-        this.agregar = this.tarea != undefined;
+        this.agregar = (this.tarea != undefined) && (this.tarea.completa==false);
 
       },
       (error) => {

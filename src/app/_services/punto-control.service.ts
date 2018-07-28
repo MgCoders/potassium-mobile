@@ -13,8 +13,8 @@ export class PuntoControlService {
 
   constructor(public http: HttpClient) { }
 
-  find(id: number): Observable<PuntoControl> {
-    return this.http.get<PuntoControl>(`${environment.apiUrl}/puntoscontrol/` + id);
+  find(id: number): Observable<PuntoControl[]> {
+    return this.http.get<PuntoControl[]>(`${environment.apiUrl}/puntoscontrol/` + id);
   }
 
   getByTrabajo(idTrabajo: number): Observable<PuntoControl[]> {

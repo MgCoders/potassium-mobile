@@ -69,8 +69,8 @@
           <ion-label color="primary" stacked>
             Tipo de equipo
           </ion-label>
-          <ion-select [(ngModel)]="equipoActual.tipoEquipo">
-            <ion-option *ngFor="let est of listaTipoEquipo " [value]="est">
+          <ion-select [(ngModel)]="equipoActual.tipoEquipo.id">
+            <ion-option *ngFor="let est of listaTipoEquipo " [value]="est.id">
               {{est.descripcion}}
             </ion-option>
           </ion-select>

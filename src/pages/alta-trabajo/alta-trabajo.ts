@@ -448,7 +448,8 @@ export class AltaTrabajoPage {
         equipoVidriosLateralesSanos:false,
         dibujoEquipoRecepcion: '',
         dibujoAlto: 0,
-        dibujoAncho:0}
+        dibujoAncho:0,
+        paraFinalizar:false}
       );
     console.log('Todo Limpito');
     console.log(this.trabajoActual);

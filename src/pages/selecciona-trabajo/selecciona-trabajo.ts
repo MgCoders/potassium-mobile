@@ -101,7 +101,8 @@ export class SeleccionaTrabajoPage {
         equipoVidriosLateralesSanos:false,
         dibujoEquipoRecepcion: '',
         dibujoAlto: 0,
-        dibujoAncho:0}
+        dibujoAncho:0,
+        paraFinalizar: false}
       );
 
 
