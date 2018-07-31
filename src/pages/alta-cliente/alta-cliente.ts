@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Cliente} from "../../app/_models/Cliente";
 import {ClienteImp} from "../../app/_models/ClienteImp";
@@ -21,6 +21,22 @@ export class AltaClientePage {
 
   clienteActual: Cliente;
   editar: boolean;
+
+
+
+
+  @ViewChild('nombreEmpresa') VCnombreEmpresa ;
+  @ViewChild('rut') VCrut ;
+  @ViewChild('telefono') VCtelefono ;
+  @ViewChild('personaContacto') VCpersonaContacto ;
+  @ViewChild('telefonoContacto') VCtelefonoContacto ;
+  @ViewChild('emailEmpresa') VCemailEmpresa ;
+  @ViewChild('direccion') VCdireccion ;
+
+
+
+
+
 
   constructor(public navCtrl: NavController,
               private clienteServices: ClienteServices,
@@ -245,5 +261,64 @@ export class AltaClientePage {
     }
 
 
+
+
+    /*
+
+    @ViewChild('nombreEmpresa') VCnombreEmpresa ;
+    @ViewChild('rut') VCrut ;
+    @ViewChild('telefono') VCtelefono ;
+    @ViewChild('personaContacto') VCpersonaContacto ;
+    @ViewChild('telefonoContacto') VCtelefonoContacto ;
+    @ViewChild('emailEmpresa') VCemailEmpresa ;
+    @ViewChild('direccion') VCdireccion ;
+
+
+
+     */
+
+
+
+    //Functions to next input
+    goRUT_ac(){
+      setTimeout(() => {
+        this.VCrut.setFocus();
+      },150);
+    }
+
+    //Functions to next input
+    goTel_ac(){
+      setTimeout(() => {
+        this.VCtelefono.setFocus();
+      },150);
+    }
+
+    //Functions to next input
+    goPC_ac(){
+      setTimeout(() => {
+        this.VCpersonaContacto.setFocus();
+      },150);
+    }
+
+    //Functions to next input
+    goTC_ac(){
+      setTimeout(() => {
+        this.VCtelefonoContacto.setFocus();
+      },150);
+    }
+
+    //Functions to next input
+    goEE_ac(){
+      setTimeout(() => {
+        this.VCemailEmpresa.setFocus();
+      },150);
+    }
+
+    //Functions to next input
+    goDir_ac(){
+      setTimeout(() => {
+        this.VCdireccion.setFocus();
+      },150);
+    }
 
 }

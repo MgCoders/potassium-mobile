@@ -19,7 +19,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Nombre empresa</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.nombreEmpresa">
+          <ion-input #nombreEmpresa type="text" placeholder="..." [(ngModel)]="clienteActual.nombreEmpresa" (keyup.enter)="goRUT_ac()">
 
           </ion-input>
         </ion-item>
@@ -27,7 +27,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>RUT</ion-label>
-          <ion-input type="number" placeholder="..." [(ngModel)]="clienteActual.rut">
+          <ion-input #rut type="number" placeholder="..." [(ngModel)]="clienteActual.rut" (keyup.enter)="goTel_ac()">
 
           </ion-input>
         </ion-item>
@@ -35,7 +35,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Teléfono</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.telefono">
+          <ion-input #telefono type="text" placeholder="..." [(ngModel)]="clienteActual.telefono" (keyup.enter)="goPC_ac()">
 
           </ion-input>
         </ion-item>
@@ -43,7 +43,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Persona de contacto</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.personaContacto">
+          <ion-input #personaContacto type="text" placeholder="..." [(ngModel)]="clienteActual.personaContacto" (keyup.enter)="goTC_ac()">
 
           </ion-input>
         </ion-item>
@@ -51,7 +51,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Teléfono de contacto</ion-label>
-          <ion-input type="number" placeholder="..." [(ngModel)]="clienteActual.telefonoContacto">
+          <ion-input #telefonoContacto type="number" placeholder="..." [(ngModel)]="clienteActual.telefonoContacto" (keyup.enter)="goEE_ac()">
 
           </ion-input>
         </ion-item>
@@ -59,7 +59,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Email empresa</ion-label>
-          <ion-input type="email" placeholder="..." [(ngModel)]="clienteActual.emailEmpresa">
+          <ion-input #emailEmpresa type="email" placeholder="..." [(ngModel)]="clienteActual.emailEmpresa" (keyup.enter)="goDir_ac()">
 
           </ion-input>
         </ion-item>
@@ -67,7 +67,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Dirección</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="clienteActual.direccion">
+          <ion-input #direccion type="text" placeholder="..." [(ngModel)]="clienteActual.direccion">
           </ion-input>
         </ion-item>
       </ion-col>
