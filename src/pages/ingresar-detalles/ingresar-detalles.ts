@@ -62,7 +62,7 @@ export class IngresarDetallesPage {
   fechaRecepcion_txt: string = '';
   fechaProvistaEntrega: Date;
   recuperarTrabajo: number = -1;
-
+  motivoVisita: string = '';
 
   trabajoActual: Trabajo;
   background:string;
@@ -184,7 +184,7 @@ export class IngresarDetallesPage {
       this.equipoVidriosLaterales = (this.trabajoActual.equipoVidriosLaterales == undefined ? false : this.trabajoActual.equipoVidriosLaterales);
       this.equipoVidriosLateralesSanos = (this.trabajoActual.equipoVidriosLateralesSanos == undefined ? false : this.trabajoActual.equipoVidriosLateralesSanos);
       this.dibujoEquipoRecepcion = (this.trabajoActual.dibujoEquipoRecepcion == undefined ? '' : this.trabajoActual.dibujoEquipoRecepcion);
-
+      this.motivoVisita = (this.trabajoActual.motivoVisita == undefined ? '' : this.trabajoActual.motivoVisita);
 
     }
 
@@ -263,6 +263,7 @@ export class IngresarDetallesPage {
     this.trabajoActual.equipoVidriosLaterales = this.equipoVidriosLaterales;
     this.trabajoActual.equipoVidriosLateralesSanos = this.equipoVidriosLateralesSanos;
     this.trabajoActual.dibujoEquipoRecepcion = this.dibujoEquipoRecepcion;
+    this.trabajoActual.motivoVisita = this.motivoVisita;
 
     this.events.publish('change-tab', 3, this.trabajoActual);
 

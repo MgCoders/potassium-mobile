@@ -215,4 +215,52 @@ export class ListaTrabajoPage {
       });*/
   }
 
+
+
+  borraTrabajo(id: number) {
+    console.log("borro trabajo: ", id);
+
+    let toastCorrecto_lt = this.toastCtrl.create({
+      message: 'Trabajo borrado correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    let toastError_lt = this.toastCtrl.create({
+      message: 'Error al borrar..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    let loading_lt = this.loadingCtrl.create({
+      content: 'Procesando...'
+    });
+
+
+    let ta = this.lista.filter( function (item) {
+      return (item.id == id);
+    });
+
+    //Le asigno el estado de borrado
+    ta[0].estado = "BORRADO";
+
+    loading_lt.present();
+    this.trabajoService.edit(ta[0]).subscribe(
+      (data) => {
+        loading_lt.dismissAll();
+        toastCorrecto_lt.present();
+        console.log("trabajoActual CON ID editado: ",data);
+        this.ionViewWillEnter();
+      },
+      (error) => {
+        console.log(error);
+        toastError_lt.setMessage(error.toString());
+        toastError_lt.present();
+      });
+
+
+
+  }
+
 }

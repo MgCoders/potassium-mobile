@@ -34,6 +34,16 @@
           </ion-datetime>
         </ion-item>
       </ion-col>
+
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          <ion-label color="primary" stacked>Motivo de Visita</ion-label>
+          <ion-input type="text" placeholder="..." [(ngModel)]="motivoVisita">
+
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
       <!--ion-col col-12 col-md-6 offset-md-3>
         <ion-range min="0" max="100" [(ngModel)]="equipoCantidadCombustible" color="primary" step="10">
           <ion-label range-left>
@@ -72,6 +82,7 @@
               </ion-input>
             </ion-item>
           </ion-col>
+
 
           <!-- Comienza campos switch/toggle -->
 

@@ -19,6 +19,8 @@ export class PuntoControlImp implements PuntoControl {
 
     verificado: boolean;
 
+    paraVerificar: boolean;
+
     constructor(x: PuntoControl) {
         this.id = x.id;
         this.nombre = x.nombre;
@@ -27,6 +29,8 @@ export class PuntoControlImp implements PuntoControl {
         this.trabajo = x.trabajo;
         this.verificado = x.verificado;
         this.tareas = new Array();
+        this.paraVerificar = x.paraVerificar;
+
         //console.log("x",x);
         // console.log("x.tareas",x.tareas);
 

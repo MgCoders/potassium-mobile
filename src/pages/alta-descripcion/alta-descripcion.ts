@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import {ImagePicker} from "@ionic-native/image-picker";
 
 /**
  * Generated class for the AltaDescripcionPage page.
@@ -25,6 +26,7 @@ export class AltaDescripcionPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private camera: Camera,
+              private imagePicker: ImagePicker,
               private toastCtrl: ToastController) {
     this.image = 'assets/imgs/photo.jpg';
   }
@@ -111,5 +113,44 @@ export class AltaDescripcionPage {
 
 
 
+
+
+  getPics() {/*
+  this.imagePicker.getPictures(
+    function (result) {
+      var content = '';
+      for (var i = 0; i < result.length; i++) {
+        content += '<img src="' + result[i] + '" style="max-width:200px"/>';
+        //content += '<img src="data:image/jpg;base64,'+result[i]+'" style="max-width:200px"/>';
+      }
+      document.getElementById("imageOutput").innerHTML = content;
+    }, function (error) {
+      alert('Error: ' + error);
+    }, {
+      // if no title is passed, the plugin should use a sane default (preferrably the same as it was, so check the old one.. there are screenshots in the marketplace doc)
+      maximumImagesCount: 10,
+      title: 'Select pix',
+      message: 'Pick max 10 items', // optional default no helper message above the picker UI
+      // be careful with these options as they require additional processing
+      width: 400,
+      quality: 80
+      //             outputType: imagePicker.OutputType.BASE64_STRING
+    }
+  );*/
+
+    this.imagePicker.getPictures(
+
+      {
+
+      }
+
+
+    ).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+        console.log('Image URI: ' + results[i]);
+      }
+    }, (err) => { });
+
+  }
 
 }

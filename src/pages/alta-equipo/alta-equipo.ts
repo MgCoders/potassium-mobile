@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Equipo} from "../../app/_models/Equipo";
 import {EquipoServices} from "../../app/_services/equipo.service";
@@ -24,6 +24,14 @@ export class AltaEquipoPage {
   equipoActual: Equipo;
   listaTipoEquipo: TipoEquipo[];
   editar: boolean;
+
+  @ViewChild('modelo') VCmodelo ;
+  @ViewChild('marca') VCmarca ;
+  @ViewChild('color') VCcolor ;
+  @ViewChild('matricula') VCmatricula ;
+  @ViewChild('numeroChasis') VCnumeroChasis ;
+  @ViewChild('descripcion') VCdescripcion;
+
 
 
   constructor(public navCtrl: NavController,
@@ -209,6 +217,46 @@ export class AltaEquipoPage {
 
 
 
+  /*
+
+    @ViewChild('modelo') VCmodelo ;
+    @ViewChild('marca') VCmarca ;
+    @ViewChild('color') VCcolor ;
+    @ViewChild('matricula') VCmatricula ;
+    @ViewChild('numeroChasis') VCnumeroChasis ;
+    @ViewChild('descripcion') VCdescripcion;
+
+   */
+
+  goMAR_ae(){
+    setTimeout(() => {
+      this.VCmarca.setFocus();
+    },150);
+  }
+
+  goCOL_ae(){
+    setTimeout(() => {
+      this.VCcolor.setFocus();
+    },150);
+  }
+
+  goMAT_ae(){
+    setTimeout(() => {
+      this.VCmatricula.setFocus();
+    },150);
+  }
+
+  goNUM_ae(){
+    setTimeout(() => {
+      this.VCnumeroChasis.setFocus();
+    },150);
+  }
+
+  goDES_ae(){
+    setTimeout(() => {
+      this.VCdescripcion.setFocus();
+    },150);
+  }
 
 
 }

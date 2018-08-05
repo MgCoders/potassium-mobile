@@ -29,11 +29,11 @@ export class RecepcionPage {
   }
 
   trabajoNuevo(){
-    this.navCtrl.push(AltaTrabajoPage, {tipo:"NUEVO"});
+    this.navCtrl.push(AltaTrabajoPage, {tipo:false});
   }
 
   trabajoReparacion(){
-    this.navCtrl.push(AltaTrabajoPage, {tipo:"REPARACION"});
+    this.navCtrl.push(AltaTrabajoPage, {tipo:true});
   }
 
   recuperarTrabajos(){

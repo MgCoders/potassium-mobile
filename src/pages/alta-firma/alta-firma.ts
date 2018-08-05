@@ -21,6 +21,10 @@ export class AltaFirmaPage {
   canvasElement: any;
   callback:any;
 
+
+  drawingsSteps: any[] = [];
+  numberStep: number = 0;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public platform: Platform,
@@ -157,4 +161,33 @@ export class AltaFirmaPage {
   }
 
 
+  undoFirma() {
+
+    if (this.numberStep > 0) {
+      this.clearCanvas();
+
+      console.log('Entró a la funcion undo!');
+      console.log('La lista es: ', this.drawingsSteps);
+      console.log('numeroActual: ', this.numberStep);
+
+      this.numberStep--;
+
+      let ctx = this.canvasElement.getContext('2d');
+
+      //Muestro la imagen
+      var image = new Image();
+      image.onload = function () {
+        ctx.drawImage(image, 0, 0);
+      };
+
+
+      image.src = this.drawingsSteps[this.numberStep];
+      console.log('Salgo a la funcion undo!');
+      console.log('La lista es: ', this.drawingsSteps);
+      console.log('numeroActual: ', this.numberStep);
+    }
+
+  }
+
+  
 }

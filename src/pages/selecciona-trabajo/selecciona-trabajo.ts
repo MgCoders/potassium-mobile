@@ -65,6 +65,7 @@ export class SeleccionaTrabajoPage {
         cliente:c,
         equipo:e,
         motivoVisita: '',
+        esReparacion: false,
         fechaRecepcion: '',
         fechaProvistaEntrega:'',
         requierePresupuesto:false,

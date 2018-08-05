@@ -16,4 +16,6 @@ export interface PuntoControl {
 
   verificado: boolean;
 
+  paraVerificar: boolean;
+
 }

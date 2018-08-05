@@ -75,6 +75,7 @@ export class VerTrabajoPage {
         cliente:c,
         equipo:e,
         motivoVisita: '',
+        esReparacion:false,
         fechaRecepcion: '',
         fechaProvistaEntrega:'',
         requierePresupuesto:false,

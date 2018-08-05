@@ -35,7 +35,7 @@ export class AltaTrabajoPage {
 
   @ViewChild(Tabs) tabs: Tabs;
 
-  tipoTrabajo: string;
+  tipoTrabajo: boolean;
 
   tabCliente:any;
   tabEquipo:any;
@@ -411,7 +411,8 @@ export class AltaTrabajoPage {
       new TrabajoImp({
         cliente:c,
         equipo:e,
-        motivoVisita: this.tipoTrabajo,
+        motivoVisita: '',
+        esReparacion: this.tipoTrabajo,
         fechaRecepcion: this.dp.transform( new Date(), 'dd-MM-yyyy HH:MM'),
         fechaProvistaEntrega: this.dp.transform( new Date(), 'dd-MM-yyyy'),
         requierePresupuesto:false,

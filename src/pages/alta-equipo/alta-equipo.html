@@ -19,7 +19,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Modelo</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.modelo">
+          <ion-input #modelo type="text" placeholder="..." [(ngModel)]="equipoActual.modelo" (keyup.enter)="goMAR_ae()">
 
           </ion-input>
         </ion-item>
@@ -27,7 +27,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Marca</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.marca">
+          <ion-input #marca type="text" placeholder="..." [(ngModel)]="equipoActual.marca" (keyup.enter)="goCOL_ae()">
 
           </ion-input>
         </ion-item>
@@ -35,7 +35,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Color</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.color">
+          <ion-input #color type="text" placeholder="..." [(ngModel)]="equipoActual.color" (keyup.enter)="goMAT_ae()">
 
           </ion-input>
         </ion-item>
@@ -43,7 +43,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Matricula</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.matricula">
+          <ion-input #matricula type="text" placeholder="..." [(ngModel)]="equipoActual.matricula" (keyup.enter)="goNUM_ae()">
 
           </ion-input>
         </ion-item>
@@ -51,7 +51,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Número chasis</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="equipoActual.numeroChasis">
+          <ion-input #numeroChasis type="text" placeholder="..." [(ngModel)]="equipoActual.numeroChasis" (keyup.enter)="goDES_ae()">
 
           </ion-input>
         </ion-item>
@@ -59,7 +59,7 @@
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Descripción</ion-label>
-          <ion-textarea  placeholder="..." [(ngModel)]="equipoActual.descripcion">
+          <ion-textarea #descripcion placeholder="..." [(ngModel)]="equipoActual.descripcion">
 
           </ion-textarea>
         </ion-item>

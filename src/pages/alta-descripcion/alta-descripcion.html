@@ -20,6 +20,15 @@
         <button ion-button block (click)="getPicture()">Abrir la cámara</button>
         <img [src]="image" *ngIf="image" />
       </ion-col>
+
+      <div id="deviceready" class="blink">
+        <p class="event listening">Connecting to Device</p>
+
+        <p class="event received">Device is Ready</p>
+        <button onclick="getPics()">get pics</button>
+      </div>
+
+
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
         <ion-item class="no-padding">
           <ion-label color="primary" stacked>Descripción</ion-label>
