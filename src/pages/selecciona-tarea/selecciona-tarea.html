@@ -47,7 +47,23 @@
 
             <ion-item>
               <span class="simpleLabel">Estado actual:</span>
-              <br> {{(tarea.completa) ? "COMPLETA": "SIN TERMINAR"}}
+              <br> <b>{{(tarea.completa) ? "COMPLETA": "SIN TERMINAR"}} </b>
+              <ion-icon color='{{ (tarea?.completa) ? "secondary" : "danger" }}'
+                        name='{{ (tarea?.completa) ? "md-checkmark-circle-outline" : "ios-code-download" }}'
+                        item-start></ion-icon>
+            </ion-item>
+
+            <ion-item>
+              <span class="simpleLabel">La tarea require verificación?:</span>
+              <br> <b>{{(tarea.necesitaVerificacion) ? "SI": "NO"}} </b>
+            </ion-item>
+
+            <ion-item *ngIf="tarea.necesitaVerificacion">
+              <span class="simpleLabel">Estado de verificación:</span>
+              <br> <b>{{(tarea.verificada) ? "VERIFICADA": "SIN VERIFICAR"}} </b>
+              <ion-icon color='{{ (tarea?.completa) ? "secondary" : "danger" }}'
+                        name='{{ (tarea?.completa) ? "md-checkmark-circle-outline" : "ios-code-download" }}'
+                        item-start></ion-icon>
             </ion-item>
             <!--ion-item>
               Asignado a: (Empleado 23,Empleado 24, Empleado 25)
@@ -80,14 +96,23 @@
           </ion-item>
 
           <ion-item *ngFor="let tarea of lista" (click)="switchEstadoTarea()" >
-            {{ (!tarea?.completa) ? "Finalizar tarea" : "La tarea está incompleta" }}
+            Cambiar Estado a: {{ (!tarea?.completa) ? "COMPLETA" : "INCOMPLETA" }}
             <ion-note item-end></ion-note>
-            <ion-icon color='{{ (!tarea?.completa) ? "secondary" : "primary" }}'
+            <ion-icon color='{{ (!tarea?.completa) ? "secondary" : "danger" }}'
                       name='{{ (!tarea?.completa) ? "md-checkmark-circle-outline" : "ios-code-download" }}'
                       item-start></ion-icon>
             <ion-icon color="dark" name='ios-arrow-forward-outline' item-end></ion-icon>
           </ion-item>
 
+
+          <ion-item *ngFor="let tarea of lista" ngIf="tarea.necesitaVerificacion" (click)="switchEstadoTarea()" >
+            Cambiar Estado a: {{ (!tarea?.verificada) ? "VERIFICADA" : "SIN VERIFICAR" }}
+            <ion-note item-end></ion-note>
+            <ion-icon color='{{ (!tarea?.completa) ? "secondary" : "danger" }}'
+                      name='{{ (!tarea?.completa) ? "md-checkmark-circle-outline" : "ios-code-download" }}'
+                      item-start></ion-icon>
+            <ion-icon color="dark" name='ios-arrow-forward-outline' item-end></ion-icon>
+          </ion-item>
 
 
           <!--ion-item>

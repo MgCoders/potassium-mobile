@@ -56,8 +56,8 @@ export class AltaTareaPage {
     if(this.tareaActual == undefined) {
       let tareas = new Array();
       let usuario = new UsuarioImp({    email: "", nombre: "", apellido: "", role: "", login: false, password: "" });
-      let pc = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas, verificado: false});
-      this.tareaActual = new TareaImp({nombre: "", descripcion:"",minutosEstimados: 0, puntoControl: pc, completa:  false});
+      let pc = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas, verificado: false, paraVerificar:false});
+      this.tareaActual = new TareaImp({nombre: "", descripcion:"",minutosEstimados: 0, puntoControl: pc, completa:  false, necesitaVerificacion: false, verificada: false});
 
     }
 
@@ -163,21 +163,38 @@ export class AltaTareaPage {
 
     console.log("this.editar: ", this.editar);
 
+
+    let loading_at_3 = this.loadingCtrl.create({
+      content: 'Cargando la tarea...'
+    });
+    let toastCorrecto_at_3 = this.toastCtrl.create({
+      message: 'Tarea cargada correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    loading_at_3.present();
     if (!this.editar) {
       this.tareaService.create(this.tareaActual).subscribe(
         (data) => {
+          loading_at_3.dismissAll();
+          toastCorrecto_at_3.present();
           this.tareaActual = new TareaImp(data);
           this.navCtrl.pop();
         },
         (error) => {
+          console.log(error);
         });
     } else {
       this.tareaService.edit(this.tareaActual).subscribe(
         (data) => {
+          loading_at_3.dismissAll();
+          toastCorrecto_at_3.present();
           this.tareaActual = new TareaImp(data);
           this.navCtrl.pop();
         },
         (error) => {
+          console.log(error);
         });
     }
     console.log('Cliente después');
@@ -210,14 +227,8 @@ export class AltaTareaPage {
     console.log("Validando nombre: ", this.tareaActual.nombre);
 
 
-
-    if(valido && (this.tareaActual.puntoControl == undefined || this.tareaActual.puntoControl.id == undefined)){
-      mensaje = 'Error en el punto de control';
-      valido = false;
-    }
-
-    if(valido && (this.tareaActual.minutosEstimados == undefined || this.tareaActual.minutosEstimados == 0)){
-      mensaje = 'No se ingresó minutosEstimados';
+    if(valido && (this.tareaActual.nombre == undefined || this.tareaActual.nombre == "")){
+      mensaje = 'No se ingresó nombre';
       valido = false;
     }
 
@@ -226,8 +237,15 @@ export class AltaTareaPage {
       valido = false;
     }
 
-    if(valido && (this.tareaActual.nombre == undefined || this.tareaActual.nombre == "")){
-      mensaje = 'No se ingresó nombre';
+
+    if(valido && (this.tareaActual.minutosEstimados == undefined || this.tareaActual.minutosEstimados == 0)){
+      mensaje = 'No se ingresó minutosEstimados';
+      valido = false;
+    }
+
+
+    if(valido && (this.tareaActual.puntoControl == undefined || this.tareaActual.puntoControl.id == undefined)){
+      mensaje = 'Error en el punto de control';
       valido = false;
     }
 

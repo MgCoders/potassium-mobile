@@ -58,7 +58,7 @@ export class AltaPuntoControlPage {
     if(this.pcActual == undefined) {
       let tareas = new Array();
       let usuario = new UsuarioImp({    email: "", nombre: "", apellido:"", role: "", password: "", login:false });
-      this.pcActual = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas, verificado: false});
+      this.pcActual = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario,orden:0, tareas: tareas, verificado: false, paraVerificar: false});
     }
 
 

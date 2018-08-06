@@ -113,7 +113,7 @@ export class ListaPuntocontrolPage {
   }
 
 
-  nuevoPuntoControl(trabajo: Trabajo) {
+  nuevoPuntoControl() {
     this.navCtrl.push(AltaPuntoControlPage, {trabajoActual:this.trabajoActual});
   }
 

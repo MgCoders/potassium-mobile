@@ -9,5 +9,7 @@ export interface Tarea {
   minutosEstimados: number;
   puntoControl: models.PuntoControl;
   completa: boolean;
+  necesitaVerificacion: boolean;
+  verificada: boolean;
 
 }
