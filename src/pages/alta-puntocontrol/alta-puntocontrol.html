@@ -42,8 +42,8 @@
           <ion-item>
             <ion-label>Responsable</ion-label>
             <ion-icon name='md-clipboard' item-start></ion-icon>
-            <ion-select [(ngModel)]="pcActual.responsable">
-              <ion-option *ngFor="let usr of listaUsuarios " [value]="usr" >{{usr.nombre}}</ion-option>
+            <ion-select [(ngModel)]="usrSeleccionado">
+              <ion-option *ngFor="let usr of listaUsuarios " [value]="usr.id" >{{usr.nombre}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>

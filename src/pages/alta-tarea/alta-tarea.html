@@ -53,8 +53,8 @@
           <ion-label color="primary" stacked>
             Punto de control
           </ion-label>
-          <ion-select [(ngModel)]="tareaActual.puntoControl">
-            <ion-option *ngFor="let est of listaPC " [value]="est">
+          <ion-select [(ngModel)]="PCseleccionado">
+            <ion-option *ngFor="let est of listaPC " [value]="est.id">
               {{est.nombre}}
             </ion-option>
           </ion-select>

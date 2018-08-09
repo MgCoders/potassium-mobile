@@ -56,7 +56,7 @@ export class AltaEquipoPage {
       position: 'bottom'
     });
 
-    let te = new TipoEquipoImp({descripcion:'', dibujo: '', id:-1});
+    let te = new TipoEquipoImp({descripcion:'', dibujo: '', id:-1, requiereInfoRecibo:false});
 
     //Inicializo en vacío
       this.equipoActual =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );

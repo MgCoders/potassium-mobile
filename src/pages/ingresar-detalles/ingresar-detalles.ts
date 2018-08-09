@@ -331,6 +331,7 @@ export class IngresarDetallesPage {
 
   callbackDibujo = (_params) => {
 
+    let self = this;
 
     return new Promise((resolve, reject) => {
       console.log("VUELVO:: de Setear el dibujo");
@@ -339,6 +340,7 @@ export class IngresarDetallesPage {
       this.dibujoEquipoRecepcion = _params['dibujoEquipoRecepcion'];
       this.dibujoAncho = _params['dibujoAncho'];
       this.dibujoAlto = _params['dibujoAlto'];
+      this.background = self.trabajoActual.equipo.tipoEquipo.dibujo;
 
       //this.events.publish('push-foto', _params);
       //console.log(this.firmaCliente64);
@@ -363,6 +365,24 @@ export class IngresarDetallesPage {
     //console.log("OBJ:: RETURN ", this.trabajoActual.equipo != undefined);
 
     return this.trabajoActual.equipo != undefined;
+  }
+
+  TErequiereInfoRecibo(){
+    //console.log("Entro a controlar si oculto o no");
+    //console.log("OBJ:: trabajoActual.equipo > ", this.trabajoActual.equipo);
+    //console.log("OBJ:: RETURN ", this.trabajoActual.equipo != undefined);
+
+    return this.trabajoActual.equipo.tipoEquipo.requiereInfoRecibo;
+  }
+
+  TieneDibujo(){
+    //console.log("Entro a controlar si oculto o no");
+    //console.log("OBJ:: trabajoActual.equipo > ", this.trabajoActual.equipo);
+    //console.log("OBJ:: RETURN ", this.trabajoActual.equipo != undefined);
+
+    //data:image/jpeg;base64
+    console.log("string:",this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22));
+    return this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22) == "data:image/jpeg;base64";
   }
 
 }

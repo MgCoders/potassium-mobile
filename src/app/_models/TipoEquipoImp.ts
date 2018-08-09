@@ -21,10 +21,13 @@ export class TipoEquipoImp implements TipoEquipo {
 
     descripcion: string;
 
+    requiereInfoRecibo: boolean;
+
 
     public constructor(t: TipoEquipo) {
         this.id = t.id;
         this.dibujo = t.dibujo;
         this.descripcion = t.descripcion;
+        this.requiereInfoRecibo = t.requiereInfoRecibo;
     }
 }

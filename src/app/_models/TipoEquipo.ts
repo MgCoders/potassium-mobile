@@ -17,4 +17,6 @@ export interface TipoEquipo {
 
     dibujo: string;
 
+    requiereInfoRecibo: boolean;
+
 }

@@ -112,7 +112,7 @@ export class SeleccionaTareaPage {
   completarTarea(){
     let alert = this.alertCtrl.create({
       title: 'Confirmar tarea completada',
-      message: 'Realmente quiere dar por completa esta tarea?',
+      message: '¿Realmente quiere dar por completa esta tarea?',
       buttons: [
         {
           text: 'No',
@@ -171,7 +171,7 @@ export class SeleccionaTareaPage {
   tareaIncompleta(){
     let alert = this.alertCtrl.create({
       title: 'Cambiar el estado de la tarea',
-      message: 'Realmente quiere dar por incompleta esta tarea?',
+      message: '¿Realmente quiere dar por incompleta esta tarea?',
       buttons: [
         {
           text: 'No',
@@ -213,7 +213,7 @@ export class SeleccionaTareaPage {
               });
 
 
-            console.log('Confirmó, la tarea ahora está completa');
+            console.log('Confirmó, la tarea ahora está incompleta');
 
           }
         }
@@ -224,15 +224,215 @@ export class SeleccionaTareaPage {
   }
 
   switchEstadoTarea() {
-    console.log("entro al switch");
-    if (this.lista[0].completa){
-      this.tareaIncompleta();
+    console.log("entro al switch - completa");
+
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+
+    if(valido && (this.lista[0] == undefined || this.lista[0].verificada)){
+      mensaje = 'La tarea ya fue completada';
+      valido = false;
     }
-    else
-    {
-      this.completarTarea();
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    if ( valido ) {
+
+      if (this.lista[0].completa){
+        this.tareaIncompleta();
+      }
+      else
+      {
+        this.completarTarea();
+      }
+
     }
+
+
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  tareaVerificada(){
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar tarea Verificada',
+      message: '¿Realmente quiere dar por verificada esta tarea?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Canceló, no se ha cambiado nada');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+
+
+
+            //Tengo que actualizar
+            let loading_lt_2 = this.loadingCtrl.create({
+              content: 'Actualizando la tarea...'
+            });
+            let toastCorrecto_lt_2 = this.toastCtrl.create({
+              message: 'Tarea actualizada correctamente!',
+              duration: 3000,
+              position: 'bottom'
+            });
+
+
+            loading_lt_2.present();
+
+            this.lista[0].verificada = true;
+
+            this.tareaService.edit(this.lista[0]).subscribe(
+              (data) => {
+                loading_lt_2.dismissAll();
+                this.lista[0] = new TareaImp(data);
+                toastCorrecto_lt_2.present();
+
+              },
+              (error) => {
+              });
+
+
+            console.log('Confirmó, la tarea ahora está verificada');
+
+
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
+
+
+
+
+
+  tareaSinVerificar(){
+    let alert = this.alertCtrl.create({
+      title: 'Cambiar verificación de la tarea',
+      message: '¿Realmente quiere asignar esta tarea como sin verificación?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Canceló, no se ha cambiado nada');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+
+
+
+            //Tengo que actualizar
+            let loading_lt_3 = this.loadingCtrl.create({
+              content: 'Actualizando la tarea...'
+            });
+            let toastCorrecto_lt_3 = this.toastCtrl.create({
+              message: 'Tarea actualizada correctamente!',
+              duration: 3000,
+              position: 'bottom'
+            });
+
+
+
+            loading_lt_3.present();
+
+            this.lista[0].verificada = false;
+
+            this.tareaService.edit(this.lista[0]).subscribe(
+              (data) => {
+                loading_lt_3.dismissAll();
+                this.lista[0] = new TareaImp(data);
+                toastCorrecto_lt_3.present();
+
+              },
+              (error) => {
+              });
+
+
+            console.log('Confirmó, la tarea ahora está sin verificar');
+
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
+
+
+
+
+
+
+
+  switchVerificadaTarea() {
+    console.log("entro al switch - Verificado");
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+
+    if(valido && (this.lista[0] == undefined || !this.lista[0].completa)){
+      mensaje = 'La tarea no está completa';
+      valido = false;
+    }
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    if ( valido ) {
+
+      if (this.lista[0].verificada) {
+        this.tareaSinVerificar();
+      }
+      else {
+        this.tareaVerificada();
+      }
+
+    }
+  }
 
 }

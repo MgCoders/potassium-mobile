@@ -58,11 +58,11 @@
               <br> <b>{{(tarea.necesitaVerificacion) ? "SI": "NO"}} </b>
             </ion-item>
 
-            <ion-item *ngIf="tarea.necesitaVerificacion">
+            <ion-item *ngIf="tarea.necesitaVerificacion && tarea?.completa">
               <span class="simpleLabel">Estado de verificación:</span>
               <br> <b>{{(tarea.verificada) ? "VERIFICADA": "SIN VERIFICAR"}} </b>
-              <ion-icon color='{{ (tarea?.completa) ? "secondary" : "danger" }}'
-                        name='{{ (tarea?.completa) ? "md-checkmark-circle-outline" : "ios-code-download" }}'
+              <ion-icon color='{{ (tarea?.verificada) ? "secondary" : "danger" }}'
+                        name='{{ (tarea?.verificada) ? "md-checkmark-circle-outline" : "ios-code-download" }}'
                         item-start></ion-icon>
             </ion-item>
             <!--ion-item>
@@ -71,7 +71,7 @@
           </ion-list>
         </ion-card>
         <br>
-        <ion-list no-border>
+        <ion-list no-border *ngFor="let tarea of lista">
           <ion-list-header>
             Acciones
           </ion-list-header>
@@ -95,7 +95,7 @@
             <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
           </ion-item>
 
-          <ion-item *ngFor="let tarea of lista" (click)="switchEstadoTarea()" >
+          <ion-item  (click)="switchEstadoTarea()" >
             Cambiar Estado a: {{ (!tarea?.completa) ? "COMPLETA" : "INCOMPLETA" }}
             <ion-note item-end></ion-note>
             <ion-icon color='{{ (!tarea?.completa) ? "secondary" : "danger" }}'
@@ -105,11 +105,11 @@
           </ion-item>
 
 
-          <ion-item *ngFor="let tarea of lista" ngIf="tarea.necesitaVerificacion" (click)="switchEstadoTarea()" >
+          <ion-item *ngIf="tarea.necesitaVerificacion && tarea?.completa" (click)="switchVerificadaTarea()" >
             Cambiar Estado a: {{ (!tarea?.verificada) ? "VERIFICADA" : "SIN VERIFICAR" }}
             <ion-note item-end></ion-note>
-            <ion-icon color='{{ (!tarea?.completa) ? "secondary" : "danger" }}'
-                      name='{{ (!tarea?.completa) ? "md-checkmark-circle-outline" : "ios-code-download" }}'
+            <ion-icon color='{{ (!tarea?.verificada) ? "secondary" : "danger" }}'
+                      name='{{ (!tarea?.verificada) ? "md-checkmark-circle-outline" : "ios-code-download" }}'
                       item-start></ion-icon>
             <ion-icon color="dark" name='ios-arrow-forward-outline' item-end></ion-icon>
           </ion-item>

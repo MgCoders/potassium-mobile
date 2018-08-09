@@ -29,6 +29,7 @@ export class AltaTareaPage {
   editar : boolean = false;
   trabajoActual: Trabajo;
   listaPC: PuntoControl[];
+  PCseleccionado: number;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -45,7 +46,10 @@ export class AltaTareaPage {
     this.tareaSeleccionada = this.navParams.data['id'];
     console.log("this.tareaSeleccionada:", this.tareaSeleccionada);
 
-
+    if (this.navParams.data['tareaActual']) {
+      this.tareaActual = new TareaImp(this.navParams.data['tareaActual']);
+      console.log("this.tareaActual:", this.tareaActual);
+    }
     this.editar = (this.tareaSeleccionada != undefined);
 
     console.log("es edición:", this.editar);
@@ -90,33 +94,6 @@ export class AltaTareaPage {
       position: 'bottom'
     });
 
-
-    loading_lt.present();
-    this.pcService.getByTrabajo(this.trabajoSeleccionado).subscribe(
-
-      (data) => {
-        loading_lt.dismissAll();
-
-        console.log("P.C. por trabajo:", data);
-
-        //Obtengo la lista desde el server con lo último
-        data.forEach (pc => {
-          this.listaPC.push(new PuntoControlImp(pc));
-        });
-
-        console.log("lista pc:",this.listaPC);
-        toastCorrecto_lt.present();
-      },
-      (error) => {
-        loading_lt.dismissAll();
-        toastError_lt.setMessage(error.toString());
-        toastError_lt.present();
-      });
-
-
-    let loading_lt_2 = this.loadingCtrl.create({
-      content: 'Cargando la tarea...'
-    });
     let toastCorrecto_lt_2 = this.toastCtrl.create({
       message: 'Lista cargada correctamente!',
       duration: 3000,
@@ -129,32 +106,73 @@ export class AltaTareaPage {
     });
 
 
-    if (this.editar) {
-      loading_lt_2.present();
-      this.tareaService.get(this.tareaSeleccionada).subscribe(
-        (data) => {
-          loading_lt_2.dismissAll();
 
-          console.log("Tarea traidea desde el server:", data);
+    loading_lt.present();
+    this.pcService.getByTrabajo(this.trabajoSeleccionado).subscribe(
 
-          //Obtengo la lista desde el server con lo último
-          this.tareaActual = new TareaImp(data);
+      (data) => {
 
-          console.log("tareaActual:", this.tareaActual);
-          toastCorrecto_lt_2.present();
-        },
-        (error) => {
-          loading_lt.dismissAll();
-          toastError_lt_2.setMessage(error.toString());
-          toastError_lt_2.present();
+        console.log("P.C. por trabajo:", data);
+
+        //Obtengo la lista desde el server con lo último
+        data.forEach (pc => {
+          this.listaPC.push(new PuntoControlImp(pc));
         });
-    }
+
+        console.log("lista pc:",this.listaPC);
+        toastCorrecto_lt.present();
+
+
+
+
+        /* traigo la tarea */
+        if (this.editar) {
+          this.tareaService.get(this.tareaSeleccionada).subscribe(
+            (data) => {
+              loading_lt.dismissAll();
+
+              console.log("Tarea traidea desde el server:", data);
+
+              //Obtengo la lista desde el server con lo último
+              this.tareaActual = new TareaImp(data);
+              this.PCseleccionado = this.tareaActual.puntoControl.id;
+
+              console.log("tareaActual:", this.tareaActual);
+              toastCorrecto_lt_2.present();
+            },
+            (error) => {
+              loading_lt.dismissAll();
+              toastError_lt_2.setMessage(error.toString());
+              toastError_lt_2.present();
+            });
+        }
+
+
+      },
+      (error) => {
+        loading_lt.dismissAll();
+        toastError_lt.setMessage(error.toString());
+        toastError_lt.present();
+      });
+
+
+
+
+
   }
 
   guardarTarea() {
 
 
     console.log("lo exporto");
+    let self = this;
+
+    this.tareaActual.puntoControl = this.listaPC.filter(function(item){
+      item.id = self.PCseleccionado;
+    } )[0];
+
+
+
 
     if(!this.validarCamposAltaTarea()) {
       return;

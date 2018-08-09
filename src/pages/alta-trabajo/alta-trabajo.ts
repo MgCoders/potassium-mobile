@@ -403,7 +403,7 @@ export class AltaTrabajoPage {
 
     //Inicializo un trabajo en vacio
     let c = new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
-    let te = new TipoEquipoImp({descripcion:'', dibujo: ''});
+    let te = new TipoEquipoImp({descripcion:'', dibujo: '', requiereInfoRecibo:false});
     //Inicializo en vacío
     let e =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
 

@@ -102,6 +102,11 @@ export class ListaTareaPage {
   }
 
   editarTarea(id:number) {
-    this.navCtrl.push(AltaTareaPage, {idTrabajo: this.trabajoSeleccionado, trabajoActual: this.navParams.data['trabajoActual'], tareaActual: id})
+
+    let tareaActual = this.lista.find(function(item){
+      return item.id == id;
+       } );
+
+    this.navCtrl.push(AltaTareaPage, {idTrabajo: this.trabajoSeleccionado, trabajoActual: this.navParams.data['trabajoActual'], tareaActual: tareaActual, id: id})
   }
 }

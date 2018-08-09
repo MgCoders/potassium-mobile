@@ -27,6 +27,7 @@ export class AltaPuntoControlPage {
 
 
   pcSeleccionado : number;
+  usrSeleccionado : number;
   pcActual: PuntoControl;
   listaPC: PuntoControl[];
   listaUsuarios: Usuario[];
@@ -119,20 +120,28 @@ export class AltaPuntoControlPage {
     if (this.editar){
 
 
+      let self = this;
       loading_apc.present();
-      this.pcService.find(this.pcSeleccionado).subscribe(
+      this.pcService.getByTrabajo(this.trabajoActual.id).subscribe(
 
         (data) => {
           loading_apc.dismissAll();
 
           console.log("P.C. traido desde la API:", data);
-          console.log("P.C. traido desde la API, data[0]:", data[0]);
+          let pcA = data.find(function(item){
+            return item.id == self.pcSeleccionado;
+          } );
+
+          console.log("P.C. traido desde la API:", pcA);
 
           //Obtengo la lista desde el server con lo último
 
-          this.pcActual = new PuntoControlImp(data[0]);
+          this.pcActual = new PuntoControlImp(pcA);
 
           console.log("pc después del llamado:",this.pcActual);
+
+          //el pc final no tiene responsable!
+          this.usrSeleccionado = (this.pcActual.responsable != undefined) ? this.pcActual.responsable.id : -1;
           toastCorrecto_apc.present();
         },
         (error) => {
@@ -144,6 +153,11 @@ export class AltaPuntoControlPage {
   }
 
   guardarPC() {
+
+    let self = this;
+    this.pcActual.responsable = this.listaUsuarios.find(function(item){
+      return item.id == self.usrSeleccionado;
+    } );
 
 
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)

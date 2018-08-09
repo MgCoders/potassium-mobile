@@ -22,7 +22,7 @@ export class PuntoControlImp implements PuntoControl {
     paraVerificar: boolean;
 
     constructor(x: PuntoControl) {
-        this.id = x.id;
+        this.id = (x.id != undefined) ? x.id : -1;
         this.nombre = x.nombre;
         this.responsable = x.responsable;
         this.orden = x.orden;
