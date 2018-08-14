@@ -93,8 +93,8 @@ export class AltaRegistroPage {
 
     let id = (this.registroActual_param != undefined) ? this.registroActual_param.id : undefined;
 
-    let user = new UsuarioImp({email: '',nombre:'', apellido:"", role: '', password:'', login:false});
-    let rub = new RubroImp( {nombre:'', descripcion: ''} )
+    let user = new UsuarioImp({id: -1, email: '',nombre:'', apellido:"", role: '', password:'', login:false});
+    let rub = new RubroImp( {nombre:'', descripcion: '', id: -1} ) ;
     this.registroActual = (this.registroActual != undefined) ?
                             this.registroActual
                           :
@@ -106,8 +106,8 @@ export class AltaRegistroPage {
       console.log('Edicion de registro!');
       this.editar = true;
       console.log("RA (_param): ", this.registroActual_param);
-      this.rubroseleccionado = this.registroActual_param.rubro.id;
-      this.usuarioseleccionado = this.registroActual_param.usuario.id;
+      this.rubroseleccionado = (this.registroActual_param.rubro == undefined) ? -1 : this.registroActual_param.rubro.id;
+      this.usuarioseleccionado = (this.registroActual_param.usuario == undefined) ? -1 : this.registroActual_param.usuario.id;
       this.cantMinutos = this.registroActual_param.minutos;
 
       loading_ar.present();

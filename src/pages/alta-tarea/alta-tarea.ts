@@ -122,6 +122,9 @@ export class AltaTareaPage {
         console.log("lista pc:",this.listaPC);
         toastCorrecto_lt.present();
 
+        loading_lt.dismissAll();
+
+
 
 
 
@@ -129,7 +132,6 @@ export class AltaTareaPage {
         if (this.editar) {
           this.tareaService.get(this.tareaSeleccionada).subscribe(
             (data) => {
-              loading_lt.dismissAll();
 
               console.log("Tarea traidea desde el server:", data);
 
@@ -167,9 +169,9 @@ export class AltaTareaPage {
     console.log("lo exporto");
     let self = this;
 
-    this.tareaActual.puntoControl = this.listaPC.filter(function(item){
-      item.id = self.PCseleccionado;
-    } )[0];
+    this.tareaActual.puntoControl = this.listaPC.find(function(item){
+      return item.id == self.PCseleccionado;
+    } );
 
 
 

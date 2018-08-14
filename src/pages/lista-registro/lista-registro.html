@@ -25,13 +25,12 @@
       </ion-col>
       <ion-col col-12 col-md-6 offset-md-3 *ngIf="lista?.length != 0">
         <ion-list>
-          <ion-item
-                    *ngFor="let registro of lista ">
+          <ion-item *ngFor="let registro of lista ">
 
             <ion-thumbnail (click)="editarRegistroHoras(registro)" item-start>
               <img src="assets/imgs/file.png">
             </ion-thumbnail>
-            <h2 (click)="editarRegistroHoras(registro)">{{registro.usuario.nombre}} - {{registro.rubro.nombre}} </h2>
+            <h2 (click)="editarRegistroHoras(registro)">{{registro.usuario.nombre}} - ({{registro.rubro == undefied ? 'SIN RUBRO' : registro.rubro?.nombre}}) </h2>
             <p (click)="editarRegistroHoras(registro)">{{registro.fecha}} - (min. {{registro.minutos}})</p>
 
             <button ion-button clear item-end (click)="editarRegistroHoras(registro)">Editar</button>

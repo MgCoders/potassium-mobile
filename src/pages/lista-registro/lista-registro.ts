@@ -95,7 +95,9 @@ export class ListaRegistroPage {
     this.registroService.getAllByTarea(this.idTareaSeleccionada).subscribe(
       (data) => {
         data.forEach(reg => {
-          this.lista.push( new RegistroImp(reg));
+          let r_obj = new RegistroImp(reg);
+          console.log("Inserto el registro:", r_obj);
+          this.lista.push( r_obj );
         });
 
         loading_lr.dismissAll();
