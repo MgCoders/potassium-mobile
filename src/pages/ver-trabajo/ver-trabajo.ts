@@ -193,4 +193,14 @@ export class VerTrabajoPage {
   hayEquipoSeleccionado(){
     return this.trabajoActual.equipo != undefined;
   }
+
+  TieneDibujoVT(){
+    //console.log("Entro a controlar si oculto o no");
+    //console.log("OBJ:: trabajoActual.equipo > ", this.trabajoActual.equipo);
+    //console.log("OBJ:: RETURN ", this.trabajoActual.equipo != undefined);
+
+    //data:image/jpeg;base64
+    console.log("string:",this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22));
+    return this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22) == "data:image/jpeg;base64";
+  }
 }

@@ -372,7 +372,14 @@ export class IngresarDetallesPage {
     //console.log("OBJ:: trabajoActual.equipo > ", this.trabajoActual.equipo);
     //console.log("OBJ:: RETURN ", this.trabajoActual.equipo != undefined);
 
-    return this.trabajoActual.equipo.tipoEquipo.requiereInfoRecibo;
+    if(this.trabajoActual.equipo != undefined) {
+
+      return this.trabajoActual.equipo.tipoEquipo.requiereInfoRecibo;
+    } else {
+      return false;
+    }
+
+
   }
 
   TieneDibujo(){
@@ -381,8 +388,14 @@ export class IngresarDetallesPage {
     //console.log("OBJ:: RETURN ", this.trabajoActual.equipo != undefined);
 
     //data:image/jpeg;base64
-    console.log("string:",this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22));
-    return this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22) == "data:image/jpeg;base64";
+
+    if(this.trabajoActual.equipo != undefined) {
+
+      console.log("string:",this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22));
+      return this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22) == "data:image/jpeg;base64";
+    } else {
+      return false;
+    }
   }
 
 }

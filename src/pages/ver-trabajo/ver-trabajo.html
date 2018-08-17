@@ -81,6 +81,30 @@
           <ion-list-header>
             Detalles del trabajo:
           </ion-list-header>
+          <ion-item *ngIf="trabajoActual.motivoVisita != undefined && trabajoActual.motivoVisita != ''">
+            <ion-card>
+              <ion-card-header>
+                Motivo visita
+              </ion-card-header>
+              <ion-card-content>
+                <br>
+                {{trabajoActual.motivoVisita}}
+              </ion-card-content>
+            </ion-card>
+          </ion-item>
+
+          <ion-item *ngIf="trabajoActual.esReparacion != undefined">
+            <ion-card>
+              <ion-card-header>
+                Tipo de trabajo:
+              </ion-card-header>
+              <ion-card-content>
+                <br>
+                {{trabajoActual.esReparacion ? "Reparación": "Nuevo"}}
+              </ion-card-content>
+            </ion-card>
+          </ion-item>
+
           <ion-item *ngIf="trabajoActual.comentarios != undefined && trabajoActual.comentarios != ''">
             <ion-card>
               <ion-card-header>
@@ -164,6 +188,10 @@
             </ion-card>
           </ion-item>
         </ion-list>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3 [hidden]="!TieneDibujoVT()" *ngIf="trabajoActual.dibujoEquipoRecepcion != ''">
+        <img src="{{trabajoActual.dibujoEquipoRecepcion}}" class="dibujo"
+             [ngStyle]="{'background-image': 'url(' + trabajoActual.equipo.tipoEquipo.dibujo + ')'}"  />
       </ion-col>
     </ion-row>
   </ion-grid>

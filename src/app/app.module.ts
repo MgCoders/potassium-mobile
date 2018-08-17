@@ -50,6 +50,7 @@ import {RubroService} from "./_services/rubro.service";
 import {UsuarioService} from "./_services/usuario.service";
 import {RegistroService} from "./_services/registro.service";
 import {AltaPuntoControlPage} from "../pages/alta-puntocontrol/alta-puntocontrol";
+import {ImagePicker} from "@ionic-native/image-picker";
 
 @NgModule({
   declarations: [
@@ -146,7 +147,9 @@ import {AltaPuntoControlPage} from "../pages/alta-puntocontrol/alta-puntocontrol
     Keyboard,
     RubroService,
     UsuarioService,
-    RegistroService
+    RegistroService,
+    ImagePicker
+
   ]
 })
 export class AppModule {}
