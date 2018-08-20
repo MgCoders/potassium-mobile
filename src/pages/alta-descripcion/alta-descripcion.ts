@@ -113,14 +113,32 @@ export class AltaDescripcionPage {
   }
 
 
-  getPics() {
-  this.imagePicker.getPictures({
-   }).then( results =>{
-                  console.log(results);
-                  for(let i=0; i < results.length;i++){
-                  this.images.push(results[i]);
-                };
-    });
+  getPics_gallery() {
+   //  this.imagePicker.getPictures({
+   // }).then( results =>{
+   //                console.log(results);
+   //                for(let i=0; i < results.length;i++){
+   //                this.images.push(results[i]);
+   //              };
+   //  });
+
+    let options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      //quality: 100,
+      correctOrientation: true
+    };
+
+    this.camera.getPicture( options )
+      .then(imageData => {
+        this.image = `data:image/jpeg;base64,${imageData}`;
+      })
+      .catch(error =>{
+        console.error( error );
+      });
   }
 
 

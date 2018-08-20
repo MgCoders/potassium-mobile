@@ -99,5 +99,6 @@
     <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.2.2">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Usar galería para las fotos" />
     </plugin>
+    <allow-navigation href="http://192.168.1.8:8101" />
     <engine name="android" spec="7.0.0" />
 </widget>

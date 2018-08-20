@@ -213,4 +213,170 @@ export class SeleccionaTrabajoPage {
 
   }
 
+
+
+  FinalizarTrabajo(id: number){
+
+
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar borrado',
+      message: 'Realmente quiere cambiar el estado de este trabajo a finalizado',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Canceló, no se cambia nada');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            console.log('Confirmó, Trabajo Finalizado');
+
+
+            /*
+                        let loading = this.loadingCtrl.create({
+                          content: 'Procesando...'
+                        });
+                        let toastCorrecto = this.toastCtrl.create({
+                          message: 'Trabajo borrado!',
+                          duration: 3000,
+                          position: 'bottom'
+                        });
+                        let toastError = this.toastCtrl.create({
+                          message: 'Error al borrar el trabajo..',
+                          duration: 3000,
+                          position: 'bottom'
+                        });
+
+
+                        loading.present();
+                        if(id != undefined){
+                          console.log('Borrar trabajo!');
+                          this.service.borrar.subscribe(
+                            (data) => {
+                              toastCorrecto.present();
+                              loading.dismissAll();
+                              this.trabajoActual = data;
+                              console.log("adentro",this.trabajoActual);
+                            },
+                            (error) => {
+                              toastError.setMessage(error);
+                              toastError.present();
+                            });
+                        }
+
+                        loading.dismissAll();
+                        loading.dismiss();*/
+
+            console.log("despues", this.trabajoActual);
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
+
+  TrabajoSinFinalizar(id: number){
+
+
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar borrado',
+      message: 'Realmente quiere cambiar el estado de este trabajo a SIN finalizar',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Canceló, no se cambia nada');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            console.log('Confirmó, Trabajo sin Finalizar');
+
+
+            /*
+                        let loading = this.loadingCtrl.create({
+                          content: 'Procesando...'
+                        });
+                        let toastCorrecto = this.toastCtrl.create({
+                          message: 'Trabajo borrado!',
+                          duration: 3000,
+                          position: 'bottom'
+                        });
+                        let toastError = this.toastCtrl.create({
+                          message: 'Error al borrar el trabajo..',
+                          duration: 3000,
+                          position: 'bottom'
+                        });
+
+
+                        loading.present();
+                        if(id != undefined){
+                          console.log('Borrar trabajo!');
+                          this.service.borrar.subscribe(
+                            (data) => {
+                              toastCorrecto.present();
+                              loading.dismissAll();
+                              this.trabajoActual = data;
+                              console.log("adentro",this.trabajoActual);
+                            },
+                            (error) => {
+                              toastError.setMessage(error);
+                              toastError.present();
+                            });
+                        }
+
+                        loading.dismissAll();
+                        loading.dismiss();*/
+
+            console.log("despues", this.trabajoActual);
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
+
+
+
+  switchFinTrabajo(id: number) {
+    console.log("entro al switch - Verificado");
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+
+    if(valido && (this.trabajoActual == undefined || !this.trabajoActual.paraFinalizar)){
+      mensaje = 'El Trabajo no está para finalizar';
+      valido = false;
+    }
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    if ( valido ) {
+
+      if (this.trabajoActual.estado == 'FINALIZADO') {
+        this.TrabajoSinFinalizar(id);
+      }
+      else {
+        this.FinalizarTrabajo(id);
+      }
+
+    }
+  }
+
 }

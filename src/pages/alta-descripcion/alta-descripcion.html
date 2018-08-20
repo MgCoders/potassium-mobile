@@ -16,24 +16,22 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
+      <ion-col col-6 col-md-3 offset-md-3>
         <button ion-button block (click)="getPicture()">Abrir la cámara</button>
+      </ion-col>
+
+      <ion-col col-6 col-md-3>
+        <button ion-button block color="light" (click)="getPics_gallery()">Abrir la galería</button>
+      </ion-col>
+
+      <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
         <img [src]="image" *ngIf="image" />
       </ion-col>
 
-      <div id="deviceready" class="blink">
-        <p class="event listening">Connecting to Device</p>
-
-        <p class="event received">Device is Ready</p>
-        <button onclick="getPics()">get pics</button>
-      </div>
-
-
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
         <ion-item class="no-padding">
-          <ion-label color="primary" stacked>Descripción</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="descr">
-          </ion-input>
+          <ion-label col-6 color="primary" stacked>Descripción</ion-label>
+          <ion-input col-6 type="text" placeholder="..." [(ngModel)]="descr"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
