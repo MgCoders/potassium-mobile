@@ -117,8 +117,8 @@ export class ListaPuntocontrolPage {
     this.navCtrl.push(AltaPuntoControlPage, {trabajoActual:this.trabajoActual});
   }
 
-  editarPuntoControl() {
-
+  editarPuntoControl(id: number) {
+    this.seleccionarPuntoControl(id);
   }
 
 }

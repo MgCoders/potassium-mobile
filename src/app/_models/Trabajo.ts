@@ -79,12 +79,12 @@ export interface Trabajo {
   nombreClienteRecepcion: string;
   nombreEmpleadoRecepcion: string;
 
-  nroOrdenCompra: number;
+  nroOrdenCompra: string;
   paraFinalizar: boolean;
 
   esReparacion: boolean;
 
-
-
+  numeroTrabajo: string;
+  cotizacion: string;
 
 }

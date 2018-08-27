@@ -6,6 +6,9 @@ import {EquipoImp} from "../../app/_models/EquipoImp";
 import {TipoEquipoImp} from "../../app/_models/TipoEquipoImp";
 import {TipoEquipo} from "../../app/_models/TipoEquipo";
 import {TipoEquipoService} from "../../app/_services/tipoEquipo.service";
+import {MarcaEquipo} from "../../app/_models/MarcaEquipo";
+import {MarcaEquipoImp} from "../../app/_models/MarcaEquipoImp";
+import {MarcaEquipoService} from "../../app/_services/marca-equipo.services";
 
 /**
  * Generated class for the AltaEquipoPage page.
@@ -23,6 +26,7 @@ export class AltaEquipoPage {
 
   equipoActual: Equipo;
   listaTipoEquipo: TipoEquipo[];
+  listaMarcaEquipo: MarcaEquipo[];
   editar: boolean;
 
   @ViewChild('modelo') VCmodelo ;
@@ -39,6 +43,7 @@ export class AltaEquipoPage {
               private tipoEquipoService:TipoEquipoService,
               public navParams: NavParams,
               public loadingCtrl: LoadingController,
+              private marcaEquioService: MarcaEquipoService,
               private toastCtrl: ToastController) {
 
 
@@ -56,10 +61,11 @@ export class AltaEquipoPage {
       position: 'bottom'
     });
 
-    let te = new TipoEquipoImp({descripcion:'', dibujo: '', id:-1, requiereInfoRecibo:false});
+    let te = new TipoEquipoImp({id: -1, descripcion:'', dibujo: '', requiereInfoRecibo:false});
+    let m = new MarcaEquipoImp( {id: -1, nombre: ''});
 
     //Inicializo en vacío
-      this.equipoActual =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
+      this.equipoActual =  new EquipoImp({marca: m ,modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
 
     let id = this.navParams.data['id'];
 
@@ -80,6 +86,8 @@ export class AltaEquipoPage {
     console.log(this.equipoActual);
 
     this.listaTipoEquipo = [];
+    this.listaMarcaEquipo = [];
+
 
     this.tipoEquipoService.getAll().subscribe(
       (data) => {
@@ -93,6 +101,25 @@ export class AltaEquipoPage {
         console.log(error);
 
       });
+
+
+
+
+
+
+    this.marcaEquioService.getAll().subscribe(
+      (data) => {
+
+        data.forEach( item => {
+          this.listaMarcaEquipo.push(item);
+        });
+
+      },
+      (error) => {
+        console.log(error);
+
+      });
+
 
 
   }

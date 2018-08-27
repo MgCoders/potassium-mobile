@@ -24,14 +24,30 @@
           </ion-input>
         </ion-item>
       </ion-col>
+      <!--<ion-col col-12 col-md-6 offset-md-3>-->
+        <!--<ion-item>-->
+          <!--<ion-label color="primary" stacked>Marca</ion-label>-->
+          <!--<ion-input #marca type="text" placeholder="..." [(ngModel)]="equipoActual.marca" (keyup.enter)="goCOL_ae()">-->
+
+          <!--</ion-input>-->
+        <!--</ion-item>-->
+      <!--</ion-col>-->
+
+
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
-          <ion-label color="primary" stacked>Marca</ion-label>
-          <ion-input #marca type="text" placeholder="..." [(ngModel)]="equipoActual.marca" (keyup.enter)="goCOL_ae()">
-
-          </ion-input>
+          <ion-label color="primary" stacked>
+            Marca
+          </ion-label>
+          <ion-select [(ngModel)]="equipoActual.marca.id">
+            <ion-option *ngFor="let est of listaMarcaEquipo " [value]="est.id">
+              {{est.nombre}}
+            </ion-option>
+          </ion-select>
         </ion-item>
       </ion-col>
+
+
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
           <ion-label color="primary" stacked>Color</ion-label>

@@ -8,14 +8,16 @@ export interface PuntoControl {
 
   trabajo: models.Trabajo;
 
-  responsable?: models.Usuario;
-
   orden: number;
 
   tareas?: models.Tarea[];
 
+  paraVerificar: boolean;
+
+  responsable?: models.Usuario;
   verificado: boolean;
 
-  paraVerificar: boolean;
+  responsable2?: models.Usuario;
+  verificado2: boolean;
 
 }

@@ -3,6 +3,7 @@ import { TareaImp } from './TareaImp';
 import { Tarea } from './Tarea';
 import { Usuario } from './Usuario';
 import { Trabajo } from './Trabajo';
+import * as models from "./models";
 
 export class PuntoControlImp implements PuntoControl {
     id?: number;
@@ -11,15 +12,17 @@ export class PuntoControlImp implements PuntoControl {
 
     trabajo: Trabajo;
 
-    responsable?: Usuario;
-
     orden: number;
 
     tareas?: Tarea[];
 
+    paraVerificar: boolean;
+
+    responsable?: models.Usuario;
     verificado: boolean;
 
-    paraVerificar: boolean;
+    responsable2?: models.Usuario;
+    verificado2: boolean;
 
     constructor(x: PuntoControl) {
         this.id = (x.id != undefined) ? x.id : -1;
@@ -30,6 +33,9 @@ export class PuntoControlImp implements PuntoControl {
         this.verificado = x.verificado;
         this.tareas = new Array();
         this.paraVerificar = x.paraVerificar;
+
+        this.verificado2 = x.verificado;
+        this.responsable2 = x.responsable2;
 
         //console.log("x",x);
         // console.log("x.tareas",x.tareas);

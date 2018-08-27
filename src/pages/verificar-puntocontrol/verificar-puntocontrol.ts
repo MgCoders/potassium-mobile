@@ -9,7 +9,7 @@ import {UsuarioService} from "../../app/_services/usuario.service";
 import {Usuario} from "../../app/_models/Usuario";
 
 /**
- * Generated class for the AltaPuntoControl page.
+ * Generated class for the VerificarPuntoControlPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -17,10 +17,10 @@ import {Usuario} from "../../app/_models/Usuario";
 
 @IonicPage()
 @Component({
-  selector: 'page-alta-puntocontrol',
-  templateUrl: 'alta-puntocontrol.html',
+  selector: 'page-verificar-puntocontrol',
+  templateUrl: 'verificar-puntocontrol.html',
 })
-export class AltaPuntoControlPage {
+export class VerificarPuntoControlPage {
 
   trabajoActual: Trabajo;
   editar : boolean = false;
@@ -91,7 +91,7 @@ export class AltaPuntoControlPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AltaPuntoControlPage');
+    console.log('ionViewDidLoad VerificarPuntoControlPage');
   }
 
 
@@ -185,7 +185,7 @@ export class AltaPuntoControlPage {
 
     console.log("lo exporto");
 
-    if(!this.validarCamposAltaPuntoControl()) {
+    if(!this.validarCamposVerificarPuntoControlPage()) {
       return;
     }
 
@@ -227,7 +227,7 @@ export class AltaPuntoControlPage {
 
 
 
-  validarCamposAltaPuntoControl(){
+  validarCamposVerificarPuntoControlPage(){
 
     let toastError_ck = this.toastCtrl.create({
       message: 'Error en los campos!',

@@ -51,6 +51,8 @@ import {UsuarioService} from "./_services/usuario.service";
 import {RegistroService} from "./_services/registro.service";
 import {AltaPuntoControlPage} from "../pages/alta-puntocontrol/alta-puntocontrol";
 import {ImagePicker} from "@ionic-native/image-picker";
+import {MarcaEquipoService} from "./_services/marca-equipo.services";
+import {VerificarPuntoControlPage} from "../pages/verificar-puntocontrol/verificar-puntocontrol";
 
 @NgModule({
   declarations: [
@@ -84,6 +86,7 @@ import {ImagePicker} from "@ionic-native/image-picker";
     AltaRegistroPage,
     ListaRegistroPage,
     AltaPuntoControlPage,
+    VerificarPuntoControlPage
   ],
   imports: [
     BrowserModule,
@@ -128,7 +131,8 @@ import {ImagePicker} from "@ionic-native/image-picker";
     ModalCamposPage,
     AltaRegistroPage,
     ListaRegistroPage,
-    AltaPuntoControlPage
+    AltaPuntoControlPage,
+    VerificarPuntoControlPage
   ],
   providers: [
     StatusBar,
@@ -148,7 +152,8 @@ import {ImagePicker} from "@ionic-native/image-picker";
     RubroService,
     UsuarioService,
     RegistroService,
-    ImagePicker
+    ImagePicker,
+    MarcaEquipoService
 
   ]
 })

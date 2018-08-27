@@ -34,5 +34,7 @@ export * from './Proyecto';
 
 export * from './Registro';
 
+export * from './MarcaEquipo';
+
 
 

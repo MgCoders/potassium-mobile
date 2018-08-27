@@ -17,7 +17,7 @@ export interface Equipo {
 
     cliente?: models.Cliente;
 
-    marca?: string;
+    marca?:  models.MarcaEquipo;
 
     modelo?: string;
 

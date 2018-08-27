@@ -60,7 +60,7 @@
                 <ion-thumbnail  item-start>
                   <img src="assets/imgs/truck.png">
                 </ion-thumbnail>
-                <h2 >{{trabajoActual.equipo != undefined ? trabajoActual.equipo.marca : ''}} / {{ trabajoActual.equipo != undefined ? trabajoActual.equipo.modelo : ''}}</h2>
+                <h2 >{{(trabajoActual.equipo != undefined && trabajoActual.equipo.marca != undefined) ? trabajoActual.equipo.marca.nombre : ''}} / {{ trabajoActual.equipo != undefined ? trabajoActual.equipo.modelo : ''}}</h2>
                 <p >Up</p>
 
                 <button ion-button clear item-end (click)="openModalEquipo()" >Ver</button>

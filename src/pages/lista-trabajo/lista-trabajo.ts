@@ -17,6 +17,7 @@ import {Equipo} from "../../app/_models/Equipo";
 import {Cliente} from "../../app/_models/Cliente";
 import {TrabajoService} from "../../app/_services/trabajo.service";
 import {AltaTrabajoPage} from "../alta-trabajo/alta-trabajo";
+import {RecepcionPage} from "../recepcion/recepcion";
 
 /**
  * Generated class for the ListaTrabajoPage page.
@@ -164,6 +165,8 @@ export class ListaTrabajoPage {
 
   switchTrabajo(id: number) {
     if(this.recuperar){
+
+      this.navCtrl.setRoot(RecepcionPage, {});
       this.recuperarTrabajo(id);
     } else {
       this.verTrabajo(id);
@@ -171,7 +174,7 @@ export class ListaTrabajoPage {
   }
 
   recuperarTrabajo(id: number){
-    this.navCtrl.push(AltaTrabajoPage, {tipo:"recuperar", id:id});
+      this.navCtrl.push(AltaTrabajoPage, {tipo:"recuperar", id:id});
   }
 
 

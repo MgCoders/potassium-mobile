@@ -18,6 +18,7 @@ import {TrabajoFotoService} from "../../app/_services/trabajoFoto.service";
 import {TrabajoFotoImp} from "../../app/_models/TrabajoFotoImp";
 import {TrabajoFoto} from "../../app/_models/TrabajoFoto";
 import {TipoEquipoImp} from "../../app/_models/TipoEquipoImp";
+import {MarcaEquipoImp} from "../../app/_models/MarcaEquipoImp";
 
 /**
  * Generated class for the AltaTrabajoPage page.
@@ -404,8 +405,10 @@ export class AltaTrabajoPage {
     //Inicializo un trabajo en vacio
     let c = new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
     let te = new TipoEquipoImp({descripcion:'', dibujo: '', requiereInfoRecibo:false});
+    let m = new MarcaEquipoImp( {id: -1, nombre: ''});
+
     //Inicializo en vacío
-    let e =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
+    let e =  new EquipoImp({marca:m,modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
 
     this.trabajoActual =
       new TrabajoImp({
@@ -423,7 +426,9 @@ export class AltaTrabajoPage {
         firmaEmpleadoRecepcion: '',
         nombreClienteRecepcion:'',
         nombreEmpleadoRecepcion:'',
-        nroOrdenCompra:0,
+        nroOrdenCompra: "",
+        numeroTrabajo: "",
+        cotizacion: "",
         equipoDocumentos:false,
         equipoAbollones:false,
         equipoAuxiliar:false,

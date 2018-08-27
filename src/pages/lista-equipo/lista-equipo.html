@@ -58,7 +58,7 @@
             <ion-thumbnail (click)="seleccionarEquipo(equipo.id)" item-start>
               <img src="assets/imgs/truck.png">
             </ion-thumbnail>
-            <h2 (click)="seleccionarEquipo(equipo.id)">{{equipo.marca}} / {{equipo.modelo}}</h2>
+            <h2 (click)="seleccionarEquipo(equipo.id)">{{equipo.marca.nombre}} / {{equipo.modelo}}</h2>
             <p (click)="seleccionarEquipo(equipo.id)">{{equipo.matricula}}</p>
 
             <button *ngIf="equipo.id != seleccionado" ion-button clear item-end (click)="editarEquipo(equipo.id)">Editar</button>

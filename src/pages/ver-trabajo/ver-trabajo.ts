@@ -14,6 +14,7 @@ import {TipoEquipoImp} from "../../app/_models/TipoEquipoImp";
 import {ModalClientePage} from "../../components/modal-cliente/modal-cliente";
 import {ModalEquipoPage} from "../../components/modal-equipo/modal-equipo";
 import {ModalCamposPage} from "../../components/modal-campos/modal-campos";
+import {MarcaEquipoImp} from "../../app/_models/MarcaEquipoImp";
 /**
  * Generated class for the VerTrabajoPage page.
  *
@@ -65,9 +66,10 @@ export class VerTrabajoPage {
     //Inicializo el trabajo en vacío
     let c = new ClienteImp({nombreEmpresa:'',personaContacto:'',telefonoContacto:''});
     let te = new TipoEquipoImp({descripcion:'', dibujo: '', requiereInfoRecibo:false});
+    let m = new MarcaEquipoImp( {id: -1, nombre: ''});
 
     //Inicializo en vacío
-    let e =  new EquipoImp({marca:'',modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
+    let e =  new EquipoImp({marca:m,modelo:'',matricula:'',color:'', numeroChasis: '', cliente:this.navParams.data['cliente'], descripcion: '' , tipoEquipo: te} );
 
 
     this.trabajoActual =
@@ -86,7 +88,9 @@ export class VerTrabajoPage {
         firmaEmpleadoRecepcion: '',
         nombreClienteRecepcion:'',
         nombreEmpleadoRecepcion:'',
-        nroOrdenCompra:0,
+        nroOrdenCompra:"",
+        numeroTrabajo: "",
+        cotizacion: "",
         equipoDocumentos:false,
         equipoAbollones:false,
         equipoAuxiliar:false,
