@@ -7,69 +7,72 @@
 <ion-header  #head>
 
   <ion-navbar>
-    <ion-title>Ficha de Punto de control</ion-title>
+    <ion-title>Verificación Punto de control</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding padding hide-header [header]="head">
+<ion-content #pc_verificado padding padding hide-header [header]="head">
   <ion-grid>
     <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
-        <ion-item>
-          <ion-label color="primary" stacked>Nombre del punto de control</ion-label>
-          <ion-input type="text" placeholder="..." [(ngModel)]="pcActual.nombre">
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label color="primary" stacked>Orden</ion-label>
-          <ion-input type="number" placeholder="..." [(ngModel)]="pcActual.orden">
-          </ion-input>
-        </ion-item>
+        <ion-card class="pc_verif">
+          <ion-card-title>
+              Detalles:
+          </ion-card-title>
+          <ion-card-content>
+            <ion-item>
+              <ion-label color="primary" stacked>Nombre del punto de control</ion-label>
+              <ion-input type="text" disabled placeholder="..." [(ngModel)]="pcActual.nombre">
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Asociado al trabajo</ion-label>
+              <ion-input text-right disabled [(ngModel)]="pcActual.trabajo.id"></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
 
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-card class="pc_verif">
+          <ion-card-title>
+            Verificación:
+          </ion-card-title>
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label>Responsable</ion-label>
+                <ion-icon name='md-clipboard' item-start></ion-icon>
+                <ion-select [(ngModel)]="usrSeleccionado">
+                  <ion-option *ngFor="let usr of listaUsuarios " [value]="usr.id" >{{usr.nombre}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
 
-      <ion-col col-12 col-md-6 offset-md-3>
-        <ion-item>
-          <ion-label>Asociado al trabajo</ion-label>
-          <ion-input text-right disabled [(ngModel)]="pcActual.trabajo.id"></ion-input>
-        </ion-item>
+            <ion-item>
+              <ion-label>Verificado? </ion-label>
+              <ion-checkbox></ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>PIN</ion-label>
+              <ion-input text-right></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
 
-      <ion-col col-12 col-md-6 offset-md-3>
-        <ion-list>
-          <ion-item>
-            <ion-label>Responsable</ion-label>
-            <ion-icon name='md-clipboard' item-start></ion-icon>
-            <ion-select [(ngModel)]="usrSeleccionado">
-              <ion-option *ngFor="let usr of listaUsuarios " [value]="usr.id" >{{usr.nombre}}</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-      <ion-col col-12 col-md-6 offset-md-3>
-        <ion-list>
-          <ion-item>
-            <ion-label>Responsable2</ion-label>
-            <ion-icon name='md-clipboard' item-start></ion-icon>
-            <ion-select [(ngModel)]="usrSeleccionado2">
-              <ion-option *ngFor="let usr of listaUsuarios " [value]="usr.id" >{{usr.nombre}}</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-      <ion-col col-12 col-md-6 offset-md-3>
-        <ion-item>
-          <ion-label>Verificación?</ion-label>
-          <ion-checkbox [(ngModel)]="tareaActual.necesitaVerificacion"></ion-checkbox>
-        </ion-item>
-      </ion-col>
     </ion-row>
+
+
+    <br> <br>
 
     <ion-row>
       <ion-col col-4 offset-4>
-        <button ion-button full color="primary" (click)="guardarPC()" >Confirmar</button>
+        <button ion-button full color="primary" >Confirmar</button>
       </ion-col>
     </ion-row>
   </ion-grid>

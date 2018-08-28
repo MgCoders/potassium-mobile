@@ -8,6 +8,7 @@ import {PuntoControl} from "../../app/_models/PuntoControl";
 import {AltaPuntoControlPage} from "../alta-puntocontrol/alta-puntocontrol";
 import {Trabajo} from "../../app/_models/Trabajo";
 import {TrabajoImp} from "../../app/_models/TrabajoImp";
+import {VerificarPuntoControlPage} from "../verificar-puntocontrol/verificar-puntocontrol";
 
 /**
  * Generated class for the ListaPuntocontrolPage page.
@@ -109,7 +110,7 @@ export class ListaPuntocontrolPage {
 
 
   seleccionarPuntoControl(id: number) {
-    this.navCtrl.push(AltaPuntoControlPage, {idPc:id, trabajoActual:this.trabajoActual});
+    this.navCtrl.push(VerificarPuntoControlPage, {idPc:id, trabajoActual:this.trabajoActual});
   }
 
 
@@ -118,7 +119,7 @@ export class ListaPuntocontrolPage {
   }
 
   editarPuntoControl(id: number) {
-    this.seleccionarPuntoControl(id);
+    this.navCtrl.push(AltaPuntoControlPage, {idPc:id, trabajoActual:this.trabajoActual});
   }
 
 }

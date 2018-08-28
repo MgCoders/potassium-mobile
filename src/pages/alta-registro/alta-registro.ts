@@ -402,7 +402,7 @@ export class AltaRegistroPage {
       valido = false;
     }
 
-    if(valido && (this.registroActual.tarea == undefined || this.registroActual.tarea.completa == false)){
+    if(valido && (this.registroActual.tarea == undefined || this.registroActual.tarea.completa == true)){
       mensaje = 'La tarea ya está completa';
       valido = false;
     }
