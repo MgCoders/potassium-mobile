@@ -154,7 +154,7 @@ export class VerificarPuntoControlPage {
         },
         (error) => {
           loading_apc.dismissAll();
-          toastError_apc.setMessage(error.toString());
+          toastError_apc.setMessage(error["headers"]['statusText']+" :: "+JSON.stringify(error["headers"]['statusText']) );
           toastError_apc.present();
         });
     //}*/
@@ -301,7 +301,7 @@ export class VerificarPuntoControlPage {
       valido = false;
     }
 
-    if(valido && this.boolVerif!=undefined){
+    if(valido && this.boolVerif==undefined){
       mensaje = 'Error con el campo de verificación';
       valido = false;
     }

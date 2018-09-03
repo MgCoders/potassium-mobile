@@ -33,7 +33,7 @@ export class SeleccionaTrabajoPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private service: TrabajoService,
+              private trabajoService: TrabajoService,
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events,
@@ -120,11 +120,12 @@ export class SeleccionaTrabajoPage {
     loading.present();
     if(id != undefined){
       console.log('SeleccionaTrabajo!');
-      this.service.get(id).subscribe(
+      this.trabajoService.get(id).subscribe(
         (data) => {
           toastCorrecto.present();
           loading.dismissAll();
           this.trabajoActual = data;
+          //this.trabajoActual.paraFinalizar = true;
           console.log("Cargo el trabajo: ",this.trabajoActual);
         },
         (error) => {
@@ -134,6 +135,10 @@ export class SeleccionaTrabajoPage {
     }
     loading.dismissAll();
     console.log("despues", this.trabajoActual);
+
+
+
+
   }
 
   ionViewDidLoad() {
@@ -154,78 +159,12 @@ export class SeleccionaTrabajoPage {
     this.navCtrl.push(VerTrabajoPage, {id:id});
   }
 
-  borraTrabajo(id: number){
 
-
-    let alert = this.alertCtrl.create({
-      title: 'Confirmar borrado',
-      message: 'Realmente quiere borrar este trabajo?',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: () => {
-            console.log('Canceló, no se borra nada');
-          }
-        },
-        {
-          text: 'Confirmar',
-          handler: () => {
-            console.log('Confirmó, Borro el trabajo');
-
-
-            /*
-                        let loading = this.loadingCtrl.create({
-                          content: 'Procesando...'
-                        });
-                        let toastCorrecto = this.toastCtrl.create({
-                          message: 'Trabajo borrado!',
-                          duration: 3000,
-                          position: 'bottom'
-                        });
-                        let toastError = this.toastCtrl.create({
-                          message: 'Error al borrar el trabajo..',
-                          duration: 3000,
-                          position: 'bottom'
-                        });
-
-
-                        loading.present();
-                        if(id != undefined){
-                          console.log('Borrar trabajo!');
-                          this.service.borrar.subscribe(
-                            (data) => {
-                              toastCorrecto.present();
-                              loading.dismissAll();
-                              this.trabajoActual = data;
-                              console.log("adentro",this.trabajoActual);
-                            },
-                            (error) => {
-                              toastError.setMessage(error);
-                              toastError.present();
-                            });
-                        }
-
-                        loading.dismissAll();
-                        loading.dismiss();*/
-
-            console.log("despues", this.trabajoActual);
-          }
-        }
-      ]
-    });
-    alert.present();
-
-  }
-
-
-
-  FinalizarTrabajo(id: number){
-
+  cambiarEstadoTrabajo(title:string, message:string, estado:string){
 
     let alert = this.alertCtrl.create({
-      title: 'Confirmar borrado',
-      message: 'Realmente quiere cambiar el estado de este trabajo a finalizado',
+      title: title,
+      message: message,
       buttons: [
         {
           text: 'No',
@@ -237,107 +176,39 @@ export class SeleccionaTrabajoPage {
         {
           text: 'Confirmar',
           handler: () => {
-            console.log('Confirmó, Trabajo Finalizado');
+            console.log('Confirmó, procesando solicitud');
 
 
-            /*
-                        let loading = this.loadingCtrl.create({
-                          content: 'Procesando...'
-                        });
-                        let toastCorrecto = this.toastCtrl.create({
-                          message: 'Trabajo borrado!',
-                          duration: 3000,
-                          position: 'bottom'
-                        });
-                        let toastError = this.toastCtrl.create({
-                          message: 'Error al borrar el trabajo..',
-                          duration: 3000,
-                          position: 'bottom'
-                        });
 
+            let loading = this.loadingCtrl.create({
+              content: 'Procesando...'
+            });
+            let toastCorrecto = this.toastCtrl.create({
+              message: 'Trabajo modificado correctamente!',
+              duration: 3000,
+              position: 'bottom'
+            });
+            let toastError = this.toastCtrl.create({
+              message: 'Error al modificar el trabajo..',
+              duration: 3000,
+              position: 'bottom'
+            });
 
-                        loading.present();
-                        if(id != undefined){
-                          console.log('Borrar trabajo!');
-                          this.service.borrar.subscribe(
-                            (data) => {
-                              toastCorrecto.present();
-                              loading.dismissAll();
-                              this.trabajoActual = data;
-                              console.log("adentro",this.trabajoActual);
-                            },
-                            (error) => {
-                              toastError.setMessage(error);
-                              toastError.present();
-                            });
-                        }
+            this.trabajoActual.estado = estado;
 
-                        loading.dismissAll();
-                        loading.dismiss();*/
-
-            console.log("despues", this.trabajoActual);
-          }
-        }
-      ]
-    });
-    alert.present();
-
-  }
-
-  TrabajoSinFinalizar(id: number){
-
-
-    let alert = this.alertCtrl.create({
-      title: 'Confirmar borrado',
-      message: 'Realmente quiere cambiar el estado de este trabajo a SIN finalizar',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: () => {
-            console.log('Canceló, no se cambia nada');
-          }
-        },
-        {
-          text: 'Confirmar',
-          handler: () => {
-            console.log('Confirmó, Trabajo sin Finalizar');
-
-
-            /*
-                        let loading = this.loadingCtrl.create({
-                          content: 'Procesando...'
-                        });
-                        let toastCorrecto = this.toastCtrl.create({
-                          message: 'Trabajo borrado!',
-                          duration: 3000,
-                          position: 'bottom'
-                        });
-                        let toastError = this.toastCtrl.create({
-                          message: 'Error al borrar el trabajo..',
-                          duration: 3000,
-                          position: 'bottom'
-                        });
-
-
-                        loading.present();
-                        if(id != undefined){
-                          console.log('Borrar trabajo!');
-                          this.service.borrar.subscribe(
-                            (data) => {
-                              toastCorrecto.present();
-                              loading.dismissAll();
-                              this.trabajoActual = data;
-                              console.log("adentro",this.trabajoActual);
-                            },
-                            (error) => {
-                              toastError.setMessage(error);
-                              toastError.present();
-                            });
-                        }
-
-                        loading.dismissAll();
-                        loading.dismiss();*/
+            loading.present();
+            console.log('Cambiar estado trabajo!');
+            this.trabajoService.edit(this.trabajoActual).subscribe(
+              (data) => {
+                toastCorrecto.present();
+                loading.dismissAll();
+                this.trabajoActual = data;
+                console.log("adentro",this.trabajoActual);
+              },
+              (error) => {
+                toastError.setMessage(error);
+                toastError.present();
+              });
 
             console.log("despues", this.trabajoActual);
           }
@@ -350,8 +221,15 @@ export class SeleccionaTrabajoPage {
 
 
 
-  switchFinTrabajo(id: number) {
-    console.log("entro al switch - Verificado");
+  switchFinTrabajo(tipo: number) {
+
+    // **TIPO**
+    // 1 es modificar
+    // 2 es borrar
+
+    console.log("Entro al switch");
+    console.log("Tipo: ",tipo);
+
 
     let toastError_ck = this.toastCtrl.create({
       message: 'Error en los campos!',
@@ -374,13 +252,27 @@ export class SeleccionaTrabajoPage {
 
     if ( valido ) {
 
-      if (this.trabajoActual.estado == 'FINALIZADO') {
-        this.TrabajoSinFinalizar(id);
-      }
-      else {
-        this.FinalizarTrabajo(id);
-      }
 
+      if (tipo === 1) {
+        if (this.trabajoActual.estado == 'FINALIZADO') {
+          let estado = 'EN_PROCESO';
+          let title = "Cambiar el estado a del trabajo";
+          let message = "Realmente quere cambiar el estado a: EN PROCESO";
+          this.cambiarEstadoTrabajo(title, message, estado);
+        }
+        else {
+
+          let estado = 'FINALIZADO';
+          let title = "Cambiar el estado a del trabajo";
+          let message = "Realmente quere cambiar el estado a: FINALIZADO";
+          this.cambiarEstadoTrabajo(title, message, estado);
+        }
+      } else {
+        let estado = 'BORRADO';
+        let title = 'Confirmar borrado';
+        let message = "Realmente quere borrar el trabajo";
+        this.cambiarEstadoTrabajo(title, message, estado);
+      }
     }
   }
 

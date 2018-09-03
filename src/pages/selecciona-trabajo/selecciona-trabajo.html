@@ -55,13 +55,13 @@
       <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
     </ion-item>
 
-    <ion-item *ngIf="trabajoActual?.paraFinalizar" (click)="switchFinTrabajo(trabajoActual.id)" >
-      Cambiar Estado a: {{ (!trabajoActual?.estado == "FINALIZADO") ? "SIN VERIFICAR" : "VERIFICADA" }}
+    <ion-item *ngIf="trabajoActual?.paraFinalizar" (click)="switchFinTrabajo(1)" > <!--1 es borrar-->
+      Cambiar Estado a: {{ (!trabajoActual?.estado == "FINALIZADO") ? "SIN FINALIZAR" : "FINALIZADO" }}
       <ion-note item-end></ion-note>
       <ion-icon color="{{ (!trabajoActual?.estado == 'FINALIZADO') ? 'sandonato_rojoLogo'  : '#0f0'}}" name='md-checkmark' item-start></ion-icon>
     </ion-item>
 
-    <ion-item (click)="borraTrabajo(trabajoActual.id)" >
+    <ion-item (click)="switchFinTrabajo(2)" > <!--2 es borrar-->
       Borrar trabajo
       <ion-note item-end></ion-note>
       <ion-icon color="sandonato_rojoLogo" name='md-trash' item-start></ion-icon>

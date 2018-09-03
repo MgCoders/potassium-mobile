@@ -85,7 +85,7 @@ export class LoginPage {
           } ,
         (err) => {
             console.log('NO LOG');
-            //console.log(JSON.stringify(err));
+            console.log(JSON.stringify(err));
             //console.log('mail: '+this.model.email+' - pass: '+this.model.password);
             this.onResetForm();
           }

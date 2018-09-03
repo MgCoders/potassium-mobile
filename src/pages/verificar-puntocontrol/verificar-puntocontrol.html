@@ -17,9 +17,12 @@
   <ion-grid *ngIf="pcActual!=undefined">
     <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
+        <h2>
+          Detalles:
+        </h2>
         <ion-card class="pc_verif">
           <ion-card-title>
-              Detalles:
+
           </ion-card-title>
           <ion-card-content>
             <ion-item>
@@ -28,18 +31,24 @@
               </ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item *ngIf="pcActual.trabajo != undefined" >
               <ion-label>Asociado al trabajo</ion-label>
               <ion-input text-right disabled [(ngModel)]="pcActual.trabajo.id"></ion-input>
             </ion-item>
           </ion-card-content>
         </ion-card>
       </ion-col>
-
+    </ion-row>
+      <br>
+      <br>
+    <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
+        <h2>
+          Verificación:
+        </h2>
         <ion-card class="pc_verif">
           <ion-card-title>
-            Verificación:
+
           </ion-card-title>
           <ion-card-content>
             <ion-list>
@@ -47,7 +56,7 @@
                 <ion-label>Responsable</ion-label>
                 <ion-icon name='md-clipboard' item-start></ion-icon>
                 <ion-select (ionChange)="reloadBoolVerif()" [(ngModel)]="usrSeleccionado">
-                  <ion-option [value]="pcActual.responsable.id" >{{pcActual.responsable.nombre}}</ion-option>
+                  <ion-option *ngIf="pcActual.responsable2 != undefined" [value]="pcActual.responsable?.id" >{{pcActual.responsable?.nombre}}</ion-option>
                   <ion-option *ngIf="pcActual.responsable2 != undefined" [value]="pcActual.responsable2?.id" >{{pcActual.responsable2?.nombre}}</ion-option>
                 </ion-select>
               </ion-item>
@@ -65,7 +74,6 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-
     </ion-row>
 
 
