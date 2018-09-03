@@ -23,15 +23,17 @@ import {Usuario} from "../../app/_models/Usuario";
 export class VerificarPuntoControlPage {
 
   trabajoActual: Trabajo;
-  editar : boolean = false;
+  //editar : boolean = false;
 
 
   pcSeleccionado : number;
   usrSeleccionado : number;
-  usrSeleccionado2   : number;
+  //usrSeleccionado2   : number;
   pcActual: PuntoControl;
-  listaPC: PuntoControl[];
-  listaUsuarios: Usuario[];
+  boolVerif: boolean;
+  usrPin: string;
+  usuarioQueVerifica:number = undefined;
+
 
 
   constructor(public navCtrl: NavController,
@@ -47,9 +49,9 @@ export class VerificarPuntoControlPage {
     this.pcSeleccionado = this.navParams.data['idPc'];
     this.trabajoActual = this.navParams.data['trabajoActual'];
 
-    this.editar = (this.pcSeleccionado != undefined);
+    //this.editar = (this.pcSeleccionado != undefined);
 
-    console.log("es edición:", this.editar);
+    //console.log("es edición:", this.editar);
 
     console.log("Vino por param. pcSeleccionado:", this.pcSeleccionado);
     console.log("Vino por param. trabajoActual:", this.trabajoActual);
@@ -59,7 +61,7 @@ export class VerificarPuntoControlPage {
 
     if(this.pcActual == undefined) {
       let tareas = new Array();
-      let usuario = new UsuarioImp({    email: "", nombre: "", apellido:"", role: "", password: "", login:false });
+      let usuario = new UsuarioImp({ id:-1,   email: "", nombre: "", apellido:"", role: "", password: "", login:false });
       this.pcActual = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario, responsable2: usuario, orden:0, tareas: tareas, verificado: false, verificado2: false, paraVerificar: false});
     }
 
@@ -72,7 +74,7 @@ export class VerificarPuntoControlPage {
     });
 
 
-    this.listaUsuarios = [];
+/*    this.listaUsuarios = [];
     console.log("Traigo la lista de usuarios.");
     this.usuarioService.getAll().subscribe(
       (data) => {
@@ -86,7 +88,7 @@ export class VerificarPuntoControlPage {
         toastError_ar_4.setMessage(error);
         toastError_ar_4.present();
       });
-
+*/
 
   }
 
@@ -98,7 +100,7 @@ export class VerificarPuntoControlPage {
   ionViewWillEnter() {
 
     //Limpio la lista
-    this.listaPC = [];
+  //  this.listaPC = [];
     console.log("Entro a la lista de PC");
 
     //console.log('ionViewDidLoad SeleccionaEquipoPage');
@@ -118,7 +120,8 @@ export class VerificarPuntoControlPage {
     });
 
 
-    if (this.editar){
+
+    //if (this.editar){
 
 
       let self = this;
@@ -143,7 +146,8 @@ export class VerificarPuntoControlPage {
 
           //el pc final no tiene responsable!
           this.usrSeleccionado = (this.pcActual.responsable != undefined) ? this.pcActual.responsable.id : -1;
-          this.usrSeleccionado2 = (this.pcActual.responsable2 != undefined) ? this.pcActual.responsable2.id : -1;
+          this.boolVerif = this.pcActual.verificado;
+          //this.usrSeleccionado2 = (this.pcActual.responsable2 != undefined) ? this.pcActual.responsable2.id : -1;
 
 
           toastCorrecto_apc.present();
@@ -153,12 +157,22 @@ export class VerificarPuntoControlPage {
           toastError_apc.setMessage(error.toString());
           toastError_apc.present();
         });
+    //}*/
+  }
+
+  reloadBoolVerif() {
+    if (this.usrSeleccionado == this.pcActual.responsable.id) {
+      this.boolVerif = this.pcActual.verificado;
+    }
+    else if (this.usrSeleccionado == this.pcActual.responsable.id) {
+      this.boolVerif = this.pcActual.verificado2;
     }
   }
 
-  guardarPC() {
+  verificarPC() {
 
     let self = this;
+    /*
     this.pcActual.responsable = this.listaUsuarios.find(function(item){
       return item.id == self.usrSeleccionado;
     } );
@@ -166,6 +180,21 @@ export class VerificarPuntoControlPage {
     this.pcActual.responsable2 = this.listaUsuarios.find(function(item){
       return item.id == self.usrSeleccionado2;
     } );
+    */
+
+    if (this.usrSeleccionado == this.pcActual.responsable.id) {
+      this.usuarioQueVerifica = 1;
+    }
+    else if (this.usrSeleccionado == this.pcActual.responsable.id) {
+      this.usuarioQueVerifica = 2;
+    }
+
+    console.log("usuarioQueVerifica", this.usuarioQueVerifica);
+    console.log("pin", this.usrPin);
+    console.log("boolVerif", this.boolVerif);
+
+
+
 
 
     //inicializo los helers que voy a usar (Dialogo de cargando y toast'es)
@@ -191,6 +220,22 @@ export class VerificarPuntoControlPage {
 
 
     loading_apc_2.present();
+
+    this.pcService.verificar(this.pcActual,this.usrPin,this.usuarioQueVerifica).subscribe(
+      (data) => {
+        toastCorrecto_apc_2.present();
+        loading_apc_2.dismissAll();
+        this.pcActual = new PuntoControlImp(data);
+        console.log("PC después: ",this.pcActual);
+        this.navCtrl.pop();
+      },
+      (error) => {
+        toastError_apc_2.setMessage(error);
+        toastError_apc_2.present();
+        console.log(error);
+      });
+
+    /*
     if (!this.editar) {
       this.pcService.create(this.pcActual).subscribe(
         (data) => {
@@ -220,7 +265,7 @@ export class VerificarPuntoControlPage {
     }
     console.log('Cliente después');
     console.log(this.pcActual);
-
+    */
   }
 
 
@@ -242,34 +287,26 @@ export class VerificarPuntoControlPage {
 
 
 
-    console.log("Validando puntoControl: ", this.pcActual.orden);
-    console.log("Validando tareas: ", this.pcActual.tareas);
-    console.log("Validando responsable: ", this.pcActual.responsable);
-    console.log("Validando responsable2: ", this.pcActual.responsable2);
-    console.log("Validando nombre: ", this.pcActual.nombre);
-    console.log("Validando trabajo: ", this.pcActual.trabajo);
+    console.log("usuarioQueVerifica", this.usuarioQueVerifica);
+    console.log("pin", this.usrPin);
+    console.log("boolVerif", this.boolVerif);
 
-
-    if(valido && (this.pcActual.nombre == undefined || this.pcActual.nombre == "")){
-      mensaje = 'No se ingresó nombre';
+    if(valido && (this.usuarioQueVerifica == undefined || !(this.usuarioQueVerifica == 1 || this.usuarioQueVerifica ==2))){
+      mensaje = 'Usuario responsable incorrecto';
       valido = false;
     }
 
-    if(valido && (this.pcActual.orden == undefined || this.pcActual.orden.toString() == "")){
-      mensaje = 'No tiene orden';
+    if(valido && (this.usrPin == undefined || (this.usrPin.length != 4))){
+      mensaje = 'El Pin debe ser de largo 4';
+      valido = false;
+    }
+
+    if(valido && this.boolVerif!=undefined){
+      mensaje = 'Error con el campo de verificación';
       valido = false;
     }
 
 
-    if(valido && (this.pcActual.responsable == undefined || this.pcActual.responsable.id == undefined)){
-      mensaje = 'No se ingresó responsable';
-      valido = false;
-    }
-
-    if(valido && (this.pcActual.responsable2 == undefined || this.pcActual.responsable2.id == undefined)){
-      mensaje = 'No se ingresó responsable2';
-      valido = false;
-    }
 
     //Estos campos no requieren validación
     //this.clienteActual.telefono

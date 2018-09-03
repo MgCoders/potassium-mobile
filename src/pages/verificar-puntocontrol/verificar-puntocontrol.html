@@ -14,7 +14,7 @@
 
 
 <ion-content #pc_verificado padding padding hide-header [header]="head">
-  <ion-grid>
+  <ion-grid *ngIf="pcActual!=undefined">
     <ion-row>
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-card class="pc_verif">
@@ -46,20 +46,21 @@
               <ion-item>
                 <ion-label>Responsable</ion-label>
                 <ion-icon name='md-clipboard' item-start></ion-icon>
-                <ion-select [(ngModel)]="usrSeleccionado">
-                  <ion-option *ngFor="let usr of listaUsuarios " [value]="usr.id" >{{usr.nombre}}</ion-option>
+                <ion-select (ionChange)="reloadBoolVerif()" [(ngModel)]="usrSeleccionado">
+                  <ion-option [value]="pcActual.responsable.id" >{{pcActual.responsable.nombre}}</ion-option>
+                  <ion-option *ngIf="pcActual.responsable2 != undefined" [value]="pcActual.responsable2?.id" >{{pcActual.responsable2?.nombre}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-list>
 
             <ion-item>
               <ion-label>Verificado? </ion-label>
-              <ion-checkbox></ion-checkbox>
+              <ion-checkbox [(ngModel)]="boolVerif" ></ion-checkbox>
             </ion-item>
 
             <ion-item>
               <ion-label>PIN</ion-label>
-              <ion-input text-right></ion-input>
+              <ion-input  type="password" text-right [(ngModel)]="usrPin"></ion-input>
             </ion-item>
           </ion-card-content>
         </ion-card>
@@ -72,7 +73,7 @@
 
     <ion-row>
       <ion-col col-4 offset-4>
-        <button ion-button full color="primary" >Confirmar</button>
+        <button ion-button full color="primary" (click)="verificarPC()" >Confirmar</button>
       </ion-col>
     </ion-row>
   </ion-grid>
