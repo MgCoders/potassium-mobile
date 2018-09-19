@@ -56,8 +56,9 @@
                 <ion-label>Responsable</ion-label>
                 <ion-icon name='md-clipboard' item-start></ion-icon>
                 <ion-select (ionChange)="reloadBoolVerif()" [(ngModel)]="usrSeleccionado">
-                  <ion-option *ngIf="pcActual.responsable2 != undefined" [value]="pcActual.responsable?.id" >{{pcActual.responsable?.nombre}}</ion-option>
-                  <ion-option *ngIf="pcActual.responsable2 != undefined" [value]="pcActual.responsable2?.id" >{{pcActual.responsable2?.nombre}}</ion-option>
+                  <!--<ion-option *ngIf="pcActual.responsable2 != undefined" [value]="pcActual.responsable?.id" >{{pcActual.responsable?.nombre}}</ion-option>-->
+                  <!--<ion-option *ngIf="pcActual.responsable2 != undefined" [value]="pcActual.responsable2?.id" >{{pcActual.responsable2?.nombre}}</ion-option>-->
+                  <ion-option *ngFor="let u of listaUsuarios" [value]="u?.id" >{{u.nombre + " " + u.apellido}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-list>

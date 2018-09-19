@@ -10,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {ListaTrabajoPage} from "../pages/lista-trabajo/lista-trabajo";
 import {IngresarDetallesPage} from "../pages/ingresar-detalles/ingresar-detalles";
 import {AltaDibujoPage} from "../pages/alta-dibujo/alta-dibujo";
+import {CalendarioPage} from "../pages/calendario/calendario";
 
 
 @Component({
@@ -37,11 +38,12 @@ export class MyApp {
       { title: 'Recepción de cliente', component: RecepcionPage },
       { title: 'Ver trabajos en proceso', component: ListaTrabajoPage },
       { title: 'Historial de trabajos', component: ListaTrabajoPage },
+      { title: 'Calendario', component: CalendarioPage },
       { title: 'Cerrar sesión', component: LoginPage }
     ];
 
     events.subscribe('user:logout', () => {
-      this.nav.setRoot(LoginPage, {tipo: 'proceso'});
+      this.nav.setRoot(CalendarioPage, {tipo: 'proceso'});
       //this.rootPage = LoginPage;
     });
 

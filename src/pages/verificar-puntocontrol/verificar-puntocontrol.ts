@@ -33,7 +33,7 @@ export class VerificarPuntoControlPage {
   boolVerif: boolean;
   usrPin: string;
   usuarioQueVerifica:number = undefined;
-
+  listaUsuarios: Usuario[];
 
 
   constructor(public navCtrl: NavController,
@@ -60,7 +60,7 @@ export class VerificarPuntoControlPage {
 
 
     if(this.pcActual == undefined) {
-      let tareas = new Array();
+      let tareas = [];
       let usuario = new UsuarioImp({ id:-1,   email: "", nombre: "", apellido:"", role: "", password: "", login:false });
       this.pcActual = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario, responsable2: usuario, orden:0, tareas: tareas, verificado: false, verificado2: false, paraVerificar: false});
     }
@@ -120,6 +120,27 @@ export class VerificarPuntoControlPage {
     });
 
 
+    let toastError_ar_4 = this.toastCtrl.create({
+      message: 'Error al cargar datos..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    this.listaUsuarios = [];
+    console.log("Traigo la lista de usuarios.");
+    this.usuarioService.getAll().subscribe(
+      (data) => {
+        data.forEach( (usr) => {
+
+          this.listaUsuarios.push( new UsuarioImp(usr));
+        })
+        console.log("Lista de usuarios después:", this.listaUsuarios);
+      },
+      (error) => {
+        toastError_ar_4.setMessage(error);
+        toastError_ar_4.present();
+      });
+
 
     //if (this.editar){
 
@@ -161,12 +182,9 @@ export class VerificarPuntoControlPage {
   }
 
   reloadBoolVerif() {
-    if (this.usrSeleccionado == this.pcActual.responsable.id) {
-      this.boolVerif = this.pcActual.verificado;
-    }
-    else if (this.usrSeleccionado == this.pcActual.responsable.id) {
-      this.boolVerif = this.pcActual.verificado2;
-    }
+
+    this.boolVerif = false;
+
   }
 
   verificarPC() {
@@ -182,12 +200,23 @@ export class VerificarPuntoControlPage {
     } );
     */
 
+    /*
     if (this.usrSeleccionado == this.pcActual.responsable.id) {
+
       this.usuarioQueVerifica = 1;
     }
     else if (this.usrSeleccionado == this.pcActual.responsable.id) {
       this.usuarioQueVerifica = 2;
     }
+    */
+
+    if (this.pcActual.responsable == undefined) {
+      this.usuarioQueVerifica = 1;
+    }
+    else {
+      this.usuarioQueVerifica = 2;
+    }
+
 
     console.log("usuarioQueVerifica", this.usuarioQueVerifica);
     console.log("pin", this.usrPin);
@@ -306,6 +335,10 @@ export class VerificarPuntoControlPage {
       valido = false;
     }
 
+    if(valido && this.boolVerif==false){
+      mensaje = 'El campo de verificación no se ha seleccionado como verificado';
+      valido = false;
+    }
 
 
     //Estos campos no requieren validación

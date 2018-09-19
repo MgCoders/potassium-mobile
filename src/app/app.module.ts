@@ -54,6 +54,9 @@ import {ImagePicker} from "@ionic-native/image-picker";
 import {MarcaEquipoService} from "./_services/marca-equipo.services";
 import {VerificarPuntoControlPage} from "../pages/verificar-puntocontrol/verificar-puntocontrol";
 
+import {Calendar} from '@ionic-native/calendar'
+import {CalDetailsPage} from "../pages/cal-details/cal-details";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -86,7 +89,8 @@ import {VerificarPuntoControlPage} from "../pages/verificar-puntocontrol/verific
     AltaRegistroPage,
     ListaRegistroPage,
     AltaPuntoControlPage,
-    VerificarPuntoControlPage
+    VerificarPuntoControlPage,
+    CalDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -132,7 +136,8 @@ import {VerificarPuntoControlPage} from "../pages/verificar-puntocontrol/verific
     AltaRegistroPage,
     ListaRegistroPage,
     AltaPuntoControlPage,
-    VerificarPuntoControlPage
+    VerificarPuntoControlPage,
+    CalDetailsPage
   ],
   providers: [
     StatusBar,
@@ -153,7 +158,8 @@ import {VerificarPuntoControlPage} from "../pages/verificar-puntocontrol/verific
     UsuarioService,
     RegistroService,
     ImagePicker,
-    MarcaEquipoService
+    MarcaEquipoService,
+    Calendar
 
   ]
 })
