@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import {NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler, Keyboard} from 'ionic-angular';
 import { MyApp } from './app.component';
 
@@ -56,41 +56,67 @@ import {VerificarPuntoControlPage} from "../pages/verificar-puntocontrol/verific
 
 import {Calendar} from '@ionic-native/calendar'
 import {CalDetailsPage} from "../pages/cal-details/cal-details";
+import {DirectivesModule} from "../directives/directives.module";
+import {AltaClientePageModule} from "../pages/alta-cliente/alta-cliente.module";
+import {AltaEquipoPageModule} from "../pages/alta-equipo/alta-equipo.module";
+import {ListaTrabajoPageModule} from "../pages/lista-trabajo/lista-trabajo.module";
+import {VerTrabajoPageModule} from "../pages/ver-trabajo/ver-trabajo.module";
+import {AltaDescripcionPageModule} from "../pages/alta-descripcion/alta-descripcion.module";
+import {AltaFirmaPageModule} from "../pages/alta-firma/alta-firma.module";
+import {SeleccionaTrabajoPageModule} from "../pages/selecciona-trabajo/selecciona-trabajo.module";
+import {ListaPuntocontrolPageModule} from "../pages/lista-puntocontrol/lista-puntocontrol.module";
+import {ListaTareaPageModule} from "../pages/lista-tarea/lista-tarea.module";
+import {AltaTareaPageModule} from "../pages/alta-tarea/alta-tarea.module";
+import {CalendarioPageModule} from "../pages/calendario/calendario.module";
+import {SeleccionaTareaPageModule} from "../pages/selecciona-tarea/selecciona-tarea.module";
+import {AltaDibujoPageModule} from "../pages/alta-dibujo/alta-dibujo.module";
+import {AltaRegistroPageModule} from "../pages/alta-registro/alta-registro.module";
+import {ListaRegistroPageModule} from "../pages/lista-registro/lista-registro.module";
+import {AltaPuntoControlPageModule} from "../pages/alta-puntocontrol/alta-puntocontrol.module";
+import {VerificarPuntoControlPageModule} from "../pages/verificar-puntocontrol/verificar-puntocontrol.module";
+import {CalDetailsPageModule} from "../pages/cal-details/cal-details.module";
+import {IngresarFirmaPageModule} from "../pages/ingresar-firma/ingresar-firma.module";
+import {IngresarDetallesPageModule} from "../pages/ingresar-detalles/ingresar-detalles.module";
+import {ListaEquipoPageModule} from "../pages/lista-equipo/lista-equipo.module";
+import {ListaClientePageModule} from "../pages/lista-cliente/lista-cliente.module";
+import {AltaTrabajoPageModule} from "../pages/alta-trabajo/alta-trabajo.module";
+import {RecepcionPageModule} from "../pages/recepcion/recepcion.module";
+import {LoginPageModule} from "../pages/login/login.module";
 
 @NgModule({
   declarations: [
     MyApp,
-    RecepcionPage,
-    LoginPage,
-    AltaTrabajoPage,
-    ListaClientePage,
-    ListaEquipoPage,
-    IngresarDetallesPage,
-    IngresarFirmaPage,
-    AltaClientePage,
-    AltaEquipoPage,
-    ListaTrabajoPage,
-    VerTrabajoPage,
-    AltaDescripcionPage,
-    AltaFirmaPage,
-    SeleccionaTrabajoPage,
-    ListaPuntocontrolPage,
-    ListaTareaPage,
-    AltaTareaPage,
-    CalendarioPage,
-    SeleccionaTrabajoPage,
-    SeleccionaTareaPage,
-    HideHeaderDirective,
-    FilterPipe,
-    AltaDibujoPage,
-    ModalClientePage,
-    ModalEquipoPage,
-    ModalCamposPage,
-    AltaRegistroPage,
-    ListaRegistroPage,
-    AltaPuntoControlPage,
-    VerificarPuntoControlPage,
-    CalDetailsPage
+    // RecepcionPage,
+    // LoginPage,
+    // AltaTrabajoPage,
+    // ListaClientePage,
+    // ListaEquipoPage,
+    // IngresarDetallesPage,
+    // IngresarFirmaPage,
+    //AltaClientePage,
+    //AltaEquipoPage,
+//ListaTrabajoPage,
+//VerTrabajoPage,
+//AltaDescripcionPage,
+//AltaFirmaPage,
+//SeleccionaTrabajoPage,
+//ListaPuntocontrolPage,
+//ListaTareaPage,
+//AltaTareaPage,
+//CalendarioPage,
+//SeleccionaTrabajoPage,
+//SeleccionaTareaPage,
+//HideHeaderDirective,
+FilterPipe,
+//AltaDibujoPage,
+ModalClientePage,
+ModalEquipoPage,
+ModalCamposPage,
+//AltaRegistroPage,
+//ListaRegistroPage,
+//AltaPuntoControlPage,
+//VerificarPuntoControlPage,
+//CalDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -105,7 +131,34 @@ import {CalDetailsPage} from "../pages/cal-details/cal-details";
       monthShortNames: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'set', 'oct', 'nov', 'dic' ],
       dayNames: ['domingo', 'lunes', 'martes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
       dayShortNames: ['dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab'],
-    })
+    }),
+    RecepcionPageModule,
+    LoginPageModule,
+    AltaTrabajoPageModule,
+    ListaClientePageModule,
+    ListaEquipoPageModule,
+    IngresarDetallesPageModule,
+    IngresarFirmaPageModule,
+    DirectivesModule,
+    AltaClientePageModule,
+    AltaEquipoPageModule,
+    ListaTrabajoPageModule,
+    VerTrabajoPageModule,
+    AltaDescripcionPageModule,
+    AltaFirmaPageModule,
+    SeleccionaTrabajoPageModule,
+    ListaPuntocontrolPageModule,
+    ListaTareaPageModule,
+    AltaTareaPageModule,
+    CalendarioPageModule,
+    SeleccionaTrabajoPageModule,
+    SeleccionaTareaPageModule,
+    AltaDibujoPageModule,
+    AltaRegistroPageModule,
+    ListaRegistroPageModule,
+    AltaPuntoControlPageModule,
+    VerificarPuntoControlPageModule,
+    CalDetailsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

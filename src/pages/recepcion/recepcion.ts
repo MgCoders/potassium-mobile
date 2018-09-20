@@ -14,7 +14,7 @@ import {ListaTrabajoPage} from "../lista-trabajo/lista-trabajo";
 @Component({
   selector: 'page-recepcion',
   templateUrl: 'recepcion.html',
-  styleUrls: ['/pages/recepcion/recepcion.scss']
+  styleUrls: ['recepcion.scss']
 })
 
 
