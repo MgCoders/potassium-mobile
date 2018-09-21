@@ -13,8 +13,7 @@ import {ListaTrabajoPage} from "../lista-trabajo/lista-trabajo";
 @IonicPage()
 @Component({
   selector: 'page-recepcion',
-  templateUrl: 'recepcion.html',
-  styleUrls: ['recepcion.scss']
+  templateUrl: 'recepcion.html'
 })
 
 

@@ -23,6 +23,8 @@ export class UsuarioImp implements models.Usuario {
   usuarioRubros?: models.UsuarioRubro[];
 
 
+  pin: string;
+
     public constructor(x: models.Usuario) {
       this.id = x.id;
 
@@ -33,6 +35,8 @@ export class UsuarioImp implements models.Usuario {
       this.apellido= x.apellido;
 
       this.role= x.role;
+
+      this.pin = x.pin;
 
       this.token = x.token;
 

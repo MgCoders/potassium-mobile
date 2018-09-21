@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {ImagePicker} from "@ionic-native/image-picker";
@@ -22,6 +22,8 @@ export class AltaDescripcionPage {
 
   callback:any;
   images: string[];
+
+  @ViewChild('myInput') myInput: ElementRef;
 
 
   constructor(public navCtrl: NavController,
@@ -53,6 +55,11 @@ export class AltaDescripcionPage {
       .catch(error =>{
         console.error( error );
       });
+  }
+
+  resize() {
+    this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
+    console.log("comentarios: "+this.descr);
   }
 
 

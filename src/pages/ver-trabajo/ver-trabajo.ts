@@ -117,7 +117,8 @@ export class VerTrabajoPage {
         dibujoEquipoRecepcion: '',
         dibujoAlto: 0,
         dibujoAncho:0,
-        paraFinalizar:false}
+        paraFinalizar:false,
+        porcentajeCompleto:0}
       );
 
 

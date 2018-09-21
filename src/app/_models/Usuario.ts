@@ -31,4 +31,6 @@ export interface Usuario {
 
   usuarioRubros?: models.UsuarioRubro[];
 
+  pin: string;
+
 }

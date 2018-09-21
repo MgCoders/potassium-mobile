@@ -80,6 +80,9 @@ export interface Trabajo {
   nombreEmpleadoRecepcion: string;
 
   nroOrdenCompra: string;
+
+  porcentajeCompleto: number;
+
   paraFinalizar: boolean;
 
   esReparacion: boolean;

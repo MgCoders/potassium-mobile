@@ -93,7 +93,7 @@ export class AltaRegistroPage {
 
     let id = (this.registroActual_param != undefined) ? this.registroActual_param.id : undefined;
 
-    let user = new UsuarioImp({id: -1, email: '',nombre:'', apellido:"", role: '', password:'', login:false});
+    let user = new UsuarioImp({id: -1, email: '',nombre:'', apellido:"", role: '', password:'', login:false, pin:""});
     let rub = new RubroImp( {nombre:'', descripcion: '', id: -1} ) ;
     this.registroActual = (this.registroActual != undefined) ?
                             this.registroActual

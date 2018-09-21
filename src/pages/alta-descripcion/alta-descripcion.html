@@ -28,12 +28,29 @@
         <img [src]="image" *ngIf="image" />
       </ion-col>
 
-      <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
+      <!--ion-col col-12 col-md-6 col-lg-6 offset-md-3>
         <ion-item class="no-padding">
           <ion-label col-6 color="primary" stacked>Descripción</ion-label>
           <ion-input col-6 type="text" placeholder="..." [(ngModel)]="descr"></ion-input>
         </ion-item>
+      </ion-col-->
+
+      <ion-col col-12 col-md-6 offset-md-3 >
+        Descripción
+        <ion-card>
+          <ion-card-content>
+              <textarea #myInput
+                        id="myInput"
+                        rows="1"
+                        maxLength="500"
+                        (keyup)="resize()"
+                        [(ngModel)]="descr">
+
+              </textarea>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
+
       <ion-col col-12 col-md-6 col-lg-6 offset-md-3>
         <button ion-button block color="secondary" (click)="guardarDetalle()" >Confirmar</button>
       </ion-col>

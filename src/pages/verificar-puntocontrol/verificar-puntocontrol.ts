@@ -61,7 +61,7 @@ export class VerificarPuntoControlPage {
 
     if(this.pcActual == undefined) {
       let tareas = [];
-      let usuario = new UsuarioImp({ id:-1,   email: "", nombre: "", apellido:"", role: "", password: "", login:false });
+      let usuario = new UsuarioImp({ id:-1,   email: "", nombre: "", apellido:"", role: "", password: "", login:false, pin:"" });
       this.pcActual = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario, responsable2: usuario, orden:0, tareas: tareas, verificado: false, verificado2: false, paraVerificar: false});
     }
 

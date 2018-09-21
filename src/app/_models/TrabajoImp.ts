@@ -75,6 +75,8 @@ export class TrabajoImp implements models.Trabajo {
 
     nroOrdenCompra: string;
 
+    porcentajeCompleto: number;
+
     paraFinalizar: boolean;
 
     esReparacion: boolean;
@@ -157,6 +159,9 @@ export class TrabajoImp implements models.Trabajo {
 
       this.cotizacion = x.cotizacion;
       this.numeroTrabajo = x.numeroTrabajo;
+
+
+      this.porcentajeCompleto = x.porcentajeCompleto;
 
 
 
