@@ -456,7 +456,7 @@ export class AltaTrabajoPage {
         dibujoAlto: 0,
         dibujoAncho:0,
         paraFinalizar:false,
-        porcentajeCompleto:0}
+        porcentajeCompleto:0  }
       );
     console.log('Todo Limpito');
     console.log(this.trabajoActual);

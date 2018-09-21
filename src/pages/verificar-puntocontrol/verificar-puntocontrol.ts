@@ -250,11 +250,19 @@ export class VerificarPuntoControlPage {
 
     loading_apc_2.present();
 
+    /*
+    if(this.usuarioQueVerifica == 1){
+      this.pcActual.verificado = this.boolVerif;
+    }else{
+      this.pcActual.verificado2 = this.boolVerif;
+    }*/
+
     this.pcService.verificar(this.pcActual,this.usrPin,this.usuarioQueVerifica).subscribe(
       (data) => {
         toastCorrecto_apc_2.present();
         loading_apc_2.dismissAll();
         this.pcActual = new PuntoControlImp(data);
+
         console.log("PC después: ",this.pcActual);
         this.navCtrl.pop();
       },
@@ -335,10 +343,10 @@ export class VerificarPuntoControlPage {
       valido = false;
     }
 
-    if(valido && this.boolVerif==false){
+    /*if(valido && this.boolVerif==false){
       mensaje = 'El campo de verificación no se ha seleccionado como verificado';
       valido = false;
-    }
+    }*/
 
 
     //Estos campos no requieren validación
