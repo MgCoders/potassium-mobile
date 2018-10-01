@@ -258,8 +258,8 @@ export class AltaTareaPage {
     }
 
 
-    if(valido && (this.tareaActual.minutosEstimados == undefined || this.tareaActual.minutosEstimados == 0)){
-      mensaje = 'No se ingresó minutosEstimados';
+    if(valido && (this.tareaActual.minutosEstimados == undefined || this.tareaActual.minutosEstimados < 0)){
+      mensaje = 'El campo minutos estimados no es válido';
       valido = false;
     }
 

@@ -1,0 +1,33 @@
+page-lista-cliente {
+
+}
+
+
+.seleccionado {
+  background-color: #ddd!important;
+  border-radius: 6px;
+}
+
+
+.roundedCircle{
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  text-align: center;
+  //background-color: #f00;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 50%;
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 0px 0px 9px 2px #aaa;
+}
+
+.centerAligned{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

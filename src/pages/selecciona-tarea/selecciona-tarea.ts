@@ -5,6 +5,7 @@ import {TareaService} from "../../app/_services/tarea.service";
 import {Tarea} from "../../app/_models/Tarea";
 import {Trabajo} from "../../app/_models/Trabajo";
 import {ListaRegistroPage} from "../lista-registro/lista-registro";
+import {ListaMaterialPage} from "../lista-material/lista-material";
 
 /**
  * Generated class for the SeleccionaTareaPage page.
@@ -107,6 +108,10 @@ export class SeleccionaTareaPage {
     this.navCtrl.push(ListaRegistroPage, {idTareaSeleccionada:this.idTareaSeleccionada});
   }
 
+
+  verMateriales(){
+    this.navCtrl.push(ListaMaterialPage, {idTareaSeleccionada:this.idTareaSeleccionada, trabajoActual: this.trabajoSeleccionado});
+  }
 
 
   completarTarea(){

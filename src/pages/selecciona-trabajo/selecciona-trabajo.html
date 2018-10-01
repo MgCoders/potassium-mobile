@@ -15,59 +15,76 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-list-header>
-      Detalles
-    </ion-list-header>
-    <ion-item>
-      Fecha de recepcion: {{trabajoActual.fechaRecepcion}}
-    </ion-item>
-    <ion-item>
-      Creado por: {{(trabajoActual.nombreEmpleadoRecepcion != undefined) ? trabajoActual.nombreEmpleadoRecepcion : "SIN INGRESAR"}}
-    </ion-item>
-    <ion-item>
-      Estado actual: {{trabajoActual.estado}}
-    </ion-item>
-  </ion-list>
-    <br>
-  <ion-list no-border>
-    <ion-list-header>
-      Acciones
-    </ion-list-header>
-    <ion-item (click)="verFicha(trabajoActual.id)">
-      Ficha
-      <ion-note item-end></ion-note>
-      <ion-icon name='ios-create-outline' item-start></ion-icon>
-      <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
-    </ion-item>
+  <ion-col col-12 col-md-6 offset-md-3>
+    <ion-card class="info-card" *ngIf="lista?.length != 0">
+      <ion-card-header>
+        <b>Detalles del trabajo:</b>
+      </ion-card-header>
+      <ion-list>
+        <ion-item>
+          <b>Fecha de recepcion:</b> {{trabajoActual.fechaRecepcion}}
+        </ion-item>
+        <ion-item>
+          <b>Creado por:</b> {{(trabajoActual.nombreEmpleadoRecepcion != undefined) ? trabajoActual.nombreEmpleadoRecepcion : "SIN INGRESAR"}}
+        </ion-item>
+        <ion-item>
+          <b>Estado actual:</b> {{trabajoActual.estado}}
+        </ion-item>
+        <ion-item>
+          <b>Minutos totales Estimados:</b> {{minutosTotalesEstimados}}
+        </ion-item>
+        <ion-item>
+          <b>Minutos totales dedicados hasta ahora:</b> {{minutosTotalesHastaAhora}}
+        </ion-item>
 
-    <ion-item (click)="verPuntosDeControl(trabajoActual.id)">
-      Puntos de contol
-      <ion-note item-end></ion-note>
-      <ion-icon name='ios-checkbox-outline' item-start></ion-icon>
-      <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
-    </ion-item>
+      </ion-list>
+    </ion-card>
+  </ion-col>
 
-    <ion-item  (click)="verTareas(trabajoActual.id)">
-      Tareas
-      <ion-note item-end></ion-note>
-      <ion-icon name='md-swap' item-start></ion-icon>
-      <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
-    </ion-item>
+  <br>
+  <ion-col col-12 col-md-6 offset-md-3>
+    <ion-list no-border>
+      <ion-list-header>
+        Acciones
+      </ion-list-header>
+      <ion-item (click)="verFicha(trabajoActual.id)">
+        Ficha
+        <ion-note item-end></ion-note>
+        <ion-icon name='ios-create-outline' item-start></ion-icon>
+        <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
+      </ion-item>
 
-    <ion-item *ngIf="trabajoActual?.paraFinalizar" (click)="switchFinTrabajo(1)" > <!--1 es borrar-->
-      Cambiar Estado a: {{ (!trabajoActual?.estado == "FINALIZADO") ? "SIN FINALIZAR" : "FINALIZADO" }}
-      <ion-note item-end></ion-note>
-      <ion-icon color="{{ (!trabajoActual?.estado == 'FINALIZADO') ? 'sandonato_rojoLogo'  : '#0f0'}}" name='md-checkmark' item-start></ion-icon>
-    </ion-item>
+      <ion-item (click)="verPuntosDeControl(trabajoActual.id)">
+        Puntos de contol
+        <ion-note item-end></ion-note>
+        <ion-icon name='ios-checkbox-outline' item-start></ion-icon>
+        <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
+      </ion-item>
 
-    <ion-item (click)="switchFinTrabajo(2)" > <!--2 es borrar-->
-      Borrar trabajo
-      <ion-note item-end></ion-note>
-      <ion-icon color="sandonato_rojoLogo" name='md-trash' item-start></ion-icon>
-    </ion-item>
+      <ion-item  (click)="verTareas(trabajoActual.id)">
+        Tareas
+        <ion-note item-end></ion-note>
+        <ion-icon name='md-swap' item-start></ion-icon>
+        <ion-icon name='ios-arrow-forward-outline' item-end></ion-icon>
+      </ion-item>
 
+      <ion-item *ngIf="trabajoActual?.paraFinalizar && (trabajoActual?.estado == 'EN_PROCESO' )" (click)="switchFinTrabajo(1)" > <!--1 es para pasar a remito o factura-->
+        Cambiar estado y enviar a: pendiente "Remito o facturación"?
+        <ion-note item-end></ion-note>
+        <ion-icon color="{{ (trabajoActual?.estado != 'EN_PROCESO') ? 'sandonato_rojoLogo'  : '#0f0'}}" name='md-checkmark' item-start></ion-icon>
+      </ion-item>
 
+      <ion-item *ngIf="trabajoActual?.paraFinalizar && (trabajoActual?.estado != 'EN_PROCESO' )" (click)="switchFinTrabajo(2)" > <!--1 es para pasar a em proceso-->
+        Cambiar estado a "EN_PROCESO"?
+        <ion-note item-end></ion-note>
+        <ion-icon color="{{ (trabajoActual?.estado != 'EN_PROCESO') ? 'sandonato_rojoLogo'  : '#0f0'}}" name='md-checkmark' item-start></ion-icon>
+      </ion-item>
 
-  </ion-list>
+      <ion-item (click)="switchFinTrabajo(9)" > <!--9 es borrar-->
+        Borrar trabajo
+        <ion-note item-end></ion-note>
+        <ion-icon color="sandonato_rojoLogo" name='md-trash' item-start></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-col>
 </ion-content>

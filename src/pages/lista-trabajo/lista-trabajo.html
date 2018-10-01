@@ -26,7 +26,7 @@
 
       <ion-item-sliding *ngFor="let trabajo of filterTrabajos(cliente)">
         <ion-item (click)="switchTrabajo(trabajo.id)" >
-          {{trabajo.equipo != undefined ? trabajo.equipo.marca.nombre : 'Sin equipo'}} - {{trabajo.equipo != undefined ? trabajo.equipo.color: ''}} :: ({{trabajo.estado}})
+          {{trabajo.equipo != undefined ? trabajo.equipo.marca.nombre : 'Sin equipo'}} - {{trabajo.equipo != undefined ? trabajo.equipo.matricula: ''}} :: # ({{trabajo.id}})
           <ion-note item-end> {{trabajo.fechaRecepcion}}</ion-note>
           <ion-icon *ngIf="(!trabajo.esReparacion)" name='ios-construct' item-start></ion-icon>
           <ion-icon *ngIf="(trabajo.esReparacion)" name='ios-build-outline' item-start></ion-icon>

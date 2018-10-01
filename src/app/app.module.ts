@@ -82,6 +82,13 @@ import {ListaClientePageModule} from "../pages/lista-cliente/lista-cliente.modul
 import {AltaTrabajoPageModule} from "../pages/alta-trabajo/alta-trabajo.module";
 import {RecepcionPageModule} from "../pages/recepcion/recepcion.module";
 import {LoginPageModule} from "../pages/login/login.module";
+import {ListaMaterialPageModule} from "../pages/lista-material/lista-material.module";
+import {ListaMaterialPage} from "../pages/lista-material/lista-material";
+import {MaterialService} from "./_services/material.service";
+import {AltaTareaMaterialPage} from "../pages/alta-tareamaterial/alta-tareamaterial";
+import {AltaTareaMaterialPageModule} from "../pages/alta-tareamaterial/alta-tareamaterial.module";
+import {AgendaPage} from "../pages/agenda/agenda";
+import {AgendaPageModule} from "../pages/agenda/agenda.module";
 
 @NgModule({
   declarations: [
@@ -158,7 +165,10 @@ ModalCamposPage,
     ListaRegistroPageModule,
     AltaPuntoControlPageModule,
     VerificarPuntoControlPageModule,
-    CalDetailsPageModule
+    CalDetailsPageModule,
+    ListaMaterialPageModule,
+    AltaTareaMaterialPageModule,
+    AgendaPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -190,7 +200,10 @@ ModalCamposPage,
     ListaRegistroPage,
     AltaPuntoControlPage,
     VerificarPuntoControlPage,
-    CalDetailsPage
+    CalDetailsPage,
+    ListaMaterialPage,
+    AltaTareaMaterialPage,
+    AgendaPage
   ],
   providers: [
     StatusBar,
@@ -212,7 +225,8 @@ ModalCamposPage,
     RegistroService,
     ImagePicker,
     MarcaEquipoService,
-    Calendar
+    Calendar,
+    MaterialService
 
   ]
 })

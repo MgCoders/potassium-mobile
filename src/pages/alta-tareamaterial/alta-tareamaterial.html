@@ -1,0 +1,72 @@
+<!--
+  Generated template for the AltaClientePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header #head>
+
+  <ion-navbar>
+    <ion-title>{{editar == 1 ? "Editar" : "Crear"}} registro de horas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding  hide-header [header]="head">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-item>
+          Vas a cargar materiales para la tarea:
+          <br>
+          <b>Tarea #{{tareaMaterialActual.tarea.id}}: {{tareaMaterialActual.tarea.nombre}}</b>
+        </ion-item>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-list>
+          <ion-item>
+            <ion-label>Material</ion-label>
+            <ion-icon name='md-clipboard' item-start></ion-icon>
+            <ion-select [(ngModel)]="materialSeleccionado">
+              <ion-option *ngFor="let mat of listaMateriales " [value]="mat.id" >{{mat.nombre}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <br><br>
+      <ion-col col-12 col-md-6 offset-md-3>
+
+        <ion-item>
+          <ion-label color="primary" stacked >Cantidad</ion-label>
+          <ion-input type="text" placeholder="..." [(ngModel)]="cantUsado">
+
+          </ion-input>
+        </ion-item>
+
+        <!--ion-list>
+          <ion-list-header>
+
+            Detalle de horarios
+
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Comienzo</ion-label>
+            <ion-datetime displayFormat="HH:mm" [(ngModel)]="comienzo"></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Fin</ion-label>
+            <ion-datetime displayFormat="HH:mm" [(ngModel)]="fin"></ion-datetime>
+          </ion-item>
+
+        </ion-list-->
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <button ion-button full color="primary" (click)="cargarMaterial()">Cargar registro</button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

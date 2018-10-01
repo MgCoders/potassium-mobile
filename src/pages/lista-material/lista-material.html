@@ -1,0 +1,52 @@
+<!--
+  Generated template for the ListaMaterialPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header #head>
+
+  <ion-navbar>
+    <ion-title>Materiales para la tarea: {{idTareaSeleccionada}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding hide-header [header]="head">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-searchbar [(ngModel)]="filterText"
+                       [placeholder]="filterPlaceholder"
+                       [formControl]="filterInput"></ion-searchbar>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="lista?.length == 0">
+        <ion-card>
+          <b>La lista de materiales para esa tarea está vacía....</b>
+        </ion-card>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3 *ngIf="lista?.length != 0">
+        <ion-list>
+          <ion-item *ngFor="let tareaMaterial of getListaTareaMaterial() ">
+
+            <ion-thumbnail (click)="seleccionaTareaMaterial(tareaMaterial)" item-start>
+              <img src="assets/imgs/paint_roller.png">
+            </ion-thumbnail>
+            <h2 (click)="seleccionaTareaMaterial(tareaMaterial)">{{tareaMaterial.material.nombre}} (cantidad: {{tareaMaterial.cantidad}})</h2>
+            <p (click)="seleccionaTareaMaterial(tareaMaterial)">{{tareaMaterial.material.tipoMaterial.nombre}} - {{tareaMaterial.material.descripcion}}</p>
+
+            <!--button ion-button clear item-end (click)="editarTareaMaterial(tareaMaterial)">Editar</button-->
+
+            <ion-badge ></ion-badge>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab right bottom>
+    <button ion-fab color="" (click)="nuevaTareaMaterial()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

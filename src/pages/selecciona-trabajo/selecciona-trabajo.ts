@@ -14,6 +14,11 @@ import {ClienteImp} from "../../app/_models/ClienteImp";
 import {EquipoImp} from "../../app/_models/EquipoImp";
 import {TipoEquipoImp} from "../../app/_models/TipoEquipoImp";
 import {MarcaEquipoImp} from "../../app/_models/MarcaEquipoImp";
+import {TareaService} from "../../app/_services/tarea.service";
+import {TareaImp} from "../../app/_models/TareaImp";
+import {Tarea} from "../../app/_models/Tarea";
+import {RegistroImp} from "../../app/_models/RegistroImp";
+import {RegistroService} from "../../app/_services/registro.service";
 
 /**
  * Generated class for the SeleccionaTrabajoPage page.
@@ -30,6 +35,8 @@ import {MarcaEquipoImp} from "../../app/_models/MarcaEquipoImp";
 export class SeleccionaTrabajoPage {
 
   trabajoActual: Trabajo;
+  minutosTotalesEstimados: number = 0;
+  minutosTotalesHastaAhora: number = 0;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -37,6 +44,8 @@ export class SeleccionaTrabajoPage {
               public loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               public events: Events,
+              private tareaService: TareaService,
+              private registroService: RegistroService,
               private alertCtrl: AlertController) {
 
     let loading = this.loadingCtrl.create({
@@ -52,6 +61,7 @@ export class SeleccionaTrabajoPage {
       duration: 3000,
       position: 'bottom'
     });
+
 
 
 
@@ -128,6 +138,10 @@ export class SeleccionaTrabajoPage {
           this.trabajoActual = data;
           //this.trabajoActual.paraFinalizar = true;
           console.log("Cargo el trabajo: ",this.trabajoActual);
+          this.calcMinutosTotalesEstimados();
+          this.calcMinutosTotalesHastaAhora();
+          console.log("Llamo a la funcion de calcular los minutos ");
+
         },
         (error) => {
           toastError.setMessage(error);
@@ -161,60 +175,140 @@ export class SeleccionaTrabajoPage {
   }
 
 
+  calcMinutosTotalesEstimados(){
+    if( this.minutosTotalesEstimados == 0 && this.trabajoActual != undefined && this.trabajoActual.id != undefined) {
+      this.tareaService.getAllByTrabajo(this.trabajoActual.id).subscribe(
+        (data) => {
+          //Obtengo la lista desde el server con lo último
+          var mins = 0;
+          data.forEach (Tarea => {
+            mins += Tarea.minutosEstimados;
+          });
+
+          console.log("Minutos totales:",mins);
+          this.minutosTotalesEstimados = mins;
+        }
+      )
+    }
+  }
+
+
+  calcMinutosTotalesHastaAhora_tarea(tarea: Tarea){
+    if( tarea != undefined && tarea.id != undefined) {
+
+      this.registroService.getAllByTarea(tarea.id).subscribe(
+        (data) => {
+
+          data.forEach(reg => {
+            this.minutosTotalesHastaAhora += reg.minutos;
+          });
+        }
+      );
+    }
+  }
+
+
+  calcMinutosTotalesHastaAhora(){
+    if( this.minutosTotalesHastaAhora == 0 && this.trabajoActual != undefined && this.trabajoActual.id != undefined) {
+      this.tareaService.getAllByTrabajo(this.trabajoActual.id).subscribe(
+        (data) => {
+          //Obtengo la lista desde el server con lo último
+
+          data.forEach (Tarea => {
+            this.calcMinutosTotalesHastaAhora_tarea(Tarea);
+          });
+          console.log("Minutos totales:",this.minutosTotalesHastaAhora);
+        }
+      )
+    }
+  }
+
+  llamarAPI(estado: string){
+    let loading = this.loadingCtrl.create({
+      content: 'Procesando...'
+    });
+    let toastCorrecto = this.toastCtrl.create({
+      message: 'Trabajo modificado correctamente!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    let toastError = this.toastCtrl.create({
+      message: 'Error al modificar el trabajo..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    this.trabajoActual.estado = estado;
+
+    loading.present();
+    console.log('Cambiar estado trabajo!');
+    this.trabajoService.edit(this.trabajoActual).subscribe(
+      (data) => {
+        toastCorrecto.present();
+        loading.dismissAll();
+        this.trabajoActual = data;
+        console.log("adentro",this.trabajoActual);
+      },
+      (error) => {
+        toastError.setMessage(error);
+        toastError.present();
+      });
+
+    console.log("despues", this.trabajoActual);
+  }
+
+
   cambiarEstadoTrabajo(title:string, message:string, estado:string){
+
+
+    //Esta opción siempre va
+    var buttons_arr = [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+        handler: () => {
+          console.log('Canceló, no se cambia nada');
+        }
+      }
+      ];
+
+
+    if(estado != ''){
+      buttons_arr.push({
+        text: 'Confirmar',
+        role: null,
+        handler: () => {
+          console.log('Confirmó, procesando solicitud');
+
+          this.llamarAPI(estado);
+        }
+      });
+    }else{
+      buttons_arr.push({
+        text: 'A remito',
+        role: null,
+        handler: () => {
+          console.log('Remito, procesando solicitud');
+          estado = "PENDIENTE_REMITO";
+          this.llamarAPI(estado);
+        }
+      });
+      buttons_arr.push({
+        text: 'A facturar',
+        role: null,
+        handler: () => {
+          console.log('Facturar, procesando solicitud');
+          estado = "PENDIENTE_FACTURA";
+          this.llamarAPI(estado);
+        }
+      });
+    }
+
 
     let alert = this.alertCtrl.create({
       title: title,
       message: message,
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: () => {
-            console.log('Canceló, no se cambia nada');
-          }
-        },
-        {
-          text: 'Confirmar',
-          handler: () => {
-            console.log('Confirmó, procesando solicitud');
-
-
-
-            let loading = this.loadingCtrl.create({
-              content: 'Procesando...'
-            });
-            let toastCorrecto = this.toastCtrl.create({
-              message: 'Trabajo modificado correctamente!',
-              duration: 3000,
-              position: 'bottom'
-            });
-            let toastError = this.toastCtrl.create({
-              message: 'Error al modificar el trabajo..',
-              duration: 3000,
-              position: 'bottom'
-            });
-
-            this.trabajoActual.estado = estado;
-
-            loading.present();
-            console.log('Cambiar estado trabajo!');
-            this.trabajoService.edit(this.trabajoActual).subscribe(
-              (data) => {
-                toastCorrecto.present();
-                loading.dismissAll();
-                this.trabajoActual = data;
-                console.log("adentro",this.trabajoActual);
-              },
-              (error) => {
-                toastError.setMessage(error);
-                toastError.present();
-              });
-
-            console.log("despues", this.trabajoActual);
-          }
-        }
-      ]
+      buttons: buttons_arr
     });
     alert.present();
 
@@ -225,8 +319,9 @@ export class SeleccionaTrabajoPage {
   switchFinTrabajo(tipo: number) {
 
     // **TIPO**
-    // 1 es modificar
-    // 2 es borrar
+    // 1 es A REMITO O FACTURACION
+    // 2 es a EN_PROCESO
+    // 3 es borrar
 
     console.log("Entro al switch");
     console.log("Tipo: ",tipo);
@@ -244,7 +339,7 @@ export class SeleccionaTrabajoPage {
     let mensaje = "";
 
     if(valido && (this.trabajoActual == undefined || !this.trabajoActual.paraFinalizar)){
-      mensaje = 'El Trabajo no está para finalizar';
+      mensaje = 'El Trabajo no está habilitado para cambiar de estado';
       valido = false;
     }
 
@@ -253,22 +348,21 @@ export class SeleccionaTrabajoPage {
 
     if ( valido ) {
 
+      if (tipo == 1) {
+        //Quiere decir que le tengo que preguntar si va a factura o va a remito
+        let title = "Cambiar el estado a del trabajo";
+        let message = "Seleccione el estado que corresponda";
+        this.cambiarEstadoTrabajo(title, message, '');
+      }
 
-      if (tipo === 1) {
-        if (this.trabajoActual.estado == 'FINALIZADO') {
-          let estado = 'EN_PROCESO';
-          let title = "Cambiar el estado a del trabajo";
-          let message = "Realmente quere cambiar el estado a: EN PROCESO";
-          this.cambiarEstadoTrabajo(title, message, estado);
-        }
-        else {
-
-          let estado = 'FINALIZADO';
-          let title = "Cambiar el estado a del trabajo";
-          let message = "Realmente quere cambiar el estado a: FINALIZADO";
-          this.cambiarEstadoTrabajo(title, message, estado);
-        }
-      } else {
+      if (tipo == 2) {
+        //Qiuiere decir que cancela lo que estaba antes, y va a en proceso
+        let estado = 'EN_PROCESO';
+        let title = "Cambiar el estado a del trabajo";
+        let message = "Realmente quere cambiar el estado a: EN_PROCESO?";
+        this.cambiarEstadoTrabajo(title, message, estado);
+      }
+      if (tipo == 9) {
         let estado = 'BORRADO';
         let title = 'Confirmar borrado';
         let message = "Realmente quere borrar el trabajo";

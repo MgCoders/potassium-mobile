@@ -103,6 +103,16 @@ bar-buttons {
   color: color($colors, blanco)!important;
 }
 
+
+.info-card, .info-card ion-item {
+  background-color: #d9effb !important;
+}
+
+.info-card .card-header-md {
+  color: #273cd6;
+  font-size: 20px;
+}
+
 ion-content, ion-item {
   background-color: color($colors, fondoApp) !important;
 }
@@ -129,6 +139,12 @@ ion-content, ion-item {
 
 .my_fullWidth {
   width: 100%;
+}
+
+
+//Fab button (right bottom)
+ion-fab[bottom] {
+  bottom: 40px!important;
 }
 
 // Ionicons

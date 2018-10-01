@@ -1,0 +1,65 @@
+<!--
+  Generated template for the ListaClientePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header #head>
+
+  <ion-navbar>
+    <ion-title>Lista de registros para la tarea # {{idTareaSeleccionada}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding hide-header [header]="head">
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-col col-12 col-md-6 offset-md-3 text-center *ngIf="lista?.length == 0">
+        <ion-card>
+          <b>La lista de clientes está vacía....</b>
+        </ion-card>
+      </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3 *ngIf="lista?.length != 0">
+        <ion-list>
+          <ion-item *ngFor="let trabajo of lista ">
+            <ion-thumbnail class="centerAligned" (click)="verFichaTrabajo(trabajo.id)" item-start>
+              <div class="roundedCircle" [ngStyle]="{'background-color': '' + getColorForPercentage(trabajo.porcentajeCompleto) + ''}">
+                {{trabajo.porcentajeCompleto}}%
+              </div>
+            </ion-thumbnail>
+            <h2 (click)="verFichaTrabajo(trabajo.id)">{{trabajo.id}} - ({{trabajo.motivoVisita}}) </h2>
+            <p (click)="verFichaTrabajo(trabajo.id)">F.R.: {{trabajo.fechaRecepcion}} - F.P.E.: {{trabajo.fechaProvistaEntrega}}</p>
+          </ion-item>
+
+          <ion-item>
+            <ion-thumbnail class="centerAligned" item-start>
+              <div class="roundedCircle" [ngStyle]="{'background-color': '' + getColorForPercentage(25) + ''}" >
+                {{25}}%
+              </div>
+            </ion-thumbnail>
+          </ion-item>
+
+          <ion-item>
+            <ion-thumbnail class="centerAligned" item-start>
+              <div class="roundedCircle" [ngStyle]="{'background-color': '' + getColorForPercentage(50) + ''}" >
+                {{50}}%
+              </div>
+            </ion-thumbnail>
+          </ion-item>
+
+          <ion-item>
+            <ion-thumbnail class="centerAligned" item-start>
+              <div class="roundedCircle" [ngStyle]="{'background-color': '' + getColorForPercentage(75) + ''}" >
+                {{75}}%
+              </div>
+            </ion-thumbnail>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

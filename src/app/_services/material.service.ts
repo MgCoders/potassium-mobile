@@ -15,6 +15,10 @@ export class MaterialService {
         return this.http.get<Material[]>(`${environment.apiUrl}/materiales/`);
     }
 
+    getAll_x_Filtro(filtro: string): Observable<Material[]> {
+      return this.http.get<Material[]>(`${environment.apiUrl}/materiales/autocomplete/` + encodeURIComponent(filtro));
+    }
+
     create(x: Material): Observable<any> {
         return this.http.post(`${environment.apiUrl}/materiales/`, x);
     }
