@@ -7,6 +7,10 @@
 <ion-header #head>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
     <ion-title>Lista de registros para la tarea # {{idTareaSeleccionada}}</ion-title>
   </ion-navbar>
 
@@ -27,8 +31,11 @@
         <ion-list>
           <ion-item *ngFor="let trabajo of lista ">
             <ion-thumbnail class="centerAligned" (click)="verFichaTrabajo(trabajo.id)" item-start>
-              <div class="roundedCircle" [ngStyle]="{'background-color': '' + getColorForPercentage(trabajo.porcentajeCompleto) + ''}">
-                {{trabajo.porcentajeCompleto}}%
+              <div class="roundedCircle"
+                   [ngStyle]="{'background-color': '' + getColorForPercentage(trabajo.porcentajeCompleto) + '',
+                                'color': invertColor(getColorForPercentage(trabajo.porcentajeCompleto)) + 'CC' }"
+              >
+                {{(trabajo.porcentajeCompleto!= undefined) ? trabajo.porcentajeCompleto + "%" : "N/A"}}
               </div>
             </ion-thumbnail>
             <h2 (click)="verFichaTrabajo(trabajo.id)">{{trabajo.id}} - ({{trabajo.motivoVisita}}) </h2>
@@ -45,7 +52,8 @@
 
           <ion-item>
             <ion-thumbnail class="centerAligned" item-start>
-              <div class="roundedCircle" [ngStyle]="{'background-color': '' + getColorForPercentage(50) + ''}" >
+              <div class="roundedCircle" [ngStyle]="{'background-color': '' + getColorForPercentage(50) + '',
+                                'color': invertColor(getColorForPercentage(50)) + 'CC' }" >
                 {{50}}%
               </div>
             </ion-thumbnail>

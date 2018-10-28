@@ -143,6 +143,7 @@ export class AgendaPage {
     // or output as hex if preferred
 
     */
+    pct = 100 -pct; //el contrario
     pct /=100;
     let hue=((1-pct)*120);
     let color = ["hsl(",hue,",100%,50%)"].join("");
@@ -177,7 +178,41 @@ export class AgendaPage {
       const hex = Math.round(x * 255).toString(16);
       return hex.length === 1 ? '0' + hex : hex;
     };
-    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+
+    var comun = `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    //var invertido = this.invertColor(comun);
+    return comun;
+  }
+
+  invertColor(hex) {
+    if (hex.indexOf('#') === 0) {
+      hex = hex.slice(1);
+    }
+    // convert 3-digit hex to 6-digits.
+    if (hex.length === 3) {
+      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    }
+    if (hex.length !== 6) {
+      throw new Error('Invalid HEX color.');
+    }
+    // invert color components
+    var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
+      g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
+      b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
+    // pad each with zeros and return
+    return '#' + this.padZero(r) + this.padZero(g) + this.padZero(b);
+  }
+
+  padZero(str, len) {
+    len = len || 2;
+    var zeros = new Array(len).join('0');
+    return (zeros + str).slice(-len);
+  }
+
+  float2color( percentage ) {
+    var color_part_dec = 255 * percentage;
+    var color_part_hex = Number(parseInt( color_part_dec , 10)).toString(16);
+    return "#" + color_part_hex + color_part_hex + color_part_hex;
   }
 
 

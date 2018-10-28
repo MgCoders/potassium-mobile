@@ -118,10 +118,12 @@ export class ListaTrabajoPage {
     this.listaClientes = [];
     this.lista = [];
 
-    let estados_str = "";
-    this.listaEstados.forEach(estado => {
-      estados_str += estado+",";
-    });
+    //let estados_str = "";
+    // this.listaEstados.forEach(estado => {
+    //   estados_str += estado+",";
+    // });
+
+    let estados_str = this.listaEstados.join(",");
 
     console.log("estados a solicitar:",estados_str);
 
