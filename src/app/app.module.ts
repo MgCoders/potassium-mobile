@@ -89,6 +89,8 @@ import {AltaTareaMaterialPage} from "../pages/alta-tareamaterial/alta-tareamater
 import {AltaTareaMaterialPageModule} from "../pages/alta-tareamaterial/alta-tareamaterial.module";
 import {AgendaPage} from "../pages/agenda/agenda";
 import {AgendaPageModule} from "../pages/agenda/agenda.module";
+import {IonicSelectableModule} from "ionic-selectable";
+import {PortService} from "./_services/port.service";
 
 @NgModule({
   declarations: [
@@ -168,7 +170,8 @@ ModalCamposPage,
     CalDetailsPageModule,
     ListaMaterialPageModule,
     AltaTareaMaterialPageModule,
-    AgendaPageModule
+    AgendaPageModule,
+    IonicSelectableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -226,8 +229,8 @@ ModalCamposPage,
     ImagePicker,
     MarcaEquipoService,
     Calendar,
-    MaterialService
-
+    MaterialService,
+    PortService
   ]
 })
 export class AppModule {}

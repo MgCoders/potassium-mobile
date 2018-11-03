@@ -5,6 +5,9 @@ import {IonicPage, MenuController, NavController, NavParams, ToastController} fr
 import {RecepcionPage} from "../recepcion/recepcion";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../app/_services/auth.service";
+import {PortService} from "../../app/_services/port.service";
+import {Port} from "../../app/types";
+import {IonicSelectableComponent} from "ionic-selectable";
 
 /**
  * Generated class for the LoginPage page.
@@ -27,6 +30,8 @@ export class LoginPage {
   validationForm: FormGroup;
   formSubmitted = false;
 
+
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private authService: AuthService,
@@ -35,11 +40,16 @@ export class LoginPage {
               private toastCtrl: ToastController) {
 
     this.menu.enable(false);
+
+
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
+
+
 
 
 

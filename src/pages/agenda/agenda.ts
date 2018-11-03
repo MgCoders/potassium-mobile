@@ -17,6 +17,10 @@ import {TareaImp} from "../../app/_models/TareaImp";
 import {TrabajoService} from "../../app/_services/trabajo.service";
 import {TrabajoImp} from "../../app/_models/TrabajoImp";
 import {VerTrabajoPage} from "../ver-trabajo/ver-trabajo";
+import {DatePipe} from "@angular/common";
+
+import { registerLocaleData } from '@angular/common';
+import localeUy from "@angular/common/locales/es-UY";
 
 
 /**
@@ -118,6 +122,22 @@ export class AgendaPage {
   }
 
 
+  getDatestr(str: string){
+    console.log("str",str);
+    registerLocaleData(localeUy);
+    var datePipe = new DatePipe('es-UY');
+
+    var dt1   = parseInt(str.substring(0,2));
+    var mon1  = parseInt(str.substring(3,5));
+    var yr1   = parseInt(str.substring(6,10));
+
+    var dateStr = new Date(yr1, mon1-1, dt1);
+    console.log("dateStr",dateStr);
+
+    return datePipe.transform(dateStr, 'dd/MM/yyyy');
+  }
+
+
 
 
   getColorForPercentage(pct: number) {
@@ -203,15 +223,15 @@ export class AgendaPage {
     return '#' + this.padZero(r) + this.padZero(g) + this.padZero(b);
   }
 
-  padZero(str, len) {
-    len = len || 2;
+  padZero(str) {
+    var len = 2;
     var zeros = new Array(len).join('0');
     return (zeros + str).slice(-len);
   }
 
   float2color( percentage ) {
     var color_part_dec = 255 * percentage;
-    var color_part_hex = Number(parseInt( color_part_dec , 10)).toString(16);
+    var color_part_hex = Number(parseInt( color_part_dec.toString() , 10)).toString(16);
     return "#" + color_part_hex + color_part_hex + color_part_hex;
   }
 

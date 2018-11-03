@@ -39,7 +39,7 @@
               </div>
             </ion-thumbnail>
             <h2 (click)="verFichaTrabajo(trabajo.id)">{{trabajo.id}} - ({{trabajo.motivoVisita}}) </h2>
-            <p (click)="verFichaTrabajo(trabajo.id)">F.R.: {{trabajo.fechaRecepcion}} - F.P.E.: {{trabajo.fechaProvistaEntrega}}</p>
+            <p (click)="verFichaTrabajo(trabajo.id)">F.R.: {{ getDatestr(trabajo.fechaRecepcion) }} - F.P.E.: {{ getDatestr(trabajo.fechaProvistaEntrega) }}</p>
           </ion-item>
 
           <ion-item>

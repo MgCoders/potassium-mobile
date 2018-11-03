@@ -23,6 +23,9 @@ import {Trabajo} from "../../app/_models/Trabajo";
 import {MaterialImp} from "../../app/_models/MaterialImp";
 import {MaterialService} from "../../app/_services/material.service";
 import {TareaService} from "../../app/_services/tarea.service";
+import {IonicSelectableComponent} from "ionic-selectable";
+import {Port} from "../../app/types";
+import {PortService} from "../../app/_services/port.service";
 
 /**
  * Generated class for the AltaTareaMaterialPage page.
@@ -51,8 +54,12 @@ export class AltaTareaMaterialPage {
   cantUsado: number = 0;
 
   listaMateriales: Material[];
+  material: Material;
 
   materialSeleccionado:number;
+
+  //ports: Port[];
+  //port: Port;
 
   constructor(public navCtrl: NavController,
               private registroService: RegistroService,
@@ -62,12 +69,16 @@ export class AltaTareaMaterialPage {
               private tareaService: TareaService,
               public navParams: NavParams,
               public loadingCtrl: LoadingController,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController,
+              private portService: PortService) {
 
 
     console.log("Entro a TareaMaterial");
 
     console.log("this.navParams.", this.navParams);
+
+
+    //this.ports = this.portService.getPorts();
 
     //Inicializo en vacío
     this.tareaMaterialActual_param = this.navParams.data['tareaMaterial'];
@@ -92,7 +103,7 @@ export class AltaTareaMaterialPage {
 
     let id = (this.tareaMaterialActual_param != undefined) ? this.tareaMaterialActual_param.id : undefined;
 
-    let tareas = new Array();
+    let tareas = [];
     let usuario = new UsuarioImp({email: "", nombre: "", apellido:"", role: "", password: "", login:false, pin:"" });
     let pc = new PuntoControlImp({nombre:'', trabajo:this.trabajoActual, responsable: usuario, responsable2: usuario, orden:0, tareas: tareas, verificado: false, verificado2: false, paraVerificar: false});
     let tarea = new TareaImp({nombre: '',descripcion:'', minutosEstimados:-1, puntoControl:pc, completa:false, necesitaVerificacion:false,verificada:false});
@@ -119,7 +130,7 @@ export class AltaTareaMaterialPage {
         data.forEach((mat) => {
 
           this.listaMateriales.push(new MaterialImp(mat));
-        })
+        });
         console.log("Lista de usuarios materiales:", this.listaMateriales);
       },
       (error) => {
@@ -143,6 +154,73 @@ export class AltaTareaMaterialPage {
       });
 
   }
+
+
+
+
+
+
+  materialChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    console.log('port:', event.value);
+    this.materialSeleccionado = event.value;
+  }
+
+
+  reloadList(event: {
+    component: IonicSelectableComponent,
+    text: string
+  }){
+
+    let textEntered = event.text;
+
+    if(textEntered.length  < 3){
+      return false;
+    }
+
+    this.listaMateriales = [];
+    event.component.startSearch();
+
+    let toastError_ar_4 = this.toastCtrl.create({
+      message: 'Error al cargar datos..',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    console.log("textEntered",textEntered);
+
+    this.materialService.getAll_x_Filtro(textEntered).subscribe(
+      (data) => {
+        data.forEach((mat) => {
+          event.component.endSearch();
+          this.listaMateriales.push(new MaterialImp(mat));
+
+          event.component.items = this.listaMateriales;
+
+          // Get ports from a storage and stop searching.
+          event.component.endSearch();
+
+        })
+        console.log("Lista de usuarios materiales:", this.listaMateriales);
+      },
+      (error) => {
+        toastError_ar_4.setMessage(error);
+        toastError_ar_4.present();
+      }
+    );
+  }
+
+
+
+
+
+
+
+
+
+
 
 
   ionViewDidLoad() {

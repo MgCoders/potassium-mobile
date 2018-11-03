@@ -32,8 +32,26 @@
               <ion-option *ngFor="let mat of listaMateriales " [value]="mat.id" >{{mat.nombre}}</ion-option>
             </ion-select>
           </ion-item>
+          <ion-item>
+            <ion-label>Material</ion-label>
+            <ionic-selectable
+              item-content
+              [(ngModel)]="material"
+              itemValueField="id"
+              itemTextField="nombre"
+              [items]="listaMateriales"
+              [searchFailText]="'No hay items...'"
+              [canSearch]="true"
+              (onSearch)="reloadList($event)"
+              (onChange)="materialChange($event)">
+            </ionic-selectable>
+          </ion-item>
         </ion-list>
       </ion-col>
+
+
+
+
       <br><br>
       <ion-col col-12 col-md-6 offset-md-3>
 
