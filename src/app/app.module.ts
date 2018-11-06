@@ -91,6 +91,8 @@ import {AgendaPage} from "../pages/agenda/agenda";
 import {AgendaPageModule} from "../pages/agenda/agenda.module";
 import {IonicSelectableModule} from "ionic-selectable";
 import {PortService} from "./_services/port.service";
+import {AltaMarcaPageModule} from "../pages/alta-marca/alta-marca.module";
+import {AltaMarcaPage} from "../pages/alta-marca/alta-marca";
 
 @NgModule({
   declarations: [
@@ -171,7 +173,8 @@ ModalCamposPage,
     ListaMaterialPageModule,
     AltaTareaMaterialPageModule,
     AgendaPageModule,
-    IonicSelectableModule
+    IonicSelectableModule,
+    AltaMarcaPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -206,7 +209,8 @@ ModalCamposPage,
     CalDetailsPage,
     ListaMaterialPage,
     AltaTareaMaterialPage,
-    AgendaPage
+    AgendaPage,
+    AltaMarcaPage
   ],
   providers: [
     StatusBar,

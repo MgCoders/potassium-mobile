@@ -9,6 +9,7 @@ import {TipoEquipoService} from "../../app/_services/tipoEquipo.service";
 import {MarcaEquipo} from "../../app/_models/MarcaEquipo";
 import {MarcaEquipoImp} from "../../app/_models/MarcaEquipoImp";
 import {MarcaEquipoService} from "../../app/_services/marca-equipo.services";
+import {AltaMarcaPage} from "../alta-marca/alta-marca";
 
 /**
  * Generated class for the AltaEquipoPage page.
@@ -103,9 +104,31 @@ export class AltaEquipoPage {
       });
 
 
+    //
+    //
+    //
+    //
+    // this.marcaEquioService.getAll().subscribe(
+    //   (data) => {
+    //
+    //     data.forEach( item => {
+    //       this.listaMarcaEquipo.push(item);
+    //     });
+    //
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //
+    //   });
+    //
 
 
+  }
 
+
+  ionViewWillEnter() {
+
+    this.listaMarcaEquipo = [];
 
     this.marcaEquioService.getAll().subscribe(
       (data) => {
@@ -120,12 +143,16 @@ export class AltaEquipoPage {
 
       });
 
-
-
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AltaEquipoPage');
+  }
+
+
+  nuevaMarca(){
+    console.log('Crear Nueva marca');
+    this.navCtrl.push(AltaMarcaPage, {});
   }
 
 

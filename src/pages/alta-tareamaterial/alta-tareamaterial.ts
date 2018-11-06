@@ -56,7 +56,7 @@ export class AltaTareaMaterialPage {
   listaMateriales: Material[];
   material: Material;
 
-  materialSeleccionado:number;
+  materialSeleccionado: any;
 
   //ports: Port[];
   //port: Port;
@@ -164,7 +164,7 @@ export class AltaTareaMaterialPage {
     component: IonicSelectableComponent,
     value: any
   }) {
-    console.log('port:', event.value);
+    console.log('material:', event.value);
     this.materialSeleccionado = event.value;
   }
 
@@ -295,11 +295,19 @@ export class AltaTareaMaterialPage {
 
 
 
+
+    console.log("this.materialSeleccionado",this.materialSeleccionado);
+
     this.listaMateriales.forEach( (x) =>{
-      if(x.id == this.materialSeleccionado){
+      if(x.id == this.materialSeleccionado.id){
         this.tareaMaterialActual.material = x;
       }
     });
+
+
+    console.log("this.listaMateriales",this.listaMateriales);
+    console.log("this.tareaMaterialActual.material",this.tareaMaterialActual.material);
+
 
     this.tareaMaterialActual.cantidad = this.cantUsado;
 
