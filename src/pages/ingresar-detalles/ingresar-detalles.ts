@@ -63,6 +63,8 @@ export class IngresarDetallesPage {
   fechaProvistaEntrega: Date;
   recuperarTrabajo: number = -1;
   motivoVisita: string = '';
+  requierePresupuesto: boolean;
+  cotizacion: string = '';
 
   trabajoActual: Trabajo;
   background:string;
@@ -185,6 +187,8 @@ export class IngresarDetallesPage {
       this.equipoVidriosLateralesSanos = (this.trabajoActual.equipoVidriosLateralesSanos == undefined ? false : this.trabajoActual.equipoVidriosLateralesSanos);
       this.dibujoEquipoRecepcion = (this.trabajoActual.dibujoEquipoRecepcion == undefined ? '' : this.trabajoActual.dibujoEquipoRecepcion);
       this.motivoVisita = (this.trabajoActual.motivoVisita == undefined ? '' : this.trabajoActual.motivoVisita);
+      this.cotizacion = (this.trabajoActual.cotizacion == undefined ? '' : this.trabajoActual.cotizacion);
+      this.requierePresupuesto = (this.trabajoActual.requierePresupuesto == undefined ? false : this.trabajoActual.requierePresupuesto);
 
     }
 
@@ -264,6 +268,8 @@ export class IngresarDetallesPage {
     this.trabajoActual.equipoVidriosLateralesSanos = this.equipoVidriosLateralesSanos;
     this.trabajoActual.dibujoEquipoRecepcion = this.dibujoEquipoRecepcion;
     this.trabajoActual.motivoVisita = this.motivoVisita;
+    this.trabajoActual.cotizacion =  this.cotizacion;
+    this.trabajoActual.requierePresupuesto = this.requierePresupuesto;
 
     this.events.publish('change-tab', 3, this.trabajoActual);
 

@@ -346,8 +346,23 @@ export class SeleccionaTrabajoPage {
     toastError_ck.setMessage(mensaje);
     toastError_ck.present();
 
-    if ( valido ) {
 
+
+    if (tipo == 9) {
+      let estado = 'BORRADO';
+      let title = 'Confirmar borrado';
+      let message = "Realmente quere borrar el trabajo";
+      this.cambiarEstadoTrabajo(title, message, estado);
+    }
+
+    if (tipo == 8 ) {
+      let estado = 'CREADO';
+      let title = 'Volver a editar';
+      let message = "Realmente quere volver a editar el trabajo";
+      this.cambiarEstadoTrabajo(title, message, estado);
+    }
+
+    if ( valido ) {
       if (tipo == 1) {
         //Quiere decir que le tengo que preguntar si va a factura o va a remito
         let title = "Cambiar el estado a del trabajo";
@@ -362,12 +377,7 @@ export class SeleccionaTrabajoPage {
         let message = "Realmente quere cambiar el estado a: EN_PROCESO?";
         this.cambiarEstadoTrabajo(title, message, estado);
       }
-      if (tipo == 9) {
-        let estado = 'BORRADO';
-        let title = 'Confirmar borrado';
-        let message = "Realmente quere borrar el trabajo";
-        this.cambiarEstadoTrabajo(title, message, estado);
-      }
+
     }
   }
 

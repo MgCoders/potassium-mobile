@@ -53,12 +53,66 @@ export class IngresarFirmaPage {
 
     toastCorrecto.present();
 
-    this.events.publish('change-tab', 4, {
-      'firmaClienteRecepcion': this.firmaCliente64,
-      'firmaEmpleadoRecepcion': this.firmaEmpleado64,
-      'nombreClienteRecepcion': this.nombreCliente,
-      'nombreEmpleadoRecepcion': this.nombreEmpleado
+
+    if (this.validarFirmas()){
+      this.events.publish('change-tab', 4, {
+        'firmaClienteRecepcion': this.firmaCliente64,
+        'firmaEmpleadoRecepcion': this.firmaEmpleado64,
+        'nombreClienteRecepcion': this.nombreCliente,
+        'nombreEmpleadoRecepcion': this.nombreEmpleado
+      });
+    }
+    return;
+  }
+
+
+  validarFirmas(){
+
+    let toastError_ck = this.toastCtrl.create({
+      message: 'Error en los campos!',
+      duration: 3000,
+      position: 'bottom'
     });
+
+    //campos NotNull
+
+    let valido = true;
+    let mensaje = "";
+
+    console.log("Validando firmaCliente64: ", this.firmaCliente64);
+    console.log("Validando firmaEmpleado64: ", this.firmaEmpleado64);
+    console.log("Validando nombreCliente: ", this.nombreCliente);
+    console.log("Validando nombreEmpleado: ", this.nombreEmpleado);
+
+
+    if(valido && (this.firmaCliente64 == undefined ||this.firmaCliente64 == '')){
+      mensaje = 'No se ingresó firma de cliente';
+      valido = false;
+    }
+    if(valido && (this.firmaEmpleado64 == undefined ||this.firmaEmpleado64 == '')){
+      mensaje = 'No se ingresó firma de empleado';
+      valido = false;
+    }
+    if(valido && (this.nombreCliente == undefined ||this.nombreCliente == '')){
+      mensaje = 'No se ingresó nombre de cliente';
+      valido = false;
+    }
+    if(valido && (this.nombreEmpleado == undefined ||this.nombreEmpleado == '')){
+      mensaje = 'No se ingresó nombre de empleado';
+      valido = false;
+    }
+
+
+    //Estos campos no requieren validación
+    //this.clienteActual.telefono
+    //this.clienteActual.direccion
+
+    toastError_ck.setMessage(mensaje);
+    toastError_ck.present();
+
+    return valido;
+
+
 
   }
 

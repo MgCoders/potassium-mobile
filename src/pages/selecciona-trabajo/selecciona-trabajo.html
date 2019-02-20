@@ -80,6 +80,12 @@
         <ion-icon color="{{ (trabajoActual?.estado != 'EN_PROCESO') ? 'sandonato_rojoLogo'  : '#0f0'}}" name='md-checkmark' item-start></ion-icon>
       </ion-item>
 
+      <ion-item (click)="switchFinTrabajo(8)" > <!--9 es borrar-->
+        Volver a editar
+        <ion-note item-end></ion-note>
+        <ion-icon color="secondary" name='exit' item-start></ion-icon>
+      </ion-item>
+
       <ion-item (click)="switchFinTrabajo(9)" > <!--9 es borrar-->
         Borrar trabajo
         <ion-note item-end></ion-note>

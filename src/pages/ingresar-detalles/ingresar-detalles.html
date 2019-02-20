@@ -34,6 +34,22 @@
           </ion-datetime>
         </ion-item>
       </ion-col>
+      <ion-col col-12 col-md-6 offset-md-3>
+
+        <ion-item>
+          <ion-label>Requiere presupuesto:</ion-label>
+          <ion-select [(ngModel)]="requierePresupuesto">
+            <ion-option [value]="true">Si</ion-option>
+            <ion-option [value]="false">No</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cotización</ion-label>
+          <ion-input text-right [(ngModel)]="cotizacion">
+          </ion-input>
+        </ion-item>
+      </ion-col>
 
       <ion-col col-12 col-md-6 offset-md-3>
         <ion-item>
