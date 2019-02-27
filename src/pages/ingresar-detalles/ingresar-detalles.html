@@ -377,11 +377,14 @@
 
       <ion-col col-12 col-md-6 offset-md-3 [hidden]="!hayEquipoSeleccionado()" *ngFor="let detalle of lista">
         <ion-card>
-          <img src="{{detalle.img}}" />
+          <button ion-button full float-right (click)="released(detalle.id)" color="danger" >Borrar</button>
+          <img src="{{detalle.foto}}" />
           <ion-card-content>
             <p>
-              {{detalle.descr}}
+              {{detalle.descripcion}}
             </p>
+
+
           </ion-card-content>
         </ion-card>
       </ion-col>

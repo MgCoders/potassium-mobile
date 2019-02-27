@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { LoginPage } from './login';
 import {IonicSelectableModule} from "ionic-selectable";
+import {LongPressModule} from "ionic-long-press";
 
 @NgModule({
   declarations: [
@@ -9,7 +10,7 @@ import {IonicSelectableModule} from "ionic-selectable";
   ],
   imports: [
     IonicPageModule.forChild(LoginPage),
-
+    LongPressModule
 
   ],
 })

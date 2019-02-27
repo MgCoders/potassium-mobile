@@ -1,5 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {
+  AlertController,
   Events, IonicPage, NavController, NavParams, ToastController
 } from 'ionic-angular';
 import {AltaDescripcionPage} from "../alta-descripcion/alta-descripcion";
@@ -11,6 +12,7 @@ import {Trabajo} from "../../app/_models/Trabajo";
 import {AltaDibujoPage} from "../alta-dibujo/alta-dibujo";
 import {TrabajoFotoService} from "../../app/_services/trabajoFoto.service";
 import {TrabajoFotoImp} from "../../app/_models/TrabajoFotoImp";
+import {TrabajoFoto} from "../../app/_models/TrabajoFoto";
 
 
 /**
@@ -27,7 +29,7 @@ import {TrabajoFotoImp} from "../../app/_models/TrabajoFotoImp";
 })
 export class IngresarDetallesPage {
 
-  lista: any[];
+  lista: TrabajoFoto[];
   comentarios: string;
   kmEquipoRecepcion: number;
 
@@ -73,6 +75,8 @@ export class IngresarDetallesPage {
   max: string;
   dp: DatePipe;
 
+  pressed: boolean = false;
+
   @ViewChild('myInput') myInput: ElementRef;
 
 
@@ -85,6 +89,7 @@ export class IngresarDetallesPage {
               private trabajoFotoService: TrabajoFotoService,
               /*private as: AlertController,*/
               private toastCtrl: ToastController,
+              private alertCtrl: AlertController,
               private events: Events) {
 
     //seteo el fondo segun el tipo equipo!
@@ -397,11 +402,76 @@ export class IngresarDetallesPage {
 
     if(this.trabajoActual.equipo != undefined) {
 
-      console.log("string:",this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22));
-      return this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,22) == "data:image/jpeg;base64";
+      //console.log("string:",this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,10));
+      return this.trabajoActual.equipo.tipoEquipo.dibujo.substring(0,10) == "data:image";
     } else {
       return false;
     }
   }
+
+
+  // pressed(){
+  //   console.log("[pressed]");
+  // }
+  //
+  // active(){
+  //   console.log("[active]");
+  // }
+
+  released(id: number){
+    console.log("[released] id: ", id);
+
+    if(!this.pressed) {
+
+      this.pressed = true;
+
+      //Esta opción siempre va
+      var buttons_arr = [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Canceló, no se borra nada');
+            this.pressed = false;
+          }
+        }
+      ];
+
+      buttons_arr.push({
+        text: 'Borrar',
+        role: null,
+        handler: () => {
+          console.log('Borrar, procesando solicitud');
+          this.pressed = false;
+          //estado = "PENDIENTE_FACTURA";
+          //this.llamarAPI(estado);
+
+          // this.trabajoFotoService get(id).subscribe(
+          //   (data) => {
+          //     data.forEach( item => {
+          //       this.lista.push( new TrabajoFotoImp(item));
+          //       console.log('Foto en el server!:', item);
+          //     });
+          //
+          //     console.log("adentro",this.trabajoActual);
+          //   },
+          //   (error) => {
+          //     toastError.setMessage(error.toString());
+          //   }
+          // );
+
+
+        }
+      });
+      let alert = this.alertCtrl.create({
+        title: "Borrar la fotp",
+        message: "Estas seguro que quieres borrar esta foto y la descripcion?",
+        buttons: buttons_arr
+      });
+      alert.present();
+    }
+  }
+
+
 
 }

@@ -71,7 +71,7 @@ export class AltaDescripcionPage {
 
     this.callback = this.navParams.get("callback");
 
-    let data = {img: this.image, descr: this.descr};
+    let data = {foto: this.image, descripcion: this.descr};
     this.callback(data).then(()=>{
       this.navCtrl.pop();
     });

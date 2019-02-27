@@ -66,6 +66,21 @@ export class AltaFirmaPage {
 
   handleStart(ev){
 
+    console.log('Entró a la funcion handle!');
+    console.log('La lista es: ', this.drawingsSteps);
+    console.log('numeroActual: ', this.numberStep);
+
+    //guardo el elemento para el ctrl+z
+    this.drawingsSteps[this.numberStep] = this.canvasElement.toDataURL();
+
+    //limpio el historial hacia adelante, dejando la lista hasta el actual
+    this.numberStep++;
+    this.drawingsSteps = this.drawingsSteps.slice(0,this.numberStep);
+    console.log('Salgo a la funcion handle!');
+    console.log('La lista es: ', this.drawingsSteps);
+    console.log('numeroActual: ', this.numberStep);
+
+
     this.lastX = ev.touches[0].pageX-21;
     this.lastY = ev.touches[0].pageY-226;
   }

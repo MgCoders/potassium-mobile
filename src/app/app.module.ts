@@ -93,6 +93,7 @@ import {IonicSelectableModule} from "ionic-selectable";
 import {PortService} from "./_services/port.service";
 import {AltaMarcaPageModule} from "../pages/alta-marca/alta-marca.module";
 import {AltaMarcaPage} from "../pages/alta-marca/alta-marca";
+import {LongPressModule} from "ionic-long-press";
 
 @NgModule({
   declarations: [
@@ -174,7 +175,8 @@ ModalCamposPage,
     AltaTareaMaterialPageModule,
     AgendaPageModule,
     IonicSelectableModule,
-    AltaMarcaPageModule
+    AltaMarcaPageModule,
+    LongPressModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

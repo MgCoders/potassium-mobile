@@ -85,19 +85,19 @@ export class IngresarFirmaPage {
     console.log("Validando nombreEmpleado: ", this.nombreEmpleado);
 
 
-    if(valido && (this.firmaCliente64 == undefined ||this.firmaCliente64 == '')){
+    if(valido && (this.firmaCliente64 == undefined || this.firmaCliente64 == '' || this.firmaCliente64 == 'assets/imgs/blanco.jpg')){
       mensaje = 'No se ingresó firma de cliente';
       valido = false;
     }
-    if(valido && (this.firmaEmpleado64 == undefined ||this.firmaEmpleado64 == '')){
+    if(valido && (this.firmaEmpleado64 == undefined || this.firmaEmpleado64 == '' || this.firmaEmpleado64 == 'assets/imgs/blanco.jpg')){
       mensaje = 'No se ingresó firma de empleado';
       valido = false;
     }
-    if(valido && (this.nombreCliente == undefined ||this.nombreCliente == '')){
+    if(valido && (this.nombreCliente == undefined || this.nombreCliente == '' || this.nombreCliente == 'Sin ingresar...')){
       mensaje = 'No se ingresó nombre de cliente';
       valido = false;
     }
-    if(valido && (this.nombreEmpleado == undefined ||this.nombreEmpleado == '')){
+    if(valido && (this.nombreEmpleado == undefined || this.nombreEmpleado == '' || this.nombreEmpleado == 'Sin ingresar...')){
       mensaje = 'No se ingresó nombre de empleado';
       valido = false;
     }

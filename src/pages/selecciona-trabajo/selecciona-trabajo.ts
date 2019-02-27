@@ -158,6 +158,14 @@ export class SeleccionaTrabajoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SeleccionaTrabajoPage');
+    // this.calcMinutosTotalesEstimados();
+    // this.calcMinutosTotalesHastaAhora();
+  }
+
+  ionViewWillEnter(){
+    console.log('ionViewWillEnter SeleccionaTrabajoPage');
+    this.calcMinutosTotalesEstimados();
+    this.calcMinutosTotalesHastaAhora();
   }
 
 
@@ -176,7 +184,7 @@ export class SeleccionaTrabajoPage {
 
 
   calcMinutosTotalesEstimados(){
-    if( this.minutosTotalesEstimados == 0 && this.trabajoActual != undefined && this.trabajoActual.id != undefined) {
+    if( this.trabajoActual != undefined && this.trabajoActual.id != undefined) {
       this.tareaService.getAllByTrabajo(this.trabajoActual.id).subscribe(
         (data) => {
           //Obtengo la lista desde el server con lo último
@@ -209,7 +217,7 @@ export class SeleccionaTrabajoPage {
 
 
   calcMinutosTotalesHastaAhora(){
-    if( this.minutosTotalesHastaAhora == 0 && this.trabajoActual != undefined && this.trabajoActual.id != undefined) {
+    if( this.trabajoActual != undefined && this.trabajoActual.id != undefined) {
       this.tareaService.getAllByTrabajo(this.trabajoActual.id).subscribe(
         (data) => {
           //Obtengo la lista desde el server con lo último

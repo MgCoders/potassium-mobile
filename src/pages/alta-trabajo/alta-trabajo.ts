@@ -346,9 +346,9 @@ export class AltaTrabajoPage {
       //console.log("trabajo", this.trabajoActual);
       //console.log("params:", data);
       let trabFot = new TrabajoFotoImp({
-                                            foto: data['img'],
+                                            foto: data['foto'],
                                             trabajo: this.trabajoActual,
-                                            descripcion: data['descr']
+                                            descripcion: data['descripcion']
                                           });
 
       console.log("trabFot:", trabFot);

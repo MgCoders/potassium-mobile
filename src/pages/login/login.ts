@@ -149,4 +149,17 @@ export class LoginPage {
 
 
 
+  pressed(){
+    console.log("[pressed]");
+  }
+
+  active(){
+    console.log("[active]");
+  }
+
+  released(){
+    console.log("[released]");
+  }
+
+
 }
